@@ -19,16 +19,16 @@ WriteFile("./sidebars.js",WriteContents(sidebar_js,"sidebar"));
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: '備忘録',
-  url: 'https://your-docusaurus-test-site.com',
-  baseUrl: '/',
+  url: 'https://koseki2580.github.io/study-docs',
+  baseUrl: '/study-docs/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   // favicon: 'img/favicon.ico',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'koseki', // Usually your GitHub org/user name.
-  projectName: 'kosekis_docs', // Usually your repo name.
+  organizationName: 'koseki2580', // Usually your GitHub org/user name.
+  projectName: 'study-docs', // Usually your repo name.
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -259,5 +259,5 @@ function WriteContents(contents,variable){
 function WriteFile(path, data){
   let oddData = fs.readFileSync(path).toString();
   if (crypto.createHash('md5').update(oddData).digest('hex') === crypto.createHash('md5').update(data).digest('hex')) return;
-  fs.writeFileSync("./src/components/HomepageFeatures/content.js",data);
+  fs.writeFileSync(path,data);
 }
