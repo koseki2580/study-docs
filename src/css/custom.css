@@ -105,6 +105,9 @@
 .markdown h4{
   color: var(--ifm-color-primary-darker);
 }
+.markdown h5{
+  color: var(--ifm-color-primary-darker);
+}
 .markdown p{
   color: var(--ifm-color-word);
 }

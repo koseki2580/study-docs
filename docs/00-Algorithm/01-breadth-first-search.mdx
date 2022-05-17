@@ -7,7 +7,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 ## 幅優先探索とは
-幅優先探索(BFS : Breadth-First Search)とは[グラフ](/docs/Data-structure/graph)や木構造を探索するためのアルゴリズムであり、探索を開始する位置から近いものから探索していく探索手法。
+幅優先探索(BFS : Breadth First Search)とは[グラフ](/docs/Data-structure/graph)や木構造を探索するためのアルゴリズムであり、探索を開始する位置から近いものから探索していく探索手法。
 
 ## アルゴリズム
 
@@ -28,31 +28,29 @@ import TabItem from '@theme/TabItem';
 ![イメージ図](/img/svg/Algorithm/breadth-first-search/breadth-3.drawio.svg "手順2後の木構造")
 頂点`2`と繋がっている頂点`3`を次の探索点に追加する
 
-3. 頂点4探索済みとして記録する。
+3. 頂点`4`探索済みとして記録する。
 ![イメージ図](/img/svg/Algorithm/breadth-first-search/breadth-4.drawio.svg "手順3後の木構造")
 頂点`4`と繋がっている頂点`7,6`を次の探索点に追加する
 
-4. 頂点3探索済みとして記録する。
+4. 頂点`3`探索済みとして記録する。
 ![イメージ図](/img/svg/Algorithm/breadth-first-search/breadth-5.drawio.svg "手順4後の木構造")
 頂点`3`と繋がっている頂点`5`を次の探索点に追加する
 
-5. 頂点7探索済みとして記録する。
+5. 頂点`7`探索済みとして記録する。
 ![イメージ図](/img/svg/Algorithm/breadth-first-search/breadth-6.drawio.svg "手順5後の木構造")
-頂点`y`と繋がっている頂点は存在しないので何も追加しない
+頂点`7`と繋がっている頂点は存在しないので何も追加しない
 
-6. 頂点6探索済みとして記録する。
+6. 頂点`6`探索済みとして記録する。
 ![イメージ図](/img/svg/Algorithm/breadth-first-search/breadth-7.drawio.svg "手順6後の木構造")
 頂点`6`と繋がっている頂点`8`を次の探索点に追加する
 
-7. 頂点5探索済みとして記録する。
+7. 頂点`5`探索済みとして記録する。
 ![イメージ図](/img/svg/Algorithm/breadth-first-search/breadth-8.drawio.svg "手順7後の木構造")
 頂点`5`と繋がっている頂点は存在しないので何も追加しない
 
-8. 頂点8探索済みとして記録する。
+8. 頂点`8`探索済みとして記録する。
 ![イメージ図](/img/svg/Algorithm/breadth-first-search/breadth-9.drawio.svg "手順8後の木構造")
 頂点`8`と繋がっている頂点は存在しないので何も追加しない
-
-始点から近い頂点から順に探索する点としているのが探索済み頂点の順番からも見て取れる。
 
 
 ### 使用するデータ構造
@@ -76,7 +74,7 @@ import TabItem from '@theme/TabItem';
 <Tabs groupId="code">
   <TabItem value="python" label="Python" default>
 
-```python title:"breadth-first-search.py"
+```python title="breadth-first-search.py"
 from collections import deque
 box = [[1,2],[1,4],[2,3],[3,5],[4,7],[4,6],[6,8]]
 graph = [[] for _ in range(8)] 
@@ -113,7 +111,7 @@ while (len(q) > 0):
   </TabItem>
   <TabItem value="C++" label="C++">
 
-```cpp title:"breadth-first-search.cpp"
+```cpp title="breadth-first-search.cpp"
 int main() {
     vector<pair<int,int>> box = {{1,2},{1,4},{2,3},{3,5},{4,7},{4,6},{6,8}};
     vector<vector<int>> graph(8);
@@ -136,7 +134,6 @@ int main() {
     {
         // dequeue
         int pos = q.front();q.pop();
-        printf("%d ",pos);
         for (auto to: graph[pos]){
             if (dist[to] == -1){
                 dist[to] = dist[pos] + 1;
@@ -154,7 +151,7 @@ int main() {
   </TabItem>
   <TabItem value="C#" label="C#">
 
-```csharp title:"breadth-first-search.cs"
+```csharp title="breadth-first-search.cs"
 public static void Main(string[] args)
 {
     int[,] box = new int[,] { { 1, 2 }, { 1, 4 }, { 2, 3 }, { 3, 5 }, { 4, 7 }, { 4, 6 }, { 6, 8 } };
@@ -180,12 +177,10 @@ public static void Main(string[] args)
     for (int i = 0; i < dist.Length; ++i) dist[i] = -1;
     dist[0] = 0;
 
-
     while (q.Count > 0)
     {
         // dequeue
         int pos = q.Dequeue();
-        Console.Write(pos + " ");
         foreach (int to in graph[pos])
         {
             if (dist[to] == -1)
@@ -197,7 +192,6 @@ public static void Main(string[] args)
             }
         }
     }
-
 }
 ```
 

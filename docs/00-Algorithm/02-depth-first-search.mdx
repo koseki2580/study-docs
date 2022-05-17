@@ -1,0 +1,199 @@
+---
+title : 深さ優先探索
+sidebar_label : 深さ優先探索
+---
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+## 深さ優先探索とは
+深さ優先探索(DFS : Depth First Search)とは[グラフ](/docs/Data-structure/graph)や木構造を探索するためのアルゴリズムであり、探索を開始する位置から近いものから探索していく探索手法。
+
+## アルゴリズム
+
+### 流れ
+次の図のような木構造があったとする。
+
+![イメージ図](/img/svg/Algorithm/depth-first-search/depth-1.drawio.svg "最初の木構造")
+
+頂点`1`を始点として、幅優先探索を行うと次のような流れになる。
+
+1. 始点は探索済みとして記録する。
+
+![イメージ図](/img/svg/Algorithm/depth-first-search/depth-2.drawio.svg "手順1後の木構造")
+
+頂点`1`と繋がっている頂点`2,4`を次の探索点に追加する。
+
+2. 頂点`4`探索済みとして記録する。
+![イメージ図](/img/svg/Algorithm/depth-first-search/depth-3.drawio.svg "手順2後の木構造")
+頂点`4`と繋がっている頂点`7,6`を次の探索点に追加する
+
+3. 頂点`6`探索済みとして記録する。
+![イメージ図](/img/svg/Algorithm/depth-first-search/depth-4.drawio.svg "手順3後の木構造")
+頂点`6`と繋がっている頂点`8`を次の探索点に追加する
+
+4. 頂点`8`探索済みとして記録する。
+![イメージ図](/img/svg/Algorithm/depth-first-search/depth-5.drawio.svg "手順4後の木構造")
+頂点`8`と繋がっている頂点は存在しないので何も追加しない
+
+5. 頂点`7`探索済みとして記録する。
+![イメージ図](/img/svg/Algorithm/depth-first-search/depth-6.drawio.svg "手順5後の木構造")
+頂点`7`と繋がっている頂点は存在しないので何も追加しない
+
+6. 頂点`2`探索済みとして記録する。
+![イメージ図](/img/svg/Algorithm/depth-first-search/depth-7.drawio.svg "手順6後の木構造")
+頂点`2`と繋がっている頂点`3`を次の探索点に追加する
+
+7. 頂点`3`探索済みとして記録する。
+![イメージ図](/img/svg/Algorithm/depth-first-search/depth-8.drawio.svg "手順7後の木構造")
+頂点`3`と繋がっている頂点`5`を次の探索点に追加する
+
+8. 頂点`5`探索済みとして記録する。
+![イメージ図](/img/svg/Algorithm/depth-first-search/depth-9.drawio.svg "手順8後の木構造")
+頂点`5`と繋がっている頂点は存在しないので何も追加しない
+
+### 使用するデータ構造
+流れの次の探索点の配列の順番を見ると配列新たに要素を追加する際も配列から要素を取り出す際も一番右側、要素番号の一番後ろの要素に処理を行っている。
+
+つまり、FILOの動作が行われている。このFILOを表すのに適したデータ構造が**[Stack](/docs/Data-structure/stack)**である。
+
+- 次の探索点の配列の一番後ろの要素を取り出し、探索を行う
+- 探索した際に新たな未探索要素が見つかったら、次の探索点の配列の後ろに要素の追加する
+
+以上の2つの処理を行えれば深さ優先探索を行うことができる。
+そのため、それぞれStackを用いると
+
+- 次の探索点の配列の一番後ろの要素を`pop`し（取り出し）、探索を行う
+- 探索した際に新たな未探索要素が見つかったら、次の探索点の配列の後ろに`push`（要素の追加）する
+
+と言えるのでStackを用いてることができることがわかる。
+
+### プログラム
+
+<Tabs groupId="code">
+  <TabItem value="python" label="Python" default>
+
+```python title="depth-first-search.py"
+from collections import deque
+box = [[1,2],[1,4],[2,3],[3,5],[4,7],[4,6],[6,8]]
+graph = [[] for _ in range(8)] 
+
+# 有向グラフを作成
+for i in range(len(box)):
+    graph[box[i][0]-1].append(box[i][1]-1)
+
+# stackを作成
+q = deque()
+
+# 頂点1番を追加
+q.append(0)
+
+# 頂点1からの距離を記録する配列
+dist = [-1] * 8
+dist[0] = 0
+while (len(q) > 0):
+    
+    # pop
+    pos = q.pop()
+    for to in graph[pos]:
+        
+        # 未探索チェック
+        if dist[to] == -1:
+            dist[to] = dist[pos] + 1
+
+            # push
+            q.append(to)
+
+
+```
+
+  </TabItem>
+  <TabItem value="C++" label="C++">
+
+```cpp title="depth-first-search.cpp"
+int main() {
+    vector<pair<int,int>> box = {{1,2},{1,4},{2,3},{3,5},{4,7},{4,6},{6,8}};
+    vector<vector<int>> graph(8);
+    // 有向グラフを作成
+    for(int i = 0; i < box.size();++i){
+        graph[box[i].first-1].push_back(box[i].second-1);
+    }
+
+    // stackを作成
+    stack<int> q;
+
+    // 頂点1番を追加
+    q.push(0);
+
+    // 頂点1からの距離を記録する配列
+    vector<int> dist(8,-1);
+    dist[0] = 0;
+
+    while (!q.empty())
+    {
+        // pop
+        int pos = q.top();q.pop();
+        for (auto to: graph[pos]){
+            if (dist[to] == -1){
+                dist[to] = dist[pos] + 1;
+                
+                // push
+                q.push(to);
+            }
+        }
+    }
+    
+    return 0;
+}
+```
+
+  </TabItem>
+  <TabItem value="C#" label="C#">
+
+```csharp title="depth-first-search.cs"
+public static void Main(string[] args)
+{
+    int[,] box = new int[,] { { 1, 2 }, { 1, 4 }, { 2, 3 }, { 3, 5 }, { 4, 7 }, { 4, 6 }, { 6, 8 } };
+    List<List<int>> graph = new List<List<int>>();
+    for (int i = 0;i < 8; ++i)
+    {
+        graph.Add(new List<int>());
+    }
+
+    for (int i = 0; i < box.Length/2; ++i)
+    {
+        graph[box[i, 0] - 1].Add(box[i, 1] - 1);
+    }
+
+    // stackを作成
+    Stack<int> q = new Stack<int>();
+
+    // 頂点1番を追加
+    q.Push(0);
+
+    // 頂点1からの距離を記録する配列
+    int[] dist = new int[8];
+    for (int i = 0; i < dist.Length; ++i) dist[i] = -1;
+    dist[0] = 0;
+
+    while (q.Count > 0)
+    {
+        // pop
+        int pos = q.Pop();
+        foreach (int to in graph[pos])
+        {
+            if (dist[to] == -1)
+            {
+                dist[to] = dist[pos] + 1;
+
+                // push
+                q.Push(to);
+            }
+        }
+    }
+
+}
+```
+
+  </TabItem>
+</Tabs>
