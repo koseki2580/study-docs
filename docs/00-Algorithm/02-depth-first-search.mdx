@@ -1,6 +1,7 @@
 ---
 title: 深さ優先探索
 sidebar_label: 深さ優先探索
+toc_max_heading_level: 4
 ---
 
 ```mdx-code-block
@@ -10,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 ## 深さ優先探索とは
 
-深さ優先探索(DFS : Depth First Search)とは[グラフ](/docs/Data-structure/graph)や木構造を探索するためのアルゴリズムであり、探索を開始する位置から近いものから探索していく探索手法。
+深さ優先探索(DFS : Depth First Search)とは[グラフ](/docs/Data-structure/graph)や[木構造](/docs/Data-structure/tree)を探索するためのアルゴリズムであり、探索を開始する位置から近いものから探索していく探索手法。
 
 ## アルゴリズム
 
@@ -173,8 +174,6 @@ int main() {
     }
 
     DFS(0);
-    rep(i, 0, record.size()) printf("%d ", record[i]);
-
     return 0;
 }
 ```
@@ -202,11 +201,6 @@ public static void Main(string[] args)
         graph[box[i, 1] - 1].Add(box[i, 0] - 1);
     }
     DFS(0);
-
-    for(int i = 0; i< record.Count; ++i)
-    {
-        Console.Write(record[i] + " ");
-    }
 }
 
 static void DFS(int s, int p = -1)
@@ -276,8 +270,6 @@ struct tree
     tree() {}
     tree(const int &val) : tree(nullptr, nullptr, val) {}
     tree(tree *left_, tree *right_, const int &val_) : left(left_), right(right_), value(val_) {}
-
-    // tree(const int &x) : tree(nil, nil, x) {}
 };
 
 void DFS(tree *s)
@@ -303,7 +295,6 @@ int main()
     root->right->right = new tree(3);
 
     DFS(root);
-    rep(i, 0, record.size()) printf("%d ", record[i]);
 
     return 0;
 }
@@ -327,11 +318,6 @@ public static void Main(string[] args)
     root.right.right = new tree(3);
 
     DFS(root);
-
-    for(int i = 0; i< record.Count; ++i)
-    {
-        Console.Write(record[i] + " ");
-    }
 }
 
 static void DFS(tree root)

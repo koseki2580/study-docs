@@ -1,11 +1,14 @@
 ---
 title: データモデル
 sidebar_label: データモデル
+draft: true
+toc_max_heading_level: 4
 ---
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import FontColor from "/src/components/Custom/FontColor/FontColor.js"
 ```
 
 ## データモデルとは
@@ -50,7 +53,11 @@ import TabItem from '@theme/TabItem';
 子ノードが複数の親ノードを持ちたい場合、重複登録を行う必要になり、同じノードを複数入力するのはデータ的に不自然になる。
 また、データの追加や削除を行った場合はルートを再登録する必要がある。
 
-メリット : 特定のノードのルートが限定的になり、速度が速い
-デメリット : 柔軟性に欠ける
+- <FontColor color="red">
+    メリット : 特定のノードのルートが限定的になり、速度が速い
+  </FontColor>
+- <FontColor color="blue">デメリット : 柔軟性に欠ける</FontColor>
 
-![イメージ図](/img/svg/Database/data-model/data-model-1.drawio.svg "帰りがけ順")
+![イメージ図](/img/svg/Database/data-model/data-model-1.drawio.svg "階層型モデル")
+
+###
