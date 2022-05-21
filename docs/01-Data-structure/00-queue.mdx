@@ -1,12 +1,15 @@
 ---
-title : キュー
-sidebar_label : キュー
+title: キュー
+sidebar_label: キュー
 ---
+
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
+
 ## キューとは
+
 データを先入れ先出し(FIFO : First In First Out)のリスト構造を持つデータ構造を`キュー(queue)`という。
 
 ![イメージ図](/img/svg/Data-structure/queue/queue-1.drawio.svg "キュー")
@@ -18,7 +21,7 @@ import TabItem from '@theme/TabItem';
 
 ```python title="queue.py"
 # Pythonの標準ライブラリ
-from collections import deque 
+from collections import deque
 
 # 初期化
 box = deque()
@@ -89,12 +92,14 @@ int main() {
   </TabItem>
 </Tabs>
 
-### Dequeue 
+### Dequeue
+
 データを前から取り出す処理。言語により、名称が異なるが一般的にキューのデータ構造でデータを取り出す処理を`Dequeue`という。
 
 ![イメージ図](/img/svg/Data-structure/queue/queue-2.drawio.svg "デキュー")
 
-### Enqueue 
+### Enqueue
+
 データを後ろに入れる処理。言語により、名称が異なるが一般的にキューのデータ構造でデータを入れる処理を`Enqueue`という。
 
 ![イメージ図](/img/svg/Data-structure/queue/queue-3.drawio.svg "エンキュー")

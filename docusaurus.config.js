@@ -176,7 +176,7 @@ function getFiles(){
         // ファイル読み込み
         let title = fs.readFileSync( baseUrl + parentdatas[i] + "/" + childrendatas[j], 'utf8')
         // mdファイルからタイトル要素取り出し
-        title = title.split("---")[1].split("\n")[1].split(" ")[2];
+        title = title.split("---")[1].split("\n")[1].split(" ")[1];
 
         let childName = RemovePrefix(childrenName[0]);
         // インデックスページに表示するコンテンツ

@@ -1,12 +1,15 @@
 ---
-title : スタック
-sidebar_label : スタック
+title: スタック
+sidebar_label: スタック
 ---
+
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
+
 ## スタックとは
+
 データを後入れ先出し(LIFO : Last In First Out)のリスト構造を持つデータ構造を`スタック(stack)`という。
 
 ![イメージ図](/img/svg/Data-structure/stack/stack-1.drawio.svg "スタック")
@@ -18,7 +21,7 @@ import TabItem from '@theme/TabItem';
 
 ```python title="stack.py"
 # Pythonの標準ライブラリ
-from collections import deque 
+from collections import deque
 
 # 初期化
 box = deque()
@@ -66,7 +69,7 @@ int main() {
 
 ```csharp title="stack.cs"
 # Pythonの標準ライブラリ
-from collections import deque 
+from collections import deque
 
 # 初期化
 box = deque()
@@ -88,12 +91,14 @@ print(box) # deque([1, 2])
   </TabItem>
 </Tabs>
 
-### Pop 
+### Pop
+
 データを後ろから取り出す処理。言語により、名称が異なるがスタックのデータ構造でデータを取り出す処理を`Pop`という。
 
 ![イメージ図](/img/svg/Data-structure/stack/stack-2.drawio.svg "ポップ")
 
-### Push 
+### Push
+
 データを後ろに入れる処理。言語により、名称が異なるがスタックのデータ構造でデータを入れる処理を`Push`という。
 
 ![イメージ図](/img/svg/Data-structure/stack/stack-3.drawio.svg "プッシュ")
