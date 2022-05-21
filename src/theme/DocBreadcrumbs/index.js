@@ -1,18 +1,18 @@
-import React from 'react';
+import React from "react";
 import {
   ThemeClassNames,
   useSidebarBreadcrumbs,
   useHomePageRoute,
-} from '@docusaurus/theme-common';
-import styles from './styles.module.css';
-import clsx from 'clsx';
-import Link from '@docusaurus/Link';
-import useBaseUrl from '@docusaurus/useBaseUrl';
-import {translate} from '@docusaurus/Translate';
-import IconHome from '@theme/IconHome'; // TODO move to design system folder
+} from "@docusaurus/theme-common";
+import styles from "./styles.module.css";
+import clsx from "clsx";
+import Link from "@docusaurus/Link";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import { translate } from "@docusaurus/Translate";
+import IconHome from "@theme/IconHome"; // TODO move to design system folder
 
-function BreadcrumbsItemLink({children, href, isLast}) {
-  const className = 'breadcrumbs__link';
+function BreadcrumbsItemLink({ children, href, isLast }) {
+  const className = "breadcrumbs__link";
 
   if (isLast) {
     return (
@@ -35,17 +35,18 @@ function BreadcrumbsItemLink({children, href, isLast}) {
   );
 } // TODO move to design system folder
 
-function BreadcrumbsItem({children, active, index, addMicrodata}) {
+function BreadcrumbsItem({ children, active, index, addMicrodata }) {
   return (
     <li
       {...(addMicrodata && {
         itemScope: true,
-        itemProp: 'itemListElement',
-        itemType: 'https://schema.org/ListItem',
+        itemProp: "itemListElement",
+        itemType: "https://schema.org/ListItem",
       })}
-      className={clsx('breadcrumbs__item', {
-        'breadcrumbs__item--active': active,
-      })}>
+      className={clsx("breadcrumbs__item", {
+        "breadcrumbs__item--active": active,
+      })}
+    >
       {children}
       <meta itemProp="position" content={String(index + 1)} />
     </li>
@@ -53,17 +54,18 @@ function BreadcrumbsItem({children, active, index, addMicrodata}) {
 }
 
 function HomeBreadcrumbItem() {
-  const homeHref = useBaseUrl('/');
+  const homeHref = useBaseUrl("/");
   return (
     <li className="breadcrumbs__item">
       <Link
         aria-label={translate({
-          id: 'theme.docs.breadcrumbs.home',
-          message: 'Home page',
-          description: 'The ARIA label for the home page in the breadcrumbs',
+          id: "theme.docs.breadcrumbs.home",
+          message: "Home page",
+          description: "The ARIA label for the home page in the breadcrumbs",
         })}
-        className={clsx('breadcrumbs__link', styles.breadcrumbsItemLink)}
-        href={homeHref}>
+        className={clsx("breadcrumbs__link", styles.breadcrumbsItemLink)}
+        href={homeHref}
+      >
         {/* <IconHome className={styles.breadcrumbHomeIcon} /> */}
         ホーム
       </Link>
@@ -83,17 +85,19 @@ export default function DocBreadcrumbs() {
     <nav
       className={clsx(
         ThemeClassNames.docs.docBreadcrumbs,
-        styles.breadcrumbsContainer,
+        styles.breadcrumbsContainer
       )}
       aria-label={translate({
-        id: 'theme.docs.breadcrumbs.navAriaLabel',
-        message: 'Breadcrumbs',
-        description: 'The ARIA label for the breadcrumbs',
-      })}>
+        id: "theme.docs.breadcrumbs.navAriaLabel",
+        message: "Breadcrumbs",
+        description: "The ARIA label for the breadcrumbs",
+      })}
+    >
       <ul
         className="breadcrumbs"
         itemScope
-        itemType="https://schema.org/BreadcrumbList">
+        itemType="https://schema.org/BreadcrumbList"
+      >
         {homePageRoute && <HomeBreadcrumbItem />}
         {breadcrumbs.map((item, idx) => {
           const isLast = idx === breadcrumbs.length - 1;
@@ -102,7 +106,8 @@ export default function DocBreadcrumbs() {
               key={idx}
               active={isLast}
               index={idx}
-              addMicrodata={!!item.href}>
+              addMicrodata={!!item.href}
+            >
               <BreadcrumbsItemLink href={item.href} isLast={isLast}>
                 {item.label}
               </BreadcrumbsItemLink>
