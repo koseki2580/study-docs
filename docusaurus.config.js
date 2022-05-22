@@ -182,6 +182,8 @@ function getFiles() {
           baseUrl + parentdatas[i] + "/" + childrendatas[j],
           "utf8"
         );
+        let draft = title.split("---")[1].split("\n")[3].split(" ")[1];
+        if (draft === "true") continue;
         // mdファイルからタイトル要素取り出し
         title = title.split("---")[1].split("\n")[1].split(" ")[1];
 
