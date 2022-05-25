@@ -70,24 +70,26 @@ int main() {
   <TabItem value="C#" label="C#">
 
 ```csharp title="stack.cs"
-# Pythonの標準ライブラリ
-from collections import deque
+public static void Main()
+{
+  // 初期化
+  Stack<int> s = new Stack<int>();
 
-# 初期化
-box = deque()
+  // Push 要素を一番後ろに追加
+  s.Push(1);
+  s.Push(2);
+  s.Push(3);
+  Console.WriteLine(s.Peek()); // 3  s:[1,2,3]
+  s.Push(4);
+  Console.WriteLine(s.Peek()); // 4  s:[1,2,3,4]
 
-# push 要素を一番後ろに追加する
-box.append(1)
-box.append(2)
-box.append(3)
-print(box) # deque([1, 2, 3])
-box.append(4)
-print(box) # deque([1, 2, 3, 4])
+  // Pop　一番後ろ（一番新しい）要素を取り除く
+  s.Pop();
+  s.Pop();
+  Console.WriteLine(s.Peek()); // 2  s:[1,2]
 
-# pop 一番後ろ（新しい）要素を取り出し
-print(box.pop()) # 4
-print(box.pop()) # 3
-print(box) # deque([1, 2])
+  return;
+}
 ```
 
   </TabItem>

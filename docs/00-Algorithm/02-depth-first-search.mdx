@@ -306,6 +306,17 @@ int main()
   <TabItem value="C#" label="C#">
 
 ```csharp title="depth-first-search-in-order.cs"
+
+class tree
+{
+    public tree left = null;
+    public tree right = null;
+    public int value;
+    public tree(int x)
+    {
+        value = x;
+    }
+}
 static List<int> record = new List<int>();
 
 public static void Main(string[] args)
