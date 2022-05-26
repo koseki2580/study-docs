@@ -64,3 +64,41 @@ import FontColor from "/src/components/Custom/FontColor/FontColor.js"
 主キーは関係スキーマでは下線をつけて表現する。
 
 ![イメージ図](/img/svg/Database/relational-data-model/relational-data-model-2.drawio.svg "主キー")
+
+他の関係表を参照するための属性を`外部キー`と呼ぶ。外部キーとして設定すると以下の制約が課される。
+
+- 関係表 B の外部キーの属性値は関係表 A の主キーの属性値として存在しなければならない
+- 関係表 A からタプルを削除する場合は、関係表 B との参照関係に矛盾が生じてはならない
+
+この制約のことを`参照制約`と言う。
+
+外部キーは関係スキーマでは点線の下線をつけて表現する。
+
+![イメージ図](/img/svg/Database/relational-data-model/relational-data-model-3.drawio.svg "外部キー")
+
+### 演算
+
+2 つの関係から新たな関係を求める演算のことを`関係演算`と呼ぶ。
+
+関係演算は 8 種類の演算が存在する。
+
+1. 和 : 2 つの関係表のどちらかに存在するタプル集合を取り出す
+2. 差 : 2 つの関係表の片方のみに存在するタプル集合を取り出す
+3. 積 : 2 つの関係表の両方に存在するタプル集合を取り出す
+4. 直積 : 2 つの関係表に含まれるタプルの全ての組み合わせを取り出す
+5. 射影 : 関係表から条件に合うカラムを取り出す
+6. 選択 : 関係表から条件に合うタプルを取り出す
+7. 結合 : 2 つの関係表を組み合わせて 1 つの関係表を作成する
+8. 商 : 関係表 B のタプルを全てもつ関係表 A のタプル集合を取り出し、関係表 B の属性を取り除く
+
+#### 和
+
+![イメージ図](/img/svg/Database/relational-data-model/relational-data-model-4.drawio.svg "和")
+
+#### 差
+
+![イメージ図](/img/svg/Database/relational-data-model/relational-data-model-5.drawio.svg "差")
+
+#### 積
+
+![イメージ図](/img/svg/Database/relational-data-model/relational-data-model-6.drawio.svg "積")
