@@ -91,6 +91,8 @@ import FontColor from "/src/components/Custom/FontColor/FontColor.js"
 7. 結合 : 2 つの関係表を組み合わせて 1 つの関係表を作成する
 8. 商 : 関係表 B のタプルを全てもつ関係表 A のタプル集合を取り出し、関係表 B の属性を取り除く
 
+結合にはいくつかの種類があるため以下の図では取り上げない。
+
 #### 和
 
 ![イメージ図](/img/svg/Database/relational-data-model/relational-data-model-4.drawio.svg "和")
@@ -102,3 +104,49 @@ import FontColor from "/src/components/Custom/FontColor/FontColor.js"
 #### 積
 
 ![イメージ図](/img/svg/Database/relational-data-model/relational-data-model-6.drawio.svg "積")
+
+#### 直積
+
+![イメージ図](/img/svg/Database/relational-data-model/relational-data-model-7.drawio.svg "直積")
+
+#### 射影
+
+![イメージ図](/img/svg/Database/relational-data-model/relational-data-model-8.drawio.svg "射影")
+
+#### 選択
+
+![イメージ図](/img/svg/Database/relational-data-model/relational-data-model-9.drawio.svg "選択")
+
+#### 商
+
+![イメージ図](/img/svg/Database/relational-data-model/relational-data-model-10.drawio.svg "商")
+
+### 結合
+
+結合には様々な種類が存在し、
+
+- θ 結合
+- 等結合
+- 自然結合
+- 外部結合
+
+などがある。
+
+#### θ 結合
+
+結合する関係表の直積を求め、その中から 2 つの属性を選択し`X θ Y`の関係となるタプルを取り出す結合方法をいう。
+θ は比較演算子のことを指し、`<, >, <=, >=, =, <>`などがある。
+
+![イメージ図](/img/svg/Database/relational-data-model/relational-data-model-11.drawio.svg "θ結合")
+
+#### 等結合
+
+θ 結合の θ を`=`とした時の結合方法のことをいう。
+
+![イメージ図](/img/svg/Database/relational-data-model/relational-data-model-12.drawio.svg "等結合")
+
+#### 自然結合
+
+等結合の重複している属性を取り除いた結合方法のことをいう。
+
+![イメージ図](/img/svg/Database/relational-data-model/relational-data-model-13.drawio.svg "自然結合")
