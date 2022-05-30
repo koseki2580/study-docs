@@ -2,7 +2,7 @@
 title: 関係モデル
 sidebar_label: 関係モデル
 draft: true
-toc_max_heading_level: 4
+toc_max_heading_level: 5
 ---
 
 ```mdx-code-block
@@ -150,3 +150,29 @@ import FontColor from "/src/components/Custom/FontColor/FontColor.js"
 等結合の重複している属性を取り除いた結合方法のことをいう。
 
 ![イメージ図](/img/svg/Database/relational-data-model/relational-data-model-13.drawio.svg "自然結合")
+
+#### 外部結合
+
+外部結合に 3 種類存在する。
+
+- 左外部結合
+- 右外部結合
+- 完全外部結合
+
+##### 左外部結合
+
+`左`側にある関係表は全て取り出し、`右`側にある関係表は`左`側にある関係表と一致するもののみ取り出す。その際に、`左`側には存在するが`右`側に存在しないものは`NULL`として取り出す。
+
+![イメージ図](/img/svg/Database/relational-data-model/relational-data-model-14.drawio.svg "左外部結合")
+
+##### 右外部結合
+
+`右`側にある関係表は全て取り出し、`左`側にある関係表は`右`側にある関係表と一致するもののみ取り出す。その際に、`右`側には存在するが`左`側に存在しないものは`NULL`として取り出す。
+
+![イメージ図](/img/svg/Database/relational-data-model/relational-data-model-15.drawio.svg "右外部結合")
+
+##### 完全外部結合
+
+左外部結合と右外部結合を合わせたものをいう。
+
+![イメージ図](/img/svg/Database/relational-data-model/relational-data-model-16.drawio.svg "完全外部結合")
