@@ -124,6 +124,8 @@ function getFiles() {
   // 再帰で使えるように外に変数を出す
   let parentdata;
   let navparent;
+  let recursionParentData;
+  let recursionNavparent;
   // docs直下の親要素を探索する
   for (let i = 0; i < parentdatas.length; ++i) {
     // マッチしないファイルは検索対象外
@@ -147,8 +149,11 @@ function getFiles() {
       label: "",
       items: [],
     };
-
+    recursionParentData = [[]];
+    recursionNavparent = [[]];
     CreateContent("", parentdatas[i]);
+    for (let data of recursionParentData.pop()) parentdata.contents.push(data);
+    for (let data of recursionNavparent.pop()) navparent.items.push(data);
     navbar_items.push(navparent);
     contents.push(parentdata);
   }
@@ -167,6 +172,7 @@ function getFiles() {
 
     // _category_.jsonにタイトルが存在
     if (fileName === "_category_.json") {
+      if (basePath.length === 0 || basePath.includes("/") === true) return;
       // JSONオブジェクトを取得
       const jsonObject = JSON.parse(
         fs.readFileSync(baseUrl + "/" + basePath + "/" + fileName, "utf8")
@@ -178,14 +184,22 @@ function getFiles() {
 
     // jsonファイルではないのでフォルダ
     // 探索を進める
-    if (fileName.includes(".mdx") !== true) {
+    if (fileName.includes(".md") !== true) {
       let nextfile = fs.readdirSync(baseUrl + "/" + basePath + "/" + fileName);
+      recursionParentData.push([]);
+      recursionNavparent.push([]);
       for (let next of nextfile) {
         CreateContent(
           basePath + (basePath.length === 0 ? "" : "/") + fileName,
           next
         );
       }
+      let temppar = recursionParentData.pop();
+      let tempnav = recursionNavparent.pop();
+      for (let data of temppar)
+        recursionParentData[recursionParentData.length - 1].push(data);
+      for (let data of tempnav)
+        recursionNavparent[recursionNavparent.length - 1].push(data);
       return;
     }
 
@@ -205,7 +219,12 @@ function getFiles() {
       title: title,
       href: `docs/${filepath.replace("README", "")}`,
     };
-    parentdata.contents.push(datas);
+    if (fileName.includes("README") === true) {
+      recursionParentData[recursionParentData.length - 1].unshift(datas);
+    } else {
+      recursionParentData[recursionParentData.length - 1].push(datas);
+    }
+    // parentdata.contents.push(datas);
 
     // navbarに子要素を入れる
     let navbaritem = {
@@ -214,7 +233,13 @@ function getFiles() {
       label: title,
       docId: `${filepath}`,
     };
-    navparent.items.push(navbaritem);
+    if (fileName.includes("README") === true) {
+      recursionNavparent[recursionNavparent.length - 1].unshift(navbaritem);
+    } else {
+      recursionNavparent[recursionNavparent.length - 1].push(navbaritem);
+    }
+
+    // navparent.items.push(navbaritem);
   }
 }
 
