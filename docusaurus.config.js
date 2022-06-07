@@ -5,6 +5,8 @@ const lightCodeTheme = require("prism-react-renderer/themes/github");
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 const fs = require("fs");
 const crypto = require("crypto");
+const math = require("remark-math");
+const katex = require("rehype-katex");
 
 let contents = [];
 let sidebar_js = {};
@@ -49,6 +51,8 @@ const config = {
         docs: {
           showLastUpdateTime: true,
           sidebarPath: require.resolve("./sidebars.js"),
+          remarkPlugins: [math],
+          rehypePlugins: [katex],
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl: "https://github.com/koseki2580/study-docs/edit/main/",
@@ -88,7 +92,7 @@ const config = {
         // ],
         items: navbar_items,
       },
-      footer: {},
+      // footer: {},
       prism: {
         additionalLanguages: ["csharp"],
         theme: lightCodeTheme,
@@ -104,6 +108,15 @@ const config = {
         indexDocSidebarParentCategories: 1,
       },
     ],
+  ],
+  stylesheets: [
+    {
+      href: "https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css",
+      type: "text/css",
+      integrity:
+        "sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM",
+      crossorigin: "anonymous",
+    },
   ],
 };
 
@@ -252,19 +265,18 @@ function getFiles() {
  */
 function RemovePrefix(filename) {
   let filepath = filename.split("/");
-  let res = "";
   for (let i = 0; i < filepath.length; ++i) {
     let temp = filepath[i].split("-");
-
+    let res = "";
+    if (temp.length === 1) continue;
     for (let j = 1; j < temp.length; ++j) {
       res += temp[j];
       if (j !== temp.length - 1) res += "-";
     }
-    if (temp.length === 1) res += temp;
-    if (i !== filepath.length - 1) res += "/";
+    filepath[i] = res;
   }
 
-  return res;
+  return filepath.join("/");
 }
 
 function WriteContents(contents, variable) {

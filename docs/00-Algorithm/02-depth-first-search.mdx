@@ -131,12 +131,13 @@ from collections import deque
 def DFS(s ,p = -1):
     # 探索対象に入った時に記録する
     record.append(s)
+    check[s] = True
     for to in graph[s]:
-        # 親要素には探索しない
-        if to == p:
+        # 一度探索したものは探索しない
+        if check[to] == True:
             continue
         DFS(to,s)
-box = [[1,3],[1,2],[3,5],[3,6],[5,7],[2,4]]
+box = [[1,3],[1,2],[3,6],[3,5],[5,7],[2,4]]
 graph = [[] for _ in range(7)]
 
 # 無向グラフを作成
@@ -144,6 +145,7 @@ for i in range(len(box)):
     graph[box[i][0]-1].append(box[i][1]-1)
     graph[box[i][1]-1].append(box[i][0]-1)
 
+check = [False] * 7
 record = []
 DFS(0)
 ```
@@ -153,25 +155,32 @@ DFS(0)
 
 ```cpp title="depth-first-search-pre-order.cpp"
 vector<int> record;
+vector<bool> check(7, false);
 vector<vector<int>> graph(7);
 
-void DFS(int s, int p = -1){
+void DFS(int s, int p = -1)
+{
     // 探索対象に入った時に記録する
     record.push_back(s);
-    for(auto to: graph[s]){
-        // 親要素には探索しない
-        if (to == p) continue;
+    check[s] = true;
+    for (auto to : graph[s])
+    {
+        // 一度探索したものは探索しない
+        if (check[to] == true)
+            continue;
         DFS(to, s);
     }
 }
 
-int main() {
+int main()
+{
 
-    vector<pair<int,int>> box = {{1,3},{1,2},{3,5},{3,6},{5,7},{2,4}};
+    vector<pair<int, int>> box = {{1, 3}, {1, 2}, {3, 6}, {3, 5}, {5, 7}, {2, 4}};
     // 無向グラフを作成
-    for(int i = 0; i < box.size();++i){
-        graph[box[i].first-1].push_back(box[i].second-1);
-        graph[box[i].second-1].push_back(box[i].first-1);
+    for (int i = 0; i < box.size(); ++i)
+    {
+        graph[box[i].first - 1].push_back(box[i].second - 1);
+        graph[box[i].second - 1].push_back(box[i].first - 1);
     }
 
     DFS(0);
@@ -183,35 +192,42 @@ int main() {
   <TabItem value="C#" label="C#">
 
 ```csharp title="depth-first-search-pre-order.cs"
+static List<bool> check = new List<bool>();
 static List<int> record = new List<int>();
 static List<List<int>> graph = new List<List<int>>();
 
 public static void Main(string[] args)
 {
-    int[,] box = new int[,] { { 1, 3 }, { 1, 2 }, { 3, 5 }, { 3, 6 }, { 5, 7 }, { 2, 4 } };
+    int[,] box = new int[,] { { 1, 3 }, { 1, 2 }, { 3, 6 }, { 3, 5 }, { 5, 7 }, { 2, 4 } };
 
-    for (int i = 0;i < 7; ++i)
+    for (int i = 0; i < 7; ++i)
     {
         graph.Add(new List<int>());
+        check.Add(false);
     }
 
     //無向グラフを作成
-    for (int i = 0; i < box.Length/2; ++i)
+    for (int i = 0; i < box.Length / 2; ++i)
     {
         graph[box[i, 0] - 1].Add(box[i, 1] - 1);
         graph[box[i, 1] - 1].Add(box[i, 0] - 1);
     }
     DFS(0);
+    for(int i = 0; i < 7; ++i)
+    {
+        Console.Write(record[i] + " ");
+    }
 }
 
 static void DFS(int s, int p = -1)
 {
     // 探索対象に入った時に記録する
     record.Add(s);
-    foreach(int to in graph[s])
+    check[s] = true;
+    foreach (int to in graph[s])
     {
-        // 親要素には探索しない
-        if (to == p) continue;
+        // 一度探索したものは探索しない
+        if (check[to] == true) continue;
         DFS(to, s);
     }
 }
@@ -354,6 +370,7 @@ static void DFS(tree root)
 
 #### 帰りがけ順
 
+````mdx-code-block
 <Tabs groupId="code">
   <TabItem value="python" label="Python" default>
 
@@ -361,15 +378,15 @@ static void DFS(tree root)
 from collections import deque
 
 def DFS(s ,p = -1):
-
+    check[s] = True
     for to in graph[s]:
-        # 親要素には探索しない
-        if to == p:
+        # 一度探索したものは探索しない
+        if check[to] == True:
             continue
         DFS(to,s)
     # 探索を終えた時に記録する
     record.append(s)
-box = [[1,3],[1,2],[3,5],[3,6],[5,7],[2,4]]
+box = [[1,3],[1,2],[3,6],[3,5],[5,7],[2,4]]
 graph = [[] for _ in range(7)]
 
 # 無向グラフを作成
@@ -377,6 +394,7 @@ for i in range(len(box)):
     graph[box[i][0]-1].append(box[i][1]-1)
     graph[box[i][1]-1].append(box[i][0]-1)
 
+check = [False] * 7
 record = []
 DFS(0)
 ```
@@ -386,31 +404,36 @@ DFS(0)
 
 ```cpp title="depth-first-search-post-order.cpp"
 vector<int> record;
+vector<bool> check(7, false);
 vector<vector<int>> graph(7);
 
-void DFS(int s, int p = -1){
-
-    for(auto to: graph[s]){
-        // 親要素には探索しない
-        if (to == p) continue;
+void DFS(int s, int p = -1)
+{
+    check[s] = true;
+    for (auto to : graph[s])
+    {
+        // 一度探索したものは探索しない
+        if (check[to] == true)
+            continue;
         DFS(to, s);
     }
-    // 探索を終えた時に記録する
+    // 探索対象に入った時に記録する
     record.push_back(s);
 }
 
-int main() {
+int main()
+{
 
-    vector<pair<int,int>> box = {{1,3},{1,2},{3,5},{3,6},{5,7},{2,4}};
+    vector<pair<int, int>> box = {{1, 3}, {1, 2}, {3, 6}, {3, 5}, {5, 7}, {2, 4}};
     // 無向グラフを作成
-    for(int i = 0; i < box.size();++i){
-        graph[box[i].first-1].push_back(box[i].second-1);
-        graph[box[i].second-1].push_back(box[i].first-1);
+    for (int i = 0; i < box.size(); ++i)
+    {
+        graph[box[i].first - 1].push_back(box[i].second - 1);
+        graph[box[i].second - 1].push_back(box[i].first - 1);
     }
 
     DFS(0);
-    rep(i, 0, record.size()) printf("%d ", record[i]);
-
+    rep(i, 0, 7) printf("%d ", record[i]);
     return 0;
 }
 ```
@@ -419,27 +442,28 @@ int main() {
   <TabItem value="C#" label="C#">
 
 ```csharp title="depth-first-search-post-order.cs"
+static List<bool> check = new List<bool>();
 static List<int> record = new List<int>();
 static List<List<int>> graph = new List<List<int>>();
 
 public static void Main(string[] args)
 {
-    int[,] box = new int[,] { { 1, 3 }, { 1, 2 }, { 3, 5 }, { 3, 6 }, { 5, 7 }, { 2, 4 } };
+    int[,] box = new int[,] { { 1, 3 }, { 1, 2 }, { 3, 6 }, { 3, 5 }, { 5, 7 }, { 2, 4 } };
 
-    for (int i = 0;i < 7; ++i)
+    for (int i = 0; i < 7; ++i)
     {
         graph.Add(new List<int>());
+        check.Add(false);
     }
 
     //無向グラフを作成
-    for (int i = 0; i < box.Length/2; ++i)
+    for (int i = 0; i < box.Length / 2; ++i)
     {
         graph[box[i, 0] - 1].Add(box[i, 1] - 1);
         graph[box[i, 1] - 1].Add(box[i, 0] - 1);
     }
     DFS(0);
-
-    for(int i = 0; i< record.Count; ++i)
+    for(int i = 0; i < 7; ++i)
     {
         Console.Write(record[i] + " ");
     }
@@ -447,20 +471,22 @@ public static void Main(string[] args)
 
 static void DFS(int s, int p = -1)
 {
-
-    foreach(int to in graph[s])
+    check[s] = true;
+    foreach (int to in graph[s])
     {
-        // 親要素には探索しない
-        if (to == p) continue;
+        // 一度探索したものは探索しない
+        if (check[to] == true) continue;
         DFS(to, s);
     }
-    // 探索を終えた時に記録する
+    // 探索対象に入った時に記録する
     record.Add(s);
 }
 ```
 
   </TabItem>
 </Tabs>
+
+````
 
 探索済みを記録しない場合は再帰処理を使わずに次のように書くことができる。
 
