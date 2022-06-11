@@ -51,7 +51,7 @@ import FontColor from "/src/components/Custom/FontColor/FontColor.js"
 `X`が決まると`Y`が決まるような関係を`関数従属`と呼び、`X → Y`のように表す。
 この時の`X`を`決定項`と呼び、`Y`を`従属項`と呼ぶ。
 
-関係従属 X → Y において、X の全ての真部分集合 X'において X' → Y が成立しない時を`完全関数従属`という。
+関係従属 X $\rightarrow$ Y において、X の全ての真部分集合 X'において X' $\rightarrow$ Y が成立しない時を`完全関数従属`という。
 
 ##### 真部分集合
 
@@ -63,10 +63,22 @@ import FontColor from "/src/components/Custom/FontColor/FontColor.js"
 
 真部分集合においても関係従属が存在する場合を`部分関係従属`という。
 
-例えば、X が決定すると Y が決まる関係(X → Y)の時 X,Z が決定すると Y が決まる関係(X,Z → Y)であるとも言える。
+例えば、X が決定すると Y が決まる関係(X $\rightarrow$ Y)の時 X,Z が決定すると Y が決まる関係(X,Z $\rightarrow$ Y)であるとも言える。
 
 ### 第 3 正規形
 
 第 2 正規形の条件を満たし、全ての非キー属性が主キーに対して推移的関係従属していない関係表を`第3正規形`と呼ぶ。
 
 ![イメージ図](/img/svg/Database/normalization/normalization-4.drawio.svg "第2正規形 → 第3正規形")
+
+#### 推移的関係従属
+
+X,Y,Z の 3 つの関係が存在し、
+
+1. X $\rightarrow$ Y
+2. Y $\nrightarrow$ X
+3. Y $\rightarrow$ Z
+
+の 3 つの関係が成り立つ時`推移的関数従属`しているという。
+
+### ボイスコッド正規形
