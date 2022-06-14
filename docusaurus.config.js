@@ -20,7 +20,6 @@ WriteFile(
   WriteContents(contents, "content")
 );
 WriteFile("./sidebars.js", WriteContents(sidebar_js, "sidebar"));
-
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "備忘録",
