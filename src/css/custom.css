@@ -25,6 +25,8 @@
   --ifm-color-img: white;
   --ifm-color-code-title: #f6f8fa;
   --ifm-color-tabs: var(--ifm-color-code-title);
+  --ifm-table-head-color: var(--ifm-color-primary-darkest);
+  --ifm-table-head-background: var(--ifm-color-code);
 }
 
 [data-theme="dark"] {
@@ -151,4 +153,8 @@
 
 ::marker {
   font-weight: bold;
+}
+
+tr td:first-child {
+  color: var(--ifm-color-primary-dark);
 }
