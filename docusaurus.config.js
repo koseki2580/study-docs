@@ -166,9 +166,10 @@ function getFiles() {
     CreateContent("", parentdatas[i]);
     for (let data of recursionParentData.pop()) parentdata.contents.push(data);
     for (let data of recursionNavparent.pop()) navparent.items.push(data);
-    navbar_items.push(navparent);
-    contents.push(parentdata);
+    if (navparent.items.length !== 0) navbar_items.push(navparent);
+    if (parentdata.contents.length !== 0) contents.push(parentdata);
   }
+
   navbar_items.push({
     type: "search",
     position: "right",
