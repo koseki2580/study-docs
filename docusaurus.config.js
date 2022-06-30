@@ -126,7 +126,7 @@ const config = {
 };
 
 module.exports = config;
-
+console.log(navbar_items);
 /**
  * docsの親要素・子要素をjson形式で取り出し
  */
@@ -177,9 +177,16 @@ function getFiles() {
   }
 
   navbar_items.push({
+    href: "https://github.com/koseki2580/study-docs",
+    position: "right",
+    className: "header-github-link",
+    "aria-label": "GitHub repository",
+  });
+  navbar_items.push({
     type: "search",
     position: "right",
   });
+
   /**
    * 再帰処理でコンテンツを作成
    * @param {string} basePath ドキュメントのファイルパス
