@@ -103,16 +103,40 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
+      algolia: {
+        // The application ID provided by Algolia
+        appId: "3TKZBSXW6M",
+
+        // Public API key: it is safe to commit it
+        apiKey: "ebf396899e7416ef1152bfa118a63d29",
+
+        indexName: "study",
+
+        // Optional: see doc section below
+        contextualSearch: true,
+
+        // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
+        // externalUrlRegex: "external\\.com|domain\\.com",
+
+        // Optional: Algolia search parameters
+        searchParameters: {},
+
+        // Optional: path for search page that enabled by default (`false` to disable it)
+        searchPagePath: "search",
+
+        //... other Algolia params
+      },
     }),
   plugins: [
-    [
-      require.resolve("@cmfcmf/docusaurus-search-local"),
-      {
-        // Options here
-        language: "ja",
-        indexDocSidebarParentCategories: 1,
-      },
-    ],
+    ["./my-plugin", {}],
+    // [
+    //   require.resolve("@cmfcmf/docusaurus-search-local"),
+    //   {
+    //     // Options here
+    //     language: "ja",
+    //     indexDocSidebarParentCategories: 1,
+    //   },
+    // ],
   ],
   stylesheets: [
     {
@@ -122,11 +146,14 @@ const config = {
         "sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM",
       crossorigin: "anonymous",
     },
+    {
+      href: "https://cdn.jsdelivr.net/npm/@docsearch/css@3",
+      type: "text/css",
+    },
   ],
 };
 
 module.exports = config;
-console.log(navbar_items);
 /**
  * docsの親要素・子要素をjson形式で取り出し
  */
