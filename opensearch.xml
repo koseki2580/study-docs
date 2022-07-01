@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
+                       xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+  <ShortName>備忘録</ShortName>
+  <Description>Search 備忘録</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Url type="text/html" method="get" template="https://koseki2580.github.io/study-docs/study-docs/search?q={searchTerms}"/>
+  <Url type="application/opensearchdescription+xml" rel="self" template="https://koseki2580.github.io/study-docs/study-docs/opensearch.xml" />
+  <moz:SearchForm>https://koseki2580.github.io/study-docs/study-docs/</moz:SearchForm>
+</OpenSearchDescription>
