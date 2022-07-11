@@ -17,6 +17,7 @@ import DocBreadcrumbs from "@theme/DocBreadcrumbs";
 import MDXContent from "@theme/MDXContent";
 import styles from "./styles.module.css";
 import Giscus from "@giscus/react";
+import { useColorMode } from "@docusaurus/theme-common";
 
 function DocItemMetadata(props) {
   const { content: DocContent } = props;
@@ -46,6 +47,7 @@ function DocItemContent(props) {
     !hideTableOfContents && DocContent.toc && DocContent.toc.length > 0;
   const renderTocDesktop =
     canRenderTOC && (windowSize === "desktop" || windowSize === "ssr");
+  const { colorMode, setColorMode } = useColorMode();
   return (
     <div className="row">
       <div className={clsx("col", !hideTableOfContents && styles.docItemCol)}>
@@ -95,11 +97,12 @@ function DocItemContent(props) {
             repoId="R_kgDOHVqENw="
             category="Comments"
             categoryId="DIC_kwDOHVqEN84CQI59"
-            mapping="title"
+            mapping="specific"
+            term={title}
             reactionsEnabled="1"
             emitMetadata="0"
             inputPosition="top"
-            theme="light"
+            theme={colorMode}
             lang="ja"
             loading="lazy"
           />
