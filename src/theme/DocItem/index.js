@@ -94,7 +94,7 @@ function DocItemContent(props) {
           <Giscus
             id="comments"
             repo="koseki2580/study-docs"
-            repoId="R_kgDOHVqENw="
+            repoId="R_kgDOHVqENw"
             category="Comments"
             categoryId="DIC_kwDOHVqEN84CQI59"
             mapping="specific"
