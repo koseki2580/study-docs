@@ -1,19 +1,18 @@
 import React from "react";
+import clsx from "clsx";
+import { ThemeClassNames } from "@docusaurus/theme-common";
 import {
-  ThemeClassNames,
   useSidebarBreadcrumbs,
   useHomePageRoute,
-} from "@docusaurus/theme-common";
-import styles from "./styles.module.css";
-import clsx from "clsx";
+} from "@docusaurus/theme-common/internal";
 import Link from "@docusaurus/Link";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import { translate } from "@docusaurus/Translate";
-import IconHome from "@theme/IconHome"; // TODO move to design system folder
-
+import IconHome from "@theme/Icon/Home";
+import styles from "./styles.module.css";
+// TODO move to design system folder
 function BreadcrumbsItemLink({ children, href, isLast }) {
   const className = "breadcrumbs__link";
-
   if (isLast) {
     return (
       <span className={className} itemProp="name">
@@ -21,20 +20,20 @@ function BreadcrumbsItemLink({ children, href, isLast }) {
       </span>
     );
   }
-
   return href ? (
     <Link className={className} href={href} itemProp="item">
       <span itemProp="name">{children}</span>
-    </Link> // TODO Google search console doesn't like breadcrumb items without href.
+    </Link>
   ) : (
+    // TODO Google search console doesn't like breadcrumb items without href.
     // The schema doesn't seem to require `id` for each `item`, although Google
     // insist to infer one, even if it's invalid. Removing `itemProp="item
     // name"` for now, since I don't know how to properly fix it.
     // See https://github.com/facebook/docusaurus/issues/7241
     <span className={className}>{children}</span>
   );
-} // TODO move to design system folder
-
+}
+// TODO move to design system folder
 function BreadcrumbsItem({ children, active, index, addMicrodata }) {
   return (
     <li
@@ -52,7 +51,6 @@ function BreadcrumbsItem({ children, active, index, addMicrodata }) {
     </li>
   );
 }
-
 function HomeBreadcrumbItem() {
   const homeHref = useBaseUrl("/");
   return (
@@ -72,15 +70,12 @@ function HomeBreadcrumbItem() {
     </li>
   );
 }
-
 export default function DocBreadcrumbs() {
   const breadcrumbs = useSidebarBreadcrumbs();
   const homePageRoute = useHomePageRoute();
-
   if (!breadcrumbs) {
     return null;
   }
-
   return (
     <nav
       className={clsx(
