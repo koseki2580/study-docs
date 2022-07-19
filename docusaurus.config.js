@@ -7,7 +7,7 @@ const fs = require("fs");
 const crypto = require("crypto");
 const math = require("remark-math");
 const katex = require("rehype-katex");
-
+const isDev = process.env.NODE_ENV === "development";
 let contents = [];
 let sidebar_js = {};
 let navbar_items = [];
@@ -243,7 +243,7 @@ function getFiles() {
       "utf8"
     );
     let draft = title.split("---")[1].split("\n")[3].split(" ")[1];
-    if (draft === "true") return;
+    if (isDev === false && draft === "true") return;
     // mdファイルからタイトル要素取り出し
     title = title.split("---")[1].split("\n")[1].split(" ")[1];
 

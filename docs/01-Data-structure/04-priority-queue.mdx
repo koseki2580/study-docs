@@ -1,0 +1,23 @@
+---
+title: 優先度付きキュー
+sidebar_label: 優先度付きキュー
+draft: false
+toc_max_heading_level: 4
+---
+
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
+## 優先度付きキューとは
+
+要素を取り出す際に入れた順ではなく、何らかの取り出し順(優先度)を定めて取り出していくデータ構造のことを`優先度付きキュー`という。
+
+![イメージ図](/img/svg/Data-structure/priority-queue/priority-queue-1.drawio.svg "優先度付きキュー")
+
+優先度付きキューは様々なデータ構造(木構造・配列)を用いて実装することが可能である。
+
+### ヒープ
+
+優先度付きキューの実装の 1 つで子要素は親要素より常に大きい(小さい)か等しいという制約を持つ木構造の事を`ヒープ`という。
