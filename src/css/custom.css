@@ -34,9 +34,9 @@
   --ifm-color-primary-dark: #63c4d0;
   --ifm-color-primary-darker: #56bfcc;
   --ifm-color-primary-darkest: #37a9b8;
-  --ifm-color-primary-light: #97d8e0;
-  --ifm-color-primary-lighter: #a4dde4;
-  --ifm-color-primary-lightest: #ccecf0;
+  --ifm-color-primary-light: #7ae0ee;
+  --ifm-color-primary-lighter: #aae6ee;
+  --ifm-color-primary-lightest: #c8ebf0;
   --docusaurus-highlighted-code-line-bg: inherit;
   /* --ifm-menu-color:blue; */
 
@@ -65,7 +65,7 @@
   margin: 1rem;
 }
 [data-theme="dark"] .contents {
-  box-shadow: 0 20px 25px 0 rgba(255, 255, 255, 0.5);
+  box-shadow: 0 20px 25px 0 rgba(233, 233, 233, 0.5);
 }
 .header-github-link:hover {
   opacity: 0.6;
