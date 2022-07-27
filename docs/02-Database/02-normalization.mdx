@@ -140,14 +140,16 @@ X,Y,Z の 3 つの関係が存在し、
 
 ![イメージ図](/img/svg/Database/normalization/normalization-7.drawio.svg "ベース図")
 
-この関係表では
+この関係表では{受注番号 1}と決まれば、{商品 A, 商品 B}または{材料 A, 材料 B}と一意に決定する。つまり、{受注番号}が決まれば、独立して{商品名}と{材料名}が決まるため、次の関係が存在する。
 
 - {受注番号} $\rightarrow$$\rightarrow$ {商品名 | 材料名}
 
-が存在する。この関係を{受注番号} $\rightarrow$$\rightarrow$ {商品名}と{受注番号} $\rightarrow$$\rightarrow$ {材料名}
+この関係を{受注番号} $\rightarrow$$\rightarrow$ {商品名}と{受注番号} $\rightarrow$$\rightarrow$ {材料名}
 に分ける正規化を行う。
 
 ![イメージ図](/img/svg/Database/normalization/normalization-8.drawio.svg "第4正規形")
+
+![イメージ図](/img/svg/Database/normalization/normalization-9.drawio.svg "イメージE-R図")
 
 ### 第 5 正規形
 
@@ -155,9 +157,11 @@ X,Y,Z の 3 つの関係が存在し、
 結合従属性とは関係が 3 以上に分解可能な従属性のことを指し、n 個に分解できるとき
 `n-分解可能`という。
 
-![イメージ図](/img/svg/Database/normalization/normalization-9.drawio.svg "ベース図")
+![イメージ図](/img/svg/Database/normalization/normalization-10.drawio.svg "ベース図")
 
-この関係表では{受注番号 1}に対する{商品名 A, 商品名 D}や{材料名 B}に対する{受注番号 1, 受注番号 2}などの様々な従属性が考えられる。
-これらを分解する。
+この関係表では{受注番号 1}が決まった際に、{材料名 A, 材料名 B}と決まるが、{商品名 A}が決まった際にも{材料名 A, 材料名 B}が決まる。
+といったように{受注番号,　商品名, 材料名}が独立していないため、この関係を分解する。
 
-![イメージ図](/img/svg/Database/normalization/normalization-10.drawio.svg "第5正規化")
+![イメージ図](/img/svg/Database/normalization/normalization-11.drawio.svg "第5正規化")
+
+![イメージ図](/img/svg/Database/normalization/normalization-12.drawio.svg "イメージE-R図")
