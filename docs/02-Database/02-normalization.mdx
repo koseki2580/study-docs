@@ -36,7 +36,7 @@ import FontColor from "/src/components/Custom/FontColor/FontColor.js"
 
 ### 第 1 正規形
 
-非正規形の関係表から`繰り返し`を排除することを`第1正規形`と呼ぶ。
+非正規形の関係表から`繰り返し`・`複数値`を排除することを`第1正規形`と呼ぶ。
 
 ![イメージ図](/img/svg/Database/normalization/normalization-1.drawio.svg "非正規形→正規形")
 
@@ -107,7 +107,7 @@ X,Y,Z の 3 つの関係が存在し、
 1. X $\rightarrow$ Y が自明な関数従属性である
 2. X は関係表 R のスーパキーである
 
-自明な関数従属性とは X $\rightarrow$ Y である時に Y が X の部分集合である集合である時のことをいう。
+`自明な関数従属性`とは X $\rightarrow$ Y である時に Y が X の部分集合である集合である時のことをいう。
 {受注番号, 商品番号} $\rightarrow$ {商品番号}のような場合をさす。
 
 `スーパキー`とは関係のタプルを一意に選択できるという条件のみを満たすキーのことをいう。
@@ -140,11 +140,12 @@ X,Y,Z の 3 つの関係が存在し、
 
 ![イメージ図](/img/svg/Database/normalization/normalization-7.drawio.svg "ベース図")
 
-この関係表では{受注番号 1}と決まれば、{商品 A, 商品 B}または{材料 A, 材料 B}と一意に決定する。つまり、{受注番号}が決まれば、独立して{商品名}と{材料名}が決まるため、次の関係が存在する。
+この関係表では{受注番号 1}と決まれば、{商品 A, 商品 B}または{送り先 A, 送り先 B}と一意に決定する。つまり、{受注番号}が決まれば、独立して{商品名}と{送り先}が決まるため、次の関係が存在する。
+また、{商品名}と{送り先}の間には関係が一切なく、それぞれ独立して決定する。
 
-- {受注番号} $\rightarrow$$\rightarrow$ {商品名 | 材料名}
+- {受注番号} $\rightarrow$$\rightarrow$ {商品名 | 送り先}
 
-この関係を{受注番号} $\rightarrow$$\rightarrow$ {商品名}と{受注番号} $\rightarrow$$\rightarrow$ {材料名}
+この関係を{受注番号} $\rightarrow$$\rightarrow$ {商品名}と{受注番号} $\rightarrow$$\rightarrow$ {送り先}
 に分ける正規化を行う。
 
 ![イメージ図](/img/svg/Database/normalization/normalization-8.drawio.svg "第4正規形")
@@ -160,7 +161,7 @@ X,Y,Z の 3 つの関係が存在し、
 ![イメージ図](/img/svg/Database/normalization/normalization-10.drawio.svg "ベース図")
 
 この関係表では{受注番号 1}が決まった際に、{材料名 A, 材料名 B}と決まるが、{商品名 A}が決まった際にも{材料名 A, 材料名 B}が決まる。
-といったように{受注番号,　商品名, 材料名}が独立していないため、この関係を分解する。
+{受注番号,　商品名, 材料名}が独立していないため、この関係を分解する。
 
 ![イメージ図](/img/svg/Database/normalization/normalization-11.drawio.svg "第5正規化")
 
