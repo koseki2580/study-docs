@@ -24,7 +24,7 @@ WriteFile("./sidebars.js", WriteContents(sidebar_js, "sidebar"));
 const config = {
   title: "備忘録",
   url: "https://koseki2580.github.io/study-docs",
-  baseUrl: "/study-docs/",
+  baseUrl: "/study-docs",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   // favicon: 'img/favicon.ico',
@@ -59,6 +59,10 @@ const config = {
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
+        gtag: {
+          trackingID: "G-6FT13EFQVW",
+          anonymizeIP: true,
+        },
       }),
     ],
   ],
@@ -77,6 +81,7 @@ const config = {
 
         items: navbar_items,
       },
+
       // footer: {},
       prism: {
         additionalLanguages: ["csharp"],
@@ -109,6 +114,7 @@ const config = {
     }),
   plugins: [
     ["./my-plugin", {}],
+    // ["@docusaurus/preset-classic", {}],
     // [
     //   require.resolve("@cmfcmf/docusaurus-search-local"),
     //   {
