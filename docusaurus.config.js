@@ -24,7 +24,7 @@ WriteFile("./sidebars.js", WriteContents(sidebar_js, "sidebar"));
 const config = {
   title: "備忘録",
   url: "https://koseki2580.github.io/study-docs",
-  baseUrl: "/study-docs",
+  baseUrl: "/study-docs/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   // favicon: 'img/favicon.ico',
@@ -112,18 +112,7 @@ const config = {
         //... other Algolia params
       },
     }),
-  plugins: [
-    ["./my-plugin", {}],
-    // ["@docusaurus/preset-classic", {}],
-    // [
-    //   require.resolve("@cmfcmf/docusaurus-search-local"),
-    //   {
-    //     // Options here
-    //     language: "ja",
-    //     indexDocSidebarParentCategories: 1,
-    //   },
-    // ],
-  ],
+  plugins: [["./my-plugin", {}]],
   stylesheets: [
     {
       href: "https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css",

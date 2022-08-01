@@ -3,6 +3,7 @@ title: 強連結成分分解
 sidebar_label: 強連結成分分解
 draft: false
 toc_max_heading_level: 4
+tags: [アルゴリズム]
 ---
 
 ```mdx-code-block
