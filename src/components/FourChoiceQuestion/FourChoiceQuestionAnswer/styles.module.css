@@ -1,0 +1,25 @@
+.answer_group {
+  align-items: left;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  border: 2px solid var(--ifm-color-primary-darkest);
+  width: 100%;
+  padding: inherit;
+}
+.answer {
+  text-align: left;
+  border-bottom: 2px solid var(--ifm-color-primary-darkest);
+  color: red;
+  font-size: 20px;
+  padding: inherit;
+  padding-bottom: 0px;
+}
+.answer_text {
+  color: var(--ifm-color-word);
+}
+.interpret {
+  /* font-size: 20px; */
+  padding: inherit;
+  color: inherit;
+}

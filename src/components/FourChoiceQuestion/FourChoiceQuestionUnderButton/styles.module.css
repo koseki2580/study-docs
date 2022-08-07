@@ -1,0 +1,22 @@
+.btn :hover {
+  cursor: pointer;
+  box-shadow: 0 10px 25px 0 rgb(0 0 0 / 50%);
+}
+[data-theme="dark"] .btn :hover {
+  box-shadow: 0 10px 25px 0 rgba(233, 233, 233, 0.5);
+}
+.button_text {
+  color: var(--ifm-color-primary-lightest) !important;
+  background-color: var(--ifm-color-primary-darker);
+  padding: 10px;
+  margin: 0;
+  border-radius: 25px;
+}
+.question_button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin: inherit;
+  margin-top: 30px;
+}
