@@ -70,30 +70,20 @@ function Test2({ question, answer, choice, interpret, tag }) {
   );
 }
 
-export default function FourChoiceQuestionLayout({ path }) {
-  // console.log(data);
-  const [posts, setPosts] = useState([]);
-  const url = useBaseUrl(path);
-  useEffect(() => {
-    fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        // console.log(data);
-        setPosts(data);
-      });
-  }, []);
+export default function FourChoiceQuestionLayout({
+  created_by,
+  created_at,
+  datas,
+}) {
+  console.log(created_at);
+  console.log(created_by);
+  console.log(datas);
+
   return (
-    <div>
-      {posts.datas &&
-        posts.datas.map((props, idx) => <Test2 key={idx} {...props} />)}
-    </div>
+    <>
+      {datas.map((props, idx) => (
+        <Test2 key={idx} {...props} />
+      ))}
+    </>
   );
 }

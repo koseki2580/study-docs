@@ -8,9 +8,9 @@ hide_table_of_contents: true
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import FourChoiceQuestionLayout from "/src/components/FourChoiceQuestion/FourChoiceQuestionLayout"
+import FourChoiceQuestion from "/src/components/FourChoiceQuestion/FourChoiceQuestion"
 ```
 
 ```mdx-code-block
-<FourChoiceQuestionLayout path="/json/FourChoiceQuestion/test.json"></FourChoiceQuestionLayout>
+<FourChoiceQuestion path="/json/FourChoiceQuestion/test.json"></FourChoiceQuestion>
 ```
