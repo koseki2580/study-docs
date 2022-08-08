@@ -12,10 +12,10 @@ export default function FourChoiceQuestionUnderButton({ display = false }) {
       style={{ display: displays }}
     >
       <a className={`not-a-tag contents ${styles.btn}`}>
-        <h2 className={styles.button_text}>前の問題</h2>
+        <h3 className={styles.button_text}>前の問題</h3>
       </a>
       <a className={`not-a-tag contents ${styles.btn}`}>
-        <h2 className={styles.button_text}>次の問題</h2>
+        <h3 className={styles.button_text}>次の問題</h3>
       </a>
     </div>
   );

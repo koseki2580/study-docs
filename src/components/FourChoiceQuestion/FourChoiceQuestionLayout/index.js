@@ -10,15 +10,23 @@ const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 function Test2({ question, answer, choice, interpret, tag }) {
   // tagで出題問題を選択できるようにした
-  let after_ans = false;
   const test = styles.choice;
+  const checked = styles.choice_checked;
+  const [displayAnswer, setDisplayAnswer] = useState(false);
+  const [correctAnswerCount, setCorrectAnswerCount] = useState(0);
+  const [answerCount, setAnswerCount] = useState(0);
+  const [correctAnswerRate, setCorrectAnswerRate] = useState("0");
+  let choiceBox = undefined;
   return (
     <div className={styles.fourchoicequestion}>
-      <div>正解数/解答数: 0 / 0 (0%)</div>
+      <div>
+        正解数/解答数: {correctAnswerCount} / {answerCount} ({correctAnswerRate}
+        %)
+      </div>
       <Answer
         answer={answer}
         interpret={interpret}
-        display={after_ans}
+        display={displayAnswer}
       ></Answer>
       <div className={styles.question}>{question}</div>
       <div className={clsx("col col--6") + " not-a-tag"}>
@@ -29,14 +37,27 @@ function Test2({ question, answer, choice, interpret, tag }) {
             onClick={(e) => {
               e.stopPropagation();
               let element = e.currentTarget;
-              console.log(e);
-              console.log(element.parentNode);
-              // while (element.tagName !== "A") {
-              //   element = element.parentNode;
-              // }
-              let box = document.querySelectorAll(`.${test}`);
-              console.log(box);
-              box.pointerEvents = "none";
+              element.classList.add(checked);
+              console.log(element.firstChild.textContent);
+              if (choiceBox === undefined)
+                choiceBox = document.querySelectorAll(`.${test}`);
+
+              choiceBox.forEach((element) => {
+                element.style.pointerEvents = "none";
+              });
+              setDisplayAnswer(true);
+              setAnswerCount(answerCount + 1);
+              let add = 0;
+              if (element.firstChild.textContent.includes(answer)) {
+                setCorrectAnswerCount(correctAnswerCount + 1);
+                add = 1;
+              }
+              setCorrectAnswerRate(
+                (
+                  ((correctAnswerCount + add) / (answerCount + 1)) *
+                  100
+                ).toPrecision(4)
+              );
             }}
           >
             <h2 className="index-content-title">{alphabet[idx]}. </h2>
@@ -44,7 +65,7 @@ function Test2({ question, answer, choice, interpret, tag }) {
           </a>
         ))}
       </div>
-      <UnderButton display={after_ans}></UnderButton>
+      <UnderButton display={displayAnswer}></UnderButton>
     </div>
   );
 }
