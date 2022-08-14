@@ -10,44 +10,31 @@ import clsx from "clsx";
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 function Question(props) {
-  // tagで出題問題を選択できるようにした
-  const test = styles.choice;
-  const checked = styles.choice_checked;
-
-  const [correctAnswerCount, setCorrectAnswerCount] = useState(0);
-  const [answerCount, setAnswerCount] = useState(0);
-  let choiceBox = undefined;
-  console.log(props.setDisplayAnswer);
+  const click = props.clickAnswer === false ? "all" : "none";
   return (
     <>
       <div className={styles.question}>{props.question}</div>
-      <div className={clsx("col col--6") + " not-a-tag"}>
+      <div className={`${clsx("col col--6")}`} style={{ pointerEvents: click }}>
         {props.choice.map((data, idx) => (
-          <a
-            key={idx + 1}
-            className={`padding-horiz--md contents ${styles.choice}`}
-            onClick={(e) => {
-              e.stopPropagation();
-              let element = e.currentTarget;
-              element.classList.add(checked);
-              console.log(element.firstChild.textContent);
-              if (choiceBox === undefined)
-                choiceBox = document.querySelectorAll(`.${test}`);
-              props.setDisplayAnswer(true);
-              choiceBox.forEach((element) => {
-                element.style.pointerEvents = "none";
-              });
-              setAnswerCount(answerCount + 1);
-              let add = 0;
-              if (element.firstChild.textContent.includes(props.answer)) {
-                setCorrectAnswerCount(correctAnswerCount + 1);
-                add = 1;
-              }
-            }}
-          >
-            <h2 className="index-content-title">{alphabet[idx]}. </h2>
-            <div className={styles.answer_choice}>{data}</div>
-          </a>
+          <>
+            <input
+              type="radio"
+              name="radio"
+              id={`radio-${idx + 1}`}
+              className={`${styles.radiobtn}`}
+              onClick={(e) => {
+                props.setDisplayAnswer(true);
+              }}
+            />
+            <label
+              htmlFor={`radio-${idx + 1}`}
+              className={`padding-horiz--md contents ${styles.choice} ${styles.radiolabel}`}
+              id={"test"}
+            >
+              <h2 className="index-content-title">{alphabet[idx]}. </h2>
+              <div className={styles.answer_choice}>{data}</div>
+            </label>
+          </>
         ))}
       </div>
     </>
@@ -64,8 +51,15 @@ export default function FourChoiceQuestionLayout({
   console.log(datas);
   const correctAnswerCount = useRef(0);
   const answerCount = useRef(0);
-  const questionNumber = useRef(getRandomInt(datas.length));
+  const [clickAnswer, setClickAnswer] = useState(false);
+  const [questionNumber, setQuestionNumber] = useState(
+    getRandomInt(datas.length)
+  );
   const [displayAnswer, setDisplayAnswer] = useState(false);
+  useEffect(() => {
+    setClickAnswer(displayAnswer);
+    if (displayAnswer === false) setQuestionNumber(getRandomInt(datas.length));
+  }, [displayAnswer]);
 
   return (
     <div className={styles.fourchoicequestion}>
@@ -74,16 +68,21 @@ export default function FourChoiceQuestionLayout({
         answerCount={answerCount.current}
       ></Rate>
       <Answer
-        answer={datas[questionNumber.current].answer}
-        interpret={datas[questionNumber.current].interpret}
+        // key={"answer"}
+        answer={datas[questionNumber].answer}
+        interpret={datas[questionNumber].interpret}
         display={displayAnswer}
       ></Answer>
       <Question
         key={"question"}
-        {...datas[questionNumber.current]}
+        {...datas[questionNumber]}
+        clickAnswer={clickAnswer}
         setDisplayAnswer={setDisplayAnswer}
       />
-      <UnderButton display={displayAnswer}></UnderButton>
+      <UnderButton
+        display={displayAnswer}
+        setDisplayAnswer={setDisplayAnswer}
+      ></UnderButton>
     </div>
   );
 }

@@ -91,6 +91,7 @@
   transition: 1s;
   transition-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
+
 .contents:hover {
   background-color: var(--ifm-color-primary-light);
 }

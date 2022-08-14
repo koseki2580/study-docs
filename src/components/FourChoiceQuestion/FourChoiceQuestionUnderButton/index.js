@@ -4,17 +4,30 @@ import Answer from "../FourChoiceQuestionAnswer";
 import styles from "./styles.module.css";
 import clsx from "clsx";
 
-export default function FourChoiceQuestionUnderButton({ display = false }) {
+export default function FourChoiceQuestionUnderButton({
+  display = false,
+  setDisplayAnswer,
+}) {
   const displays = display === true ? "" : "none";
   return (
     <div
       className={`${clsx("col col--6")} ${styles.question_button}`}
       style={{ display: displays }}
     >
-      <a className={`not-a-tag contents ${styles.btn}`}>
+      <a
+        className={`not-a-tag contents ${styles.btn}`}
+        onClick={(e) => {
+          setDisplayAnswer(false);
+        }}
+      >
         <h3 className={styles.button_text}>前の問題</h3>
       </a>
-      <a className={`not-a-tag contents ${styles.btn}`}>
+      <a
+        className={`not-a-tag contents ${styles.btn}`}
+        onClick={(e) => {
+          setDisplayAnswer(false);
+        }}
+      >
         <h3 className={styles.button_text}>次の問題</h3>
       </a>
     </div>
