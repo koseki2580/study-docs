@@ -1,0 +1,39 @@
+.question {
+  margin: 15px;
+  padding: inherit;
+  border-radius: 20px;
+  border: 2px solid var(--ifm-color-primary-darkest);
+  width: 100%;
+  color: inherit;
+}
+
+.choice_area {
+  display: flex;
+  flex-direction: column;
+  padding: inherit;
+  margin: 5px;
+}
+
+.choice {
+  box-shadow: none !important;
+  cursor: pointer;
+}
+
+.answer_choice {
+  margin-left: 10px;
+}
+
+.radiolabel {
+  text-decoration: none;
+  color: var(--ifm-color-primary-darkest);
+  transition: 1s;
+  transition-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.checked {
+  background-color: var(--ifm-color-primary-light);
+}
+
+input[type="radio"].radiobtn {
+  display: none;
+}

@@ -3,43 +3,11 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 import Answer from "../FourChoiceQuestionAnswer";
 import UnderButton from "../FourChoiceQuestionUnderButton";
 import Rate from "../FourChoiceQuestionAnswerRate";
+import Question from "../FourChoiceMain";
 
 import styles from "./styles.module.css";
-import clsx from "clsx";
 
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-function Question(props) {
-  const click = props.clickAnswer === false ? "all" : "none";
-  return (
-    <>
-      <div className={styles.question}>{props.question}</div>
-      <div className={`${clsx("col col--6")}`} style={{ pointerEvents: click }}>
-        {props.choice.map((data, idx) => (
-          <>
-            <input
-              type="radio"
-              name="radio"
-              id={`radio-${idx + 1}`}
-              className={`${styles.radiobtn}`}
-              onClick={(e) => {
-                props.setDisplayAnswer(true);
-              }}
-            />
-            <label
-              htmlFor={`radio-${idx + 1}`}
-              className={`padding-horiz--md contents ${styles.choice} ${styles.radiolabel}`}
-              id={"test"}
-            >
-              <h2 className="index-content-title">{alphabet[idx]}. </h2>
-              <div className={styles.answer_choice}>{data}</div>
-            </label>
-          </>
-        ))}
-      </div>
-    </>
-  );
-}
 
 export default function FourChoiceQuestionLayout({
   created_by,
@@ -52,13 +20,20 @@ export default function FourChoiceQuestionLayout({
   const correctAnswerCount = useRef(0);
   const answerCount = useRef(0);
   const [clickAnswer, setClickAnswer] = useState(false);
+  const [checkedAnswer, setCheckedAnswer] = useState("none");
+
   const [questionNumber, setQuestionNumber] = useState(
     getRandomInt(datas.length)
   );
   const [displayAnswer, setDisplayAnswer] = useState(false);
   useEffect(() => {
     setClickAnswer(displayAnswer);
-    if (displayAnswer === false) setQuestionNumber(getRandomInt(datas.length));
+    if (displayAnswer === false) {
+      setQuestionNumber(getRandomInt(datas.length));
+      document
+        .querySelector(`.${checkedAnswer}`)
+        ?.classList.remove(checkedAnswer);
+    }
   }, [displayAnswer]);
 
   return (
@@ -74,9 +49,9 @@ export default function FourChoiceQuestionLayout({
         display={displayAnswer}
       ></Answer>
       <Question
-        key={"question"}
         {...datas[questionNumber]}
         clickAnswer={clickAnswer}
+        setCheckedAnswer={setCheckedAnswer}
         setDisplayAnswer={setDisplayAnswer}
       />
       <UnderButton
