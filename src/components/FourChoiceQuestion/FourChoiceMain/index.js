@@ -24,6 +24,11 @@ export default function Main(props) {
               onClick={(e) => {
                 props.setDisplayAnswer(true);
                 e.target.parentNode.classList.add(styles.checked);
+                props.answerCount.current += 1;
+                if (
+                  e.target.nextElementSibling.textContent.includes(props.answer)
+                )
+                  props.correctAnswerCount.current += 1;
               }}
             />
             <h2 className="index-content-title">{alphabet[idx]}. </h2>

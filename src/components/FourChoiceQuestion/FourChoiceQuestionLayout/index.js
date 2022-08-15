@@ -7,16 +7,11 @@ import Question from "../FourChoiceMain";
 
 import styles from "./styles.module.css";
 
-const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
 export default function FourChoiceQuestionLayout({
   created_by,
   created_at,
   datas,
 }) {
-  console.log(created_at);
-  console.log(created_by);
-  console.log(datas);
   const correctAnswerCount = useRef(0);
   const answerCount = useRef(0);
   const [clickAnswer, setClickAnswer] = useState(false);
@@ -51,6 +46,8 @@ export default function FourChoiceQuestionLayout({
       <Question
         {...datas[questionNumber]}
         clickAnswer={clickAnswer}
+        correctAnswerCount={correctAnswerCount}
+        answerCount={answerCount}
         setCheckedAnswer={setCheckedAnswer}
         setDisplayAnswer={setDisplayAnswer}
       />
