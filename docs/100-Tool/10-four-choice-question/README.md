@@ -1,7 +1,7 @@
 ---
 title: 4択問題機能
 sidebar_label: 4択問題機能
-draft: false
+draft: true
 hide_table_of_contents: true
 ---
 
