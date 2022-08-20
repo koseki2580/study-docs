@@ -37,7 +37,7 @@ if (isDev === true) {
     },
   ];
 
-  // // ナビバーに追加
+  // ナビバーに追加
   navbar_items.push({
     docId: "Tool/four-choice-question/README",
     label: "4択問題",
@@ -233,7 +233,7 @@ function getFiles() {
       if (basePath.length === 0 || basePath.includes("/") === true) return;
       // JSONオブジェクトを取得
       const jsonObject = JSON.parse(
-        fs.readFileSync(baseUrl + "/" + basePath + "/" + fileName, "utf8")
+        fs.readFileSync(`${baseUrl}/${basePath}/${fileName}`, "utf8")
       );
       parentdata.headtitle = jsonObject.label;
       navparent.label = jsonObject.label;
@@ -243,15 +243,45 @@ function getFiles() {
     // jsonファイルではないのでフォルダ
     // 探索を進める
     if (fileName.includes(".md") !== true) {
-      let nextfile = fs.readdirSync(baseUrl + "/" + basePath + "/" + fileName);
+      let nextfile = fs.readdirSync(`${baseUrl}/${basePath}/${fileName}`);
       recursionParentData.push([]);
       recursionNavparent.push([]);
+
+      // Readmeがあればそれのみ追加する
+      let includeReadme = false;
+      let readmeFile;
       for (let next of nextfile) {
-        CreateContent(
-          basePath + (basePath.length === 0 ? "" : "/") + fileName,
-          next
-        );
+        if (next.includes("README") === true) {
+          readmeFile = next;
+          includeReadme = true;
+          break;
+        }
       }
+      // READMEが存在する場合は_category_.jsonのlabelを表示タイトルとする
+      if (includeReadme === true) {
+        CreateContent(
+          `${basePath}${basePath.length === 0 ? "" : "/"}${fileName}`,
+          readmeFile
+        );
+        const jsonObject = JSON.parse(
+          fs.readFileSync(
+            `${baseUrl}/${basePath}/${fileName}/_category_.json`,
+            "utf8"
+          )
+        );
+        recursionParentData[recursionParentData.length - 1][0].title =
+          jsonObject.label;
+        recursionNavparent[recursionParentData.length - 1][0].label =
+          jsonObject.label;
+      } else {
+        for (let next of nextfile) {
+          CreateContent(
+            `${basePath}${basePath.length === 0 ? "" : "/"}${fileName}`,
+            next
+          );
+        }
+      }
+
       let temppar = recursionParentData.pop();
       let tempnav = recursionNavparent.pop();
       for (let data of temppar)
@@ -262,11 +292,8 @@ function getFiles() {
     }
 
     // ファイル読み込み
-    let filepath = RemovePrefix(basePath + "/" + fileName.split(".")[0]);
-    let title = fs.readFileSync(
-      baseUrl + "/" + basePath + "/" + fileName,
-      "utf8"
-    );
+    let filepath = RemovePrefix(`${basePath}/${fileName.split(".")[0]}`);
+    let title = fs.readFileSync(`${baseUrl}/${basePath}/${fileName}`, "utf8");
     let draft = title.split("---")[1].split("\n")[3].split(" ")[1];
     if (isDev === false && draft === "true") return;
     // mdファイルからタイトル要素取り出し
@@ -277,6 +304,7 @@ function getFiles() {
       title: title,
       href: `docs/${filepath.replace("README", "")}`,
     };
+
     if (fileName.includes("README") === true) {
       recursionParentData[recursionParentData.length - 1].unshift(datas);
     } else {
