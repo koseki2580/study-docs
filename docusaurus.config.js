@@ -270,10 +270,15 @@ function getFiles() {
             "utf8"
           )
         );
-        recursionParentData[recursionParentData.length - 1][0].title =
-          jsonObject.label;
-        recursionNavparent[recursionParentData.length - 1][0].label =
-          jsonObject.label;
+        if (
+          recursionParentData[recursionParentData.length - 1][0] !== undefined
+        )
+          recursionParentData[recursionParentData.length - 1][0].title =
+            jsonObject.label;
+
+        if (recursionNavparent[recursionParentData.length - 1][0] !== undefined)
+          recursionNavparent[recursionParentData.length - 1][0].label =
+            jsonObject.label;
       } else {
         for (let next of nextfile) {
           CreateContent(
