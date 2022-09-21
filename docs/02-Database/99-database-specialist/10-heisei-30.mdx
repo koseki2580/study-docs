@@ -46,8 +46,6 @@ import FontColor from "@site/src/components/Custom/FontColor"
 
 ##### (1)
 
-- 図 1 にある `ア`, `イ`に入る列名を答える問題
-
 ![午後2 設問1 図1](/img/png/Database/database-specialist/H30/2-1-figure-1.png "午後2 設問1 図1")
 
 問題の 7 ページ目に`仮払い金精算`について書かれている。
@@ -95,8 +93,6 @@ $\textcircled{\scriptsize 2}$ ではさらに、「仮払金の申請は事務�
 | イ(仮払金精算) | <UnderLine px="2" >申請番号</UnderLine>, <UnderLine px="2" >精算日</UnderLine>, 精算金額 |
 
 ##### (2)
-
-- 表 6 の太枠を埋める問題
 
 ![午後2 設問1 表6](/img/png/Database/database-specialist/H30/2-1-chart-6.png "午後2 設問1 表6")
 
@@ -201,8 +197,6 @@ $\textcircled{\scriptsize 2}$ ではさらに、「仮払金の申請は事務�
 
 ##### (3)
 
-- 検査制約を求める問題
-
 (2)の支払い先は「申請登録時の指定は経費支払依頼では必須、立替経費精算では任意である。」であり、必須にすると任意に対応できないため、NOT NULL 制約を No としていた。
 そのため、「経費支払依頼では必須」に対応するために検査制約をつける必要がある。
 
@@ -216,8 +210,6 @@ $\textcircled{\scriptsize 2}$ ではさらに、「仮払金の申請は事務�
 この 2 つを合わせた`申請種別 = '1' OR 申請種別 = '2' AND 支払先 IS NOT NULL`が答えとなる。
 
 ##### (4)
-
-- データ所要量を求める問題
 
 ![午後2 設問1 表7](/img/png/Database/database-specialist/H30/2-1-chart-7.png "午後2 設問1 表7")
 
@@ -239,8 +231,6 @@ $\textcircled{\scriptsize 2}$ ではさらに、「仮払金の申請は事務�
   データ所要量は必要なデータページ数とページサイズを掛け合わせることで求めることができ、`100,000 * 4000 = 400,000,000`となり、`400`百万バイトとなる。
 
 #### 設問 2
-
-- DB サーバの性能見積もりの問題
 
 ![午後2 ページ15](/img/png/Database/database-specialist/H30/2-1-1-4.png "午後2 ページ15 ")
 
@@ -282,8 +272,6 @@ $\textcircled{\scriptsize 2}$ ではさらに、「仮払金の申請は事務�
 
 ##### (1)
 
-- サービス選定についての問題
-
 ![午後2 設問1 表8](/img/png/Database/database-specialist/H30/2-1-chart-8.png "午後2 設問1 表8")
 
 - $\textcircled{\scriptsize 1}$
@@ -307,8 +295,6 @@ $\textcircled{\scriptsize 2}$ ではさらに、「仮払金の申請は事務�
   つまり、バックアップストレージに保存した後の 5 分間の間に更新コミット $\rightarrow$ 障害発生の順に起きた場合は更新が反映されない。
 
 ##### (2)
-
-- バッチ処理の性能についての問題
 
 ![午後2 設問1 表2](/img/png/Database/database-specialist/H30/2-1-chart-2.png "午後2 設問1 表2")
 
@@ -378,8 +364,6 @@ $\textcircled{\scriptsize 2}$ ではさらに、「仮払金の申請は事務�
 
 ##### (3)
 
-- スケジュールの設定に関する問題
-
 ページ 8 $>$ 1. 現行システム $>$ (1) $>$ $\textcircled{\scriptsize 4}$ に
 「旅費交通費精算機能の運用時間帯は、平日の 8 時 $\sim$　 23 時であり、8 時 $\sim$ 20 時にオンライン処理、20 時 $\sim$ 23 時にバックアップ及びバッチ処理が行われる。」
 とあるので、平日の 8 時 $\sim$　 23 時だけ起動させるだけ良いことが分かる。
@@ -391,8 +375,6 @@ $\textcircled{\scriptsize 2}$ ではさらに、「仮払金の申請は事務�
 #### (1)
 
 ![午後2 設問2 表1](/img/png/Database/database-specialist/H30/2-2-chart-1.png "午後2 設問2 表1")
-
-- 語句を埋める問題
 
 ##### ア
 
@@ -409,8 +391,6 @@ $\textcircled{\scriptsize 2}$ ではさらに、「仮払金の申請は事務�
 `構成部品を発注する`が答えとなる。
 
 #### (2)
-
-- 品目とサブタイプとの関係を求める問題
 
 ![午後2 設問2 表2](/img/png/Database/database-specialist/H30/2-2-chart-2.png "午後2 設問2 表2")
 
@@ -502,8 +482,6 @@ E-R 図からではなく、テーブルから埋める方が理解しやすい�
 とあるので、`入荷`となる。
 
 #### (4)
-
-- 関係スキーマを埋める問題
 
 ![午後2 設問2 図2](/img/png/Database/database-specialist/H30/2-2-figure-2.png "午後2 設問2 図2")
 
