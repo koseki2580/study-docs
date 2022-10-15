@@ -308,7 +308,10 @@ function getFiles() {
     let draft = title.split("---")[1].split("\n")[3].split(" ")[1];
     if (isDev === false && draft === "true") return;
     // mdファイルからタイトル要素取り出し
-    title = title.split("---")[1].split("\n")[1].split(" ")[1];
+    let splitTitle = title.split("---")[1].split("\n")[1].split(" ");
+    let tempTitle = [];
+    for (let i = 1; i < splitTitle.length; ++i) tempTitle.push(splitTitle[i]);
+    title = tempTitle.join(" ");
 
     // インデックスページに表示するコンテンツ
     let datas = {
