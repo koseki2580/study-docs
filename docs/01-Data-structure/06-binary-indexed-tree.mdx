@@ -155,3 +155,179 @@ $0111_{(2)}$ $\rightarrow$ $0110_{(2)}$ $\rightarrow$ $0100_{(2)}$ (7 $\rightarr
 > $0110_{(2)}$(6)の最下位 bit は $0010_{(2)}$なので 2 を引くと$0110_{(2)}$ - $0010_{(2)}$ = $0100_{(2)}$(6 - 2 = 4)となる
 >
 > $0111_{(2)}$(7)の最下位 bit は $0001_{(2)}$なので 1 を引くと$0111_{(2)}$ - $0001_{(2)}$ = $0110_{(2)}$(7 - 1 = 6)となる
+
+:::info
+$a_0 + a_1 + a_2 + \dots + a_{n-1} + a_n$の和は求めれるけど
+$a_5 + a_6 + a_7 + \dots + a_{m-1} + a_m$のような間の区間を求めたい場合は[累積和](/docs/Algorithm/cumulative-sum)と同じ様に引き算をすることで求めることができる。
+
+> 全部 10 個の要素があった場合に$a_7 + a_8 + a_9$の和を知りたいとすると
+> $(a_0 + a_1 + a_2 + \dots + a_8 + a_9) - (a_0 + a_1 + a_2 + \dots + a_5 + a_6)$ = $a_7 + a_8 + a_9$
+
+:::
+
+特定要素に加算・区間和の導出に最終 bit を用いてる。最終 bit の位置を 1 つずつ探索する方法もあるが、2 の補数をうまく活用することで簡単に求めるできる。
+
+2 の補数とはコンピュータの世界では負の数として用いられるものであり、例えば`6 (0110)`の補数は`-6 (1010)`と表現され、元の bit を反転させて 1 足すことで求めることができる。
+($0110_{(2)}$ $\rightarrow$ $1001_{(2)}$ $\rightarrow$ $1010_{(2)}$)
+
+この`0110`と`1010`を AND 演算を行うと最下位 bit を取得することができる。
+(2 の補数は 0 となる数字を求めており、全ての bit が 0 とするためには最下位 bit を足し合わせて`1 + 1 = 0`となる様に繰り上げを行う必要があるので、
+補数と元の数字は最下位 bit だけともに 1 となっている)
+
+:::info
+基数の補数とは`足すと桁が1つ上がる数のうち最も小さい数`のことである。
+2 進数の場合は、n bit で数字を表現していた場合に n+1 bit が 1 となっていた場合は無視されるので、0 となる数字を求めているのと同義である。
+:::
+
+### プログラム
+
+<Tabs groupId="code">
+  <TabItem value="python" label="Python" default>
+
+```python title="binary-indexed-tree.py"
+class BinaryIndexedTree:
+
+    def __init__(self, n):
+        self._n = n + 1
+        self._data = [0] * self._n
+
+    def add(self, x, num):
+        """要素に加算
+
+        Args:
+            x (int): 要素の位置
+            n (int): 加算する値
+        """
+        x += 1
+        while(x < self._n):
+            self._data[x] += num
+            x += x & -x
+
+    def sum(self, x):
+        """区間の和
+
+        Args:
+            x (int): 区間の最後の要素番号
+
+        Returns:
+            int, float: 0 ~ nまでの区間和
+        """
+        num = 0
+        x += 1
+        while (x != 0):
+            num += self._data[x]
+            x -= x & -x
+        return num
+```
+
+  </TabItem>
+
+  <TabItem value="C++" label="C++">
+
+```cpp title="binary-indexed-tree.cpp"
+template <typename T>
+struct BinaryIndexedTree
+{
+    int n;
+    vector<T> data;
+    BinaryIndexedTree(int n_ = 0) :n(n_+1), data(n,0){}
+
+    /**
+     * @brief
+     * 要素に加算
+     * @param x 要素の位置
+     * @param num 加算する値
+     */
+    void add(int x, T num){
+        x += 1;
+        for (int i = x; i < n; i += (i & -i)){
+            data[i] += num;
+        }
+    }
+
+    /**
+     * @brief
+     * 区間の和
+     * @param x 区間の最後の要素番号
+     * @return T 0 ~ nまでの区間和
+     */
+    T sum(int x){
+        T num = 0;
+        x += 1;
+        while (x != 0){
+            num += data[x];
+            x -= (x & -x);
+        }
+        return num;
+    }
+};
+```
+
+  </TabItem>
+
+  <TabItem value="C#" label="C#">
+
+```csharp title="binary-indexed-tree.cs"
+public class BinaryIndexedTree<T>
+{
+    private int n;
+    private readonly T[] data;
+    private Func<T, T, T> Add { get; set; }
+
+    public BinaryIndexedTree(int n_)
+    {
+
+        ParameterExpression op1 = Expression.Parameter(typeof(T));
+        ParameterExpression op2 = Expression.Parameter(typeof(T));
+        Add = Expression.Lambda<Func<T, T, T>>(Expression.Add(op1, op2), op1, op2).Compile();
+
+        n = n_;
+        data = new T[n];
+    }
+
+    /// <summary>
+    /// 要素に加算
+    /// </summary>
+    /// <param name="x">要素の位置</param>
+    /// <param name="num">加算する値</param>
+    public void add(int x, T num)
+    {
+        x += 1;
+        for (int i = x; i < n; i += (i & -i))
+        {
+            data[i] = Add(data[i], num);
+        }
+    }
+
+    /// <summary>
+    /// 区間の和
+    /// </summary>
+    /// <param name="x">区間の最後の要素番号</param>
+    /// <returns>0 ~ nまでの区間和</returns>
+    public T sum(int x)
+    {
+        x += 1;
+        T num = default(T);
+        while (x != 0)
+        {
+            num = Add(num, data[x]);
+            x -= (x & -x);
+        }
+        return num;
+    }
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+[こちら](https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B&lang=jp)で動作確認を行い、3 コードともに AC でした。
+
+## 応用
+
+勉強中
+
+## 参考
+
+[Binary Indexed Tree (BIT) 総まとめ！区間加算や二次元 BIT まで](https://algo-logic.info/binary-indexed-tree/)
