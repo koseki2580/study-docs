@@ -381,6 +381,10 @@ function WriteContents(contents, variable) {
  */
 // ファイルを常に書き込むとホットリロードの際に無限ループに入るためファイルの内容が変更しているか確認し、変更されていればファイルを書き出す
 function WriteFile(path, data) {
+  if (fs.existsSync(path) === false) {
+    fs.writeFileSync(path, data);
+    return;
+  }
   let oddData = fs.readFileSync(path).toString();
   if (
     crypto.createHash("md5").update(oddData).digest("hex") ===
