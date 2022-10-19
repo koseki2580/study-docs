@@ -23,6 +23,9 @@ import FontColor from "@site/src/components/Custom/FontColor"
 例えば、処理 A の後に処理 B を行うことを A $\rightarrow$ B の様に有向グラフで表すことができ、このような処理 $\circ \rightarrow \circ$のような依存関係が複数あった場合に、
 トポロジカルソートを行うと、トポロジカルソートされた配列を左から順に処理することで、依存関係に違反しない順序で処理を行うことができる。
 
+`トポロジカルソートが行える = グラフは閉路のない有向グラフ(DAG)である`
+と言うことが言えるので、トポロジカルソートが行えない場合は DAG ではないので、閉路検出にもトポロジカルソートは用いることができる。
+
 ### アルゴリズム
 
 ### 流れ
@@ -127,7 +130,83 @@ a
   </TabItem>
 </Tabs>
 
+#### 深さ優先探索を用いる方法
+
+深さ探索を用いる場合は深さ探索の[帰りがけ順](/docs/Algorithm/depth-first-search#帰りがけ順)に注目する。
+帰りがけ順は全ての子ノードを訪れた後に探索済みとする走査順であり、子ノードが矢印の向かう先と考えると矢尻のノードを全て処理すると、
+自身を探索済みとして帰りがけ順の並びに追加する。つまり、帰りがけ順に走査した後、その配列を逆順にすることでトポロジカルソート順にとなる。
+
+![深さ優先探索を用いたトポロジカルソート](/img/svg/Algorithm/topological-sort/topological-sort-8.drawio.svg "深さ優先探索を用いたトポロジカルソート")
+
+頂点番号 1 番から深さ優先探索を行う。
+
+![深さ優先探索を用いたトポロジカルソート2](/img/svg/Algorithm/topological-sort/topological-sort-9.drawio.svg "深さ優先探索を用いたトポロジカルソート2")
+
+帰りがけ順に番号を付与するので、最初に番号が付与されるのは 6 番の頂点となる。
+
+![深さ優先探索を用いたトポロジカルソート3](/img/svg/Algorithm/topological-sort/topological-sort-10.drawio.svg "深さ優先探索を用いたトポロジカルソート3")
+
+次に番号が付与されるのは 7 番の頂点となる。
+
+![深さ優先探索を用いたトポロジカルソート4](/img/svg/Algorithm/topological-sort/topological-sort-11.drawio.svg "深さ優先探索を用いたトポロジカルソート4")
+
+次に番号が付与されるのは 2 番の頂点となる。
+
+![深さ優先探索を用いたトポロジカルソート5](/img/svg/Algorithm/topological-sort/topological-sort-12.drawio.svg "深さ優先探索を用いたトポロジカルソート5")
+
+1 番から探索できるものがないので次に番号が付与されるのは 1 番の頂点となる。
+
+![深さ優先探索を用いたトポロジカルソート6](/img/svg/Algorithm/topological-sort/topological-sort-13.drawio.svg "深さ優先探索を用いたトポロジカルソート6")
+
+次に探索する頂点は番号が小さい 3 番であり、3 番から探索できる頂点である 1 番はすでに探索済みなので探索しない。
+すると、3 番の頂点は探索するところがないので番号を付与する。
+
+![深さ優先探索を用いたトポロジカルソート7](/img/svg/Algorithm/topological-sort/topological-sort-14.drawio.svg "深さ優先探索を用いたトポロジカルソート7")
+
+4 番の頂点も同様に探索可能な頂点番号 2 番は探索済みであり、探索するところがないので番号を付与する。
+
+![深さ優先探索を用いたトポロジカルソート8](/img/svg/Algorithm/topological-sort/topological-sort-15.drawio.svg "深さ優先探索を用いたトポロジカルソート8")
+
+5 番の頂点も同様に探索可能な頂点番号 3 番は探索済みであり、探索するところがないので番号を付与する。
+
+![深さ優先探索を用いたトポロジカルソート9](/img/svg/Algorithm/topological-sort/topological-sort-16.drawio.svg "深さ優先探索を用いたトポロジカルソート9")
+
+これで深さ優先探索の帰りがけ順の配列が完成したので、これを反転させるとトポロジカルソート順となっている。
+
+![深さ優先探索を用いたトポロジカルソート10](/img/svg/Algorithm/topological-sort/topological-sort-17.drawio.svg "深さ優先探索を用いたトポロジカルソート10")
+
+:::caution 注意
+深さ優先探索の帰りがけ順
+:::
+
+##### プログラム
+
+<Tabs groupId="code">
+  <TabItem value="python" label="Python" default>
+
+```python title="topological-sort-breadth.py"
+
+```
+
+  </TabItem>
+  <TabItem value="C++" label="C++">
+
+```cpp title="topological-sort-breadth.cpp"
+a
+```
+
+  </TabItem>
+  <TabItem value="C#" label="C#">
+
+```csharp title="topological-sort-breadth.cs"
+a
+```
+
+  </TabItem>
+</Tabs>
+
 ## 参考
 
 [有向非巡回グラフ](https://ja.wikipedia.org/wiki/%E6%9C%89%E5%90%91%E9%9D%9E%E5%B7%A1%E5%9B%9E%E3%82%B0%E3%83%A9%E3%83%95)
 [トポロジカルソートのアルゴリズム（閉路のない有向グラフ DAG のソート）](https://algo-logic.info/topological-sort/)
+[DFS (深さ優先探索) 超入門！ 〜 グラフ・アルゴリズムの世界への入口 〜【後編】](https://qiita.com/drken/items/a803d4fc4a727e02f7ba#4-6-%E3%82%B5%E3%82%A4%E3%82%AF%E3%83%AB%E6%A4%9C%E5%87%BA)
