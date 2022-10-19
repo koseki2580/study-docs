@@ -70,6 +70,8 @@ import FontColor from "@site/src/components/Custom/FontColor"
 入次数が`0`となる頂点が複数でた場合は取り除く順番は自由に定めることができるので、複数通りのトポロジカルソートが存在する。
 以下のプログラムでは幅優先探索を用いているが深さ優先探索を用いても配列順は異なるが、トポロジカルソート順になっている。
 
+格納した配列の値の数がグラフ頂点数と一致していなければ閉路が存在することを意味するので閉路検出が行える。
+
 ##### プログラム
 
 <Tabs groupId="code">
@@ -176,7 +178,10 @@ a
 ![深さ優先探索を用いたトポロジカルソート10](/img/svg/Algorithm/topological-sort/topological-sort-17.drawio.svg "深さ優先探索を用いたトポロジカルソート10")
 
 :::caution 注意
-深さ優先探索の帰りがけ順
+深さ優先探索の帰りがけ順は例え閉路が存在していたとしても行うことができるので、シンプルに実装するとトポロジカルソートができる前提のコードになってしまう。
+閉路が存在している状態は、探索している頂点を$v$とすると、$v$から探索できる全頂点を探索する(帰りがけ順に番号を記録する)前に、再度$v$に訪れるという状態である。
+つまり、深さ優先探索を行なっている最中に一度訪れているが、まだ帰りがけ順の番号を記録されていないかを確認することで閉路が存在するということがわかるので、
+深さ優先探索の訪れた際に番号を記録する[行きがけ順](/docs/Algorithm/depth-first-search#行きがけ順)と帰りがけ順を用いることで閉路検出を行うことができる。
 :::
 
 ##### プログラム
@@ -184,21 +189,72 @@ a
 <Tabs groupId="code">
   <TabItem value="python" label="Python" default>
 
-```python title="topological-sort-breadth.py"
+```python title="topological-sort-depth.py"
+from collections import deque
+
+
+def dfs(st, p=-1):
+    global pos
+    # 訪れたフラグを立てる(行きがけ順)
+    seen[st] = True
+
+    for to in box[st]:
+        if (to == p):
+            continue
+
+        if (finished[to]):
+            continue
+
+        # 行きがけ順では記録されているが、帰りがけ順では記録されていないので閉路が存在する
+        if seen[to] and not finished[to]:
+            pos = to
+            return
+
+        dfs(to, st)
+        if (pos != -1):
+            return
+    # 全ての子ノードを探索完了(帰りがけ順)
+    finished[st] = True
+
+    # 表示を1-indexedにするため+1している
+    ans.append(st+1)
+
+
+N = 7
+
+# 上の図を表現
+graph = [[5, 3], [3, 1], [1, 2], [4, 2], [2, 6], [2, 7]]
+box = [[] for _ in range(N)]
+
+# トポロジカルソート後の配列
+ans = []
+for i in range(len(graph)):
+    # 配列に収まるように1-indexedから
+    x = graph[i][0] - 1
+    y = graph[i][1] - 1
+    box[x].append(y)
+pos = -1
+seen = [False] * N
+finished = [False] * N
+for i in range(N):
+    if finished[i] == False:
+        dfs(i)
+ans.reverse()
+print(*ans)
 
 ```
 
   </TabItem>
   <TabItem value="C++" label="C++">
 
-```cpp title="topological-sort-breadth.cpp"
+```cpp title="topological-sort-depth.cpp"
 a
 ```
 
   </TabItem>
   <TabItem value="C#" label="C#">
 
-```csharp title="topological-sort-breadth.cs"
+```csharp title="topological-sort-depth.cs"
 a
 ```
 
