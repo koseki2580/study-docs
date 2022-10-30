@@ -32,25 +32,53 @@ import TabItem from '@theme/TabItem';
 
 1. 探索開始頂点を 1 として深さ優先探索を行う。([帰りがけ順](/docs/Algorithm/depth-first-search#帰りがけ順)についてはこちらに記述しています)
 
-![イメージ図](/img/svg/Algorithm/scc-decomposition/scc-decomposition-2.drawio.svg "深さ優先探索")
+![深さ優先探索](/img/svg/Algorithm/scc-decomposition/scc-decomposition-2.drawio.svg "深さ優先探索")
 
 2. 有向グラフの向きを反転させたグラフ ${G}^{H}$を作成する
 
-![イメージ図](/img/svg/Algorithm/scc-decomposition/scc-decomposition-3.drawio.svg "グラフの反転")
+![グラフの反転](/img/svg/Algorithm/scc-decomposition/scc-decomposition-3.drawio.svg "グラフの反転")
 
 3. 1.の帰りがけ順に再度深さ優先探索を行う。1 で探索できるところまでを探索し、探索できた頂点が 1 つの強連結成分
 
-![イメージ図](/img/svg/Algorithm/scc-decomposition/scc-decomposition-4.drawio.svg "反転グラフの深さ優先探索")
+![反転グラフの深さ優先探索](/img/svg/Algorithm/scc-decomposition/scc-decomposition-4.drawio.svg "反転グラフの深さ優先探索")
 
-4. 次に記録番号が大きい`4`を探索する。
+4. 次に記録番号が大きい index 番号 4 の`6`を探索する。
 
-![イメージ図](/img/svg/Algorithm/scc-decomposition/scc-decomposition-5.drawio.svg "反転グラフの深さ優先探索その2")
+![反転グラフの深さ優先探索その2](/img/svg/Algorithm/scc-decomposition/scc-decomposition-5.drawio.svg "反転グラフの深さ優先探索その2")
 
 5. 最後に`5`を探索する。
 
-![イメージ図](/img/svg/Algorithm/scc-decomposition/scc-decomposition-6.drawio.svg "反転グラフの深さ優先探索その3")
+![反転グラフの深さ優先探索その3](/img/svg/Algorithm/scc-decomposition/scc-decomposition-6.drawio.svg "反転グラフの深さ優先探索その3")
 
 以上の流れで強連結成分ごとに分解することができる。
+
+なぜこの方法でうまくいくのかを考えてみる。(数学的に考えるのは難しい{勉強中}の直感的な理由を考える)
+まず、考えるべきことはなぜ、帰りがけ順で走査順を記録し、その後ろから処理していくのかを考える。
+
+例として次の頂点を考える。
+
+![走査開始頂点について](/img/svg/Algorithm/scc-decomposition/scc-decomposition-7.drawio.svg "走査開始頂点について")
+
+上の図の頂点番号が小さい順に帰りがけ順で走査していくと以下の図の様になる。
+
+![走査開始頂点について2](/img/svg/Algorithm/scc-decomposition/scc-decomposition-8.drawio.svg "走査開始頂点について2")
+
+ここで注目するべき部分は走査開始頂点である。
+
+![走査開始頂点について3](/img/svg/Algorithm/scc-decomposition/scc-decomposition-9.drawio.svg "走査開始頂点について3")
+
+帰りがけ順は走査開始頂点の子ノード(探索できるノード)を全て探索し終えると番号が記録されるため、
+帰りがけ順の走査順配列の一番最後は必ず走査開始頂点となる。また、最後の要素は木構造でいう根に相当する部分とみることもできる。
+
+経路を反転することで、閉路が存在しない場合は走査開始頂点から訪れることが可能であった頂点は訪れることができなくなる。
+しかし、閉路が存在していた場合は経路を反転しても訪れることが可能である。
+以下の図では 1 番頂点から 5 番頂点へ移動することができていたが経路を反転することで移動することができなくなっている
+
+![走査開始頂点について4](/img/svg/Algorithm/scc-decomposition/scc-decomposition-10.drawio.svg "走査開始頂点について4")
+
+走査順の最後の要素は多くの要素を訪れることができる可能性のある要素であるため(木構造の根に相当)、経路を反転すると
+多くの要素から訪れられる要素となる。上の 2 つの図を考えると頂点番号 7 番は元の経路で`1, 3, 4, 5, 8, 9`に訪れることができるが
+経路を反転すると頂点番号`1, 3, 4, 5, 8, 9`から訪れることができる頂点となっている。
 
 ## プログラム
 
