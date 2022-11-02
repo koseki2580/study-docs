@@ -58,8 +58,8 @@ WriteFile("./sidebars.js", WriteContents(sidebar_js, "sidebar"));
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "備忘録",
-  url: "https://koseki2580.github.io/study-docs",
-  baseUrl: "/study-docs/",
+  url: "https://koseki2580.github.io/",
+  baseUrl: "/study-docs",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   // favicon: 'img/favicon.ico',
@@ -76,6 +76,9 @@ const config = {
     defaultLocale: "ja",
     locales: ["ja"],
   },
+  // markdown: {
+  //   mermaid: true,
+  // },
 
   presets: [
     [
@@ -147,8 +150,13 @@ const config = {
 
         //... other Algolia params
       },
+      // mermaid: {
+      //   theme: { light: "neutral", dark: "forest" },
+      // },
     }),
+  // plugins: [["./my-plugin", {}], "@docusaurus/theme-mermaid"],
   plugins: [["./my-plugin", {}]],
+
   stylesheets: [
     {
       href: "https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css",
