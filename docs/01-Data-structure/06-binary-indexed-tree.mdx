@@ -1,7 +1,7 @@
 ---
 title: Binary Indexed Tree
 sidebarlabel: Binary Indexed Tree
-draft: false
+draft: true
 toc_max_heading_level: 4
 tags: [データ構造]
 ---
