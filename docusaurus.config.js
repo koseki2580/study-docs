@@ -6,20 +6,12 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 const fs = require("fs");
 const crypto = require("crypto");
 const math = require("remark-math");
-// const mdxMermaid = require("mdx-mermaid");
 const katex = require("rehype-katex");
 const isDev = process.env.NODE_ENV === "development";
 let contents = [];
 let sidebar_js = {};
 let navbar_items = [];
 getFiles();
-// console.log(navbar_items);
-// console.log(contents);
-// async function getMermaid() {
-//   const mdxMermaid = await import("mdx-mermaid");
-//   return [mdxMermaid.default];
-// }
-// console.log(getMermaid());
 /* 作成したツールはドキュメントとは別で表示させる */
 if (isDev === true) {
   // メインページに追加
@@ -76,9 +68,9 @@ const config = {
     defaultLocale: "ja",
     locales: ["ja"],
   },
-  // markdown: {
-  //   mermaid: true,
-  // },
+  markdown: {
+    mermaid: true,
+  },
 
   presets: [
     [
@@ -88,7 +80,9 @@ const config = {
         docs: {
           showLastUpdateTime: true,
           sidebarPath: require.resolve("./sidebars.js"),
-          remarkPlugins: [require("mdx-mermaid"), math],
+          remarkPlugins: [math],
+          // remarkPlugins: [require("mdx-mermaid"), math],
+
           rehypePlugins: [katex],
           showLastUpdateAuthor: true,
           // Please change this to your repo.
@@ -150,12 +144,12 @@ const config = {
 
         //... other Algolia params
       },
-      // mermaid: {
-      //   theme: { light: "neutral", dark: "forest" },
-      // },
+      mermaid: {
+        theme: { light: "default", dark: "dark" },
+      },
     }),
-  // plugins: [["./my-plugin", {}], "@docusaurus/theme-mermaid"],
-  plugins: [["./my-plugin", {}]],
+  plugins: [["./my-plugin", {}], "@docusaurus/theme-mermaid"],
+  // plugins: [["./my-plugin", {}]],
 
   stylesheets: [
     {
