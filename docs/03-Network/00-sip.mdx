@@ -1,0 +1,110 @@
+---
+title: SIP
+sidebar_label: SIP
+draft: true
+toc_max_heading_level: 5
+tags: [ネットワーク, アプリケーション層]
+---
+
+## SIP とは
+
+SIP(Session Initiation Protocol)は端末間のセッションの生成・変更・転送・切断等を行うプロトコルのことである。
+
+SIP では端末のことをユーザエージェント(UA: User Agent)と呼び、次の 2 通りの UA が存在する。
+
+- ユーザーエージェント・クライアント (UAC : User Agent Client): SIP リクエストを生成・送信し、応答を受信・処理する UA
+- ユーザーエージェント・サーバ (UAS : User Agent Server): SIP リクエストを受信・処理し、応答を生成・送信する UA
+
+SIP で規定されているのはセッションを制御する機構であり、やりとりするデータについては規定されていない。
+例えば、セッションを生成した後にリアルタイムデータ(音声・映像)の転送には、RTP(Real-time Transport Protocol)を用いる。
+
+SIP はデータ自体は定義されていないので、音声データであれば IP 電話, 音声+映像であればテレビ電話, テキストであればチャットといったさまざまな形で用いられる。
+
+SIP がセッションを生成している間にセッション情報交換を行う。[SDP](#sdp-とは)を用いてやりとりを行なっている。
+
+SIP のメッセージには 2 種類存在し、クライアントからサーバへ送信するリクエストとサーバからクライアントへ送信するレスポンスが存在する。
+それぞれについて[こちら](http://www.iana.org/assignments/sip-parameters/sip-parameters.xhtml)で定義されている。
+
+- **リクエスト**
+
+  | メッセージ |         説明         |
+  | :--------: | :------------------: |
+  |   INVITE   | セッション開始を要求 |
+  |    ACK     | セッション生成の確認 |
+  |    BYE     |    セッション終了    |
+  |  REGISTER  |     URI 登録要求     |
+
+- **レスポンス**
+
+  | 番号 |         |               説明               |
+  | :--: | :-----: | :------------------------------: |
+  | 100  | Trying  |              処理中              |
+  | 180  | Ringing | 呼び出し中(電話であれば音がなる) |
+  | 200  |   OK    |               成功               |
+
+  ステータスコードの分類は以下のように定義されている
+
+  | コード |      説明       |
+  | :----: | :-------------: |
+  |  1xx   |   Provisional   |
+  |  2xx   |   Successful    |
+  |  3xx   |   Redirection   |
+  |  4xx   | Request Failure |
+  |  5xx   | Server Failure  |
+  |  6xx   | Global Failures |
+
+SIP のシーケンスは次のようになる。
+
+- UA が相手の IP アドレスを知っている場合
+
+  ![SIPシーケンス IPアドレス既知](/img/svg/Network/sip/sip-1.drawio.svg "SIPシーケンス IPアドレス既知")
+
+  IP アドレスを知っているの相手の UA と直接やりとりを行う。
+
+- UA が相手の IP アドレスを知らない場合
+
+  ![SIPシーケンス IPアドレス未知](/img/svg/Network/sip/sip-2.drawio.svg "SIPシーケンス IPアドレス未知")
+
+  IP アドレスを知らないため、SIP サーバを介してセッション情報を交換する。
+  そのため、初めに各 UA は REGISTER リクエストを使用して、SIP URI と IP アドレスの対応付けを **SIP サーバに登録する**必要がある。
+
+平成 26 年のネットワークスペシャリストの午後 2 問 2 では SIP の INVITE リクエストの内容についての図が書かれている。
+![平成26年 午後2 図3](/img/png/Network/sip/H26-2-2-figure-3.png "平成26年 午後2 図3")
+
+この図の Via フィールドはリクエストを経由したパスを表しており、SIP サーバ A $\rightarrow$ SIP サーバ B への INVITE では Via フィールドは 2 つになっている。
+また、SIP サーバ B $\rightarrow$ サーバ UA への INVITE では Via フィールドは 3 つとなる。Via フィールドに追記する際には既存 Via フィールドの上位に追記するようになっている。
+サーバ UA から 200 OK レスポンスを SIP サーバ B へ送る際には Via フィールドをそのままにして送り出す。
+それぞれの SIP サーバでは最上位の位置する Via フィールド(自分が付与したもの)を削除し、次に最上位となった場所へレスポンスを送信する仕組みなっている。
+[RFC3261 page-14](https://www.rfc-editor.org/rfc/rfc3261.html#page-14)にその説明が書かれている。
+![SIPシーケンス Viaフィールド](/img/svg/Network/sip/sip-3.drawio.svg "SIPシーケンス Viaフィールド")
+
+## 用語
+
+### SDP とは
+
+SDP(Session Description Protocol)はセッションの記述方法を規定したものであり、
+[RFC8866](https://tex2e.github.io/rfc-translater/html/rfc8866.html)で規定されている。
+例えば、
+
+- セッション時間
+- 通信先の IP アドレス
+- データ転送に使用するポート番号
+- データ(音声・映像等)の種別
+
+等を規定している。
+
+### URI
+
+URI(Uniform Resource Identifier)は資源を識別する識別子であり、[RFC3986](https://tex2e.github.io/rfc-translater/html/rfc3986.html)
+で定義されている。
+
+URL(Uniform Resource Locator)は URI のサブセット(一部)である。
+
+## 関連機能
+
+- インスタントメッセージ機能 ([RFC3428](https://tex2e.github.io/rfc-translater/html/rfc3428.html))
+- イベント通知機能 ([RFC6665](https://tex2e.github.io/rfc-translater/html/rfc6665.html))
+
+## 参考
+
+- [https://ja.wikipedia.org/wiki/Session_Initiation_Protocol](https://ja.wikipedia.org/wiki/Session_Initiation_Protocol)
