@@ -6,6 +6,15 @@ toc_max_heading_level: 5
 tags: [ネットワーク, アプリケーション層]
 ---
 
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import FontColor from "@site/src/components/Custom/FontColor"
+import SplitParagraph from "@site/src/components/Custom/SplitParagraph"
+import Paragraph from "@site/src/components/Custom/Paragraph"
+
+```
+
 ## SIP とは
 
 SIP(Session Initiation Protocol)は端末間のセッションの生成・変更・転送・切断等を行うプロトコルのことである。
@@ -77,6 +86,383 @@ SIP のシーケンスは次のようになる。
 それぞれの SIP サーバでは最上位の位置する Via フィールド(自分が付与したもの)を削除し、次に最上位となった場所へレスポンスを送信する仕組みなっている。
 [RFC3261 page-14](https://www.rfc-editor.org/rfc/rfc3261.html#page-14)にその説明が書かれている。
 ![SIPシーケンス Viaフィールド](/img/svg/Network/sip/sip-3.drawio.svg "SIPシーケンス Viaフィールド")
+
+RFC3261 に記載されているデータの流れは以下である。(SDP の body は表示しない(「〇〇 SDP not shown」と書かれている))
+
+:::caution
+図の番号とヘッダーの数字が一致しないので合うように変更して記載している。
+(図の番号に合わせてヘッダーメッセージを選択している。)
+:::
+
+$\textcircled{\scriptsize 1}$ **INVITE** Alice $\rightarrow$ atlanta.com proxy
+
+<SplitParagraph border="false">
+  <Paragraph>
+
+![SIPシーケンス ヘッダーメッセージ付き1](/img/svg/Network/sip/sip-4-1.drawio.svg "SIPシーケンス ヘッダーメッセージ付き1")
+
+  </Paragraph>
+  <Paragraph>
+
+```txt
+INVITE sip:bob@biloxi.com SIP/2.0
+Via: SIP/2.0/UDP pc33.atlanta.com;branch=z9hG4bKnashds8
+Max-Forwards: 70
+To: Bob <sip:bob@biloxi.com>
+From: Alice <sip:alice@atlanta.com>;tag=1928301774
+Call-ID: a84b4c76e66710
+CSeq: 314159 INVITE
+Contact: <sip:alice@pc33.atlanta.com>
+Content-Type: application/sdp
+Content-Length: 142
+```
+
+  </Paragraph>
+</SplitParagraph>
+
+$\textcircled{\scriptsize 2}$ **INVITE** atlanta.com proxy $\rightarrow$ biloxi.com proxy
+
+<SplitParagraph border="false">
+  <Paragraph>
+
+![SIPシーケンス ヘッダーメッセージ付き2](/img/svg/Network/sip/sip-4-2.drawio.svg "SIPシーケンス ヘッダーメッセージ付き2")
+
+  </Paragraph>
+  <Paragraph>
+
+```txt
+INVITE sip:bob@biloxi.com SIP/2.0
+Via: SIP/2.0/UDP bigbox3.site3.atlanta.com;branch=z9hG4bK77ef4c2312983.1
+Via: SIP/2.0/UDP pc33.atlanta.com;branch=z9hG4bKnashds8
+ ;received=192.0.2.1
+Max-Forwards: 69
+To: Bob <sip:bob@biloxi.com>
+From: Alice <sip:alice@atlanta.com>;tag=1928301774
+Call-ID: a84b4c76e66710
+CSeq: 314159 INVITE
+Contact: <sip:alice@pc33.atlanta.com>
+Content-Type: application/sdp
+Content-Length: 142
+```
+
+  </Paragraph>
+</SplitParagraph>
+
+$\textcircled{\scriptsize 3}$ **100 Trying** atlanta.com proxy $\rightarrow$ Alice
+
+<SplitParagraph border="false">
+  <Paragraph>
+
+![SIPシーケンス ヘッダーメッセージ付き3](/img/svg/Network/sip/sip-4-3.drawio.svg "SIPシーケンス ヘッダーメッセージ付き3")
+
+  </Paragraph>
+  <Paragraph>
+
+```txt
+SIP/2.0 100 Trying
+Via: SIP/2.0/UDP pc33.atlanta.com;branch=z9hG4bKnashds8
+ ;received=192.0.2.1
+To: Bob <sip:bob@biloxi.com>
+From: Alice <sip:alice@atlanta.com>;tag=1928301774
+Call-ID: a84b4c76e66710
+CSeq: 314159 INVITE
+Content-Length: 0
+```
+
+  </Paragraph>
+</SplitParagraph>
+
+$\textcircled{\scriptsize 4}$ **INVITE** biloxi.com proxy $\rightarrow$ Bob
+
+<SplitParagraph border="false">
+  <Paragraph>
+
+![SIPシーケンス ヘッダーメッセージ付き4](/img/svg/Network/sip/sip-4-4.drawio.svg "SIPシーケンス ヘッダーメッセージ付き4")
+
+  </Paragraph>
+  <Paragraph>
+
+```txt
+INVITE sip:bob@192.0.2.4 SIP/2.0
+Via: SIP/2.0/UDP server10.biloxi.com;branch=z9hG4bK4b43c2ff8.1
+Via: SIP/2.0/UDP bigbox3.site3.atlanta.com;branch=z9hG4bK77ef4c2312983.1
+ ;received=192.0.2.2
+Via: SIP/2.0/UDP pc33.atlanta.com;branch=z9hG4bKnashds8
+ ;received=192.0.2.1
+Max-Forwards: 68
+To: Bob <sip:bob@biloxi.com>
+From: Alice <sip:alice@atlanta.com>;tag=1928301774
+Call-ID: a84b4c76e66710
+CSeq: 314159 INVITE
+Contact: <sip:alice@pc33.atlanta.com>
+Content-Type: application/sdp
+Content-Length: 142
+```
+
+  </Paragraph>
+</SplitParagraph>
+
+$\textcircled{\scriptsize 5}$ **100 Trying** biloxi.com proxy $\rightarrow$ atlanta.com proxy
+
+<SplitParagraph border="false">
+  <Paragraph>
+
+![SIPシーケンス ヘッダーメッセージ付き5](/img/svg/Network/sip/sip-4-5.drawio.svg "SIPシーケンス ヘッダーメッセージ付き5")
+
+  </Paragraph>
+  <Paragraph>
+
+```txt
+SIP/2.0 100 Trying
+Via: SIP/2.0/UDP bigbox3.site3.atlanta.com;branch=z9hG4bK77ef4c2312983.1
+ ;received=192.0.2.2
+Via: SIP/2.0/UDP pc33.atlanta.com;branch=z9hG4bKnashds8
+ ;received=192.0.2.1
+To: Bob <sip:bob@biloxi.com>
+From: Alice <sip:alice@atlanta.com>;tag=1928301774
+Call-ID: a84b4c76e66710
+CSeq: 314159 INVITE
+Content-Length: 0
+```
+
+  </Paragraph>
+</SplitParagraph>
+
+$\textcircled{\scriptsize 6}$ **180 Ringing** Bob $\rightarrow$ biloxi.com proxy
+
+<SplitParagraph border="false">
+  <Paragraph>
+
+![SIPシーケンス ヘッダーメッセージ付き6](/img/svg/Network/sip/sip-4-6.drawio.svg "SIPシーケンス ヘッダーメッセージ付き6")
+
+  </Paragraph>
+  <Paragraph>
+
+```txt
+SIP/2.0 180 Ringing
+Via: SIP/2.0/UDP server10.biloxi.com;branch=z9hG4bK4b43c2ff8.1
+ ;received=192.0.2.3
+Via: SIP/2.0/UDP bigbox3.site3.atlanta.com;branch=z9hG4bK77ef4c2312983.1
+ ;received=192.0.2.2
+Via: SIP/2.0/UDP pc33.atlanta.com;branch=z9hG4bKnashds8
+ ;received=192.0.2.1
+To: Bob <sip:bob@biloxi.com>;tag=a6c85cf
+From: Alice <sip:alice@atlanta.com>;tag=1928301774
+Call-ID: a84b4c76e66710
+Contact: <sip:bob@192.0.2.4>
+CSeq: 314159 INVITE
+Content-Length: 0
+```
+
+  </Paragraph>
+</SplitParagraph>
+
+$\textcircled{\scriptsize 7}$ **180 Ringing** biloxi.com proxy $\rightarrow$ atlanta.com proxy
+
+<SplitParagraph border="false">
+  <Paragraph>
+
+![SIPシーケンス ヘッダーメッセージ付き7](/img/svg/Network/sip/sip-4-7.drawio.svg "SIPシーケンス ヘッダーメッセージ付き7")
+
+  </Paragraph>
+  <Paragraph>
+
+```txt
+SIP/2.0 180 Ringing
+Via: SIP/2.0/UDP bigbox3.site3.atlanta.com;branch=z9hG4bK77ef4c2312983.1
+ ;received=192.0.2.2
+Via: SIP/2.0/UDP pc33.atlanta.com;branch=z9hG4bKnashds8
+ ;received=192.0.2.1
+To: Bob <sip:bob@biloxi.com>;tag=a6c85cf
+From: Alice <sip:alice@atlanta.com>;tag=1928301774
+Call-ID: a84b4c76e66710
+Contact: <sip:bob@192.0.2.4>
+CSeq: 314159 INVITE
+Content-Length: 0
+```
+
+  </Paragraph>
+</SplitParagraph>
+
+$\textcircled{\scriptsize 8}$ **180 Ringing** atlanta.com proxy $\rightarrow$ Alice
+
+<SplitParagraph border="false">
+  <Paragraph>
+
+![SIPシーケンス ヘッダーメッセージ付き8](/img/svg/Network/sip/sip-4-8.drawio.svg "SIPシーケンス ヘッダーメッセージ付き8")
+
+  </Paragraph>
+  <Paragraph>
+
+```txt
+SIP/2.0 180 Ringing
+Via: SIP/2.0/UDP pc33.atlanta.com;branch=z9hG4bKnashds8
+ ;received=192.0.2.1
+To: Bob <sip:bob@biloxi.com>;tag=a6c85cf
+From: Alice <sip:alice@atlanta.com>;tag=1928301774
+Call-ID: a84b4c76e66710
+Contact: <sip:bob@192.0.2.4>
+CSeq: 314159 INVITE
+Content-Length: 0
+```
+
+  </Paragraph>
+</SplitParagraph>
+
+$\textcircled{\scriptsize 9}$ **200 OK** Bob $rightarrow$ biloxi.com proxy
+
+<SplitParagraph border="false">
+  <Paragraph>
+
+![SIPシーケンス ヘッダーメッセージ付き9](/img/svg/Network/sip/sip-4-9.drawio.svg "SIPシーケンス ヘッダーメッセージ付き9")
+
+  </Paragraph>
+  <Paragraph>
+
+```txt
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP server10.biloxi.com;branch=z9hG4bK4b43c2ff8.1
+ ;received=192.0.2.3
+Via: SIP/2.0/UDP bigbox3.site3.atlanta.com;branch=z9hG4bK77ef4c2312983.1
+ ;received=192.0.2.2
+Via: SIP/2.0/UDP pc33.atlanta.com;branch=z9hG4bKnashds8
+ ;received=192.0.2.1
+To: Bob <sip:bob@biloxi.com>;tag=a6c85cf
+From: Alice <sip:alice@atlanta.com>;tag=1928301774
+Call-ID: a84b4c76e66710
+CSeq: 314159 INVITE
+Contact: <sip:bob@192.0.2.4>
+Content-Type: application/sdp
+Content-Length: 131
+```
+
+  </Paragraph>
+</SplitParagraph>
+
+$\textcircled{\scriptsize 10}$ **200 OK** biloxi.com proxy $\rightarrow$ atlanta.com proxy
+
+<SplitParagraph border="false">
+  <Paragraph>
+
+![SIPシーケンス ヘッダーメッセージ付き10](/img/svg/Network/sip/sip-4-10.drawio.svg "SIPシーケンス ヘッダーメッセージ付き10")
+
+  </Paragraph>
+  <Paragraph>
+
+```txt
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP bigbox3.site3.atlanta.com;branch=z9hG4bK77ef4c2312983.1
+ ;received=192.0.2.2
+Via: SIP/2.0/UDP pc33.atlanta.com;branch=z9hG4bKnashds8
+ ;received=192.0.2.1
+To: Bob <sip:bob@biloxi.com>;tag=a6c85cf
+From: Alice <sip:alice@atlanta.com>;tag=1928301774
+Call-ID: a84b4c76e66710
+CSeq: 314159 INVITE
+Contact: <sip:bob@192.0.2.4>
+Content-Type: application/sdp
+Content-Length: 131
+```
+
+  </Paragraph>
+</SplitParagraph>
+
+$\textcircled{\scriptsize 11}$ **200 OK** atlanta.com proxy $\rightarrow$ Alice
+
+<SplitParagraph border="false">
+  <Paragraph>
+
+![SIPシーケンス ヘッダーメッセージ付き11](/img/svg/Network/sip/sip-4-11.drawio.svg "SIPシーケンス ヘッダーメッセージ付き11")
+
+  </Paragraph>
+  <Paragraph>
+
+```txt
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP pc33.atlanta.com;branch=z9hG4bKnashds8
+ ;received=192.0.2.1
+To: Bob <sip:bob@biloxi.com>;tag=a6c85cf
+From: Alice <sip:alice@atlanta.com>;tag=1928301774
+Call-ID: a84b4c76e66710
+CSeq: 314159 INVITE
+Contact: <sip:bob@192.0.2.4>
+Content-Type: application/sdp
+Content-Length: 131
+```
+
+  </Paragraph>
+</SplitParagraph>
+
+$\textcircled{\scriptsize 12}$ **ACK** Alice $\rightarrow$ Bob
+
+<SplitParagraph border="false">
+  <Paragraph>
+
+![SIPシーケンス ヘッダーメッセージ付き12](/img/svg/Network/sip/sip-4-12.drawio.svg "SIPシーケンス ヘッダーメッセージ付き12")
+
+  </Paragraph>
+  <Paragraph>
+
+```txt
+ACK sip:bob@192.0.2.4 SIP/2.0
+Via: SIP/2.0/UDP pc33.atlanta.com;branch=z9hG4bKnashds9
+Max-Forwards: 70
+To: Bob <sip:bob@biloxi.com>;tag=a6c85cf
+From: Alice <sip:alice@atlanta.com>;tag=1928301774
+Call-ID: a84b4c76e66710
+CSeq: 314159 ACK
+Content-Length: 0
+```
+
+  </Paragraph>
+</SplitParagraph>
+
+$\textcircled{\scriptsize 13}$ **BYE** Bob $\rightarrow$ Alice
+
+<SplitParagraph border="false">
+  <Paragraph>
+
+![SIPシーケンス ヘッダーメッセージ付き13](/img/svg/Network/sip/sip-4-13.drawio.svg "SIPシーケンス ヘッダーメッセージ付き13")
+
+  </Paragraph>
+  <Paragraph>
+
+```txt
+BYE sip:alice@pc33.atlanta.com SIP/2.0
+Via: SIP/2.0/UDP 192.0.2.4;branch=z9hG4bKnashds10
+Max-Forwards: 70
+From: Bob <sip:bob@biloxi.com>;tag=a6c85cf
+To: Alice <sip:alice@atlanta.com>;tag=1928301774
+Call-ID: a84b4c76e66710
+CSeq: 231 BYE
+Content-Length: 0
+```
+
+  </Paragraph>
+</SplitParagraph>
+
+$\textcircled{\scriptsize 14}$ **200 OK** Alice -> Bob
+
+<SplitParagraph border="false">
+  <Paragraph>
+
+![SIPシーケンス ヘッダーメッセージ付き14](/img/svg/Network/sip/sip-4-14.drawio.svg "SIPシーケンス ヘッダーメッセージ付き14")
+
+  </Paragraph>
+  <Paragraph>
+
+```txt
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.0.2.4;branch=z9hG4bKnashds10
+From: Bob <sip:bob@biloxi.com>;tag=a6c85cf
+To: Alice <sip:alice@atlanta.com>;tag=1928301774
+Call-ID: a84b4c76e66710
+CSeq: 231 BYE
+Content-Length: 0
+```
+
+  </Paragraph>
+</SplitParagraph>
 
 ## 用語
 
