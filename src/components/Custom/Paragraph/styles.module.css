@@ -4,7 +4,6 @@
   border-right: 1px black solid;
   border-left: 1px black solid;
   position: relative;
-  /* align-self: stretch; */
   padding: 5px;
-  /* overflow-wrap: break-word; */
+  overflow-x: scroll;
 }
