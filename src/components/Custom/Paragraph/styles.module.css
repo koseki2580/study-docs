@@ -1,0 +1,10 @@
+.text_ward {
+  width: 100%;
+  height: auto;
+  border-right: 1px black solid;
+  border-left: 1px black solid;
+  position: relative;
+  /* align-self: stretch; */
+  padding: 5px;
+  /* overflow-wrap: break-word; */
+}

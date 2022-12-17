@@ -1,0 +1,24 @@
+.split {
+  /* margin: auto; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: space-evenly;
+  align-items: stretch;
+  padding: 5px;
+  position: relative;
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+
+.border_none div {
+  border: none;
+}
+
+.split div:first-child {
+  border-left: none;
+}
+.split div:last-child {
+  border-right: none;
+}
