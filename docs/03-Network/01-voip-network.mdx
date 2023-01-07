@@ -21,7 +21,7 @@ VoIP(Voice over Internet Protocol) はネットワーク上で音声データの
 
 VoIP は 2 段階に分かれており、
 
-1. [SIP](/docs/Network/sip) を用いてセッションを生成
+1. [SIP][sip] を用いてセッションを生成
 2. RTP による音声通信
 
 の手順でやり取りが行われる。
@@ -56,3 +56,28 @@ VoIP GW は公衆 IP 電話網と自社の内線 IP 電話網のそれぞれの 
 ![VoIP GWの通信流れ](/img/svg/Network/voip-network/voip-network-1.drawio.svg "VoIP GWの通信流れ")
 
 ### NAT に起因する問題
+
+自社電話機に割り当てられるのはプライベート IP アドレスであり、インターネット網を経由し、
+SIP を使った通話を行う場合はプライベート IP アドレスからグローバル IP アドレスに変換する必要がある。
+
+NAT を使用してプライベート IP アドレスをグローバル IP アドレスに変換した場合に、通話セッションを生成できない問題が発生する。
+
+![平成26年 午後2 図3](/img/png/Network/sip/H26-2-2-figure-3.png "平成26年 午後2 図3")
+
+ネットワークスペシャリストの平成 26 年午後 2 問 2 において、セッション生成開始時の INVITE リクエストの例が登場している。
+[SIP][sip]でも説明している通り発信元・先の IP アドレスのやりとりは SIP メッセージを通して行なっている。
+
+そのため、上記の図の発信元の IP アドレスにはプライベート IP アドレスが格納され、通話セッションを生成することができない。
+
+![SIP NATがある場合のIP遷移](/img/svg/Network/voip-network/voip-network-2.drawio.svg "SIP NATがある場合のIP遷移")
+
+SIP メッセージ内プライベート IP アドレスとなっているため、着呼側 UA からの RTP パケットが発呼側に届かない。
+
+この問題は VoIP GW の NAT トラバーサル機能を使うことで解決する。
+この機能を使うことで、VoIP GW は内線 IP 電話網側から受け取った SIP メッセージの発信元 IP アドレスを VoIP GW 自身のグローバル IP アドレスに変換する。
+
+公衆 IP 電話網側(クライアント側)のプライベート IP とグローバル IP の変換の過程は省略する。道中に NAT が存在する場合でも STUN サーバ等を使用することでグローバル IP を知ることができる。
+
+![VoIP GWのNATトラバーサル](/img/svg/Network/voip-network/voip-network-3.drawio.svg "VoIP GWのNATトラバーサル")
+
+[sip]: /docs/Network/sip
