@@ -1,0 +1,58 @@
+---
+title: Voice over Internet Protocol
+sidebar_label: Voice over Internet Protocol
+draft: true
+toc_max_heading_level: 5
+tags: [ネットワーク]
+---
+
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import FontColor from "@site/src/components/Custom/FontColor"
+import SplitParagraph from "@site/src/components/Custom/SplitParagraph"
+import Paragraph from "@site/src/components/Custom/Paragraph"
+
+```
+
+## Voice over Internet Protocol とは
+
+VoIP(Voice over Internet Protocol) はネットワーク上で音声データのやりとりを行う技術の総称のことを言う。
+
+VoIP は 2 段階に分かれており、
+
+1. [SIP](/docs/Network/sip) を用いてセッションを生成
+2. RTP による音声通信
+
+の手順でやり取りが行われる。
+
+### VoIP GW
+
+VoIP GW(VoIP GateWay)は公衆 IP 電話網と自社の内線 IP 電話網の 2 つの SIP サーバを接続するために必要となる。
+そのため、VoIP GW は公衆 IP 電話網と自社の内線 IP 電話網との境界に存在し、それぞれの SIP サーバとやりとりを行う。
+
+着呼側の SIP から VoIP GW を見ると発呼側として振る舞い、発呼側の SIP からみると VoIP GW は着呼側として振る舞う。
+そのため、VoIP GW は両方の SIP ネットワークに対して UA として振る舞う特殊な UA となる。これを `B2BUA(Back-to-Back User Agent)`と呼ぶ。
+
+B2BUA については [RFC3261, Section 6](https://www.rfc-editor.org/rfc/rfc3261#section-6) で定義されており、以下のように書かれている
+
+<details>
+  <summary>Back-to-Back User Agent</summary>A back-to-back user agent (B2BUA) is
+  a logical entity that receives a request and processes it as a user agent
+  server (UAS). In order to determine how the request should be answered, it
+  acts as a user agent client (UAC) and generates requests. Unlike a proxy
+  server, it maintains dialog state and must participate in all requests sent on
+  the dialogs it has established. Since it is a concatenation of a UAC and UAS,
+  no explicit definitions are needed for its behavior.
+</details>
+
+さらに、セッション生成を仲介するだけでなく、RTP パケットの中継も行う SBC(Session Border Controller)と呼ばれる機能も持つ。
+
+VoIP GW は公衆 IP 電話網と自社の内線 IP 電話網のそれぞれの SIP ネットワークに対して、SIP URI と IP アドレスの対応付けを登録する必要がある。
+そのため、それぞれの SIP サーバに対して`REGISTER`リクエストを送信する必要がある。
+
+通信の流れは以下のようになる。
+
+![VoIP GWの通信流れ](/img/svg/Network/voip-network/voip-network-1.drawio.svg "VoIP GWの通信流れ")
+
+### NAT に起因する問題
