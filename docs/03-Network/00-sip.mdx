@@ -483,6 +483,164 @@ SDP(Session Description Protocol)はセッションの記述方法を規定し�
 
 等を規定している。
 
+SDP は`<type>=<value>`の形で記述されている。RFC8866 では以下のパラメータが記述されている。**\***がついてるパラメータについてはオプションとなっている。
+
+```txt
+Session description
+v=  (protocol version)
+o=  (originator and session identifier)
+s=  (session name)
+i=* (session information)
+u=* (URI of description)
+e=* (email address)
+p=* (phone number)
+c=* (connection information -- not required if included in
+    all media descriptions)
+b=* (zero or more bandwidth information lines)
+One or more time descriptions:
+  ("t=", "r=" and "z=" lines; see below)
+k=* (obsolete)
+a=* (zero or more session attribute lines)
+Zero or more media descriptions
+
+Time description
+t=  (time the session is active)
+r=* (zero or more repeat times)
+z=* (optional time zone offset line)
+
+Media description, if present
+m=  (media name and transport address)
+i=* (media title)
+c=* (connection information -- optional if included at
+    session level)
+b=* (zero or more bandwidth information lines)
+k=* (obsolete)
+a=* (zero or more media attribute lines)
+```
+
+<FontColor color="red">英語が苦手なので間違っている可能性あり</FontColor>
+
+- `v`
+
+プロトコルバージョンの表し、必ず 0 になる。(マイナーバージョンが存在しない)
+
+- `o`
+
+  オリジンを表し、以下のような形式でデータを取る。
+
+  ```
+  o=<username> <sess-id> <sess-version> <nettype> <addrtype> <unicast-address>
+  ```
+
+  - `<username>`
+
+    発信元ホスト上のユーザーのログインまたは`-`となる。`<username>`にはスペースを入れることはできない。
+
+  - `<sess-id>`
+
+    グローバルに一意になる数字であり、UNIX 時間を用いることが推奨されている。
+
+  - `<sess-version>`
+
+    このセッションを説明するセッション番号
+
+  - `<nettype>`
+
+    ネットワークの種類であり、`IN`はインターネットを意味している。
+
+  - `<addrtype>`
+
+    IPv4, IPv6 が記載されている。
+
+  - `<unicast-address>`
+
+    セッションが生成されたマシンの IP アドレスか FQDN が記載されている。
+
+- `s`
+
+  本セッションの名前となる。`s=`としてはならず、必ず値を入れる必要がある。意味のある名前が存在しない場合は`s= `, `s=-`のような形式を推奨している。
+  後ほど登場する Session description の`a=`に`a=charset:~~~`で設定する文字セットで表現する必要があり、`a=charset:~~~`を省略した場合は、
+  UTF-8 でエンコードした ISO 10646 を使用する必要がある。
+
+- `i`
+
+  セッションについてのテキスト情報である。こちらも`s`と同様に`a=charset:~~~`で設定する文字セットで表現する必要があり、`a=charset:~~~`を省略した場合は、
+  UTF-8 でエンコードした ISO 10646 となる。メディアタイプが複数存在する際に特に役に立つパラメータである。
+
+- `u`
+
+  URI（Uniform Resource Identifier）である。
+
+- `e`
+
+  セッション相手のメールアドレスである。
+
+  [RFC5322](https://tex2e.github.io/rfc-translater/html/rfc5322.html)の形式をとる。例えば`j.doe@example.com (Jane Doe)` or `Jane Doe <j.doe@example.com>`のような形式
+
+- `p`
+
+  セッション相手の電話番号である。ITU-T 勧告（E.164）に基づいた電話番号の形式で記述する。
+
+- `c`
+
+  接続情報であり、以下のような形式を取る。
+
+  ```
+  c=<nettype> <addrtype> <connection-address>
+  ```
+
+  Media description 領域にも記述することができ、Session description 領域とそれぞれの領域に記述がある場合は、Media description 領域が優先される。
+
+  `<nettype>`, `<addrtype>`は上記と同じである。
+
+  - `<connection-address>`
+
+    セッションがマルチキャストの場合は IP マルチキャストグループアドレスが格納され、マルチキャストではない場合はユニキャスト IP アドレスが格納される。
+
+    IP アドレスが IPv4 の場合は TTL を決める必要があり、0~255 の範囲で決め、`c=IN IP4 233.252.0.1/127`のように`/`で IP アドレスの隣記述する。
+    IPv6 の場合は TTL は必要ない。
+
+    複数のマルチキャストグループが必要な場合は`<base multicast address>[/<ttl>]/<number of addresses>`の方式に従い設定する。
+    最後の`<number of addresses>`を省略することができ、省略した場合は`/1`と同義になる。
+
+    つまり、`c=IN IP4 233.252.0.1/127/3`は以下と同じである。
+
+    ```
+    c=IN IP4 233.252.0.1/127
+    c=IN IP4 233.252.0.2/127
+    c=IN IP4 233.252.0.3/127
+    ```
+
+    IPv6 でも同様であり、`c=IN IP6 ff00::db8:0:101/3`は以下と同じである。
+
+    ```
+    c=IN IP6 ff00::db8:0:101
+    c=IN IP6 ff00::db8:0:102
+    c=IN IP6 ff00::db8:0:103
+    ```
+
+- `b`
+
+  帯域幅情報であり、以下の形式をとる。
+
+  ```
+  b=<bwtype>:<bandwidth>
+  ```
+
+  - `<bwtype>`
+
+    `CT`, `AS`, `X-`が存在する。
+
+    | 記号 |                                                                                 意味                                                                                 |
+    | :--: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+    |  CT  |                                            暗黙の了解で決定している帯域幅と異なる場合に使用し、設定した帯域幅を上限とする                                            |
+    |  AS  | アプリケーション固有であると解釈する(RTP の場合[RFC3550](https://tex2e.github.io/rfc-translater/html/rfc3550.html)の Section 6.2 で定義されている`セッション帯域幅`) |
+    |  X-  |                                               実験的に定義された。現在は使うべきではなく、新しいものを IANA に登録申請                                               |
+
+  - `<bandwidth>`
+
+    1 秒あたりのキロビットとして解釈する。
+
 ### URI
 
 URI(Uniform Resource Identifier)は資源を識別する識別子であり、[RFC3986](https://tex2e.github.io/rfc-translater/html/rfc3986.html)
