@@ -1,0 +1,191 @@
+---
+title: トンネリング
+sidebar_label: トンネリング
+draft: true
+toc_max_heading_level: 5
+tags: [ネットワーク]
+---
+
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import FontColor from "@site/src/components/Custom/FontColor"
+import SplitParagraph from "@site/src/components/Custom/SplitParagraph"
+import Paragraph from "@site/src/components/Custom/Paragraph"
+```
+
+## トンネリング
+
+トンネリングとは共用ネットワークの 2 点間を仮想の専用線を構築する技術のことをいう。
+トンネリングはトンネリング用のプロトコルを用いてパケットをカプセル化させることで実現させている。
+
+トンネリングプロトコルにはいくつか種類が存在する。([Wikipedia](https://en.wikipedia.org/wiki/Tunneling_protocol)より)
+
+- [IP in IP][rfc1853]
+- [SIT/IPv6][rfc3879]
+- [GRE][rfc2784] ([RFC1701][rfc1701])
+- [OpenVPN][openvpn] (参考 [RFC8922 3.4.3](https://www.rfc-editor.org/rfc/rfc8922.html#name-openvpn))
+- [SSTP][sstp] (Secure Socket Tunneling Protocol)
+- [IPSec][rfc6071] (Internet Protocol Security)
+- [L2TP][rfc2661] (Layer 2 Tunneling Protocol)
+- [VXLAN][rfc7348] (Virtual Extensible Local Area Network)
+
+### IP in IP
+
+IP in IP のカプセル化の方法は単純であり、IP パケットに別の IP パケットでカプセル化を行う。
+
+![IP in IP](/img/svg/Network/tunneling/tunneling-1.drawio.svg "IP in IP")
+
+([RFC1853][rfc1853]より)
+
+外側の IP ヘッダについて以下のようになる。
+
+- `Type Of Service`
+
+  元の IP ヘッダの内容をコピーする。また、必要に応じて変更されることもある。
+
+- `Identification`
+
+  新しく作成する。
+
+- `Don't Fragment`
+
+  元の IP ヘッダの内容をコピーする。
+
+- `More Fragments`
+
+  フラグメンテーションが発生する場合は必要である。
+
+- `Time To Live`
+
+  [RFC3232][rfc3232] ([RFC1700][rfc1700])で決められたデフォルト値を使用
+
+- `Protocol`
+
+  次のヘッダ。トンネルヘッダが存在しない場合であれば、内部 IPv4 となる。
+
+- `Source`
+
+  データグラムの送信に使用されるインターフェースに関連付けられた IP アドレス。
+
+- `Destination`
+
+  カプセル化を解除する宛先 IP アドレス
+
+- `Options`
+
+  元の IP ヘッダからコピーしない。新しいものが追加されることがある。
+
+### SIT/IPv6
+
+IPv6 同士で通信を行う際に途中で IPv4 で通信を行わないといけない場面が生じた際に、IPv4 でやりとりするためにカプセル化を行う。
+カプセル化を行うことで IPv4 としてデータをやりとりができるようになる。
+
+![SIT/IPv6](/img/svg/Network/tunneling/tunneling-2.drawio.svg "SIT/IPv6")
+
+### GRE
+
+GRE は Generic Routing Encapsulation の略であり、以下のような形式をとる。
+
+![GRE](/img/svg/Network/tunneling/tunneling-3.drawio.svg "GRE")
+
+GRE ヘッダは以下の構造をしている([RFC2784][rfc2784]はまだ(2023 年 1 月現在)Proposed Standard なので[RFC1701][rfc1071]で記述されている構造)。
+
+![GRE Header](/img/svg/Network/tunneling/tunneling-4.drawio.svg "GRE Header")
+
+- `C` (1bits)
+
+  `Checksum Present`の略であり、1 となっていれば`Checksum`が存在することを意味する。
+
+- `R` (1bits)
+
+  `Routing Present`の略であり、1 となっていれば`Offset`と`Routing`が存在することを意味する。
+
+- `K` (1bits)
+
+  `Key Present`の略であり、1 となっていれば`Key`が存在することを意味する。
+
+- `S` (1bits)
+
+  `Sequence Number Present`の略であり、1 となっていれば`Sequence Number`が存在することを意味する。
+
+- `s` (1bits)
+
+  `Strict Source Route`の略であり、1 となっていれば`Strict Source route`であることを意味する。
+  Strict Source route とは送信者がパケットが通過する経路を指定することを意味している。
+
+- `Recur` (3bits)
+
+  `Recursion Control`の略であり、再帰制御で許容される追加のカプセル化の数を格納する(<FontColor color="red">間違っているかも</FontColor>)。基本的には 0 が入る
+
+  <details>
+    <summary>原文</summary>
+    Recursion control contains a three bit unsigned integer which contains the number
+    of additional encapsulations which are permissible. This SHOULD default to zero.
+  </details>
+
+- `Flags` (5bits)
+
+  予約されたものであり、現在は全て 0 が入る。
+
+- `Ver` (3bits)
+
+  `Version Number`の略であり、必ず 0 を入れる必要がある。
+
+- `Protocol Type` (16bits)
+
+  ペイロードパケットのプロトコルタイプが格納されている。一般的にはイーサネットプロトコルタイプが格納される。
+  定義されているプロトコルタイプは以下である。
+
+  |        Protocol Family        | PTYPE |
+  | :---------------------------: | :---: |
+  |           Reserved            | 0000  |
+  |              SNA              | 0004  |
+  |       OSI network layer       | 00FE  |
+  |              PUP              | 0200  |
+  |              XNS              | 0600  |
+  |              IP               | 0800  |
+  |             Chaos             | 0804  |
+  |          RFC 826 ARP          | 0806  |
+  |        Frame Relay ARP        | 0808  |
+  |             VINES             | 0BAD  |
+  |          VINES Echo           | 0BAE  |
+  |        VINES Loopback         | 0BAF  |
+  |       DECnet (Phase IV)       | 6003  |
+  | Transparent Ethernet Bridging | 6558  |
+  |        Raw Frame Relay        | 6559  |
+  |         Apollo Domain         | 8019  |
+  |     Ethertalk (Appletalk)     | 809B  |
+  |          Novell IPX           | 8137  |
+  |  RFC 1144 TCP/IP compression  | 876B  |
+  |     IP Autonomous Systems     | 876C  |
+  |          Secure Data          | 876D  |
+  |           Reserved            | FFFF  |
+
+- `Offset` (16bits)
+
+  Routing フィールドの先頭から、検査されるアクティブ Source Route Entry の最初のバイト(8bit)までのバイトオフセットを示す(<FontColor color="red">間違っているかも</FontColor>)。
+
+  <details>
+    <summary>原文</summary>
+    The offset field indicates the octet offset from the start of the Routing field
+    to the first octet of the active Source Route Entry to be examined. This field
+    is present if the Routing Present or the Checksum Present bit is set to 1, and
+    contains valid information only if the Routing Present bit is set to 1.
+  </details>
+
+[rfc1853]: https://www.rfc-editor.org/rfc/rfc1853.html
+[rfc3879]: https://www.rfc-editor.org/rfc/rfc3879.html
+[rfc2784]: https://www.rfc-editor.org/rfc/rfc2784.html
+[openvpn]: https://openvpn.net/community-resources/openvpn-cryptographic-layer/
+[sstp]: https://en.wikipedia.org/wiki/Secure_Socket_Tunneling_Protocol
+[rfc6071]: https://www.rfc-editor.org/rfc/rfc6071.html
+[rfc2661]: https://www.rfc-editor.org/rfc/rfc2661.html
+[rfc7348]: https://www.rfc-editor.org/rfc/rfc7348.html
+[rfc3232]: https://www.rfc-editor.org/rfc/rfc3232.html
+[rfc1700]: https://www.rfc-editor.org/rfc/rfc1700.html
+[rfc1701]: https://www.rfc-editor.org/rfc/rfc1701
+
+## 参考
+
+- [Strict Source Route](https://dictionary.goo.ne.jp/word/%E3%82%B9%E3%83%88%E3%83%AA%E3%82%AF%E3%83%88%E3%82%BD%E3%83%BC%E3%82%B9%E3%83%AB%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0/)
