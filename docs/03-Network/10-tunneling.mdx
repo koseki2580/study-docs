@@ -402,6 +402,80 @@ IPsec には 2 種類の接続方法が存在する。
 
 ![トランスポートモード・トンネルモード通信](/img/svg/Network/tunneling/tunneling-13.drawio.svg "トランスポートモード・トンネルモード通信")
 
+### IKEv2 (Internet Key Exchange Protocol Version 2)
+
+IPsec の鍵交換にためのプロトコルであり、[RFC7296][rfc7296]で定義されている。
+
+IKE はそれぞれの通信間で相互認証を実行し、カプセル化セキュリティペイロード(ESP)または認証ヘッダー(AH)の SA を効率的に確立するために
+使用できる共有秘密鍵を含む IKE Security Association(SA)を確立する。
+
+IKE メッセージを送信する側を`イニシエータ`と呼び、応答を返す側を`レスポンダ`と呼ぶ。
+
+IKE を使用した通信は、常に IKE_SA_INIT および IKE_AUTH 交換（IKEv1 ではフェーズ 1 として知られている）で始まり、
+最初の交換は通常 4 つのメッセージで構成されるが、シナリオ(AH なのか ESP なのかトンネルモードなのかトランスポートモードなのか)によって増えるが場合がある。
+
+メッセージの初めは IKE_SA_INIT であり、暗号アルゴリズムやノンスを[Diffie-Hellman 鍵交換方式](/docs/Network/diffie-hellman)で交換する。
+
+2 番目のメッセージは IKE_AUTH であり、前のメッセージの認証, 身元・証明書の交換を行い、IKE SA を確立する。
+
+最初の交換に続くすべてのメッセージは IKE_SA_INIT で決定された暗号化アルゴリズムとキーを使用して暗号化されて保護されます。
+
+すべての IKE メッセージには、固定ヘッダーの一部としてメッセージ ID が含まれている。
+このメッセージ ID は、リクエストとレスポンスを照合し、メッセージの再送信を識別するために使用される。
+
+| Notation |           Payload            |
+| :------: | :--------------------------: |
+|   AUTH   |        Authentication        |
+|   CERT   |         Certificate          |
+| CERTREQ  |     Certificate Request      |
+|    CP    |        Configuration         |
+|    D     |            Delete            |
+|   EAP    |  Extensible Authentication   |
+|   HDR    |  IKE header (not a payload)  |
+|   IDi    |  Identification - Initiator  |
+|   IDr    |  Identification - Responder  |
+|    KE    |         Key Exchange         |
+|  Ni, Nr  |            Nonce             |
+|    N     |            Notify            |
+|    SA    |     Security Association     |
+|    SK    | Encrypted and Authenticated  |
+|   TSi    | Traffic Selector - Initiator |
+|   TSr    | Traffic Selector - Responder |
+|    V     |          Vendor ID           |
+
+イニシエータの初めのメッセージは次のような形式をしている。
+
+![IKE Request 1](/img/svg/Network/tunneling/tunneling-14.drawio.svg "IKE Request 1")
+
+このパケットの Security Association - Initiator 1 ではイニシエータが IKE SA に対してサポートしている暗号化アルゴリズムを示している。
+Key Exchange - Initiator では Diffie-Hellman 値を送信している。
+
+これに対するレスポンダの応答は次のような形式を取る。(IPsec の章において)以降の図で灰色のデータはオプションを意味している。
+
+![IKE Response 1](/img/svg/Network/tunneling/tunneling-15.drawio.svg "IKE Response 1")
+
+Security Association - Responder 1 で選択した暗号スイートを表し、
+Key Exchange - Responder で Diffie-Hellman 交換を終了させる。
+
+この時点で SKEYSEED と呼ばれる値を生成することができ、IKE SA 用の鍵が全て導出することができる。
+今後のメッセージはヘッダを除いて、暗号化が行われ、完全性が担保される。
+
+イニシエータの次のメッセージは次のような形式をとる。
+
+![IKE Request 2](/img/svg/Network/tunneling/tunneling-16.drawio.svg "IKE Request 2")
+
+Identification - Initiator でイニシエータの身元を主張し、整合性は Authentication ペイロードを使用する。
+証明書を Certificate ペイロードで送信し、トラストアンカーのリストを Certificate Request ペイロードで送信する場合がある。
+
+Traffic Selector は、アドレス範囲（IPv4 または IPv6）、ポート範囲、および IP プロトコル ID で構成される。
+
+Security Association - Initiator 2 ペイロードを使用して子 SA のネゴシエーションを開始する。
+Security Association - Initiator 2 から始まるフィールドは、CREATE_CHILD_SA 交換の説明がされている。
+
+このメッセージに対するレスポンダの応答は次のような形式を取る。
+
+![IKE Response 2](/img/svg/Network/tunneling/tunneling-17.drawio.svg "IKE Response 2")
+
 ## 参考
 
 - [Strict Source Route](https://dictionary.goo.ne.jp/word/%E3%82%B9%E3%83%88%E3%83%AA%E3%82%AF%E3%83%88%E3%82%BD%E3%83%BC%E3%82%B9%E3%83%AB%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0/)
@@ -409,7 +483,7 @@ IPsec には 2 種類の接続方法が存在する。
 - [https://it-trend.jp/encryption/article/64-0091](https://it-trend.jp/encryption/article/64-0091)
 - [https://en.wikipedia.org/wiki/Secure_Socket_Tunneling_Protocol](https://en.wikipedia.org/wiki/Secure_Socket_Tunneling_Protocol)
 - [https://amnimo.com/column/037/](https://amnimo.com/column/037/)
-- [https://www.infraexpert.com/study/ipsec6.html][https://www.infraexpert.com/study/ipsec6.html]
+- [https://www.infraexpert.com/study/ipsec6.html](https://www.infraexpert.com/study/ipsec6.html)
 
 [rfc1853]: https://www.rfc-editor.org/rfc/rfc1853.html
 [rfc3879]: https://www.rfc-editor.org/rfc/rfc3879.html
@@ -424,3 +498,4 @@ IPsec には 2 種類の接続方法が存在する。
 [rfc1701]: https://www.rfc-editor.org/rfc/rfc1701
 [rfc2104]: https://www.rfc-editor.org/rfc/rfc2104
 [rfc2405]: https://www.rfc-editor.org/rfc/rfc2405.html
+[rfc7296]: https://www.rfc-editor.org/rfc/rfc7296.html
