@@ -1,6 +1,6 @@
 ---
-title: IPアドレス
-sidebar_label: IPアドレス
+title: IP パケット
+sidebar_label: IP パケット
 draft: false
 toc_max_heading_level: 5
 tags: [ネットワーク]
@@ -18,11 +18,11 @@ import Paragraph from "@site/src/components/Custom/Paragraph"
 
 IP アドレスとは情報機器を識別するためのネットワーク層の識別番号である。([Wikipedia](https://ja.wikipedia.org/wiki/IP%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9))
 
-### IPv4
+### IPv4 パケット
 
 IP ヘッダー(v4)は[RFC791][rfc791]で定義されている。
 
-![IPv4 ヘッダー](/img/svg/Network/ip-address/ip-address-1.drawio.svg "IPv4 ヘッダー")
+![IPv4 ヘッダー](/img/svg/Network/ip-packet/ip-packet-1.drawio.svg "IPv4 ヘッダー")
 
 - `Version` (4bits)
 
@@ -36,7 +36,7 @@ IP ヘッダー(v4)は[RFC791][rfc791]で定義されている。
 
   IPv4 においてパケットの優先度を表すパラメータである。
 
-  ![Type of Service](/img/svg/Network/ip-address/ip-address-2.drawio.svg "Type of Service")
+  ![Type of Service](/img/svg/Network/ip-packet/ip-packet-2.drawio.svg "Type of Service")
 
   - `Precedence`
 
@@ -81,7 +81,7 @@ IP ヘッダー(v4)は[RFC791][rfc791]で定義されている。
   `T`, `D`, `R`は`Precedence`が同じ場合に用いられる。
   [RFC2474][rfc2474]でこの部分は更新され、IPv4 の`Type of Service`と後述する IPv6 の`Traffic Class`は以下のように変更された。
 
-  ![differentiated services codepoint](/img/svg/Network/ip-address/ip-address-3.drawio.svg "differentiated services codepoint")
+  ![differentiated services codepoint](/img/svg/Network/ip-packet/ip-packet-3.drawio.svg "differentiated services codepoint")
 
   `DSCP`は differentiated services codepoint の略であり、優先度を 64 通りに再定義された。
 
@@ -101,11 +101,11 @@ IP ヘッダー(v4)は[RFC791][rfc791]で定義されている。
   ルータは IP データグラムがこの MTU を超えていた場合はデータを分割し MTU に収まるようしてからデータを転送する。
   複数の IP データグラム分け、それぞれに IP ヘッダを付与することで複数の IP パケットに分割する処理のことを`フラグメンテーション`と呼ぶ。
 
-  ![フラグメンテーション](/img/svg/Network/ip-address/ip-address-4.drawio.svg "フラグメンテーション")
+  ![フラグメンテーション](/img/svg/Network/ip-packet/ip-packet-4.drawio.svg "フラグメンテーション")
 
   `Flags`はこのフラグメンテーションに関する情報をもち、以下の形式をとる。
 
-  ![Flags](/img/svg/Network/ip-address/ip-address-5.drawio.svg "Flags")
+  ![Flags](/img/svg/Network/ip-packet/ip-packet-5.drawio.svg "Flags")
 
   0bit 目は必ず 0 となる。
 
@@ -183,11 +183,11 @@ IP ヘッダー(v4)は[RFC791][rfc791]で定義されている。
 
   詳しくは[RFC1071][rfc1071]で記述されている。
 
-- `Source Address` (32bits)
+- `Source packet` (32bits)
 
   送信元 IP アドレス
 
-- `Destination Address` (32bits)
+- `Destination packet` (32bits)
 
   宛先 IP アドレス
 
@@ -199,11 +199,11 @@ IP ヘッダー(v4)は[RFC791][rfc791]で定義されている。
 
   IP ヘッダを 32bits で終わるように 0 を入れて帳尻合わせを行う。
 
-### IPv6
+### IPv6 パケット
 
 IPv6 は[RFC8200][rfc8200]に記載されおり、以下のような形式をとる。
 
-![IPv6](/img/svg/Network/ip-address/ip-address-6.drawio.svg "IPv6")
+![IPv6](/img/svg/Network/ip-packet/ip-packet-6.drawio.svg "IPv6")
 
 - `Version` (4bits)
 
@@ -229,11 +229,11 @@ IPv6 は[RFC8200][rfc8200]に記載されおり、以下のような形式をと
 
   ルータを経由するごとに-1 される。0 になるとパケットは破棄される。IPv4 の Time to Live と同じである。
 
-- `Source Address` (128bits)
+- `Source packet` (128bits)
 
   送信元 IP アドレス
 
-- `Destination Address` (128bits)
+- `Destination packet` (128bits)
 
   宛先 IP アドレス
 
@@ -243,7 +243,7 @@ IPv6 に拡張ヘッダが存在する。
 
   パケットの経路上すべてのノードで検査および処理されるオプションの情報が格納されている。
 
-  ![Hop-by-Hop Options header](/img/svg/Network/ip-address/ip-address-7.drawio.svg "Hop-by-Hop Options header")
+  ![Hop-by-Hop Options header](/img/svg/Network/ip-packet/ip-packet-7.drawio.svg "Hop-by-Hop Options header")
 
   - `Next Header` (8btis)
 
@@ -261,7 +261,7 @@ IPv6 に拡張ヘッダが存在する。
 
   パケットの宛先ノードだけが検査する必要があるオプションの情報が格納されている。
 
-  ![Destination Options header](/img/svg/Network/ip-address/ip-address-7.drawio.svg "Destination Options header")
+  ![Destination Options header](/img/svg/Network/ip-packet/ip-packet-7.drawio.svg "Destination Options header")
 
   - `Next Header`
   - `Hdr Ext Len`
@@ -275,7 +275,7 @@ IPv6 に拡張ヘッダが存在する。
 
   経由する必要がある中間ノードのリストが格納されている。
 
-  ![Routing header](/img/svg/Network/ip-address/ip-address-8.drawio.svg "Routing header")
+  ![Routing header](/img/svg/Network/ip-packet/ip-packet-8.drawio.svg "Routing header")
 
   - `Next Header`
   - `Hdr Ext Len`
@@ -304,7 +304,7 @@ IPv6 に拡張ヘッダが存在する。
   MTU より大きい場合に使用し、IPv4 のフラグメンテーションとは挙動が異なる。
   IPv4 の場合は途中のルータでもフラグメンテーションが発生していたが、IPv6 では送信元のみがフラグメンテーションを行う。
 
-  ![Fragment header](/img/svg/Network/ip-address/ip-address-9.drawio.svg "Fragment header")
+  ![Fragment header](/img/svg/Network/ip-packet/ip-packet-9.drawio.svg "Fragment header")
 
   - `Next Header`
 
