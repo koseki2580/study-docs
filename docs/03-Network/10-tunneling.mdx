@@ -64,11 +64,11 @@ IP in IP のカプセル化の方法は単純であり、IP パケットに別�
 
   次のヘッダ。トンネルヘッダが存在しない場合であれば、内部 IPv4 となる。
 
-- `Source`
+- `Source address`
 
   データグラムの送信に使用されるインターフェースに関連付けられた IP アドレス。
 
-- `Destination`
+- `Destination address`
 
   カプセル化を解除する宛先 IP アドレス
 
@@ -288,7 +288,7 @@ OpenVPN は次のような形式をしている。
 初期化ベクトルとは暗号化の際に使用するランダムに生成されたビット列である。
 または、HMAC は初期化ベクトルと暗号化した範囲から算出している。
 
-## SSTP
+### SSTP
 
 SSTP は Secure Socket Tunneling Protocol の略であり、[Microsoft][sstp]が開発したプロトコルであり、
 HTTPS プロトコルを介して Point-to-Point Protocol (PPP) トラフィックをカプセル化するものである。
@@ -339,7 +339,7 @@ SSTP パケットは次の図のような構成をとる。
   `C`が 1 であれば制御メッセージが格納され、0 であれば上位プロトコルからのペイロードが格納されている。
   SSTP データ パケットは、PPP フレームをペイロードとして通信する。
 
-### SSTP 制御パケット
+#### SSTP 制御パケット
 
 制御パケットはクライアントとサーバーの両⽅が制御メッセージを相互に送信するために使⽤するパケットであり、以下の形式を取る。
 
@@ -372,7 +372,7 @@ SSTP パケットは次の図のような構成をとる。
   SSTP コントロール メッセージを構成する可変サイズの属性である。
   全てを書くと長いので[Microsoft][sstp]の 2.2.4 章からこの属性についての説明がされている(2023/2/4 現在)。
 
-### SSTP データパケット
+#### SSTP データパケット
 
 SSTP データパケットは、SSTP クライアントと SSTP サーバーの両⽅が上位層のペイロード(つまり、PPP フレーム)を相互に送信するために使⽤する SSTP パケットであり、以下の形式を取る。
 
@@ -382,7 +382,7 @@ SSTP データパケットは、SSTP クライアントと SSTP サーバーの�
 
   上位層の可変長のペイロードである。
 
-## IPsec
+### IPsec
 
 IPsec は IP Security の略であり、IP パケットをカプセル化するプロトコルである。IP v4, v6 のどちらでも使用できるプロトコルである。
 
@@ -402,7 +402,7 @@ IPsec には 2 種類の接続方法が存在する。
 
 ![トランスポートモード・トンネルモード通信](/img/svg/Network/tunneling/tunneling-13.drawio.svg "トランスポートモード・トンネルモード通信")
 
-### IKEv2 (Internet Key Exchange Protocol Version 2)
+#### IKEv2 (Internet Key Exchange Protocol Version 2)
 
 IPsec の鍵交換にためのプロトコルであり、[RFC7296][rfc7296]で定義されている。
 
@@ -469,12 +469,21 @@ Identification - Initiator でイニシエータの身元を主張し、整合�
 
 Traffic Selector は、アドレス範囲（IPv4 または IPv6）、ポート範囲、および IP プロトコル ID で構成される。
 
-Security Association - Initiator 2 ペイロードを使用して子 SA のネゴシエーションを開始する。
-Security Association - Initiator 2 から始まるフィールドは、CREATE_CHILD_SA 交換の説明がされている。
+Security Association - Initiator 2 ペイロードを使用して子 SA(IPsec SA) のネゴシエーションを開始する。
 
 このメッセージに対するレスポンダの応答は次のような形式を取る。
 
 ![IKE Response 2](/img/svg/Network/tunneling/tunneling-17.drawio.svg "IKE Response 2")
+
+レスポンダは Identification - Responder で自身身元を証明する。オプションで証明書を 1 枚以上送信し、身元認証を行うことで 2 番目のメッセージの完全性を証明する。
+これにより子 SA(IPsec SA) のネゴシエーションを完了する。
+
+IKE_AUTH の通信を行ったもの同士がすべての署名とメッセージ認証コード(MAC)が正しく計算されていることを確認する必要がある。
+
+CREATE_CHILD_SA exchange を使用して新しい SA の作成や IKE SA や Child SA のリキーを行う。
+CREATE_CHILD_SA exchange は IKE v1 ではフェーズ 2 と呼ばれている。
+SA は新しい SA を生成してから古い SA を削除することでリキーが行われる。
+[RFC7296][rfc7296]セクション 2.8 は、古い SA から新しい SA へのトラフィックの移動や古い SA の削除など、リキーの仕組みを説明している。
 
 ## 参考
 

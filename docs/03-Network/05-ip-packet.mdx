@@ -166,16 +166,16 @@ IP ヘッダー(v4)は[RFC791][rfc791]で定義されている。
 
   ```
   計算時
-  A + B + C ... + 0 (Checksum) = X
+  A + B + C + ... + 0 (Checksum) = X
   補数和
   X → x
 
   送信時
-  A, B, C ... , ~x
+  A, B, C + ... , ~x
 
   受信時
-  A + B + C ... ~x
-  A + B + C ... = X なので
+  A + B + C + ... ~x
+  A + B + C + ... = X なので
   X + ~x
   Xの補数和はxなので
   x + ~x = 0xFFF
@@ -183,11 +183,11 @@ IP ヘッダー(v4)は[RFC791][rfc791]で定義されている。
 
   詳しくは[RFC1071][rfc1071]で記述されている。
 
-- `Source packet` (32bits)
+- `Source address` (32bits)
 
   送信元 IP アドレス
 
-- `Destination packet` (32bits)
+- `Destination address` (32bits)
 
   宛先 IP アドレス
 
@@ -229,11 +229,11 @@ IPv6 は[RFC8200][rfc8200]に記載されおり、以下のような形式をと
 
   ルータを経由するごとに-1 される。0 になるとパケットは破棄される。IPv4 の Time to Live と同じである。
 
-- `Source packet` (128bits)
+- `Source address` (128bits)
 
   送信元 IP アドレス
 
-- `Destination packet` (128bits)
+- `Destination address` (128bits)
 
   宛先 IP アドレス
 
@@ -251,7 +251,7 @@ IPv6 に拡張ヘッダが存在する。
 
   - `Hdr Ext Len` (8btis)
 
-    8 バイト単位となっており、一番初めの 8 バイトは含まれない。(0 となる。)
+    Header Extension Length の略で、8 バイト単位となっており、一番初めの 8 バイトは含まれない。(0 となる。)
 
   - `Options` (8 バイトの倍数)
 

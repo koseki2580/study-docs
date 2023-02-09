@@ -17,7 +17,7 @@ import Paragraph from "@site/src/components/Custom/Paragraph"
 
 ## Diffie-Hellman 鍵交換方式
 
-Diffie-Hellman 鍵交換方式とは送受信車間で乱数を安全に交換する方法である。IPsec の共通鍵生成部分でも使用されており、
+Diffie-Hellman 鍵交換方式とは送受信者間で乱数を安全に交換する方法である。IPsec の共通鍵生成部分でも使用されており、
 [基本情報技術者試験平成 25 年度秋][kihon-25-4] 問 4 でも出題されている。
 
 Diffie-Hellman 鍵交換方式では、以下のような手順が取られている。
@@ -80,7 +80,7 @@ $$
 
 $$
 \begin{align}
-  Kx = y^{X} \% p
+  Km = y^{X} \% p
 \end{align}
 $$
 
@@ -88,7 +88,7 @@ $$
 
 $$
 \begin{align}
-  Kx = g^{XY} \% p
+  Km = g^{XY} \% p
 \end{align}
 $$
 
@@ -98,7 +98,7 @@ $$
 
 $$
 \begin{align}
-  Ky = x^{Y} \% p
+  Kn = x^{Y} \% p
 \end{align}
 $$
 
@@ -106,7 +106,7 @@ $$
 
 $$
 \begin{align}
-  Ky = g^{XY} \% p
+  Kn = g^{XY} \% p
 \end{align}
 $$
 
@@ -117,7 +117,7 @@ $$
 
 $$
 \begin{align}
-  Kx = Ky = g^{XY} \% p
+  Km = Kn = g^{XY} \% p
 \end{align}
 $$
 
