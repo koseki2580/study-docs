@@ -16,13 +16,13 @@ import Paragraph from "@site/src/components/Custom/Paragraph"
 
 ## トンネリング
 
-トンネリングとは共用ネットワークの 2 点間を仮想の専用線を構築する技術のことをいう。
+トンネリングとは共用ネットワークの 2 点間で仮想の専用線を構築する技術のことをいう。
 トンネリングはトンネリング用のプロトコルを用いてパケットをカプセル化させることで実現させている。
 
 トンネリングプロトコルにはいくつか種類が存在する。([Wikipedia](https://en.wikipedia.org/wiki/Tunneling_protocol)より)
 
 - [IP in IP][rfc1853]
-- [SIT/IPv6][rfc3879]
+- [SIT/IPv6][sit]
 - [GRE][rfc2784] ([RFC1701][rfc1701])
 - [OpenVPN][openvpn] (参考 [RFC8922 3.4.3](https://www.rfc-editor.org/rfc/rfc8922.html#name-openvpn))
 - [SSTP][sstp] (Secure Socket Tunneling Protocol)
@@ -384,9 +384,104 @@ SSTP データパケットは、SSTP クライアントと SSTP サーバーの�
 
 ### IPsec
 
-IPsec は IP Security の略であり、IP パケットをカプセル化するプロトコルである。IP v4, v6 のどちらでも使用できるプロトコルである。
+IPsec は IP Security の略であり、IP パケットをカプセル化するプロトコルである。IP v4, v6 のどちらでも使用できるプロトコルであり、
+カプセル化セキュリティペイロード(ESP)[rfc4303]または認証ヘッダー(AH)[rfc4302]の 2 つのヘッダに対応している。
 
-IPsec には 2 種類の接続方法が存在する。
+IP 認証ヘッダ(AH)は、IP データグラムのための完全性と認証を確認し、リプレイ攻撃の対策として使用される。
+
+AH は次のような構成をとる。
+
+![認証ヘッダ(AH)](/img/svg/Network/tunneling/tunneling-18.drawio.svg "認証ヘッダ(AH)")
+
+- `Next Header` (8 bits)
+
+  認証ヘッダの後の次のペイロードのタイプを識別する 8 ビットのフィールドである。[IANA][iana]で定義された IP プロトコル番号のセットが使用される。
+
+- `Payload Length` (8 bits)
+
+  4 バイト単位であり、最終結果から-2 する必要がある。例えば、整合性チェック値が 96bit のアルゴリズムで決められた値が設定される場合
+  整合性チェック値以外の 12bytes (3)と整合性チェックの 96bits (12bytes)を足し合わせた`6`から`-2`した`4`が入る。
+
+  なぜ-2 されるのかは謎。
+
+  <details>
+    <summary>原文</summary>
+    This 8-bit field specifies the length of AH in 32-bit words (4-byte units), minus
+    "2". Thus, for example, if an integrity algorithm yields a 96-bit authentication
+    value, this length field will be "4" (3 32-bit word fixed fields plus 3 32-bit
+    words for the ICV, minus 2). For IPv6, the total length of the header must be
+    a multiple of 8-octet units. (Note that although IPv6 [DH98] characterizes AH
+    as an extension header, its length is measured in 32-bit words, not the 64-bit
+    words used by other IPv6 extension headers.) See Section 2.6, "Integrity Check
+    Value (ICV)", for comments on padding of this field, and Section 3.3.3.2.1, "ICV
+    Padding".
+  </details>
+
+- `Reserved` (16 bits)
+
+  将来の使用のために予約されている。
+
+- `Security Parameters Index (SPI)` (32 bits)
+
+  受信側が受信するパケットを決定する SA を識別するために使用する任意の 32 ビット値である。
+  1$\sim$255 までの範囲の SPI 値は、将来の使用のため Internet Assigned Numbers Authority（IANA）によって予約されている。
+
+- `Sequence Number Field` (32 bits)
+
+  パケットを送り合うたびに+1 されるシーケンス番号である。SA が確立した時は送信側・受信側は 0 から開始する。
+  デフォルトではリプレイ攻撃のためシーケンス番号はループしないようになっているので$2^{32}$まで増加すると新しい SA を確立する必要がある。
+
+- `Integrity Check Value-ICV` (可変)
+
+  整合性チェック値であり、このパケットの整合性を確認するために用いられる。また、必ず 32bit(IPv4)または 64bit(IPv6)である必要があるため、パディングされる場合もある。
+  この値は SA によって定められ、対称鍵暗号化アルゴリズム・SHA-1, SHA-256, MD5 のようなハッシュ関数が用いられる。
+
+カプセル化セキュリティペイロード(ESP)は、IP ヘッダの後の次の層のプロトコルのヘッダの間またはカプセル化された IP ヘッダの前に挿入される。
+ESP を使用することで、機密性・送信元認証・コネクションレス完全性・リプレイ攻撃防止・トラフィックの機密性を保つことができる。
+
+ESP は次のような構造をとる。
+
+![カプセル化セキュリティペイロード(ESP)](/img/svg/Network/tunneling/tunneling-19.drawio.svg "カプセル化セキュリティペイロード(ESP)")
+
+ペイロードの詳細は次のようになる。
+
+![ペイロード詳細)](/img/svg/Network/tunneling/tunneling-20.drawio.svg "ペイロード詳細")
+
+TFC は Traffic Flow Confidentiality の略であり、IPsec のトンネルモードの時に挿入される場合がある。
+
+- `Security Parameters Index (SPI)` (32 bits)
+
+  受信側で SA を判別するために使用され、必須のフィールドである。
+
+- `Sequence Number` (32 bits)
+
+  AH と同じであり、パケットを送り合うたびに+1 されるシーケンス番号である。SA が確立した時は送信側・受信側は 0 から開始する。
+
+- `Payload Data` (可変)
+
+  次のヘッダフィールドによって記述されるデータを含む可変長フィールドである。
+
+- `Padding` (0 ~ 255 bits)
+
+  暗号化を行った際に bit の幅を合わせるために使用される。
+
+- `Pad Lengt` (8 bits)
+
+  padding の長さを表し、必須フィールドである。
+
+- `Next Header` (8 bits)
+
+  ペイロードデータフィールドに含まれるデータのタイプを識別する必須の 8 ビットのフィールドで、IANA で定義されている。
+
+- `Traffic Flow Confidentiality` (可変)
+
+  データの長さを隠蔽するために使用されるパディングである。
+
+- `Integrity Check Value (ICV)` (可変)
+
+  整合性を確認するために使用する値。ESP ヘッダ・ペイロード・ESP トレーラフィールドの値から算出される。
+
+また、IPsec には 2 種類の接続方法が存在する。
 
 - トランスポートモード
 - トンネルモード
@@ -402,6 +497,14 @@ IPsec には 2 種類の接続方法が存在する。
 
 ![トランスポートモード・トンネルモード通信](/img/svg/Network/tunneling/tunneling-13.drawio.svg "トランスポートモード・トンネルモード通信")
 
+トランスポートモード・AH ヘッダの場合の IP ヘッダは次のような形式になる。
+
+![トランスポートモード・AH](/img/svg/Network/tunneling/tunneling-21.drawio.svg "トランスポートモード・AH")
+
+トンネルモード・AH ヘッダの場合の IP ヘッダは次のような形式になる。
+
+![トンネルモード・AH](/img/svg/Network/tunneling/tunneling-22.drawio.svg "トンネルモード・AH")
+
 #### IKEv2 (Internet Key Exchange Protocol Version 2)
 
 IPsec の鍵交換にためのプロトコルであり、[RFC7296][rfc7296]で定義されている。
@@ -412,13 +515,13 @@ IKE はそれぞれの通信間で相互認証を実行し、カプセル化セ�
 IKE メッセージを送信する側を`イニシエータ`と呼び、応答を返す側を`レスポンダ`と呼ぶ。
 
 IKE を使用した通信は、常に IKE_SA_INIT および IKE_AUTH 交換（IKEv1 ではフェーズ 1 として知られている）で始まり、
-最初の交換は通常 4 つのメッセージで構成されるが、シナリオ(AH なのか ESP なのかトンネルモードなのかトランスポートモードなのか)によって増えるが場合がある。
+最初の交換は通常 4 つのメッセージで構成されるが、シナリオ(AH なのか ESP なのかトンネルモードなのかトランスポートモードなのか)によって増える場合がある。
 
 メッセージの初めは IKE_SA_INIT であり、暗号アルゴリズムやノンスを[Diffie-Hellman 鍵交換方式](/docs/Network/diffie-hellman)で交換する。
 
 2 番目のメッセージは IKE_AUTH であり、前のメッセージの認証, 身元・証明書の交換を行い、IKE SA を確立する。
 
-最初の交換に続くすべてのメッセージは IKE_SA_INIT で決定された暗号化アルゴリズムとキーを使用して暗号化されて保護されます。
+最初の交換に続くすべてのメッセージは IKE_SA_INIT で決定された暗号化アルゴリズムとキーを使用して暗号化されて保護される。
 
 すべての IKE メッセージには、固定ヘッダーの一部としてメッセージ ID が含まれている。
 このメッセージ ID は、リクエストとレスポンスを照合し、メッセージの再送信を識別するために使用される。
@@ -476,8 +579,7 @@ Security Association - Initiator 2 ペイロードを使用して子 SA(IPsec SA
 ![IKE Response 2](/img/svg/Network/tunneling/tunneling-17.drawio.svg "IKE Response 2")
 
 レスポンダは Identification - Responder で自身身元を証明する。オプションで証明書を 1 枚以上送信し、身元認証を行うことで 2 番目のメッセージの完全性を証明する。
-これにより子 SA(IPsec SA) のネゴシエーションを完了する。
-
+これにより子 SA(IPsec SA) のネゴシエーションを完了し、
 IKE_AUTH の通信を行ったもの同士がすべての署名とメッセージ認証コード(MAC)が正しく計算されていることを確認する必要がある。
 
 CREATE_CHILD_SA exchange を使用して新しい SA の作成や IKE SA や Child SA のリキーを行う。
@@ -495,7 +597,7 @@ SA は新しい SA を生成してから古い SA を削除することでリキ
 - [https://www.infraexpert.com/study/ipsec6.html](https://www.infraexpert.com/study/ipsec6.html)
 
 [rfc1853]: https://www.rfc-editor.org/rfc/rfc1853.html
-[rfc3879]: https://www.rfc-editor.org/rfc/rfc3879.html
+[sit]: https://datatracker.ietf.org/doc/html/draft-gilligan-ipv6-sit-overview-01
 [rfc2784]: https://www.rfc-editor.org/rfc/rfc2784.html
 [openvpn]: https://openvpn.net/community-resources/openvpn-cryptographic-layer/
 [sstp]: https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-sstp/c50ed240-56f3-4309-8e0c-1644898f0ea8
@@ -508,3 +610,6 @@ SA は新しい SA を生成してから古い SA を削除することでリキ
 [rfc2104]: https://www.rfc-editor.org/rfc/rfc2104
 [rfc2405]: https://www.rfc-editor.org/rfc/rfc2405.html
 [rfc7296]: https://www.rfc-editor.org/rfc/rfc7296.html
+[rfc4302]: https://www.rfc-editor.org/rfc/rfc4302.html
+[rfc4303]: https://www.rfc-editor.org/rfc/rfc4303.html
+[iana]: https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
