@@ -1,7 +1,7 @@
 ---
 title: トランザクション
 sidebar_label: トランザクション
-draft: true
+draft: false
 toc_max_heading_level: 5
 tags: [DB, トランザクション]
 ---
@@ -149,22 +149,77 @@ ACID 特性とはトランザクションが備えるべき 4 つの特性の頭
 
 これらの問題が生じる分離レベルを表にすると以下のようになる。
 
-|                  |                ダーティリード                |            ノンリピータブルリード            |               ファントムリード               | ロストアップデート |
-| :--------------: | :------------------------------------------: | :------------------------------------------: | :------------------------------------------: | :----------------: |
-| READ UNCOMMITTED | <FontColor color="red">$\bullet$</FontColor> | <FontColor color="red">$\bullet$</FontColor> | <FontColor color="red">$\bullet$</FontColor> |      $\times$      |
-|  READ COMMITTED  |                   $\times$                   | <FontColor color="red">$\bullet$</FontColor> | <FontColor color="red">$\bullet$</FontColor> |      $\times$      |
-| REPEARABLE READ  |                   $\times$                   |                   $\times$                   | <FontColor color="red">$\bullet$</FontColor> |      $\times$      |
-|   SERIALIZABLE   |                   $\times$                   |                   $\times$                   |                   $\times$                   |      $\times$      |
+|                  |                   ダーティリード                    |               ノンリピータブルリード                |                  ファントムリード                   |             ロストアップデート              |
+| :--------------: | :-------------------------------------------------: | :-------------------------------------------------: | :-------------------------------------------------: | :-----------------------------------------: |
+| READ UNCOMMITTED | <FontColor color="lightgreen">$\bullet$</FontColor> | <FontColor color="lightgreen">$\bullet$</FontColor> | <FontColor color="lightgreen">$\bullet$</FontColor> | <FontColor color="red">$\times$</FontColor> |
+|  READ COMMITTED  |     <FontColor color="red">$\times$</FontColor>     | <FontColor color="lightgreen">$\bullet$</FontColor> | <FontColor color="lightgreen">$\bullet$</FontColor> | <FontColor color="red">$\times$</FontColor> |
+| REPEARABLE READ  |     <FontColor color="red">$\times$</FontColor>     |     <FontColor color="red">$\times$</FontColor>     | <FontColor color="lightgreen">$\bullet$</FontColor> | <FontColor color="red">$\times$</FontColor> |
+|   SERIALIZABLE   |     <FontColor color="red">$\times$</FontColor>     |     <FontColor color="red">$\times$</FontColor>     |     <FontColor color="red">$\times$</FontColor>     | <FontColor color="red">$\times$</FontColor> |
 
 ロストアップデートは排他制御を行っている以上は生じない問題である。
 
 #### ダーティリード
 
+変更途中のデータを読み取り、その変更途中のトランザクションがロールバックした場合に変更途中のデータを読み取ったトランザクションは誤ったデータを取得したことになる。
+そのため、誤った情報がデータベースに記録されてしまうため、データ整合性が損なわれる問題。
+
+![ダーティリード](/img/svg/Database/transaction/transaction-4.drawio.svg "ダーティリード")
+
 #### ノンリピータブルリード
+
+コミット(確定)したデータのみを読み取るが、別トランザクションのコミット前ではコミット前のデータ、
+コミット後はコミット後のデータを読み取る。
+そのため、1 つのトランザクション内でデータを読み取るタイミング次第で値が変更してしまい、データ整合性が損なわれる問題。
+
+![ノンリピータブルリード](/img/svg/Database/transaction/transaction-5.drawio.svg "ノンリピータブルリード")
 
 #### ファントムリード
 
+トランザクション中にデータが新しく追加され、そのデータを扱うことでデータ整合性が損なわれる問題.
+
+![ファントムリード](/img/svg/Database/transaction/transaction-6.drawio.svg "ファントムリード")
+
 #### ロストアップデート
+
+更新したデータが失われてしまい、データ整合性を損なわれる問題。
+
+![ロストアップデート](/img/svg/Database/transaction/transaction-7.drawio.svg "ロストアップデート")
+
+### ログ
+
+ACID 属性の耐久性を保つために使用され、更新前ログと更新後ログの 2 種類が存在する。
+
+CPU はメモリ上のデータしか操作ができない。そのため、データベースを利用する際はハードディスクからデータの読み込みが行われる。
+データを更新してすぐにハードディスクデータが記録されるのではなく、`チェックポイント`と呼ばれる書き込みを行うポイントでハードディスクに書き込みを行う。
+チェックポイントから次のチェックポイントの間に障害が発生した場合は、変更がハードディスクに記録されていないので、変更が失われてしまう。
+そのため、ログにデータの変更を記録し、ログからデータを復元する。
+
+ログも適度なタイミングでハードディスクに出力されるが、データとは異なり、コミットした瞬間にハードディスクにも記録する。
+
+障害が発生した際の状況として以下の図のような 2 通りの状態が考えられる。
+
+1. トランザクション中にチェックポイントを迎え、次のチェックポイントの前に障害が発生 (図左)
+2. トランザクションが完了し、コミットしたデータがチェックポイントを迎える前に障害が発生　(図右)
+
+![ログ](/img/svg/Database/transaction/transaction-8.drawio.svg "ログ")
+
+1.は更新前ログを用いて`ロールバック(後退復帰)`を行い、トランザクションを実施する前の状態に戻し、データの整合性を保つ。
+
+2.は更新後ログを用いて`ロールフォワード(前進復帰)`を行い、トランザクション実施後の状態に戻し、データの整合性を保つ。
+
+#### WAL
+
+ログの書き込みはメモリ上のデータの更新とともに行われる。そのため、更新時の書き込み処理として
+
+1. 更新前ログの書き出し
+2. 実データの更新
+3. 更新後ログの書き出し
+
+の 3 つが存在する。この 3 つをどの順番で行うか特に定められていないが、1,2,3 の順に行うのが自然に見える。
+しかし、2,3 の間で障害が発生した場合に 2 のデータは更新されたのどうかが分からなくなってしまう。
+その問題を解決するために、1,3 のログ部分を先に書き出し、その後に 2 を行うようにすることでこのような問題が生じなくなる。
+
+このように先にログを書き出す方法を WAL(Write Ahead Log)という。
 
 ## 参考
 
