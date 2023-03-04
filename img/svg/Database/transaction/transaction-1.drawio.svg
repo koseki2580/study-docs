@@ -1,0 +1,178 @@
+<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="641px" height="325px" viewBox="-0.5 -0.5 641 325" content="&lt;mxfile&gt;&lt;diagram id=&quot;MvuQo8UJawGg43ObUvw1&quot; name=&quot;ページ1&quot;&gt;7VlLb+MgEP41XCsbv/DRTtPdy0qVetjukdrERuuYiJAm2V+/EIPf2Tw2j1aqVFUwDGP4vhkGJsCZzDffOF7kP1hKCgCtdAOcRwAhgpb8rwTbSuDCoBJknKaVyG4EL/QP0UI9L1vRlCw7ioKxQtBFV5iwsiSJ6Mgw52zdVZuxovvVBc7IQPCS4GIo/UlTkZttBY38O6FZbr5s+2E1MsdGWe9kmeOUrVsiZwqcCWdMVK35ZkIKhZ3BpZr3tGe0XhgnpThmAqwmvONipfcW6YWJrdntUnD2u96oXGKci3khm7Zsyg0slN58kymqH2YFWyc55uIhxQK/4aUcjNc5FeRlgROluZZ6UjajRTFhBeO7jzgzlJAkUQZ3X2uNvCHP9Sw5opdKuCCbvdu1axCl8xE2J4JvpYqe4BjctePZvu6vGxprWd6i0Miw9pysNt2AKxsa33GsnQHW8X2wTjFBs1Gs/QSRt9l1sIbohli7I349dQCyQTTdNeSfrxvxRDdCI4lioywbHoieQDzVkjAwQ/7RdmTj0Sg7uwZUNrWdQH0itpRw6oNwAlB4aBYEoVRGILIBmmg7chl9Z+JsVaYk1d4z5hgt57pLPKLD4QitK7mIN3ARgzYy+BsiYoN/7PeJiAOjHDTK0LIHZEiQRC+c9yK7jwtc0KyUskTCS+RgrMCnMi9FemBO07TYdwo07nAd9sIjyXMuQJ5/TfLgOeTVR+e+w/aDkefB+7EXDtnrI05SeePS3ZKVpIu+3CPfvrY7vxQyD57pPm40UlVv2+49E07lkhUHlXBDxWur3TIle40l1dl2CFCL/Df8ck9sxROtpe+HAvOMGDjHSeKkwIK+d63/D+TByOXjKyGekBBvc2nqR+VNMyI6IizLNFIPKHWOFXi5pEkvMHUs2SfEUh3M1gWC+bzAdIeBCcd5avHgjdBgZEfHr/7CM6Nyec3dOezdnfunbrV4Pav9vusZct2eP6GeoWrLA0M7V6m3fZT3mMf51xHzqe7cY8+yq50wtj3wka932SdIQ7d1kmFR6vPloRQv85ri85KSOVCPuC7eKSuFF8pK0L1eVhpW3U53pku+NjqOcbunhzl5P8wVx7O6PuDYZzqT4/QMwes500jN6FRnOutguBdJdi8PuNaZJEHrgKELkjRWG/LUTQF5JrfbYBoAFO1KQr6So2Ep/lDNR1cl2vlZiz5YpadOJCZAkDtI5mN1+DMqPbLb/HZVcdf8AOhM/wI=&lt;/diagram&gt;&lt;/mxfile&gt;">
+    <defs/>
+    <g>
+        <path d="M 240 120 L 240 80 C 240 74.48 275.82 70 320 70 C 364.18 70 400 74.48 400 80 L 400 120 C 400 125.52 364.18 130 320 130 C 275.82 130 240 125.52 240 120 Z" fill="#f8cecc" stroke="#b85450" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 240 80 C 240 85.52 275.82 90 320 90 C 364.18 90 400 85.52 400 80" fill="none" stroke="#b85450" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 100px; margin-left: 241px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                A
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="320" y="104" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    A
+                </text>
+            </switch>
+        </g>
+        <path d="M 240 240 L 240 200 C 240 194.48 275.82 190 320 190 C 364.18 190 400 194.48 400 200 L 400 240 C 400 245.52 364.18 250 320 250 C 275.82 250 240 245.52 240 240 Z" fill="#dae8fc" stroke="#6c8ebf" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 240 200 C 240 205.52 275.82 210 320 210 C 364.18 210 400 205.52 400 200" fill="none" stroke="#6c8ebf" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 158px; height: 1px; padding-top: 220px; margin-left: 241px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                B
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="320" y="224" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    B
+                </text>
+            </switch>
+        </g>
+        <rect x="0" y="70" width="200" height="60" rx="9" ry="9" fill="#f8cecc" stroke="#b85450" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 198px; height: 1px; padding-top: 100px; margin-left: 1px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                Aのテーブルに対してテーブルロックで専有ロックを行う
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="100" y="104" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Aのテーブルに対してテーブルロックで専有ロックを行う
+                </text>
+            </switch>
+        </g>
+        <rect x="0" y="0" width="200" height="30" fill="#f8cecc" stroke="#b85450" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 198px; height: 1px; padding-top: 15px; margin-left: 1px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                トランザクション 1
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="100" y="19" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    トランザクション 1
+                </text>
+            </switch>
+        </g>
+        <rect x="440" y="0" width="200" height="30" fill="#dae8fc" stroke="#6c8ebf" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 198px; height: 1px; padding-top: 15px; margin-left: 441px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                トランザクション 2
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="540" y="19" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    トランザクション 2
+                </text>
+            </switch>
+        </g>
+        <path d="M 440 100 L 402.01 213.96" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 400.35 218.94 L 399.25 211.19 L 402.01 213.96 L 405.89 213.41 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="440" y="70" width="200" height="60" rx="9" ry="9" fill="#dae8fc" stroke="#6c8ebf" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 198px; height: 1px; padding-top: 100px; margin-left: 441px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                Bのテーブルに対してテーブルロックで専有ロックを行う
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="540" y="104" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Bのテーブルに対してテーブルロックで専有ロックを行う
+                </text>
+            </switch>
+        </g>
+        <path d="M 200 100 L 233.63 100" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 238.88 100 L 231.88 103.5 L 233.63 100 L 231.88 96.5 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="0" y="190" width="200" height="60" rx="9" ry="9" fill="#f8cecc" stroke="#b85450" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 198px; height: 1px; padding-top: 220px; margin-left: 1px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                Bのテーブルに対してテーブルロックで専有ロックを行う
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="100" y="224" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Bのテーブルに対してテーブルロックで専有ロックを行う
+                </text>
+            </switch>
+        </g>
+        <rect x="440" y="190" width="200" height="60" rx="9" ry="9" fill="#dae8fc" stroke="#6c8ebf" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 198px; height: 1px; padding-top: 220px; margin-left: 441px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                Aのテーブルに対してテーブルロックで専有ロックを行う
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="540" y="224" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    Aのテーブルに対してテーブルロックで専有ロックを行う
+                </text>
+            </switch>
+        </g>
+        <path d="M 200 220 L 233.63 220" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="stroke"/>
+        <path d="M 238.88 220 L 231.88 223.5 L 233.63 220 L 231.88 216.5 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 440 220 L 402.01 106.04" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="stroke"/>
+        <path d="M 400.35 101.06 L 405.89 106.59 L 402.01 106.04 L 399.25 108.81 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 40 310 L 113.63 310" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="stroke"/>
+        <path d="M 118.88 310 L 111.88 313.5 L 113.63 310 L 111.88 306.5 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="130" y="294" width="60" height="30" fill="none" stroke="none" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 58px; height: 1px; padding-top: 309px; margin-left: 131px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                待ち状態
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="160" y="313" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    待ち状態
+                </text>
+            </switch>
+        </g>
+    </g>
+    <switch>
+        <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"/>
+        <a transform="translate(0,-5)" xlink:href="https://www.diagrams.net/doc/faq/svg-export-text-problems" target="_blank">
+            <text text-anchor="middle" font-size="10px" x="50%" y="100%">
+                Viewer does not support full SVG 1.1
+            </text>
+        </a>
+    </switch>
+</svg>
