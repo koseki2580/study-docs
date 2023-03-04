@@ -27,7 +27,6 @@ import Paragraph from "@site/src/components/Custom/Paragraph"
 - [OpenVPN][openvpn] (参考 [RFC8922 3.4.3](https://www.rfc-editor.org/rfc/rfc8922.html#name-openvpn))
 - [SSTP][sstp] (Secure Socket Tunneling Protocol)
 - [IPSec][rfc4301] (Internet Protocol Security)
-- [L2TP][rfc2661] (Layer 2 Tunneling Protocol)
 - [VXLAN][rfc7348] (Virtual Extensible Local Area Network)
 
 ### IP in IP
@@ -595,6 +594,33 @@ CREATE_CHILD_SA exchange は IKE v1 ではフェーズ 2 と呼ばれている�
 SA は新しい SA を生成してから古い SA を削除することでリキーが行われる。
 [RFC7296][rfc7296]セクション 2.8 は、古い SA から新しい SA へのトラフィックの移動や古い SA の削除など、リキーの仕組みを説明している。
 
+### VXLAN
+
+VXLAN は Virtual eXtensible Local Area Network の略である。
+仮想 LAN（VLAN）の現在の制限は 4094 であり、現在の VM(Virtual Machine)のグループ分けには不十分である。そのため、この問題を解決として VXLAN が登場した。
+同じ VXLAN セグメント内の VM のみが相互に通信でき、各 VXLAN セグメントは、`VXLAN Network Identifier (VNI)`と呼ばれる 24 ビットのセグメント ID によって識別される。
+VNI は、VM から発信された内部 MAC フレームをカプセル化する外部ヘッダーにある。
+
+VXLAN は次のような形でカプセル化を行う。
+
+![VXLANカプセル化](/img/svg/Network/tunneling/tunneling-25.drawio.svg "VXLANカプセル化")
+
+VXLAN ヘッダは次のような形式を取る
+
+![VXLANヘッダ](/img/svg/Network/tunneling/tunneling-26.drawio.svg "VXLANヘッダ")
+
+- `I, R` (8 bits)
+
+  フラグであり、有効な VXLAN であれば I は 1 である必要がある。R は予約領域であり、送信時は 0 にし、受信時には無視する。
+
+- `Reserved` (24 bits, 8 bits)
+
+  予約領域であり、送信時は 0 にし、受信時には無視する。
+
+- `VXLAN Network Identifier (VNI)` (24 bits)
+
+  セグメント ID である。
+
 ## 参考
 
 - [Strict Source Route](https://dictionary.goo.ne.jp/word/%E3%82%B9%E3%83%88%E3%83%AA%E3%82%AF%E3%83%88%E3%82%BD%E3%83%BC%E3%82%B9%E3%83%AB%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0/)
@@ -610,7 +636,6 @@ SA は新しい SA を生成してから古い SA を削除することでリキ
 [openvpn]: https://openvpn.net/community-resources/openvpn-cryptographic-layer/
 [sstp]: https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-sstp/c50ed240-56f3-4309-8e0c-1644898f0ea8
 [rfc4301]: https://www.rfc-editor.org/rfc/rfc4301.html
-[rfc2661]: https://www.rfc-editor.org/rfc/rfc2661.html
 [rfc7348]: https://www.rfc-editor.org/rfc/rfc7348.html
 [rfc3232]: https://www.rfc-editor.org/rfc/rfc3232.html
 [rfc1700]: https://www.rfc-editor.org/rfc/rfc1700.html
