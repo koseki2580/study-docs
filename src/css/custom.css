@@ -22,7 +22,7 @@
   /* --ifm-color-code:rgb(236, 236, 253); */
   --ifm-color-code-word: rgb(40, 40, 239);
   --ifm-color-agenda: rgb(233, 233, 246);
-  --ifm-color-img: white;
+  /* --ifm-color-img: white; */
   --ifm-color-code-title: #f6f8fa;
   --ifm-color-tabs: var(--ifm-color-code-title);
   --ifm-table-head-color: var(--ifm-color-primary-darkest);

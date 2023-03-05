@@ -66,12 +66,12 @@ Python の場合は辞書型で O(1)で求めることができるので 2 分�
 C++では map 型が Python の辞書型に相当するが、O(log n)となっているので 2 分探索と変わらない。
 :::
 
-  </TabItem>
+</TabItem>
   <TabItem value="C++" label="C++">
 
 ```cpp title="coordinate-compression.cpp"
 vector<int> compress(vector<int> input){
-	vector<int> vals;
+	vector<int> vals
 	rep(i,0,input.size()){
 		vals.push_back(input[i]);
 	}
