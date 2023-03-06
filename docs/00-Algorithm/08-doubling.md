@@ -1,7 +1,7 @@
 ---
 title: ダブリング
 sidebar_label: ダブリング
-draft: true
+draft: false
 toc_max_heading_level: 5
 tags: [アルゴリズム]
 ---
@@ -113,6 +113,8 @@ LCA の求めるには以下の順番で処理を行う。
 
 ![要素変更2](/img/svg/Algorithm/doubling/doubling-11.drawio.svg "要素変更2")
 
+同様に 1 番の親要素である 0 番が LCA となる。
+
 #### プログラム
 
 ##### 前処理
@@ -129,31 +131,114 @@ count は$2^{i}$で求めたい乗数の値であり、n は要素数となる�
 <Tabs groupId="code">
 <TabItem value="python" label="Python" default>
 
-```python title="doubling.py"
+```python
+# 前処理で求めておく2^Nを求める
+m = 1
+count = 0
+while m < len(tree):
+    m <<= 1
+    count += 1
+
+lca_box = [[-1] * (len(tree) + 1) for _ in range(count+1)]
+
+# 幅優先探索で深さを求める
+depth = [-1] * len(tree)
+q = deque()
+q.append(0)
+depth[0] = 0
+while len(q) != 0:
+    pos = q.popleft()
+    for to in tree[pos]:
+        if depth != -1:
+            lca_box[0][to] = pos
+            depth[to] = depth[pos] + 1
+            q.append(to)
+
+
 for i in range(1, count+1):
-    for j in range(n):
+    for j in range(len(tree)):
         lca_box[i][j] = lca_box[i-1][lca_box[i-1][j]]
 ```
 
 </TabItem>
   <TabItem value="C++" label="C++">
 
-```cpp title="doubling.cpp"
-for (int i = 0; i < count+1; ++i){
-  for (int j = 0; j < n; ++j){
-    lca_box[i][j] = lca_box[i-1][lca_box[i-1][j]];
-  }
-}
+```cpp
+// 前処理で求めておく2^Nを求める
+	int m = 1;
+	int count = 0;
+	while (m < tree.size()){
+		m <<= 1;
+		++count;
+	}
+	vector<vector<int>> lca_box(count+1, vector<int>(tree.size()+1, -1));
+
+	// 幅優先探索で深さを求める
+	vector<int> depth(tree.size(), -1);
+	queue<int> q;
+	q.push(0);
+	depth[0] = 0;
+	while (!q.empty()){
+		int pos = q.front();q.pop();
+		for (int to: tree[pos]){
+			if (depth[to] == -1){
+				lca_box[0][to] = pos;
+				depth[to] = depth[pos] + 1;
+				q.push(to);
+			}
+		}
+	}
+
+	for (int i = 1; i < count + 1;++i){
+		for (int j = 0; j < tree.size(); ++j){
+			lca_box[i][j] = lca_box[i-1][lca_box[i-1][j]];
+		}
+	}
 ```
 
   </TabItem>
   <TabItem value="C#" label="C#">
 
-```csharp title="doubling.cs"
-for (int i = 0; i < count+1; ++i){
-  for (int j = 0; j < n; ++j){
-    lca_box[i][j] = lca_box[i-1][lca_box[i-1][j]];
-  }
+```csharp
+// 前処理で求めておく2^Nを求める
+int m = 1;
+int count = 0;
+while (m < tree.Count)
+{
+    m <<= 1;
+    ++count;
+}
+int[,] lca_box = new int[count + 1, tree.Count + 1];
+
+// 幅優先探索で深さを求める
+int[] depth = new int[tree.Count];
+for (int i = 0; i < tree.Count; ++i)
+{
+    depth[i] = -1;
+}
+Queue<int> q = new Queue<int>();
+q.Enqueue(0);
+depth[0] = 0;
+while (q.Count != 0)
+{
+    int pos = q.Dequeue();
+    foreach (int to in tree[pos])
+    {
+        if (depth[to] == -1)
+        {
+            lca_box[0, to] = pos;
+            depth[to] = depth[pos] + 1;
+            q.Enqueue(to);
+        }
+    }
+}
+
+for (int i = 1; i < count + 1; ++i)
+{
+    for (int j = 0; j < tree.Count; ++j)
+    {
+        lca_box[i, j] = lca_box[i - 1, lca_box[i - 1, j]];
+    }
 }
 ```
 
@@ -178,7 +263,7 @@ depth には前処理段階で深さを求めたものが格納されており�
 <Tabs groupId="code">
 <TabItem value="python" label="Python" default>
 
-```python title="doubling.py"
+```python
 def ancestors(u, up):
     cnt = 0
     while up != 0:
@@ -188,78 +273,117 @@ def ancestors(u, up):
         up >>= 1
     return u
 
-u = 3
-v = 7
-if depth[u] < depth[v]:
-    u, v = v, u
-up = depth[u] - depth[v]
-# 深さを揃える
-u = ancestors(u, up)
 
-# この時点で一致している可能性がある
-if (u == v):
-  print(u)
+check = [
+    (3, 7),
+    (10, 16),
+    (11, 15),
+    (2, 3)
+]
+for u, v in check:
+    # 常にu側に深さが深い方を配置
+    if depth[u] < depth[v]:
+        u, v = v, u
+
+    # 手順1 深さを合わせる
+    up = depth[u] - depth[v]
+    u = ancestors(u, up)
+
+    # u,v自身が共通の要素となる場合があるので確認
+    if u == v:
+        print(f"u: {u}, v:{v}")
+        continue
 ```
 
 </TabItem>
   <TabItem value="C++" label="C++">
 
-```cpp title="doubling.cpp"
-int ancestors(int u, int up){
-    int cnt = 0;
-    while (up != 0){
-        if (up & 1 == 1) u = lca_box[cnt][u];
-        cnt += 1;
-        up >>= 1;
-    }
-    return u;
-}
+```cpp
+auto ancestors = [&](int u, int up){
+		int cnt = 0;
+		while (up != 0){
+			if (up & 1 == 1){
+				u = lca_box[cnt][u];
+			}
+			++cnt;
+			up >>= 1;
+		}
+		return u;
+	};
 
-int main(){
-  int u = 3;
-  int v = 7;
-  if (depth[u] < depth[v]):
-      swap(u,v)
-  int up = depth[u] - depth[v];
-  // 深さを揃える
-  u = ancestors(u, up);
+	vector<pair<int, int>> check = {
+		{3, 7},
+		{10, 16},
+		{11, 15},
+		{2, 3}
+	} ;
+	for (pair<int,int> xx: check){
+		int u = xx.first;
+		int v = xx.second;
 
-  // この時点で一致している可能性がある
-  if (u == v){
-    cout << u << endl;
-    return 0;
-  }
-}
+		// 常にu側に深さが深い方を配置
+		if (depth[u] < depth[v]){
+			swap(u,v);
+		}
+
+		// 手順1 深さを合わせる
+		int up = depth[u] - depth[v];
+		u = ancestors(u, up);
+
+		// u,v自身が共通の要素となる場合があるので確認
+		if (u == v) {
+			printf("u: %d, v: %d\n", u, v);
+			continue;
+		}
 ```
 
   </TabItem>
   <TabItem value="C#" label="C#">
 
-```csharp title="doubling.cs"
-private int Ancestors(int u, int up){
+```csharp
+int Ancestors(int u, int up)
+{
     int cnt = 0;
-    while (up != 0){
-        if (up & 1 == 1) u = lca_box[cnt][u];
-        cnt += 1;
+    while (up != 0)
+    {
+        if ((up & 1) == 1)
+        {
+            u = lca_box[cnt, u];
+        }
+        ++cnt;
         up >>= 1;
     }
     return u;
 }
+List<List<int>> check = new List<List<int>>
+{
+    new List<int>() { 3, 7 },
+    new List<int>() { 10, 16 },
+    new List<int>() { 11, 15 },
+    new List<int>() { 2, 3 }
+};
 
-public static void Main(){
-  int u = 3;
-  int v = 7;
-  if (depth[u] < depth[v]):
-      swap(u,v)
-  int up = depth[u] - depth[v];
-  // 深さを揃える
-  u = Ancestors(u, up);
+foreach (List<int> xxx in check)
+{
+    int u = xxx[0];
+    int v = xxx[1];
 
-  // この時点で一致している可能性がある
-  if (u == v){
-    Console.WriteLine(u);
-  }
-}
+    // 常にu側に深さが深い方を配置
+    if (depth[u] < depth[v])
+    {
+        (u, v) = (v, u);
+    }
+
+    // 手順1 深さを合わせる
+    int up = depth[u] - depth[v];
+    u = Ancestors(u, up);
+
+    // u,v自身が共通の要素となる場合があるので確認
+    if (u == v)
+    {
+        Console.WriteLine($"u: {u}, v: {v}");
+        continue;
+    }
 ```
 
   </TabItem>
@@ -271,45 +395,405 @@ count は前処理で使用したものと同じである。
 <Tabs groupId="code">
 <TabItem value="python" label="Python" default>
 
-```python title="doubling.py"
+```python
+# 手順2 親を遡る
 for i in range(count, -1, -1):
     nextu = lca_box[i][u]
     nextv = lca_box[i][v]
+    # 一致しない場合のみ要素を更新
     if nextu != nextv:
         u = nextu
         v = nextv
 
-print(lca_box[0][v])
+# 最終結果の1つ前がLCAとなる
+print(f"u: {lca_box[0][u]}, v:{lca_box[0][v]}")
+```
+
+</TabItem>
+  <TabItem value="C++" label="C++">
+
+```cpp
+// 手順2 親を遡る
+for (int i = count; i > -1; --i){
+  int nextu = lca_box[i][u];
+  int nextv = lca_box[i][v];
+  // 一致しない場合のみ要素を更新
+  if (nextu != nextv){
+    u = nextu;
+    v = nextv;
+  }
+}
+
+// 最終結果の1つ前がLCAとなる
+printf("u: %d, v: %d\n", lca_box[0][u], lca_box[0][v]);
+```
+
+  </TabItem>
+  <TabItem value="C#" label="C#">
+
+```csharp
+// 手順2 親を遡る
+for (int i = count; i > -1; --i)
+{
+    int nextu = lca_box[i, u];
+    int nextv = lca_box[i, v];
+    // 一致しない場合のみ要素を更新
+    if (nextu != nextv)
+    {
+        u = nextu;
+        v = nextv;
+    }
+}
+
+// 最終結果の1つ前がLCAとなる
+Console.WriteLine($"u: {lca_box[0, u]}, v: {lca_box[0, v]}");
+```
+
+  </TabItem>
+</Tabs>
+
+上記の例を全コードは以下となる。
+
+<Tabs groupId="code">
+<TabItem value="python" label="Python" default>
+
+```python title="doubling.py"
+from collections import deque
+tree = [
+    [1, 2],
+    [7],
+    [3, 4],
+    [5],
+    [6],
+    [],
+    [8],
+    [9],
+    [10, 11],
+    [12],
+    [15],
+    [13],
+    [14],
+    [],
+    [16],
+    [],
+    []
+]
+
+# 前処理で求めておく2^Nを求める
+m = 1
+count = 0
+while m < len(tree):
+    m <<= 1
+    count += 1
+
+lca_box = [[-1] * (len(tree) + 1) for _ in range(count+1)]
+
+# 幅優先探索で深さを求める
+depth = [-1] * len(tree)
+q = deque()
+q.append(0)
+depth[0] = 0
+while len(q) != 0:
+    pos = q.popleft()
+    for to in tree[pos]:
+        if depth != -1:
+            lca_box[0][to] = pos
+            depth[to] = depth[pos] + 1
+            q.append(to)
+
+
+for i in range(1, count+1):
+    for j in range(len(tree)):
+        lca_box[i][j] = lca_box[i-1][lca_box[i-1][j]]
+
+
+def ancestors(u, up):
+    cnt = 0
+    while up != 0:
+        if up & 1 == 1:
+            u = lca_box[cnt][u]
+        cnt += 1
+        up >>= 1
+    return u
+
+
+check = [
+    (3, 7),
+    (10, 16),
+    (11, 15),
+    (2, 3)
+]
+for u, v in check:
+    # 常にu側に深さが深い方を配置
+    if depth[u] < depth[v]:
+        u, v = v, u
+
+    # 手順1 深さを合わせる
+    up = depth[u] - depth[v]
+    u = ancestors(u, up)
+
+    # u,v自身が共通の要素となる場合があるので確認
+    if u == v:
+        print(f"u: {u}, v:{v}")
+        continue
+
+    # 手順2 親を遡る
+    for i in range(count, -1, -1):
+        nextu = lca_box[i][u]
+        nextv = lca_box[i][v]
+        # 一致しない場合のみ要素を更新
+        if nextu != nextv:
+            u = nextu
+            v = nextv
+
+    # 最終結果の1つ前がLCAとなる
+    print(f"u: {lca_box[0][u]}, v:{lca_box[0][v]}")
+
 ```
 
 </TabItem>
   <TabItem value="C++" label="C++">
 
 ```cpp title="doubling.cpp"
-for (int i = count; i >= 0; --i){
-  int nextu = lca_box[i][u];
-  int nextv = lca_box[i][v];
-  if (nextu != nextv){
-      u = nextu;
-      v = nextv;
-  }
+
+int main() {
+	vector<vector<int>> tree = {
+		{1, 2},
+		{7},
+		{3, 4},
+		{5},
+		{6},
+		{},
+		{8},
+		{9},
+		{10, 11},
+		{12},
+		{15},
+		{13},
+		{14},
+		{},
+		{16},
+		{},
+		{}
+	};
+
+	// 前処理で求めておく2^Nを求める
+	int m = 1;
+	int count = 0;
+	while (m < tree.size()){
+		m <<= 1;
+		++count;
+	}
+	vector<vector<int>> lca_box(count+1, vector<int>(tree.size()+1, -1));
+
+	// 幅優先探索で深さを求める
+	vector<int> depth(tree.size(), -1);
+	queue<int> q;
+	q.push(0);
+	depth[0] = 0;
+	while (!q.empty()){
+		int pos = q.front();q.pop();
+		for (int to: tree[pos]){
+			if (depth[to] == -1){
+				lca_box[0][to] = pos;
+				depth[to] = depth[pos] + 1;
+				q.push(to);
+			}
+		}
+	}
+
+	for (int i = 1; i < count + 1;++i){
+		for (int j = 0; j < tree.size(); ++j){
+			lca_box[i][j] = lca_box[i-1][lca_box[i-1][j]];
+		}
+	}
+
+	auto ancestors = [&](int u, int up){
+		int cnt = 0;
+		while (up != 0){
+			if (up & 1 == 1){
+				u = lca_box[cnt][u];
+			}
+			++cnt;
+			up >>= 1;
+		}
+		return u;
+	};
+
+	vector<pair<int, int>> check = {
+		{3, 7},
+		{10, 16},
+		{11, 15},
+		{2, 3}
+	} ;
+	for (pair<int,int> xx: check){
+		int u = xx.first;
+		int v = xx.second;
+
+		// 常にu側に深さが深い方を配置
+		if (depth[u] < depth[v]){
+			swap(u,v);
+		}
+
+		// 手順1 深さを合わせる
+		int up = depth[u] - depth[v];
+		u = ancestors(u, up);
+
+		// u,v自身が共通の要素となる場合があるので確認
+		if (u == v) {
+			printf("u: %d, v: %d\n", u, v);
+			continue;
+		}
+
+		// 手順2 親を遡る
+		for (int i = count; i > -1; --i){
+			int nextu = lca_box[i][u];
+			int nextv = lca_box[i][v];
+			// 一致しない場合のみ要素を更新
+			if (nextu != nextv){
+				u = nextu;
+				v = nextv;
+			}
+		}
+
+		// 最終結果の1つ前がLCAとなる
+		printf("u: %d, v: %d\n", lca_box[0][u], lca_box[0][v]);
+	}
+
+		return 0;
 }
-cout << lca_box[0][v] << endl;
+
 ```
 
   </TabItem>
   <TabItem value="C#" label="C#">
 
 ```csharp title="doubling.cs"
-for (int i = count; i >= 0; --i){
-  int nextu = lca_box[i][u];
-  int nextv = lca_box[i][v];
-  if (nextu != nextv){
-      u = nextu;
-      v = nextv;
-  }
+public static void Main(string[] args)
+{
+    List<List<int>> tree = new List<List<int>>
+    {
+        new List<int>() { 1, 2 },
+        new List<int>() { 7 },
+        new List<int>() { 3, 4 },
+        new List<int>() { 5 },
+        new List<int>() { 6 },
+        new List<int>() { },
+        new List<int>() { 8 },
+        new List<int>() { 9 },
+        new List<int>() { 10, 11 },
+        new List<int>() { 12 },
+        new List<int>() { 15 },
+        new List<int>() { 13 },
+        new List<int>() { 14 },
+        new List<int>() { },
+        new List<int>() { 16 },
+        new List<int>() { },
+        new List<int>() { }
+    };
+
+    // 前処理で求めておく2^Nを求める
+    int m = 1;
+    int count = 0;
+    while (m < tree.Count)
+    {
+        m <<= 1;
+        ++count;
+    }
+    int[,] lca_box = new int[count + 1, tree.Count + 1];
+
+    // 幅優先探索で深さを求める
+    int[] depth = new int[tree.Count];
+    for (int i = 0; i < tree.Count; ++i)
+    {
+        depth[i] = -1;
+    }
+    Queue<int> q = new Queue<int>();
+    q.Enqueue(0);
+    depth[0] = 0;
+    while (q.Count != 0)
+    {
+        int pos = q.Dequeue();
+        foreach (int to in tree[pos])
+        {
+            if (depth[to] == -1)
+            {
+                lca_box[0, to] = pos;
+                depth[to] = depth[pos] + 1;
+                q.Enqueue(to);
+            }
+        }
+    }
+
+    for (int i = 1; i < count + 1; ++i)
+    {
+        for (int j = 0; j < tree.Count; ++j)
+        {
+            lca_box[i, j] = lca_box[i - 1, lca_box[i - 1, j]];
+        }
+    }
+
+    int Ancestors(int u, int up)
+    {
+        int cnt = 0;
+        while (up != 0)
+        {
+            if ((up & 1) == 1)
+            {
+                u = lca_box[cnt, u];
+            }
+            ++cnt;
+            up >>= 1;
+        }
+        return u;
+    }
+    List<List<int>> check = new List<List<int>>
+    {
+        new List<int>() { 3, 7 },
+        new List<int>() { 10, 16 },
+        new List<int>() { 11, 15 },
+        new List<int>() { 2, 3 }
+    };
+
+    foreach (List<int> xxx in check)
+    {
+        int u = xxx[0];
+        int v = xxx[1];
+
+        // 常にu側に深さが深い方を配置
+        if (depth[u] < depth[v])
+        {
+            (u, v) = (v, u);
+        }
+
+        // 手順1 深さを合わせる
+        int up = depth[u] - depth[v];
+        u = Ancestors(u, up);
+
+        // u,v自身が共通の要素となる場合があるので確認
+        if (u == v)
+        {
+            Console.WriteLine($"u: {u}, v: {v}");
+            continue;
+        }
+
+        // 手順2 親を遡る
+        for (int i = count; i > -1; --i)
+        {
+            int nextu = lca_box[i, u];
+            int nextv = lca_box[i, v];
+            // 一致しない場合のみ要素を更新
+            if (nextu != nextv)
+            {
+                u = nextu;
+                v = nextv;
+            }
+        }
+
+        // 最終結果の1つ前がLCAとなる
+        Console.WriteLine($"u: {lca_box[0, u]}, v: {lca_box[0, v]}");
+    }
 }
-Console.WriteLine(lca_box[0][v]);
 ```
 
   </TabItem>
