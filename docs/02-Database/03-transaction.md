@@ -102,7 +102,7 @@ ACID 特性とはトランザクションが備えるべき 4 つの特性の頭
 
 楽観的(オプティミスティック)ロックはほとんど同時更新なんて起きないだろうという前提のもと考えられた実現方法である。
 
-方法はデータを取得し、処理を行った後、処理終了時に取得した時とデータが同じ状態であったかを確認し、同じ状態であればデータを更新を行う。
+方法はデータを取得し、処理を行った後、処理開始時に取得した時とデータが同じ状態であったかを確認し、同じ状態であればデータを更新を行う。
 
 ![オプティミスティックロック](/img/svg/Database/transaction/transaction-2.drawio.svg "オプティミスティックロック")
 
@@ -149,12 +149,12 @@ ACID 特性とはトランザクションが備えるべき 4 つの特性の頭
 
 これらの問題が生じる分離レベルを表にすると以下のようになる。
 
-|                  |                   ダーティリード                    |               ノンリピータブルリード                |                  ファントムリード                   |             ロストアップデート              |
-| :--------------: | :-------------------------------------------------: | :-------------------------------------------------: | :-------------------------------------------------: | :-----------------------------------------: |
-| READ UNCOMMITTED | <FontColor color="lightgreen">$\bullet$</FontColor> | <FontColor color="lightgreen">$\bullet$</FontColor> | <FontColor color="lightgreen">$\bullet$</FontColor> | <FontColor color="red">$\times$</FontColor> |
-|  READ COMMITTED  |     <FontColor color="red">$\times$</FontColor>     | <FontColor color="lightgreen">$\bullet$</FontColor> | <FontColor color="lightgreen">$\bullet$</FontColor> | <FontColor color="red">$\times$</FontColor> |
-| REPEARABLE READ  |     <FontColor color="red">$\times$</FontColor>     |     <FontColor color="red">$\times$</FontColor>     | <FontColor color="lightgreen">$\bullet$</FontColor> | <FontColor color="red">$\times$</FontColor> |
-|   SERIALIZABLE   |     <FontColor color="red">$\times$</FontColor>     |     <FontColor color="red">$\times$</FontColor>     |     <FontColor color="red">$\times$</FontColor>     | <FontColor color="red">$\times$</FontColor> |
+|                  |                ダーティリード                 |            ノンリピータブルリード             |               ファントムリード                |              ロストアップデート               |
+| :--------------: | :-------------------------------------------: | :-------------------------------------------: | :-------------------------------------------: | :-------------------------------------------: |
+| READ UNCOMMITTED | <FontColor color="red">$\bullet$</FontColor>  | <FontColor color="red">$\bullet$</FontColor>  | <FontColor color="red">$\bullet$</FontColor>  | <FontColor color="green">$\times$</FontColor> |
+|  READ COMMITTED  | <FontColor color="green">$\times$</FontColor> | <FontColor color="red">$\bullet$</FontColor>  | <FontColor color="red">$\bullet$</FontColor>  | <FontColor color="green">$\times$</FontColor> |
+| REPEARABLE READ  | <FontColor color="green">$\times$</FontColor> | <FontColor color="green">$\times$</FontColor> | <FontColor color="red">$\bullet$</FontColor>  | <FontColor color="green">$\times$</FontColor> |
+|   SERIALIZABLE   | <FontColor color="green">$\times$</FontColor> | <FontColor color="green">$\times$</FontColor> | <FontColor color="green">$\times$</FontColor> | <FontColor color="green">$\times$</FontColor> |
 
 ロストアップデートは排他制御を行っている以上は生じない問題である。
 
@@ -175,7 +175,7 @@ ACID 特性とはトランザクションが備えるべき 4 つの特性の頭
 
 #### ファントムリード
 
-トランザクション中にデータが新しく追加され、そのデータを扱うことでデータ整合性が損なわれる問題.
+トランザクション中にデータが新しく追加され、そのデータを扱うことでデータ整合性が損なわれる問題。
 
 ![ファントムリード](/img/svg/Database/transaction/transaction-6.drawio.svg "ファントムリード")
 
@@ -199,7 +199,7 @@ CPU はメモリ上のデータしか操作ができない。そのため、デ�
 障害が発生した際の状況として以下の図のような 2 通りの状態が考えられる。
 
 1. トランザクション中にチェックポイントを迎え、次のチェックポイントの前に障害が発生 (図左)
-2. トランザクションが完了し、コミットしたデータがチェックポイントを迎える前に障害が発生　(図右)
+2. トランザクションが完了し、コミットしたデータがチェックポイントを迎える前に障害が発生 (図右)
 
 ![ログ](/img/svg/Database/transaction/transaction-8.drawio.svg "ログ")
 
