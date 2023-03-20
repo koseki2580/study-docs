@@ -18,36 +18,6 @@ import FontColor from "@site/src/components/Custom/FontColor"
 
 ### アルゴリズム
 
-プログラム自体はものすごくシンプルである。
-
-#### プログラム
-
-<Tabs groupId="code">
-<TabItem value="python" label="Python" default>
-
-```python title="warshall-floyd.py"
-
-
-
-```
-
-</TabItem>
-  <TabItem value="C++" label="C++">
-
-```cpp title="warshall-floyd.cpp"
-
-```
-
-  </TabItem>
-  <TabItem value="C#" label="C#">
-
-```csharp title="warshall-floyd.cs"
-
-```
-
-  </TabItem>
-</Tabs>
-
 #### 流れ
 
 始点・中継点・終点の全てのパターンを確認することで全点間の最短経路を求めている。
@@ -118,3 +88,384 @@ import FontColor from "@site/src/components/Custom/FontColor"
 さらに、中継点を考えると 0 $\rightarrow$ 3 の最短経路は 0 $\rightarrow$ 1 $\rightarrow$ 3 であり、中継点 1 を考える際に、0 $\rightarrow$ 3 の最短経路が求められていることになる。つまり、中継点までの最短距離 $+$ 中継点からの最短経路 $=$ ある頂点間の最短経路となる。
 
 中継点を基準に最短経路を足し合わせることで両端の最短経路を求める処理を繰り返し行っている。
+全頂点を経由したとしてもパスの個数は頂点数-1 が最大となるので、中継点として全頂点を確認しているので最短距離を求めることができる。
+
+プログラム自体はものすごくシンプルである。
+
+#### プログラム
+
+<Tabs groupId="code">
+<TabItem value="python" label="Python" default>
+
+```python title="warshall-floyd.py"
+# pos1, pos2, costの順に格納
+example = [
+    [0, 1, 10],
+    [0, 2, 5],
+    [1, 3, 4],
+    [1, 4, 20],
+    [2, 3, 6],
+    [2, 6, 8],
+    [3, 5, 1],
+    [4, 5, 4],
+    [4, 7, 7],
+    [5, 6, 2],
+    [5, 7, 4],
+    [6, 7, 9]
+]
+INF = 100
+
+# box[i][j] 始点iから終点jまでの最短経路を保持する
+box = [[INF] * 8 for _ in range(8)]
+for i in range(8):
+    # 始点と終点が同じ場合はコストを0とする
+    box[i][i] = 0
+for i in range(len(example)):
+    # 与えられたパスを記録する
+    box[example[i][0]][example[i][1]] = example[i][2]
+    box[example[i][1]][example[i][0]] = example[i][2]
+
+# ワーシャル-フロイド法
+for k in range(8):
+    for i in range(8):
+        for j in range(8):
+            box[i][j] = min(box[i][j], box[i][k] + box[k][j])
+```
+
+</TabItem>
+  <TabItem value="C++" label="C++">
+
+```cpp title="warshall-floyd.cpp"
+int main() {
+	// pos1, pos2, costの順に格納
+	vector<tuple<int,int,int>> example = {
+		{0, 1, 10},
+		{0, 2, 5},
+		{1, 3, 4},
+		{1, 4, 20},
+		{2, 3, 6},
+		{2, 6, 8},
+		{3, 5, 1},
+		{4, 5, 4},
+		{4, 7, 7},
+		{5, 6, 2},
+		{5, 7, 4},
+		{6, 7, 9}
+	};
+	int INF = 100;
+
+	// box[i][j] 始点iから終点jまでの最短経路を保持する
+	vector<vector<int>> box(8, vector<int>(8,INF));
+	for (int i = 0; i < 8; ++i){
+		// 始点と終点が同じ場合はコストを0とする
+		box[i][i] = 0;
+	}
+
+	for (int i = 0; i < example.size(); ++i)
+	{
+		// 与えられたパスを記録する
+		box[get<0>(example[i])][get<1>(example[i])] = (get<2>(example[i]));
+		box[get<1>(example[i])][get<0>(example[i])] = (get<2>(example[i]));
+	}
+
+	// ワーシャル-フロイド法
+	for (int k = 0; k < 8; ++k){
+		for (int i = 0; i < 8; ++i){
+			for (int j = 0; j < 8; ++j){
+				box[i][j] = min(box[i][j], box[i][k] + box[k][j]);
+			}
+		}
+	}
+	rep(i,0,8){
+		rep(j,0,8){
+			printf("%d ", box[i][j]);
+		}
+		printf("\n");
+	}
+	return 0;
+}
+```
+
+  </TabItem>
+  <TabItem value="C#" label="C#">
+
+```csharp title="warshall-floyd.cs"
+public static void Main(string[] args)
+{
+    // pos1, pos2, costの順に格納
+    List<List<int>> example = new List<List<int>>
+    {
+        new List<int>() { 0, 1, 10 },
+        new List<int>() { 0, 2, 5 },
+        new List<int>() { 1, 3, 4 },
+        new List<int>() { 1, 4, 20 },
+        new List<int>() { 2, 3, 6 },
+        new List<int>() { 2, 6, 8 },
+        new List<int>() { 3, 5, 1 },
+        new List<int>() { 4, 5, 4 },
+        new List<int>() { 4, 7, 7 },
+        new List<int>() { 5, 6, 2 },
+        new List<int>() { 5, 7, 4 },
+        new List<int>() { 6, 7, 9 }
+    };
+
+    // box[i][j] 始点iから終点jまでの最短経路を保持する
+    int[,] box = new int[8, 8];
+    int INF = 100;
+    for (int i = 0; i < 8; ++i)
+    {
+        for (int j = 0; j < 8; ++j)
+        {
+            box[i, j] = INF;
+        }
+    }
+
+    for (int i = 0; i < 8; ++i)
+    {
+        // 始点と終点が同じ場合はコストを0とする
+        box[i, i] = 0;
+    }
+
+    for (int i = 0; i < example.Count; ++i)
+    {
+        // 与えられたパスを記録する
+        box[example[i][0], example[i][1]] = example[i][2];
+        box[example[i][1], example[i][0]] = example[i][2];
+    }
+
+    // ワーシャル-フロイド法
+    for (int k = 0; k < 8; ++k)
+    {
+        for (int i = 0; i < 8; ++i)
+        {
+            for (int j = 0; j < 8; ++j)
+            {
+                box[i, j] = Math.Min(box[i, j], box[i, k] + box[k, j]);
+            }
+        }
+    }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+### 経路復元
+
+経路を復元する方法はいくつか存在するが、簡単に求められるかつ経路を辿るのが簡単な方法を説明する。
+ダイクストラ法では前の頂点番号を記録していた。しかし、ワーシャル-フロイド法では全点間の最短距離を求めているので、次の頂点を保持しながら経路を復元することが可能である。
+
+上述したように最短経路を求める際に、中継点までの最短経路$+$中継点からの最短経路で最短経路を導出している。そのため、始点から中継点までの経路と始点と終点までの経路は同じ経路を通ることを意味している。つまり、0 番 $\rightarrow$ 7 番の最短経路は[ダイクストラ法](/docs/Algorithm/dijkstra)でも求めた様に、 0 $\rightarrow$ 2 $\rightarrow$ 3 $\rightarrow$ 5 $\rightarrow$ 7 である。
+これは 0 $\rightarrow$ 7 の最短経路は 2 $\rightarrow$ 7 の最短経路と 0 $\rightarrow$ 2 を除いて同じ経路を通ることを意味する。
+
+0 番の次の頂点が 2 であり、2 ということさえ分かれば、次は 2 $\rightarrow$ 7 の最短経路を考えれば良いということになる。これを繰り返していくと最終的に 7 まで行き着く。
+そのため、0 $\rightarrow$ 7 において次に中継する点である 2 を保持することで経路を復元していくことができることが分かる。
+
+#### プログラム
+
+<Tabs groupId="code">
+<TabItem value="python" label="Python" default>
+
+```python title="warshall-floyd.py"
+# pos1, pos2, costの順に格納
+example = [
+    [0, 1, 10],
+    [0, 2, 5],
+    [1, 3, 4],
+    [1, 4, 20],
+    [2, 3, 6],
+    [2, 6, 8],
+    [3, 5, 1],
+    [4, 5, 4],
+    [4, 7, 7],
+    [5, 6, 2],
+    [5, 7, 4],
+    [6, 7, 9]
+]
+INF = 100
+
+# box[i][j] 始点iから終点jまでの最短経路を保持する
+box = [[INF] * 8 for _ in range(8)]
+for i in range(8):
+    # 始点と終点が同じ場合はコストを0とする
+    box[i][i] = 0
+for i in range(len(example)):
+    # 与えられたパスを記録する
+    box[example[i][0]][example[i][1]] = example[i][2]
+    box[example[i][1]][example[i][0]] = example[i][2]
+
+next = [[0]*8 for i in range(8)]
+for i in range(8):
+    for j in range(8):
+        next[i][j] = j
+
+# ワーシャル-フロイド法
+for k in range(8):
+    for i in range(8):
+        for j in range(8):
+            if box[i][k] + box[k][j] < box[i][j]:
+                box[i][j] = box[i][k] + box[k][j]
+                next[i][j] = next[i][k]
+
+pos = 0
+while (pos != 7):
+    print(pos, end=" ")
+    pos = next[pos][7]
+print(pos)
+
+```
+
+</TabItem>
+  <TabItem value="C++" label="C++">
+
+```cpp title="warshall-floyd.cpp"
+
+int main() {
+	// pos1, pos2, costの順に格納
+	vector<tuple<int,int,int>> example = {
+		{0, 1, 10},
+		{0, 2, 5},
+		{1, 3, 4},
+		{1, 4, 20},
+		{2, 3, 6},
+		{2, 6, 8},
+		{3, 5, 1},
+		{4, 5, 4},
+		{4, 7, 7},
+		{5, 6, 2},
+		{5, 7, 4},
+		{6, 7, 9}
+	};
+	int INF = 100;
+
+	// box[i][j] 始点iから終点jまでの最短経路を保持する
+	vector<vector<int>> box(8, vector<int>(8,INF));
+	for (int i = 0; i < 8; ++i){
+		// 始点と終点が同じ場合はコストを0とする
+		box[i][i] = 0;
+	}
+
+	vector<vector<int>> next(8, vector<int>(8,0));
+	for (int i = 0; i < 8; ++i){
+		for (int j = 0; j < 8; ++j){
+			next[i][j] = j;
+		}
+	}
+
+	for (int i = 0; i < example.size(); ++i)
+	{
+		// 与えられたパスを記録する
+		box[get<0>(example[i])][get<1>(example[i])] = (get<2>(example[i]));
+		box[get<1>(example[i])][get<0>(example[i])] = (get<2>(example[i]));
+	}
+
+	// ワーシャル-フロイド法
+	for (int k = 0; k < 8; ++k){
+		for (int i = 0; i < 8; ++i){
+			for (int j = 0; j < 8; ++j){
+				if (box[i][k] + box[k][j] < box[i][j]){
+					box[i][j] =  box[i][k] + box[k][j];
+					next[i][j] = next[i][k];
+				}
+			}
+		}
+	}
+	int pos = 0;
+	while (pos != 7){
+		printf("%d ", pos);
+		pos = next[pos][7];
+	}
+	printf("%d\n", pos);
+	return 0;
+}
+
+```
+
+  </TabItem>
+  <TabItem value="C#" label="C#">
+
+```csharp title="warshall-floyd.cs"
+public static void Main(string[] args)
+{
+    // pos1, pos2, costの順に格納
+    List<List<int>> example = new List<List<int>>
+    {
+        new List<int>() { 0, 1, 10 },
+        new List<int>() { 0, 2, 5 },
+        new List<int>() { 1, 3, 4 },
+        new List<int>() { 1, 4, 20 },
+        new List<int>() { 2, 3, 6 },
+        new List<int>() { 2, 6, 8 },
+        new List<int>() { 3, 5, 1 },
+        new List<int>() { 4, 5, 4 },
+        new List<int>() { 4, 7, 7 },
+        new List<int>() { 5, 6, 2 },
+        new List<int>() { 5, 7, 4 },
+        new List<int>() { 6, 7, 9 }
+    };
+
+    // box[i][j] 始点iから終点jまでの最短経路を保持する
+    int[,] box = new int[8, 8];
+    int INF = 100;
+    for (int i = 0; i < 8; ++i)
+    {
+        for (int j = 0; j < 8; ++j)
+        {
+            box[i, j] = INF;
+        }
+    }
+
+    for (int i = 0; i < 8; ++i)
+    {
+        // 始点と終点が同じ場合はコストを0とする
+        box[i, i] = 0;
+    }
+
+    for (int i = 0; i < example.Count; ++i)
+    {
+        // 与えられたパスを記録する
+        box[example[i][0], example[i][1]] = example[i][2];
+        box[example[i][1], example[i][0]] = example[i][2];
+    }
+
+    int[,] next = new int[8, 8];
+    for (int i = 0; i < 8; ++i)
+    {
+        for (int j = 0; j < 8; ++j)
+        {
+            next[i, j] = j;
+        }
+    }
+
+    // ワーシャル-フロイド法
+    for (int k = 0; k < 8; ++k)
+    {
+        for (int i = 0; i < 8; ++i)
+        {
+            for (int j = 0; j < 8; ++j)
+            {
+                if (box[i, k] + box[k, j] < box[i, j])
+                {
+                    box[i, j] = box[i, k] + box[k, j];
+                    next[i, j] = next[i, k];
+                }
+            }
+        }
+    }
+
+    int pos = 0;
+    while (pos != 7)
+    {
+        Console.Write(pos + " ");
+        pos = next[pos, 7];
+    }
+    Console.WriteLine(pos + " ");
+}
+```
+
+  </TabItem>
+</Tabs>
+
+## 参考
+
+- [https://zeosutt.hatenablog.com/entry/2015/05/05/045943](https://zeosutt.hatenablog.com/entry/2015/05/05/045943)
