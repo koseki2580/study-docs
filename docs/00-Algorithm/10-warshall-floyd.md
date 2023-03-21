@@ -1,7 +1,7 @@
 ---
 title: ワーシャル-フロイド法
 sidebar_label: ワーシャル-フロイド法
-draft: true
+draft: false
 toc_max_heading_level: 5
 tags: [アルゴリズム]
 ---

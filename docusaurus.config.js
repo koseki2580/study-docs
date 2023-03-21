@@ -177,7 +177,7 @@ function getFiles() {
   let parentdatas = fs.readdirSync(baseUrl);
 
   // 正規表現でマッチするファイルのみ検索する
-  const pattern = /(^\d{2}-[a-zA-Z]+)|(_category_.json)|(README.(md|mdx))/g;
+  const pattern = /(^[0-9]{2}-[a-zA-Z-]+)|(_category_.json)|(README.(md|mdx))/g;
 
   // 再帰で使えるように外に変数を出す
   let parentdata;
