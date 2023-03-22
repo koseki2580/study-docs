@@ -384,7 +384,13 @@ SSTP データパケットは、SSTP クライアントと SSTP サーバーの�
 ### IPsec
 
 IPsec は IP Security の略であり、IP パケットをカプセル化するプロトコルである。IP v4, v6 のどちらでも使用できるプロトコルであり、
-カプセル化セキュリティペイロード(ESP)[rfc4303]または認証ヘッダー(AH)[rfc4302]の 2 つのヘッダに対応している。
+[カプセル化セキュリティペイロード(ESP)][rfc4303]または[認証ヘッダー(AH)][rfc4302]の 2 つのヘッダに対応している。
+
+IPsec ではセキュアな通信を提供するために、2 つのネットワークエンティティ間で共有セキュリティ属性を確立する SA(Security Association) を用いている。
+
+(IPsec の章において)以降の図で灰色のデータはオプションを意味している。
+
+#### IP 認証ヘッダ(AH)
 
 IP 認証ヘッダ(AH)は、IP データグラムのための完全性と認証を確認し、リプレイ攻撃の対策として使用される。
 
@@ -423,7 +429,7 @@ AH は次のような構成をとる。
 - `Security Parameters Index (SPI)` (32 bits)
 
   受信側が受信するパケットを決定する SA を識別するために使用する任意の 32 ビット値である。
-  1$\sim$255 までの範囲の SPI 値は、将来の使用のため Internet Assigned Numbers Authority（IANA）によって予約されている。
+  1 $\sim$ 255 までの範囲の SPI 値は、将来の使用のため Internet Assigned Numbers Authority（IANA）によって予約されている。
 
 - `Sequence Number Field` (32 bits)
 
@@ -434,6 +440,8 @@ AH は次のような構成をとる。
 
   整合性チェック値であり、このパケットの整合性を確認するために用いられる。また、必ず 32bit(IPv4)または 64bit(IPv6)である必要があるため、パディングされる場合もある。
   この値は SA によって定められ、対称鍵暗号化アルゴリズム・SHA-1, SHA-256, MD5 のようなハッシュ関数が用いられる。
+
+#### カプセル化セキュリティペイロード(ESP)
 
 カプセル化セキュリティペイロード(ESP)は、IP ヘッダの後の次の層のプロトコルのヘッダの間またはカプセル化された IP ヘッダの前に挿入される。
 ESP を使用することで、機密性・送信元認証・コネクションレス完全性・リプレイ攻撃防止・トラフィックの機密性を保つことができる。
@@ -464,13 +472,17 @@ TFC は Traffic Flow Confidentiality の略であり、IPsec のトンネルモ�
 
   暗号化を行った際に bit の幅を合わせるために使用される。
 
-- `Pad Lengt` (8 bits)
+- `Pad Length` (8 bits)
 
   padding の長さを表し、必須フィールドである。
 
 - `Next Header` (8 bits)
 
   ペイロードデータフィールドに含まれるデータのタイプを識別する必須の 8 ビットのフィールドで、IANA で定義されている。
+
+- `IV` (オプション)
+
+  初期化ベクトル
 
 - `Traffic Flow Confidentiality` (可変)
 
@@ -479,6 +491,8 @@ TFC は Traffic Flow Confidentiality の略であり、IPsec のトンネルモ�
 - `Integrity Check Value (ICV)` (可変)
 
   整合性を確認するために使用する値。ESP ヘッダ・ペイロード・ESP トレーラフィールドの値から算出される。
+
+#### 接続方法(モード)
 
 また、IPsec には 2 種類の接続方法が存在する。
 
@@ -495,6 +509,13 @@ TFC は Traffic Flow Confidentiality の略であり、IPsec のトンネルモ�
 可能となる。
 
 ![トランスポートモード・トンネルモード通信](/img/svg/Network/tunneling/tunneling-13.drawio.svg "トランスポートモード・トンネルモード通信")
+
+つまり、IPsec には接続方法 2 種類 $\times$ ヘッダー 2 種類で合計 4 パターン存在する。
+
+- トランスポートモード・AH ヘッダ
+- トランスポートモード・ESP ヘッダ
+- トンネルモード・AH ヘッダ
+- トンネルモード・ESP ヘッダ
 
 トランスポートモード・AH ヘッダの場合の IP ヘッダは次のような形式になる。
 
@@ -520,6 +541,107 @@ IKE はそれぞれの通信間で相互認証を実行し、カプセル化セ�
 使用できる共有秘密鍵を含む IKE Security Association(SA)を確立する。
 
 IKE メッセージを送信する側を`イニシエータ`と呼び、応答を返す側を`レスポンダ`と呼ぶ。
+
+##### ヘッダー
+
+IKE ヘッダーは次のような構成をとる。
+
+![IKE ヘッダー](/img/svg/Network/tunneling/tunneling-27.drawio.svg "IKE ヘッダー")
+
+- `IKE SA Initiator's SPI` (64 bits)
+
+  一意の IKE SA を識別するためにイニシエーターによって選択された値。0 であってはならない。
+
+- `IKE SA Responder's SPI` (64 bits)
+
+  一意の IKE SA を識別するためにレスポンダによって選択された値。一番はじめのメッセージでは 0 でなければならない。
+
+- `Next Payload` (8 bits)
+
+  ヘッダーの直後に続くペイロードのタイプを示す。
+
+  |      Next Payload Type       | Notation | Value |
+  | :--------------------------: | :------: | :---: |
+  |       No Next Payload        |          |   0   |
+  |     Security Association     |    SA    |  33   |
+  |         Key Exchange         |    KE    |  34   |
+  |  Identification - Initiator  |   IDi    |  35   |
+  |  Identification - Responder  |   IDr    |  36   |
+  |         Certificate          |   CERT   |  37   |
+  |     Certificate Request      | CERTREQ  |  38   |
+  |        Authentication        |   AUTH   |  39   |
+  |            Nonce             |  Ni, Nr  |  40   |
+  |            Notify            |    N     |  41   |
+  |            Delete            |    D     |  42   |
+  |          Vendor ID           |    V     |  43   |
+  | Traffic Selector - Initiator |   TSi    |  44   |
+  | Traffic Selector - Responder |   TSr    |  45   |
+  | Encrypted and Authenticated  |    SK    |  46   |
+  |        Configuration         |    CP    |  47   |
+  |  Extensible Authentication   |   EAP    |  48   |
+
+- `Major Version` (4 bits)
+
+  使用中の IKE プロトコルのメジャーバージョンを示す。このバージョンの IKE に基づく実装では、メジャーバージョンを 2 に設定する必要がある。以前のバージョンの IKE および ISAKMP に基づく実装では、メジャーバージョンを 1 に設定する必要がある。
+
+- `Minor Version` (4 bits)
+
+  使用中の IKE プロトコルのマイナーバージョンを示す。このバージョンの IKE に基づく実装は、マイナーバージョンを 0 に設定する必要がある。受信したメッセージのマイナーバージョン番号を無視する必要がある。
+
+- `Exchange Type` (8 bits)
+
+  使用されている交換のタイプを示す。これにより、交換で各メッセージで送信されるペイロードが制限される。
+
+  |   Exchange Type    |     Value      |
+  | :----------------: | :------------: |
+  |      Reserved      |  0 $\sim$ 33   |
+  |    IKE_SA_INIT     |       34       |
+  |      IKE_AUTH      |       35       |
+  |  CREATE_CHILD_SA   |       36       |
+  |   INFORMATIONAL    |       37       |
+  | IKE_SESSION_RESUME |       38       |
+  |      GSA_AUTH      |       39       |
+  |  GSA_REGISTRATION  |       40       |
+  |     GSA_REKEY      |       41       |
+  |     Unassigned     |       42       |
+  |  IKE_INTERMEDIATE  |       43       |
+  |  IKE_FOLLOWUP_KE   |       44       |
+  |     Unassigned     | 45 $\sim$ 239  |
+  |    Private use     | 240 $\sim$ 255 |
+
+  最新のものについては[IANA](https://www.iana.org/assignments/ikev2-parameters/ikev2-parameters.xhtml)に記載されている。
+
+- `Flags` (8 bits)
+
+  メッセージに設定されている特定のオプションを示す。
+
+  ![IKE ヘッダー Flags](/img/svg/Network/tunneling/tunneling-27.drawio.svg "IKE ヘッダー Flags")
+
+  - `X`
+
+    送信時には 0 とし、受信時は無視する必要がある。
+
+  - `R`
+
+    このビットは、このメッセージが同じメッセージ ID を含むメッセージへの応答であることを示す。このビットは、すべての要求メッセージでクリアする必要があり、すべての応答で設定する必要がある。
+
+  - `V`
+
+    このビットは、送信機が、メジャーバージョン番号フィールドに示されているものよりも高いプロトコルのメジャーバージョン番号を読み込めることを示す。 IKEv2 の実装では、送信時にこのビットを 0 にする必要があり、受信メッセージでは無視する必要がある。
+
+  - `I`
+
+    このビットは、IKE SA の元のイニシエーターが送信したメッセージで設定する必要があり、レスポンダーが送信したメッセージで 0 にする必要がある。
+
+- `Message ID` (32 bits)
+
+  失われたパケットの再送信および要求と応答のマッチングを制御するために使用されるメッセージ ID。メッセージ再生攻撃を防ぐために使用されるため、プロトコルのセキュリティに不可欠である。詳細はセクション 2.1 と 2.2 に記載されている。
+
+- `Length` (32 bits)
+
+  バイト単位の合計メッセージ（ヘッダー+ペイロード）の長さ。
+
+##### 通信
 
 IKE を使用した通信は、常に IKE_SA_INIT および IKE_AUTH 交換（IKEv1 ではフェーズ 1 として知られている）で始まり、
 最初の交換は通常 4 つのメッセージで構成されるが、シナリオ(AH なのか ESP なのかトンネルモードなのかトランスポートモードなのか)によって増える場合がある。
@@ -560,7 +682,7 @@ IKE を使用した通信は、常に IKE_SA_INIT および IKE_AUTH 交換（IK
 このパケットの Security Association - Initiator 1 ではイニシエータが IKE SA に対してサポートしている暗号化アルゴリズムを示している。
 Key Exchange - Initiator では Diffie-Hellman 値を送信している。
 
-これに対するレスポンダの応答は次のような形式を取る。(IPsec の章において)以降の図で灰色のデータはオプションを意味している。
+これに対するレスポンダの応答は次のような形式を取る。
 
 ![IKE Response 1](/img/svg/Network/tunneling/tunneling-15.drawio.svg "IKE Response 1")
 
@@ -597,7 +719,7 @@ SA は新しい SA を生成してから古い SA を削除することでリキ
 ### VXLAN
 
 VXLAN は Virtual eXtensible Local Area Network の略である。
-仮想 LAN（VLAN）の現在の制限は 4094 であり、現在の VM(Virtual Machine)のグループ分けには不十分である。そのため、この問題を解決として VXLAN が登場した。
+仮想 LAN（VLAN）の現在の制限は 4094 であり、現在の VM(Virtual Machine)のグループ分けには不十分である。そのため、この問題を解決する方法として VXLAN が登場した。
 同じ VXLAN セグメント内の VM のみが相互に通信でき、各 VXLAN セグメントは、`VXLAN Network Identifier (VNI)`と呼ばれる 24 ビットのセグメント ID によって識別される。
 VNI は、VM から発信された内部 MAC フレームをカプセル化する外部ヘッダーにある。
 

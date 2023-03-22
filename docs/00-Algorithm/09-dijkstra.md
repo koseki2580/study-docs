@@ -16,6 +16,8 @@ import FontColor from "@site/src/components/Custom/FontColor"
 
 ダイクストラ法は単一始点最短経路問題を解くためアルゴリズムであり、OSPF(Open Shortest Path First)で使用されている。
 
+ダイクストラ法は負の経路が存在する場合には使用することができない(無限に更新してしまう)。
+
 ### アルゴリズム
 
 #### 流れ
