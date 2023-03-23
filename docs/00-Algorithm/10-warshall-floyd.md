@@ -65,7 +65,7 @@ import FontColor from "@site/src/components/Custom/FontColor"
 
 同様に、次は頂点 6 を中継点として考えると次の様になる。
 
-![ワーシャル-フロイド法10](/img/svg/Algorithm/warshall-floyd/warshall-floyd-10.drawio.svg "ワーシャル-フロイド法10")
+![ワーシャル-フロイド法10](/img/svg/Algorithm/warshall-floyd/warshall-floyd-12.drawio.svg "ワーシャル-フロイド法10")
 
 同様に、次は頂点 7 を中継点として考えると次の様になる。
 
