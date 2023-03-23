@@ -268,7 +268,7 @@ public static void Main(string[] args)
 <Tabs groupId="code">
 <TabItem value="python" label="Python" default>
 
-```python title="warshall-floyd.py"
+```python title="warshall-floyd-route-restoration.py"
 # pos1, pos2, costの順に格納
 example = [
     [0, 1, 10],
@@ -320,7 +320,7 @@ print(pos)
 </TabItem>
   <TabItem value="C++" label="C++">
 
-```cpp title="warshall-floyd.cpp"
+```cpp title="warshall-floyd-route-restoration.cpp"
 
 int main() {
 	// pos1, pos2, costの順に格納
@@ -386,7 +386,7 @@ int main() {
   </TabItem>
   <TabItem value="C#" label="C#">
 
-```csharp title="warshall-floyd.cs"
+```csharp title="warshall-floyd-route-restoration.cs"
 public static void Main(string[] args)
 {
     // pos1, pos2, costの順に格納
