@@ -1,7 +1,7 @@
 ---
 title: Rolling Hash
 sidebar_label: Rolling Hash
-draft: true
+draft: false
 toc_max_heading_level: 5
 tags: [アルゴリズム]
 ---
@@ -148,3 +148,109 @@ $N_{13}$まではすでに求められている($m=31, mod = 10^{9} + 9$, a $\si
 ![Rolling Hash4](/img/svg/Algorithm/rolling-hash/rolling-hash-8.drawio.svg "Rolling Hash4")
 
 Rolling Hash を用いると前処理に O(N)かかってしまうが、検索には O(N + M)の計算量で検索することができる様にする。
+
+#### プログラム
+
+<Tabs groupId="code">
+<TabItem value="python" label="Python" default>
+
+```python title="rolling-hash.py"
+class RollingHash():
+    def __init__(self, S, base=317, mod=1 << 61 - 1):
+        self.S = S
+        self.mod = mod
+        self.pow_base = [1]
+        self.hash = [0]
+        for i in range(len(self.S)):
+            self.hash.append((self.hash[-1] * base + ord(self.S[i])) % self.mod)
+            self.pow_base.append((self.pow_base[-1] * base) % self.mod)
+
+    def get(self, l, r):
+        return (self.hash[r] - self.hash[l]*self.pow_base[r-l]) % self.mod
+```
+
+</TabItem>
+  <TabItem value="C++" label="C++">
+
+```cpp title="rolling-hash.cpp"
+struct RollingHash {
+  string S;
+  vector<unsigned long long> pow_base;
+  vector<unsigned long long> hash;
+  RollingHash(string s, unsigned long long base = 317LL): pow_base(s.length() + 1,1), hash(s.length() + 1,0){
+    S = s;
+    for (int i = 0; i < S.length(); ++i){
+      hash[i+1] = hash[i] * base + int(S[i]);
+      pow_base[i+1] = pow_base[i] * base;
+    }
+  }
+  unsigned long long get(int l, int r) {
+    return hash[r] - hash[l] * pow_base[r-l];
+  }
+};
+```
+
+  </TabItem>
+  <TabItem value="C#" label="C#">
+
+```csharp title="rolling-hash.cs"
+class RollingHash
+{
+    string S;
+    ulong[] pow_base;
+    ulong[] hash;
+
+    public RollingHash(string s, ulong _base = 317)
+    {
+        S = s;
+        hash = new ulong[S.Length + 1];
+        pow_base = new ulong[S.Length + 1];
+        pow_base[0] = 1;
+        for (int i = 0; i < S.Length; ++i)
+        {
+            hash[i + 1] = hash[i] * _base + (uint)S[i];
+            pow_base[i + 1] = pow_base[i] * _base;
+        }
+    }
+
+    public ulong get(int l, int r)
+    {
+        return hash[r] - hash[l] * pow_base[r - l];
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="Rust" label="Rust">
+
+```rust title="rolling-hash.rs"
+struct RollingHash {
+    S:String,
+    pow_base:Vec<u64>,
+    hash:Vec<u64>
+}
+impl RollingHash {
+    pub fn new(s:&String) -> Self
+    {
+        let _base :u64 = 317;
+        let mut _pow_base = Vec::new();
+        let mut _hash = Vec::new();
+        _hash.push(0);
+        _pow_base.push(1);
+        let mut idx = 0;
+        for i in s.chars(){
+            _hash.push(_hash[idx] * _base + i as u64);
+            _pow_base.push(_pow_base[idx] * _base);
+            idx += 1;
+		}
+       RollingHash {S : s.clone(),pow_base:_pow_base, hash:_hash}
+    }
+
+    pub fn get(&self, l:usize, r:usize) -> u64{
+        self.hash[r] - self.hash[l] * self.pow_base[r-l]
+    }
+}
+```
+
+  </TabItem>
+</Tabs>
