@@ -147,7 +147,7 @@ $N_{13}$まではすでに求められている($m=31, mod = 10^{9} + 9$, a $\si
 
 ![Rolling Hash4](/img/svg/Algorithm/rolling-hash/rolling-hash-8.drawio.svg "Rolling Hash4")
 
-Rolling Hash を用いると前処理に O(N)かかってしまうが、検索には O(N + M)の計算量で検索することができる様にする。
+Rolling Hash を用いると全体計算量が O(N + M)となる。(それぞれの文字列をハッシュ化するの時間がかかる。)
 
 #### プログラム
 
