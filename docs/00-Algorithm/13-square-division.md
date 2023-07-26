@@ -14,7 +14,7 @@ import FontColor from "@site/src/components/Custom/FontColor"
 
 ## 平方分割 とは
 
-平方分割とはデータを$\sqrt{N}$個の大きさの$\lceil\frac{N}{\sqrt{N}}\rceil$のグループに分割することで、データに対しての操作の計算量を落とす方法である。
+平方分割とはデータを$\lfloor\sqrt{N}\rfloor$個の大きさの$\lceil\frac{N}{\sqrt{N}}\rceil$のグループに分割することで、データに対しての操作の計算量を落とす方法である。
 
 ### アルゴリズム
 
@@ -27,18 +27,23 @@ import FontColor from "@site/src/components/Custom/FontColor"
 
 ![平方分割1](/img/svg/Algorithm/square-division/square-division-1.drawio.svg "平方分割1")
 
-こうすることで、例えば`l = 2`, `r = 7`の最大値を求める場合に、グループ 2 の 3 $\sim$ 5 が完全に内包されている様な状況だと、3 $\sim$ 5 を探索する必要がなくその範囲の最大値は`23`であるとわかる。そのため、2, 6, 7, グループ 2 の 4 つの値の最大の値を求めれば良くなり、確認する回数を少なくすることができる。
+こうすることで、例えば`l = 2`, `r = 7`の最大値を求める場合に、グループ 1 の 3 $\sim$ 5 が完全に内包されている様な状況だと、3 $\sim$ 5 を探索する必要がなくグループの値を用いて最大値は`23`であるとわかる。そのため、2, 6, 7, グループ 1 の 4 つの値の最大の値を求めれば良くなり、確認する回数を少なくすることができる。
 
-検索範囲にグループが含まれない`l = 3`, `r = 4`の様な場合はそのまま 3 $\sim$ 4 の範囲を確認すれば良い。これは O($\sqrt{N}$)で済むようになっている。なぜなら、$\sqrt{N}$個ずつに区切っているので**グループが含まれる $=$ 検索範囲の個数が$\sqrt{N}$以上**ということが言えるからである。
+![平方分割4](/img/svg/Algorithm/square-division/square-division-4.drawio.svg "平方分割4")
+
+検索範囲にグループが含まれない`l = 3`, `r = 4`の様な場合はそのまま 3 $\sim$ 4 の範囲を確認すれば良い。これは O($\sqrt{N}$)で済むようになっている。なぜなら、$\lfloor\sqrt{N}\rfloor$個ずつに区切っているので**グループが含まれる $=$ 検索範囲の個数が$\lfloor\sqrt{N}\rfloor$以上**ということが言えるからである。
 
 グループが含まれているかどうかを判定するには、
 
 $$
-r - l \geqq \sqrt{N}
+r - l \geqq \lfloor\sqrt{N}\rfloor
 $$
 
 を満たしている場合にグループを含んでいる可能性がある。
 例えば、上記の例において、`l = 2`, `r = 4` の場合は条件を満たしているが、グループを含んでいない。
+
+![平方分割5](/img/svg/Algorithm/square-division/square-division-5.drawio.svg "平方分割5")
+
 必ずグループを含んでいると言える条件は以下となる。
 
 $$
@@ -66,7 +71,7 @@ $$
 \lfloor \frac{l}{\sqrt{N}}\rfloor < n < \lfloor \frac{r}{\sqrt{N}}\rfloor
 $$
 
-グループに内包されていない範囲のものはそれぞれ$l \sim (\lfloor\frac{l}{\sqrt{N}}\rfloor + 1) \times \lfloor\sqrt{N}\rfloor - 1$, $\lfloor\frac{r}{\sqrt{N}}\rfloor  \times \lfloor\sqrt{N}\rfloor \sim r$となる。(l,r が所属するグループの開始点から・終了点までを計算している)この個数は必ず$2 \times \lfloor\sqrt{N}\rfloor$個以下しか存在しない。また、完全内包されているグループの個数は必ず$\sqrt{N}$個以下なので、合わせて検索する個数は$2 \times \sqrt{N} + \sqrt{N}$となるので、計算量は$O(\sqrt{N})$となる。
+グループに内包されていない範囲のものはそれぞれ$l \sim (\lfloor\frac{l}{\sqrt{N}}\rfloor + 1) \times \lfloor\sqrt{N}\rfloor - 1$, $\lfloor\frac{r}{\sqrt{N}}\rfloor  \times \lfloor\sqrt{N}\rfloor \sim r$となる。(l,r が所属するグループの開始点から・終了点までを計算している)この個数は必ず$2 \times \lfloor\sqrt{N}\rfloor$個以下しか存在しない。また、完全内包されているグループの個数は必ず$\lfloor\sqrt{N}\rfloor$個以下なので、合わせて検索する個数は$2 \times \lfloor\sqrt{N}\rfloor + \lfloor\sqrt{N}\rfloor$となるので、計算量は$O(\sqrt{N})$となる。
 
 ![平方分割3](/img/svg/Algorithm/square-division/square-division-3.drawio.svg "平方分割3")
 
