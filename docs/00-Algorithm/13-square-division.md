@@ -31,16 +31,9 @@ import FontColor from "@site/src/components/Custom/FontColor"
 
 ![平方分割4](/img/svg/Algorithm/square-division/square-division-4.drawio.svg "平方分割4")
 
-検索範囲にグループが含まれない`l = 3`, `r = 4`の様な場合はそのまま 3 $\sim$ 4 の範囲を確認すれば良い。これは O($\sqrt{N}$)で済むようになっている。なぜなら、$\lfloor\sqrt{N}\rfloor$個ずつに区切っているので**グループが含まれる $=$ 検索範囲の個数が$\lfloor\sqrt{N}\rfloor$以上**ということが言えるからである。
+検索範囲にグループが含まれない`l = 3`, `r = 4`の様な場合はそのまま 3 $\sim$ 4 の範囲を確認すれば良い。これは O($\sqrt{N}$)で済むようになっている。なぜなら、$\lfloor\sqrt{N}\rfloor$個ずつに区切っているので**グループが含まれる $=$ 検索範囲の個数が$2 \times \lfloor\sqrt{N}\rfloor$以上**ということが言え、**グループを含まない = $2 \times \lfloor\sqrt{N}\rfloor$ 以下**と言えるからである。
 
-グループが含まれているかどうかを判定するには、
-
-$$
-r - l \geqq \lfloor\sqrt{N}\rfloor
-$$
-
-を満たしている場合にグループを含んでいる可能性がある。
-例えば、上記の例において、`l = 2`, `r = 4` の場合は条件を満たしているが、グループを含んでいない。
+例えば、`l = 2`, `r = 4` の場合はグループの個数以上だが、グループを含んでいないという場合がり、
 
 ![平方分割5](/img/svg/Algorithm/square-division/square-division-5.drawio.svg "平方分割5")
 
@@ -75,7 +68,7 @@ $$
 
 ![平方分割3](/img/svg/Algorithm/square-division/square-division-3.drawio.svg "平方分割3")
 
-両方の条件で計算量が$O(\sqrt{N})$となるので、平方分割のアルゴリズムの計算量は$O(\sqrt{N})$となる。
+両方の条件で計算量が$O(\sqrt{N})$となるので、平方分割のアルゴリズムの計算量は前処理に$\O(N)$, 検索に$O(\sqrt{N})$となる。
 
 #### プログラム
 
