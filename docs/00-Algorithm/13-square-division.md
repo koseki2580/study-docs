@@ -263,7 +263,72 @@ class SquareDivision<T>
   <TabItem value="Rust" label="Rust">
 
 ```rust title="square-division.rs"
+struct SquareDivision<T, F:Fn(T,T)->T> {
+    n:usize,
+    sqrt_num:usize,
+    condition:F,
+    data:Vec<T>,
+    initial:T,
+    division_list:Vec<T>
+}
+impl<T:Clone, F:Fn(T,T) -> T>  SquareDivision<T, F>  {
+    pub fn new(data:Vec<T>, _condition:F, _initial:T) -> Self
+    {
+        let _n :usize = data.len();
+        let mut _sqrt_num = (data.len() as f64).sqrt().floor() as usize;
+        let mut _division_list = vec![_initial.clone(); _n];
 
+        for i in 0.._n{
+            let idx:usize = (i / _sqrt_num) as usize;
+            _division_list[idx] =  _condition(_division_list[idx].clone(), data[i].clone());
+        }
+        SquareDivision {n:_n,sqrt_num:_sqrt_num, condition:_condition, data:data.to_vec(), division_list:_division_list, initial:_initial}
+    }
+
+    pub fn change(&mut self, idx:usize, val:T) {
+        self.data[idx] = val.clone();
+        let group_idx:usize = (idx / self.sqrt_num) as usize;
+        let func = &self.condition;
+        self.division_list[group_idx] = func(self.division_list[group_idx].clone(), val.clone());
+    }
+
+    pub fn query(&self, _l:usize, _r:usize) -> T
+    {
+        let mut l = _l;
+        let mut r = _r;
+        let func = &self.condition;
+        if r < l {
+            std::mem::swap(&mut l,&mut r)
+        }
+        let mut ret = self.initial.clone();
+
+        let group_l = l / self.sqrt_num;
+        let group_r = r / self.sqrt_num;
+        if group_r - group_l >= 2{
+            for i in group_l+1..group_r{
+                ret = func(ret, self.division_list[i].clone());
+            }
+            // 残り部分を比較
+            // 左側
+            ret = func(ret, self.check(l, (group_l + 1) * self.sqrt_num - 1));
+
+            // 右側
+            ret = func(ret, self.check(group_r * self.sqrt_num, r));
+        }else{
+            ret = self.check(l,r);
+        }
+        ret
+    }
+    pub fn check(&self,l:usize, r:usize) -> T{
+        let mut ret = self.initial.clone();
+        let func = &self.condition;
+        for i in l..r+1
+        {
+            ret = func(ret, self.data[i].clone());
+        }
+        ret
+    }
+}
 ```
 
   </TabItem>
