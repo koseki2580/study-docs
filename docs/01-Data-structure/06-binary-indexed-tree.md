@@ -1,7 +1,7 @@
 ---
 title: Binary Indexed Tree
 sidebarlabel: Binary Indexed Tree
-draft: true
+draft: false
 toc_max_heading_level: 4
 tags: [データ構造]
 ---
@@ -324,9 +324,9 @@ public class BinaryIndexedTree<T>
 
 [こちら](https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B&lang=jp)で動作確認を行い、3 コードともに AC でした。
 
-## 応用
+<!-- ## 応用 -->
 
-勉強中
+<!-- 勉強中 -->
 
 ## 参考
 

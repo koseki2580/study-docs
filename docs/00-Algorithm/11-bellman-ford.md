@@ -130,14 +130,14 @@ is_negative_cost = bellman_ford(0)
   <TabItem value="C++" label="C++">
 
 ```cpp title="bellman-ford.cpp"
-
+作成中
 ```
 
   </TabItem>
   <TabItem value="C#" label="C#">
 
 ```csharp title="bellman-ford.cs"
-
+作成中
 ```
 
   </TabItem>
