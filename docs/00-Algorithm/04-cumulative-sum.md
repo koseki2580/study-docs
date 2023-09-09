@@ -65,6 +65,10 @@ import FontColor from "@site/src/components/Custom/FontColor"
 
 このように 2 次元の累積和を活用すると面の情報を簡単に求めることができる。
 
+また、1 次元と同様の方法を取り、任意の面積を計算することができる。
+
+<!-- TODO 面積計算の例もかく -->
+
 ### アルゴリズム
 
 #### 1 次元
@@ -211,12 +215,28 @@ impl<T:Copy> CumulativeSum<T>  {
   </TabItem>
 </Tabs>
 
-#### 2 次元
+#### 2 次元 (part 1)
 
 <Tabs groupId="code">
 <TabItem value="python" label="Python" default>
 
 ```python title="cumulative-sum.py"
+box = [[0] * 10 for _ in range(11)]
+a = [(1, 1, 3, 3), (3, 5, 6, 6), (5, 1, 5, 7)]
+for i in range(len(a)):
+    sx, sy, gx, gy = a[i]
+    box[sx][sy] += 1
+    box[sx][gy+1] -= 1
+    box[gx+1][sy] -= 1
+    box[gx+1][gy+1] += 1
+
+for i in range(len(box)):
+    for j in range(len(box[i])-1):
+        box[i][j+1] += box[i][j]
+
+for i in range(len(box)-1):
+    for j in range(len(box[i])):
+        box[i+1][j] += box[i][j]
 
 ```
 
@@ -224,21 +244,97 @@ impl<T:Copy> CumulativeSum<T>  {
   <TabItem value="C++" label="C++">
 
 ```cpp title="cumulative-sum.cpp"
-
+int box[11][10] = {0};
+vector<tuple<int, int, int, int>> a;
+a.push_back(make_tuple(1, 1, 3, 3));
+a.push_back(make_tuple(2, 5, 6, 6));
+a.push_back(make_tuple(5, 1, 5, 7));
+for (int i = 0; i < a.size(); ++i)
+{
+  int sx = get<0>(a[i]);
+  int sy = get<1>(a[i]);
+  int gx = get<2>(a[i]);
+  int gy = get<3>(a[i]);
+  box[sx][sy] += 1;
+  box[sx][gy + 1] -= 1;
+  box[gx + 1][sy] -= 1;
+  box[gx + 1][gy + 1] += 1;
+}
+for (int i = 0; i < extent<decltype(box), 0>::value; ++i)
+{
+  for (int j = 0; j < extent<decltype(box), 1>::value - 1; ++j)
+  {
+    box[i][j + 1] += box[i][j];
+  }
+}
+for (int i = 0; i < extent<decltype(box), 0>::value - 1; ++i)
+{
+  for (int j = 0; j < extent<decltype(box), 1>::value; ++j)
+  {
+    box[i + 1][j] += box[i][j];
+  }
+}
 ```
 
   </TabItem>
   <TabItem value="C#" label="C#">
 
 ```csharp title="cumulative-sum.cs"
-
+int[,] box = new int[11, 10];
+int[,] a = { { 1, 1, 3, 3 }, { 2, 5, 6, 6 }, { 5, 1, 5, 7 } };
+for (int i = 0; i < a.GetLength(0); ++i)
+{
+    int sx = a[i, 0];
+    int sy = a[i, 1];
+    int gx = a[i, 2];
+    int gy = a[i, 3];
+    box[sx, sy] += 1;
+    box[sx, gy + 1] -= 1;
+    box[gx + 1, sy] -= 1;
+    box[gx + 1, gy + 1] += 1;
+}
+for (int i = 0; i < box.GetLength(0); ++i)
+{
+    for (int j = 0; j < box.GetLength(1) - 1; ++j)
+    {
+        box[i, j + 1] += box[i, j];
+    }
+}
+for (int i = 0; i < box.GetLength(0) - 1; ++i)
+{
+    for (int j = 0; j < box.GetLength(1); ++j)
+    {
+        box[i + 1, j] += box[i, j];
+    }
+}
 ```
 
   </TabItem>
   <TabItem value="Rust" label="Rust">
 
 ```rust title="cumulative-sum.rs"
-
+let mut box_:[[i32; 10]; 11]= Default::default();
+let a : Vec<(usize, usize, usize, usize)> = vec![(1, 1, 3, 3), (2, 5, 6, 6), (5, 1, 5, 7)];
+for i in 0..a.len(){
+    let sx:usize = a[i].0;
+    let sy:usize = a[i].1;
+    let gx:usize = a[i].2;
+    let gy:usize = a[i].3;
+    box_[sx][sy] += 1;
+    box_[sx][gy + 1] -= 1;
+    box_[gx + 1][sy] -= 1;
+    box_[gx + 1][gy + 1] += 1;
+}
+for i in 0..box_.len(){
+    for j in 0..(box_[i].len()-1){
+        box_[i][j + 1] += box_[i][j];
+    }
+}
+for i in 0..(box_.len()-1){
+    for j in 0..box_[i].len(){
+        box_[i + 1][j] += box_[i][j];
+    }
+}
 ```
 
   </TabItem>
