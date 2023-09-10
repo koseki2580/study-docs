@@ -47,7 +47,54 @@ import FontColor from "@site/src/components/Custom/FontColor"
 
 ### 2 次元
 
-累積和は 2 次元に拡張することができる。2 次元の場合は線ではなく面となる。例えば、以下の図の様な面があった場合にどの様にデータを保持するかを考える。
+累積和は 2 次元に拡張することができる。2 次元の場合は線ではなく面となる。例えば以下のような図の任意の 4 点に囲まれた値の和(赤い色になったエリア)を出したいとする。
+
+![イメージ図](/img/svg/Algorithm/cumulative-sum/cumulative-sum-9.drawio.svg "2次元イメージ図5")
+
+足し合わせる数が 9 個と少ないので、1 つ 1 つ取り出し足し合わせても今回であれば問題ない。しかし、例えば以下のように同じ図の中で他のエリアの和も求める場合を考えると求めるエリアの数が多くなると時間がかかりすぎてしまう。
+
+![イメージ図](/img/svg/Algorithm/cumulative-sum/cumulative-sum-10.drawio.svg "2次元イメージ図6")
+
+こういった場合にも累積和を用いることができる。まずは、右方向に累積和をとる。
+
+![イメージ図](/img/svg/Algorithm/cumulative-sum/cumulative-sum-11.drawio.svg "2次元イメージ図7")
+
+続いて下方向にも累積和を取っていく。そうすると、右下に全ての値を足した値が格納される。
+
+![イメージ図](/img/svg/Algorithm/cumulative-sum/cumulative-sum-12.drawio.svg "2次元イメージ図8")
+
+この累積和を取った図から赤色エリアの和を求めるには、1 次元の時と同じ様に全体から一部を引き算していき、求めたいエリアの和を求める。
+ここで赤色エリアの右下(右 5, 下 4 のインデック番号)の`70`というのは累積和を取ったので右 0 $\sim$ 5, 下 0 $\sim$ 4 の全ての和であることがわかる。
+
+![イメージ図](/img/svg/Algorithm/cumulative-sum/cumulative-sum-13.drawio.svg "2次元イメージ図9")
+
+上記の図の薄い青色のエリアから不必要なエリアを引き算することで求めたい赤色エリアの和を求めることができそうであることがわかる。
+計算に必要そうなエリアに色付けを行うと以下の様になる。
+
+![イメージ図](/img/svg/Algorithm/cumulative-sum/cumulative-sum-14.drawio.svg "2次元イメージ図10")
+
+薄い青色以外にもオレンジ, 緑, 紫の 3 色のエリアが存在する。それぞれのエリアを以下の様に計算することで赤色エリアを求めることができる。
+オレンジと緑のエリアが青色エリアから不必要なので引き算で取り除き、紫のエリアは引きすぎてしまった分加算して帳尻合わせを行っている。
+
+![イメージ図](/img/svg/Algorithm/cumulative-sum/cumulative-sum-15.drawio.svg "2次元イメージ図11")
+
+これを計算で行うには各色のエリアの右下の値を使い、
+
+$$
+70 - 26 - 17 + 8 = 35
+$$
+
+となる。実際に赤色エリアを
+
+$$
+3 + 3 + 3 + \\
+4 + 4 + 4 + \\
+4 + 5 + 5 = 35
+$$
+
+となり一致している。この様に累積和は 2 次元にも応用することができる。同じ様に拡張することで 3 次元でも累積和を使用することができる。
+
+また、面でデータを保持できるので、以下の図のようなデータの保持も簡単に行うことができる。
 
 ![イメージ図](/img/svg/Algorithm/cumulative-sum/cumulative-sum-5.drawio.svg "2次元イメージ図1")
 
@@ -55,7 +102,8 @@ import FontColor from "@site/src/components/Custom/FontColor"
 
 ![イメージ図](/img/svg/Algorithm/cumulative-sum/cumulative-sum-6.drawio.svg "2次元イメージ図2")
 
-上記の図のように数値を持つことができれば、面を表すことができる。
+上記の図のように数値を持つことができれば、面を表すことができる。しかし、対応する面に 1 ずつ値を代入していくと時間がかかりすぎる場合がある。
+累積和を使うと効率よく値を代入することができる。
 
 ![イメージ図](/img/svg/Algorithm/cumulative-sum/cumulative-sum-7.drawio.svg "2次元イメージ図3")
 
@@ -64,10 +112,6 @@ import FontColor from "@site/src/components/Custom/FontColor"
 ![イメージ図](/img/svg/Algorithm/cumulative-sum/cumulative-sum-8.drawio.svg "2次元イメージ図4")
 
 このように 2 次元の累積和を活用すると面の情報を簡単に求めることができる。
-
-また、1 次元と同様の方法を取り、任意の面積を計算することができる。
-
-<!-- TODO 面積計算の例もかく -->
 
 ### アルゴリズム
 
@@ -215,8 +259,41 @@ impl<T:Copy> CumulativeSum<T>  {
   </TabItem>
 </Tabs>
 
-#### 2 次元 (part 1)
+#### 2 次元
 
+<Tabs groupId="code">
+<TabItem value="python" label="Python" default>
+
+```python title="cumulative-sum.py"
+
+```
+
+</TabItem>
+  <TabItem value="C++" label="C++">
+
+```cpp title="cumulative-sum.cpp"
+
+```
+
+  </TabItem>
+  <TabItem value="C#" label="C#">
+
+```csharp title="cumulative-sum.cs"
+
+
+```
+
+  </TabItem>
+  <TabItem value="Rust" label="Rust">
+
+```rust title="cumulative-sum.rs"
+
+```
+
+  </TabItem>
+</Tabs>
+
+面に値を入れから累積和を行うと表したい図形を表すことができる。
 <Tabs groupId="code">
 <TabItem value="python" label="Python" default>
 
