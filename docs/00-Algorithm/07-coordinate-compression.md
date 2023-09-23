@@ -71,22 +71,22 @@ C++では map 型が Python の辞書型に相当するが、O(log n)となっ�
 
 ```cpp title="coordinate-compression.cpp"
 vector<int> compress(vector<int> input){
-	vector<int> vals
-	for(int i = 0; i< input.size(); ++i){
-		vals.push_back(input[i]);
-	}
+  vector<int> vals
+  for(int i = 0; i< input.size(); ++i){
+    vals.push_back(input[i]);
+  }
     sort(vals.begin(), vals.end());
-	vals.erase(unique(vals.begin(), vals.end()), vals.end());
-	return vals;
+  vals.erase(unique(vals.begin(), vals.end()), vals.end());
+  return vals;
 }
 int main() {
-	vector<int> a = {100, 2, 10, 550, 4, 93};
-	vector<int> compress_a = compress(a);
-	vector<int> compressed_a;
-	for (int i = 0; i < a.size();++i){
-		compressed_a.push_back(lower_bound(compress_a.begin(),compress_a.end(), a[i]) - compress_a.begin());
-	}
-	return 0;
+  vector<int> a = {100, 2, 10, 550, 4, 93};
+  vector<int> compress_a = compress(a);
+  vector<int> compressed_a;
+  for (int i = 0; i < a.size();++i){
+    compressed_a.push_back(lower_bound(compress_a.begin(),compress_a.end(), a[i]) - compress_a.begin());
+  }
+  return 0;
 }
 ```
 
@@ -208,46 +208,46 @@ for i in range(len(x1)):
 
 ```cpp title="coordinate-compression-2.cpp"
 vector<int> compress(vector<int> a,  vector<int> b){
-	vector<int> vals;
-	int dx[3]= {-1,0,1};
-	for(int i = 0; i< a.size(); ++i){
-		for(int j: dx ){
-			vals.push_back(a[i] + j);
-			vals.push_back(b[i] + j);
-		}
-	}
-	sort(vals.begin(), vals.end());
-	vals.erase(unique(vals.begin(), vals.end()), vals.end());
+  vector<int> vals;
+  int dx[3]= {-1,0,1};
+  for(int i = 0; i< a.size(); ++i){
+    for(int j: dx ){
+      vals.push_back(a[i] + j);
+      vals.push_back(b[i] + j);
+    }
+  }
+  sort(vals.begin(), vals.end());
+  vals.erase(unique(vals.begin(), vals.end()), vals.end());
 
-	return vals;
+  return vals;
 }
 
 int main() {
-	vector<tuple<int,int,int,int>> box = {
-		{3, 2, 3, 6},
-		{3, 11, 3, 13},
-		{7, 6, 7, 8},
-		{7, 10, 7, 12},
-		{3, 4, 9, 4},
-		{8, 11, 13, 11},
-	};
-	vector<int> x1,x2,y1,y2;
-	for (int i = 0; i < box.size(); ++i){
-		x1.push_back(get<0>(box[i]));
-		y1.push_back(get<1>(box[i]));
-		x2.push_back(get<2>(box[i]));
-		y2.push_back(get<3>(box[i]));
-	}
-	vector<int> X = compress(x1,x2);
-	vector<int> Y = compress(y1,y2);
-	for (int i = 0; i < x1.size(); ++i){
-		x1[i] = lower_bound(X.begin(), X.end(), x1[i]) - X.begin();
-		y1[i] = lower_bound(Y.begin(), Y.end(), y1[i]) - Y.begin();
-		x2[i] = lower_bound(X.begin(), X.end(), x2[i]) - X.begin();
-		y2[i] = lower_bound(Y.begin(), Y.end(), y2[i]) - Y.begin();
-	}
+  vector<tuple<int,int,int,int>> box = {
+    {3, 2, 3, 6},
+    {3, 11, 3, 13},
+    {7, 6, 7, 8},
+    {7, 10, 7, 12},
+    {3, 4, 9, 4},
+    {8, 11, 13, 11},
+  };
+  vector<int> x1,x2,y1,y2;
+  for (int i = 0; i < box.size(); ++i){
+    x1.push_back(get<0>(box[i]));
+    y1.push_back(get<1>(box[i]));
+    x2.push_back(get<2>(box[i]));
+    y2.push_back(get<3>(box[i]));
+  }
+  vector<int> X = compress(x1,x2);
+  vector<int> Y = compress(y1,y2);
+  for (int i = 0; i < x1.size(); ++i){
+    x1[i] = lower_bound(X.begin(), X.end(), x1[i]) - X.begin();
+    y1[i] = lower_bound(Y.begin(), Y.end(), y1[i]) - Y.begin();
+    x2[i] = lower_bound(X.begin(), X.end(), x2[i]) - X.begin();
+    y2[i] = lower_bound(Y.begin(), Y.end(), y2[i]) - Y.begin();
+  }
 
-	return 0;
+  return 0;
 }
 
 ```

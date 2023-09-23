@@ -166,35 +166,35 @@ for i in range(1, count+1):
 
 ```cpp
 // 前処理で求めておく2^Nを求める
-	int m = 1;
-	int count = 0;
-	while (m < tree.size()){
-		m <<= 1;
-		++count;
-	}
-	vector<vector<int>> lca_box(count+1, vector<int>(tree.size()+1, -1));
+  int m = 1;
+  int count = 0;
+  while (m < tree.size()){
+    m <<= 1;
+    ++count;
+  }
+  vector<vector<int>> lca_box(count+1, vector<int>(tree.size()+1, -1));
 
-	// 幅優先探索で深さを求める
-	vector<int> depth(tree.size(), -1);
-	queue<int> q;
-	q.push(0);
-	depth[0] = 0;
-	while (!q.empty()){
-		int pos = q.front();q.pop();
-		for (int to: tree[pos]){
-			if (depth[to] == -1){
-				lca_box[0][to] = pos;
-				depth[to] = depth[pos] + 1;
-				q.push(to);
-			}
-		}
-	}
+  // 幅優先探索で深さを求める
+  vector<int> depth(tree.size(), -1);
+  queue<int> q;
+  q.push(0);
+  depth[0] = 0;
+  while (!q.empty()){
+    int pos = q.front();q.pop();
+    for (int to: tree[pos]){
+      if (depth[to] == -1){
+        lca_box[0][to] = pos;
+        depth[to] = depth[pos] + 1;
+        q.push(to);
+      }
+    }
+  }
 
-	for (int i = 1; i < count + 1;++i){
-		for (int j = 0; j < tree.size(); ++j){
-			lca_box[i][j] = lca_box[i-1][lca_box[i-1][j]];
-		}
-	}
+  for (int i = 1; i < count + 1;++i){
+    for (int j = 0; j < tree.size(); ++j){
+      lca_box[i][j] = lca_box[i-1][lca_box[i-1][j]];
+    }
+  }
 ```
 
   </TabItem>
@@ -301,41 +301,41 @@ for u, v in check:
 
 ```cpp
 auto ancestors = [&](int u, int up){
-		int cnt = 0;
-		while (up != 0){
-			if (up & 1 == 1){
-				u = lca_box[cnt][u];
-			}
-			++cnt;
-			up >>= 1;
-		}
-		return u;
-	};
+    int cnt = 0;
+    while (up != 0){
+      if (up & 1 == 1){
+        u = lca_box[cnt][u];
+      }
+      ++cnt;
+      up >>= 1;
+    }
+    return u;
+  };
 
-	vector<pair<int, int>> check = {
-		{3, 7},
-		{10, 16},
-		{11, 15},
-		{2, 3}
-	} ;
-	for (pair<int,int> xx: check){
-		int u = xx.first;
-		int v = xx.second;
+  vector<pair<int, int>> check = {
+    {3, 7},
+    {10, 16},
+    {11, 15},
+    {2, 3}
+  } ;
+  for (pair<int,int> xx: check){
+    int u = xx.first;
+    int v = xx.second;
 
-		// 常にu側に深さが深い方を配置
-		if (depth[u] < depth[v]){
-			swap(u,v);
-		}
+    // 常にu側に深さが深い方を配置
+    if (depth[u] < depth[v]){
+      swap(u,v);
+    }
 
-		// 手順1 深さを合わせる
-		int up = depth[u] - depth[v];
-		u = ancestors(u, up);
+    // 手順1 深さを合わせる
+    int up = depth[u] - depth[v];
+    u = ancestors(u, up);
 
-		// u,v自身が共通の要素となる場合があるので確認
-		if (u == v) {
-			printf("u: %d, v: %d\n", u, v);
-			continue;
-		}
+    // u,v自身が共通の要素となる場合があるので確認
+    if (u == v) {
+      printf("u: %d, v: %d\n", u, v);
+      continue;
+    }
 ```
 
   </TabItem>
@@ -558,110 +558,110 @@ for u, v in check:
 ```cpp title="doubling.cpp"
 
 int main() {
-	vector<vector<int>> tree = {
-		{1, 2},
-		{7},
-		{3, 4},
-		{5},
-		{6},
-		{},
-		{8},
-		{9},
-		{10, 11},
-		{12},
-		{15},
-		{13},
-		{14},
-		{},
-		{16},
-		{},
-		{}
-	};
+  vector<vector<int>> tree = {
+    {1, 2},
+    {7},
+    {3, 4},
+    {5},
+    {6},
+    {},
+    {8},
+    {9},
+    {10, 11},
+    {12},
+    {15},
+    {13},
+    {14},
+    {},
+    {16},
+    {},
+    {}
+  };
 
-	// 前処理で求めておく2^Nを求める
-	int m = 1;
-	int count = 0;
-	while (m < tree.size()){
-		m <<= 1;
-		++count;
-	}
-	vector<vector<int>> lca_box(count+1, vector<int>(tree.size()+1, -1));
+  // 前処理で求めておく2^Nを求める
+  int m = 1;
+  int count = 0;
+  while (m < tree.size()){
+    m <<= 1;
+    ++count;
+  }
+  vector<vector<int>> lca_box(count+1, vector<int>(tree.size()+1, -1));
 
-	// 幅優先探索で深さを求める
-	vector<int> depth(tree.size(), -1);
-	queue<int> q;
-	q.push(0);
-	depth[0] = 0;
-	while (!q.empty()){
-		int pos = q.front();q.pop();
-		for (int to: tree[pos]){
-			if (depth[to] == -1){
-				lca_box[0][to] = pos;
-				depth[to] = depth[pos] + 1;
-				q.push(to);
-			}
-		}
-	}
+  // 幅優先探索で深さを求める
+  vector<int> depth(tree.size(), -1);
+  queue<int> q;
+  q.push(0);
+  depth[0] = 0;
+  while (!q.empty()){
+    int pos = q.front();q.pop();
+    for (int to: tree[pos]){
+      if (depth[to] == -1){
+        lca_box[0][to] = pos;
+        depth[to] = depth[pos] + 1;
+        q.push(to);
+      }
+    }
+  }
 
-	for (int i = 1; i < count + 1;++i){
-		for (int j = 0; j < tree.size(); ++j){
-			lca_box[i][j] = lca_box[i-1][lca_box[i-1][j]];
-		}
-	}
+  for (int i = 1; i < count + 1;++i){
+    for (int j = 0; j < tree.size(); ++j){
+      lca_box[i][j] = lca_box[i-1][lca_box[i-1][j]];
+    }
+  }
 
-	auto ancestors = [&](int u, int up){
-		int cnt = 0;
-		while (up != 0){
-			if (up & 1 == 1){
-				u = lca_box[cnt][u];
-			}
-			++cnt;
-			up >>= 1;
-		}
-		return u;
-	};
+  auto ancestors = [&](int u, int up){
+    int cnt = 0;
+    while (up != 0){
+      if (up & 1 == 1){
+        u = lca_box[cnt][u];
+      }
+      ++cnt;
+      up >>= 1;
+    }
+    return u;
+  };
 
-	vector<pair<int, int>> check = {
-		{3, 7},
-		{10, 16},
-		{11, 15},
-		{2, 3}
-	} ;
-	for (pair<int,int> xx: check){
-		int u = xx.first;
-		int v = xx.second;
+  vector<pair<int, int>> check = {
+    {3, 7},
+    {10, 16},
+    {11, 15},
+    {2, 3}
+  } ;
+  for (pair<int,int> xx: check){
+    int u = xx.first;
+    int v = xx.second;
 
-		// 常にu側に深さが深い方を配置
-		if (depth[u] < depth[v]){
-			swap(u,v);
-		}
+    // 常にu側に深さが深い方を配置
+    if (depth[u] < depth[v]){
+      swap(u,v);
+    }
 
-		// 手順1 深さを合わせる
-		int up = depth[u] - depth[v];
-		u = ancestors(u, up);
+    // 手順1 深さを合わせる
+    int up = depth[u] - depth[v];
+    u = ancestors(u, up);
 
-		// u,v自身が共通の要素となる場合があるので確認
-		if (u == v) {
-			printf("u: %d, v: %d\n", u, v);
-			continue;
-		}
+    // u,v自身が共通の要素となる場合があるので確認
+    if (u == v) {
+      printf("u: %d, v: %d\n", u, v);
+      continue;
+    }
 
-		// 手順2 親を遡る
-		for (int i = count; i > -1; --i){
-			int nextu = lca_box[i][u];
-			int nextv = lca_box[i][v];
-			// 一致しない場合のみ要素を更新
-			if (nextu != nextv){
-				u = nextu;
-				v = nextv;
-			}
-		}
+    // 手順2 親を遡る
+    for (int i = count; i > -1; --i){
+      int nextu = lca_box[i][u];
+      int nextv = lca_box[i][v];
+      // 一致しない場合のみ要素を更新
+      if (nextu != nextv){
+        u = nextu;
+        v = nextv;
+      }
+    }
 
-		// 最終結果の1つ前がLCAとなる
-		printf("u: %d, v: %d\n", lca_box[0][u], lca_box[0][v]);
-	}
+    // 最終結果の1つ前がLCAとなる
+    printf("u: %d, v: %d\n", lca_box[0][u], lca_box[0][v]);
+  }
 
-		return 0;
+    return 0;
 }
 
 ```

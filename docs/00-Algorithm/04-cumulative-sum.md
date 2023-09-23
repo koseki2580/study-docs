@@ -150,19 +150,19 @@ class CumulativeSum:
 ```cpp title="cumulative-sum.cpp"
 template<typename T>
 struct CumulativeSum {
-	vector<T> sum_box;
-	CumulativeSum(vector<T> box): sum_box(box.size() + 1, 0) {
-		for (int i = 0; i < box.size();++i){
-			sum_box[i+1] = sum_box[i] + box[i];
-		}
-	}
-	T query(int l, int r){
-		if (l > r) swap(l,r);
-		++r;
-		if (l < 0) throw exception("l is out of range")
-		if (r >= sum_box.size()) throw exception("r is out of range")
-		return sum_box[r] - sum_box[l];
-	}
+  vector<T> sum_box;
+  CumulativeSum(vector<T> box): sum_box(box.size() + 1, 0) {
+    for (int i = 0; i < box.size();++i){
+      sum_box[i+1] = sum_box[i] + box[i];
+    }
+  }
+  T query(int l, int r){
+    if (l > r) swap(l,r);
+    ++r;
+    if (l < 0) throw exception("l is out of range")
+    if (r >= sum_box.size()) throw exception("r is out of range")
+    return sum_box[r] - sum_box[l];
+  }
 };
 ```
 

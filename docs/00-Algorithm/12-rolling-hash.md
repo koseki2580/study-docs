@@ -243,7 +243,7 @@ impl RollingHash {
             _hash.push(_hash[idx] * _base + i as u64);
             _pow_base.push(_pow_base[idx] * _base);
             idx += 1;
-		}
+    }
        RollingHash {S : s.clone(),pow_base:_pow_base, hash:_hash}
     }
 

@@ -139,52 +139,52 @@ for k in range(8):
 
 ```cpp title="warshall-floyd.cpp"
 int main() {
-	// pos1, pos2, costの順に格納
-	vector<tuple<int,int,int>> example = {
-		{0, 1, 10},
-		{0, 2, 5},
-		{1, 3, 4},
-		{1, 4, 20},
-		{2, 3, 6},
-		{2, 6, 8},
-		{3, 5, 1},
-		{4, 5, 4},
-		{4, 7, 7},
-		{5, 6, 2},
-		{5, 7, 4},
-		{6, 7, 9}
-	};
-	int INF = 100;
+  // pos1, pos2, costの順に格納
+  vector<tuple<int,int,int>> example = {
+    {0, 1, 10},
+    {0, 2, 5},
+    {1, 3, 4},
+    {1, 4, 20},
+    {2, 3, 6},
+    {2, 6, 8},
+    {3, 5, 1},
+    {4, 5, 4},
+    {4, 7, 7},
+    {5, 6, 2},
+    {5, 7, 4},
+    {6, 7, 9}
+  };
+  int INF = 100;
 
-	// box[i][j] 始点iから終点jまでの最短経路を保持する
-	vector<vector<int>> box(8, vector<int>(8,INF));
-	for (int i = 0; i < 8; ++i){
-		// 始点と終点が同じ場合はコストを0とする
-		box[i][i] = 0;
-	}
+  // box[i][j] 始点iから終点jまでの最短経路を保持する
+  vector<vector<int>> box(8, vector<int>(8,INF));
+  for (int i = 0; i < 8; ++i){
+    // 始点と終点が同じ場合はコストを0とする
+    box[i][i] = 0;
+  }
 
-	for (int i = 0; i < example.size(); ++i)
-	{
-		// 与えられたパスを記録する
-		box[get<0>(example[i])][get<1>(example[i])] = (get<2>(example[i]));
-		box[get<1>(example[i])][get<0>(example[i])] = (get<2>(example[i]));
-	}
+  for (int i = 0; i < example.size(); ++i)
+  {
+    // 与えられたパスを記録する
+    box[get<0>(example[i])][get<1>(example[i])] = (get<2>(example[i]));
+    box[get<1>(example[i])][get<0>(example[i])] = (get<2>(example[i]));
+  }
 
-	// ワーシャル-フロイド法
-	for (int k = 0; k < 8; ++k){
-		for (int i = 0; i < 8; ++i){
-			for (int j = 0; j < 8; ++j){
-				box[i][j] = min(box[i][j], box[i][k] + box[k][j]);
-			}
-		}
-	}
-	rep(i,0,8){
-		rep(j,0,8){
-			printf("%d ", box[i][j]);
-		}
-		printf("\n");
-	}
-	return 0;
+  // ワーシャル-フロイド法
+  for (int k = 0; k < 8; ++k){
+    for (int i = 0; i < 8; ++i){
+      for (int j = 0; j < 8; ++j){
+        box[i][j] = min(box[i][j], box[i][k] + box[k][j]);
+      }
+    }
+  }
+  rep(i,0,8){
+    rep(j,0,8){
+      printf("%d ", box[i][j]);
+    }
+    printf("\n");
+  }
+  return 0;
 }
 ```
 
@@ -323,62 +323,62 @@ print(pos)
 ```cpp title="warshall-floyd-route-restoration.cpp"
 
 int main() {
-	// pos1, pos2, costの順に格納
-	vector<tuple<int,int,int>> example = {
-		{0, 1, 10},
-		{0, 2, 5},
-		{1, 3, 4},
-		{1, 4, 20},
-		{2, 3, 6},
-		{2, 6, 8},
-		{3, 5, 1},
-		{4, 5, 4},
-		{4, 7, 7},
-		{5, 6, 2},
-		{5, 7, 4},
-		{6, 7, 9}
-	};
-	int INF = 100;
+  // pos1, pos2, costの順に格納
+  vector<tuple<int,int,int>> example = {
+    {0, 1, 10},
+    {0, 2, 5},
+    {1, 3, 4},
+    {1, 4, 20},
+    {2, 3, 6},
+    {2, 6, 8},
+    {3, 5, 1},
+    {4, 5, 4},
+    {4, 7, 7},
+    {5, 6, 2},
+    {5, 7, 4},
+    {6, 7, 9}
+  };
+  int INF = 100;
 
-	// box[i][j] 始点iから終点jまでの最短経路を保持する
-	vector<vector<int>> box(8, vector<int>(8,INF));
-	for (int i = 0; i < 8; ++i){
-		// 始点と終点が同じ場合はコストを0とする
-		box[i][i] = 0;
-	}
+  // box[i][j] 始点iから終点jまでの最短経路を保持する
+  vector<vector<int>> box(8, vector<int>(8,INF));
+  for (int i = 0; i < 8; ++i){
+    // 始点と終点が同じ場合はコストを0とする
+    box[i][i] = 0;
+  }
 
-	vector<vector<int>> next(8, vector<int>(8,0));
-	for (int i = 0; i < 8; ++i){
-		for (int j = 0; j < 8; ++j){
-			next[i][j] = j;
-		}
-	}
+  vector<vector<int>> next(8, vector<int>(8,0));
+  for (int i = 0; i < 8; ++i){
+    for (int j = 0; j < 8; ++j){
+      next[i][j] = j;
+    }
+  }
 
-	for (int i = 0; i < example.size(); ++i)
-	{
-		// 与えられたパスを記録する
-		box[get<0>(example[i])][get<1>(example[i])] = (get<2>(example[i]));
-		box[get<1>(example[i])][get<0>(example[i])] = (get<2>(example[i]));
-	}
+  for (int i = 0; i < example.size(); ++i)
+  {
+    // 与えられたパスを記録する
+    box[get<0>(example[i])][get<1>(example[i])] = (get<2>(example[i]));
+    box[get<1>(example[i])][get<0>(example[i])] = (get<2>(example[i]));
+  }
 
-	// ワーシャル-フロイド法
-	for (int k = 0; k < 8; ++k){
-		for (int i = 0; i < 8; ++i){
-			for (int j = 0; j < 8; ++j){
-				if (box[i][k] + box[k][j] < box[i][j]){
-					box[i][j] =  box[i][k] + box[k][j];
-					next[i][j] = next[i][k];
-				}
-			}
-		}
-	}
-	int pos = 0;
-	while (pos != 7){
-		printf("%d ", pos);
-		pos = next[pos][7];
-	}
-	printf("%d\n", pos);
-	return 0;
+  // ワーシャル-フロイド法
+  for (int k = 0; k < 8; ++k){
+    for (int i = 0; i < 8; ++i){
+      for (int j = 0; j < 8; ++j){
+        if (box[i][k] + box[k][j] < box[i][j]){
+          box[i][j] =  box[i][k] + box[k][j];
+          next[i][j] = next[i][k];
+        }
+      }
+    }
+  }
+  int pos = 0;
+  while (pos != 7){
+    printf("%d ", pos);
+    pos = next[pos][7];
+  }
+  printf("%d\n", pos);
+  return 0;
 }
 
 ```

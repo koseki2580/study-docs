@@ -179,51 +179,51 @@ print(dist)
 
 ```cpp title="dijkstra.cpp"
 vector<int> dijkstra(int start, vector<vector<pair<int,int>>> box){
-	vector<int> dist(box.size(), 1001001001);
-	priority_queue<pair<int,int>> q ;
-	for (pair<int, int> val: box[start]){
-		q.push({val.second, val.first});
-	}
-	dist[start] = 0;
-	while (!q.empty()){
-		pair<int, int> val = q.top();q.pop();
-		int cost = val.first;
-		int pos = val.second;
-		if (dist[pos] < cost) continue;
-		dist[pos] = cost;
-		for (pair<int, int> val2: box[pos]){
-			q.push({dist[pos] + val2.second, val2.first});
-		}
-	}
-	return dist;
+  vector<int> dist(box.size(), 1001001001);
+  priority_queue<pair<int,int>> q ;
+  for (pair<int, int> val: box[start]){
+    q.push({val.second, val.first});
+  }
+  dist[start] = 0;
+  while (!q.empty()){
+    pair<int, int> val = q.top();q.pop();
+    int cost = val.first;
+    int pos = val.second;
+    if (dist[pos] < cost) continue;
+    dist[pos] = cost;
+    for (pair<int, int> val2: box[pos]){
+      q.push({dist[pos] + val2.second, val2.first});
+    }
+  }
+  return dist;
 }
 
 int main() {
-	// pos1, pos2, costの順に格納
-	vector<tuple<int,int,int>> example = {
-		{0, 1, 10},
-		{0, 2, 5},
-		{1, 3, 4},
-		{1, 4, 20},
-		{2, 3, 6},
-		{2, 6, 8},
-		{3, 5, 1},
-		{4, 5, 4},
-		{4, 7, 7},
-		{5, 6, 2},
-		{5, 7, 4},
-		{6, 7, 9}
-	};
+  // pos1, pos2, costの順に格納
+  vector<tuple<int,int,int>> example = {
+    {0, 1, 10},
+    {0, 2, 5},
+    {1, 3, 4},
+    {1, 4, 20},
+    {2, 3, 6},
+    {2, 6, 8},
+    {3, 5, 1},
+    {4, 5, 4},
+    {4, 7, 7},
+    {5, 6, 2},
+    {5, 7, 4},
+    {6, 7, 9}
+  };
 
-	vector<vector<pair<int,int>>> box(8);
+  vector<vector<pair<int,int>>> box(8);
 
-	for (int i = 0; i < example.size(); ++i){
-		// index頂点に接続されている頂点とコストを格納する
-		box[get<0>(example[i])].push_back({get<1>(example[i]),get<2>(example[i])});
-		box[get<1>(example[i])].push_back({get<0>(example[i]),get<2>(example[i])});
-	}
-	vector<int> dist = dijkstra(0, box);
-	return 0;
+  for (int i = 0; i < example.size(); ++i){
+    // index頂点に接続されている頂点とコストを格納する
+    box[get<0>(example[i])].push_back({get<1>(example[i]),get<2>(example[i])});
+    box[get<1>(example[i])].push_back({get<0>(example[i]),get<2>(example[i])});
+  }
+  vector<int> dist = dijkstra(0, box);
+  return 0;
 }
 
 ```
@@ -405,66 +405,66 @@ while (next != -1):
 
 ```cpp title="dijkstra-route-restoration.cpp"
 pair<vector<int>, vector<int>> dijkstra(int start, vector<vector<pair<int,int>>> box){
-	vector<int> dist(box.size(), 1001001001);
-	vector<int> prev(box.size(), -1);
-	priority_queue<pair<int,int>> q ;
-	q.push({0, start});
-	dist[start] = 0;
-	while (!q.empty()){
-		pair<int, int> val = q.top();q.pop();
-		int cost = val.first;
-		int pos = val.second;
-		if (dist[pos] < cost) continue;
+  vector<int> dist(box.size(), 1001001001);
+  vector<int> prev(box.size(), -1);
+  priority_queue<pair<int,int>> q ;
+  q.push({0, start});
+  dist[start] = 0;
+  while (!q.empty()){
+    pair<int, int> val = q.top();q.pop();
+    int cost = val.first;
+    int pos = val.second;
+    if (dist[pos] < cost) continue;
 
-		for (pair<int, int> val2: box[pos]){
-			if (dist[pos] + val2.second < dist[val2.first]){
-				dist[val2.first] = dist[pos] + val2.second;
-				q.push({dist[pos] + val2.second, val2.first});
-				prev[val2.first] = pos;
-			}
-		}
-	}
-	pair<vector<int>, vector<int>> ret;
-	ret.first = dist;
-	ret.second = prev;
-	return ret;
+    for (pair<int, int> val2: box[pos]){
+      if (dist[pos] + val2.second < dist[val2.first]){
+        dist[val2.first] = dist[pos] + val2.second;
+        q.push({dist[pos] + val2.second, val2.first});
+        prev[val2.first] = pos;
+      }
+    }
+  }
+  pair<vector<int>, vector<int>> ret;
+  ret.first = dist;
+  ret.second = prev;
+  return ret;
 }
 
 int main() {
-	// pos1, pos2, costの順に格納
-	vector<tuple<int,int,int>> example = {
-		{0, 1, 10},
-		{0, 2, 5},
-		{1, 3, 4},
-		{1, 4, 20},
-		{2, 3, 6},
-		{2, 6, 8},
-		{3, 5, 1},
-		{4, 5, 4},
-		{4, 7, 7},
-		{5, 6, 2},
-		{5, 7, 4},
-		{6, 7, 9}
-	};
+  // pos1, pos2, costの順に格納
+  vector<tuple<int,int,int>> example = {
+    {0, 1, 10},
+    {0, 2, 5},
+    {1, 3, 4},
+    {1, 4, 20},
+    {2, 3, 6},
+    {2, 6, 8},
+    {3, 5, 1},
+    {4, 5, 4},
+    {4, 7, 7},
+    {5, 6, 2},
+    {5, 7, 4},
+    {6, 7, 9}
+  };
 
-	vector<vector<pair<int,int>>> box(8);
+  vector<vector<pair<int,int>>> box(8);
 
-	for (int i = 0; i < example.size(); ++i){
-		// index頂点に接続されている頂点とコストを格納する
-		box[get<0>(example[i])].push_back({get<1>(example[i]),get<2>(example[i])});
-		box[get<1>(example[i])].push_back({get<0>(example[i]),get<2>(example[i])});
-	}
-	pair<vector<int>, vector<int>> ret = dijkstra(0, box);
-	rep(i,0,8){
-		printf("%d ", ret.first[i]);
-	}
-	printf("\n ");
-	int next = 7;
-	while (next != -1){
-		printf("%d ", next);
-		next = ret.second[next];
-	}
-	return 0;
+  for (int i = 0; i < example.size(); ++i){
+    // index頂点に接続されている頂点とコストを格納する
+    box[get<0>(example[i])].push_back({get<1>(example[i]),get<2>(example[i])});
+    box[get<1>(example[i])].push_back({get<0>(example[i]),get<2>(example[i])});
+  }
+  pair<vector<int>, vector<int>> ret = dijkstra(0, box);
+  rep(i,0,8){
+    printf("%d ", ret.first[i]);
+  }
+  printf("\n ");
+  int next = 7;
+  while (next != -1){
+    printf("%d ", next);
+    next = ret.second[next];
+  }
+  return 0;
 }
 
 ```

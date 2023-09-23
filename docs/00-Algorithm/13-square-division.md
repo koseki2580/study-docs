@@ -129,51 +129,51 @@ class SquareDivision():
 
 template<typename T>
 struct SquareDivision {
-	vector<T> data;
-	int n;
-	int sqrt_num;
-	const T&(*condition)(const T&, const T&);
-	T initial;
-	vector<T> division_list;
-	SquareDivision(vector<T> data_list, const T&(*_condition)(const T&, const T&) , T _initial): data(data_list), n(data_list.size()), sqrt_num(sqrt(data_list.size())), initial(_initial), division_list(data_list.size() / sqrt(data_list.size()) + 1, _initial), condition(_condition){
-		for (int i = 0; i < n;++i){
-			int idx = i / sqrt_num;
-			division_list[idx] = condition(division_list[idx], data[i]);
-		}
-	}
-	void change(int idx, T val){
-		data[idx] = val;
-		int group_idx = idx / sqrt_num;
-		division_list[group_idx] = condition(division_list[group_idx], val);
-	}
-	T query(int l, int r){
-		if (r < l) swap(r,l);
+  vector<T> data;
+  int n;
+  int sqrt_num;
+  const T&(*condition)(const T&, const T&);
+  T initial;
+  vector<T> division_list;
+  SquareDivision(vector<T> data_list, const T&(*_condition)(const T&, const T&) , T _initial): data(data_list), n(data_list.size()), sqrt_num(sqrt(data_list.size())), initial(_initial), division_list(data_list.size() / sqrt(data_list.size()) + 1, _initial), condition(_condition){
+    for (int i = 0; i < n;++i){
+      int idx = i / sqrt_num;
+      division_list[idx] = condition(division_list[idx], data[i]);
+    }
+  }
+  void change(int idx, T val){
+    data[idx] = val;
+    int group_idx = idx / sqrt_num;
+    division_list[group_idx] = condition(division_list[group_idx], val);
+  }
+  T query(int l, int r){
+    if (r < l) swap(r,l);
 
-		T ret = initial;
+    T ret = initial;
         int group_l = l / sqrt_num;
         int group_r = r / sqrt_num;
-		if (group_r - group_l >= 2){
-			for (int i = group_l + 1; i < group_r; ++i){
-				ret = condition(ret, division_list[i]);
-			}
-			// 残り部分を比較
-			// 左側
-			ret = condition(ret, check(l, (group_l + 1) * sqrt_num - 1));
-			// 右側
-			ret = condition(ret, check(group_r * sqrt_num, r));
-		}else{
-			ret = check(l,r);
-		}
-		return ret;
-	}
-	private:
-	T check(int l, int r){
-		T ret = initial;
-		for (int i = l; i < r+1;++i){
-			ret = condition(ret, data[i]);
-		}
-		return ret;
-	}
+    if (group_r - group_l >= 2){
+      for (int i = group_l + 1; i < group_r; ++i){
+        ret = condition(ret, division_list[i]);
+      }
+      // 残り部分を比較
+      // 左側
+      ret = condition(ret, check(l, (group_l + 1) * sqrt_num - 1));
+      // 右側
+      ret = condition(ret, check(group_r * sqrt_num, r));
+    }else{
+      ret = check(l,r);
+    }
+    return ret;
+  }
+  private:
+  T check(int l, int r){
+    T ret = initial;
+    for (int i = l; i < r+1;++i){
+      ret = condition(ret, data[i]);
+    }
+    return ret;
+  }
 };
 ```
 
