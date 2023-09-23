@@ -117,7 +117,7 @@ const config = {
 
       // footer: {},
       prism: {
-        additionalLanguages: ["csharp"],
+        additionalLanguages: ["csharp", "rust"],
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
