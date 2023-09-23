@@ -1,7 +1,7 @@
 ---
 title: 古典暗号
 sidebar_label: 古典暗号
-draft: true
+draft: false
 toc_max_heading_level: 4
 tags: [アルゴリズム, 暗号]
 ---
