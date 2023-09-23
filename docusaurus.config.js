@@ -147,8 +147,19 @@ const config = {
       mermaid: {
         theme: { light: "default", dark: "dark" },
       },
+      liveCodeBlock: {
+        /**
+         * The position of the live playground, above or under the editor
+         * Possible values: "top" | "bottom"
+         */
+        playgroundPosition: "bottom",
+      },
     }),
-  plugins: [["./my-plugin", {}], "@docusaurus/theme-mermaid"],
+  plugins: [
+    ["./my-plugin", {}],
+    "@docusaurus/theme-mermaid",
+    "@docusaurus/theme-live-codeblock",
+  ],
   // plugins: [["./my-plugin", {}]],
 
   stylesheets: [
