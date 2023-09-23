@@ -32,13 +32,13 @@ import FontColor from "@site/src/components/Custom/FontColor"
 <TabItem value="python" label="Python" default>
 
 ```python title="caesar-cipher.py"
-def caesar_cipher(input_text: str, to_direction: str = "cipher"):
+def caesar_cipher(input_text: str, to_direction: str = "encryption"):
     input_text = input_text.upper()
     base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     rot = 3
     rot_text = base[rot:] + base[:rot]
     ret_text = []
-    if to_direction == "plain":
+    if to_direction == "decryption":
         rot_text, base = base, rot_text
     for i in range(len(input_text)):
         ret_text.append(rot_text[base.index(input_text[i])])
@@ -49,14 +49,14 @@ def caesar_cipher(input_text: str, to_direction: str = "cipher"):
   <TabItem value="C++" label="C++">
 
 ```cpp title="caesar-cipher.cpp"
-string caesar_cipher(string input_text, string to_direction = "cipher")
+string caesar_cipher(string input_text, string to_direction = "encryption")
 {
   transform(input_text.begin(), input_text.end(), input_text.begin(), ::toupper);
   string base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   int rot = 3;
   string rot_text = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   rotate(rot_text.begin(), rot_text.begin() + rot, rot_text.end());
-  if (to_direction == "plain")
+  if (to_direction == "decryption")
     swap(base, rot_text);
   string ret_text;
   for (int i = 0; i < input_text.size(); ++i)
@@ -72,13 +72,13 @@ string caesar_cipher(string input_text, string to_direction = "cipher")
   <TabItem value="C#" label="C#">
 
 ```csharp title="caesar-cipher.cs"
-private static String caesar_cipher(String input_text, String to_direction = "cipher")
+private static String caesar_cipher(String input_text, String to_direction = "encryption")
 {
     input_text.ToUpper();
     String _base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     int rot = 3;
     String rot_text = _base.Substring(rot) + _base.Substring(0, rot);
-    if (to_direction == "plain")
+    if (to_direction == "decryption")
     {
         (_base, rot_text) = (rot_text, _base);
     }
@@ -95,7 +95,7 @@ private static String caesar_cipher(String input_text, String to_direction = "ci
   <TabItem value="Rust" label="Rust">
 
 ```rust title="caesar-cipher.rs"
-fn  caesar_cipher_to_cipher(input_text:String) -> String {
+fn  caesar_cipher_encryption(input_text:String) -> String {
     let input_text_upper = input_text.to_uppercase();
     let base = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
     let rot = 3;
@@ -108,7 +108,7 @@ fn  caesar_cipher_to_cipher(input_text:String) -> String {
     ret_text.to_string()
 }
 
-fn  caesar_cipher_to_plain(input_text:String) -> String {
+fn  caesar_cipher_decryption(input_text:String) -> String {
     let input_text_upper = input_text.to_uppercase();
     let base = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
     let rot = 3;
