@@ -1,7 +1,7 @@
 ---
 title: シーザー暗号
 sidebar_label: シーザー暗号
-draft: true
+draft: false
 toc_max_heading_level: 4
 tags: [アルゴリズム, 古典暗号]
 ---
