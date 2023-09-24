@@ -9,7 +9,6 @@ tags: [アルゴリズム, 古典暗号]
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import FontColor from "@site/src/components/Custom/FontColor"
 ```
 
 ## シーザー暗号とは
@@ -123,4 +122,71 @@ fn  caesar_cipher_decryption(input_text:String) -> String {
 ```
 
   </TabItem>
+  <TabItem value="JavaScript" label="JavaScript">
+
+```js title="caesar-cipher.js"
+function caesarCipher(inputText, direction = "encryption") {
+  inputText = inputText.toUpperCase();
+  let retText = "";
+  let _base = base;
+  let _rotText = rotText;
+  if (direction == "decryption") {
+    _rotText = base;
+    _base = rotText;
+  }
+  for (let i = 0; i < inputText.length; ++i) {
+    retText += _rotText[_base.indexOf(inputText[i])];
+  }
+  return retText;
+}
+```
+
+  </TabItem>
 </Tabs>
+
+### 動作
+
+```jsx live
+function CaesarCipher(props) {
+  // 暗号化 or 復号化する文字列
+  const inputText = "apple";
+
+  // encryption or decryption
+  const direction = "encryption";
+
+  // 以下は特に変更しなくて良い
+  const base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const rot = 3;
+  const rotText = base.substring(rot) + base.substring(0, rot);
+  function caesarCipher(inputText, direction = "encryption") {
+    inputText = inputText.toUpperCase();
+    let retText = "";
+    let _base = base;
+    let _rotText = rotText;
+    if (direction == "decryption") {
+      _rotText = base;
+      _base = rotText;
+    }
+    for (let i = 0; i < inputText.length; ++i) {
+      retText += _rotText[_base.indexOf(inputText[i])];
+    }
+    return retText;
+  }
+  return (
+    <>
+      <h3>{direction === "encryption" ? "暗号化" : "復号化"}</h3>
+      <p>
+        {direction === "encryption"
+          ? inputText
+          : caesarCipher(inputText, direction)}
+        <span class="mrel" style={{ padding: "5px" }}>
+          {direction === "encryption" ? "→" : "←"}
+        </span>
+        {direction === "encryption"
+          ? caesarCipher(inputText, direction)
+          : inputText}
+      </p>
+    </>
+  );
+}
+```
