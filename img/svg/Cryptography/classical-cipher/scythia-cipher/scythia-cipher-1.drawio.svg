@@ -1,0 +1,44 @@
+<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="292px" height="552px" viewBox="-0.5 -0.5 292 552" content="&lt;mxfile&gt;&lt;diagram id=&quot;qJjpPuKX58V3U5U6tmI6&quot; name=&quot;ページ1&quot;&gt;7Zxfb5swEMA/TV4nY/Mvj1vWbS+VKvVhzyh4gERwRJwm2aefM0wIRsWNsSPHtA8VHOaw73d3PhvaBVptjj/rZJs/kxSXCwjS4wJ9X0DoB4D9PgtOjQDBsBFkdZE2Iq8TvBZ/MRfy+7J9keJdryElpKTFti9ck6rCa9qTJXVNDv1mf0jZf+o2yfBA8LpOyqH0d5HSvJHGMOrkv3CR5e2TvXDZXNkkbWM+kl2epORwJUJPC7SqCaHN0ea4wuXZdq1dmvt+vHP10rEaV/QjN/B+vSXlno+N94ue2sHiKv16thk7q0jFhN9yuinZmccOm9Y4Hdir64B3GRZzB0w2mNYn1uTQGa51h/zKZq2sxmVCi7e++oTzyy7qLk94IQV7MATc1WDM9XBPgz7oq9iRfb3G/K5rQwmKUChRRJM6w3SgiB1cDbsT/efwDkTwCeVjUERFCJqD4jkORergqpFiEgp0HIrUwW2E4jsOxRegxIpMgnBcj0YkwUQkZJusC3ruJwIzIiTq8UJziELHo0bm7apRY5JJNO+wGZjWRkax43GjrS6743Tj+qpS6t8WlmWtZmehaFtVyqoHjUymLiofbILRtpy5Y2HWInE2bgIo2HIJFScYUZEHjUFxvVr2fYktLYSCpi78HyybDRipBo4UtkZGc9sJ0MVImiU1MnI+ucXgC7j68XqWZdcVw2hUref7xoBN3SewHhgA47a0H9HUbYJHy3sCMfWgkqHXyGjqtsFsGd2WT/URaydXdxOfP2rZIFQENqrWi0JjwOb2FntgS/sRwXllwcH+tmpQSdFrZOT6Swc2NY3lvThWDKpxtSA2Bsz1NxJIWJ4ObGk9omBqLfFoeU8kphpUUvQaGc3sfYU2RjfmU43EXN+agMs+oqDVe3MYRRJFGqG4Xj5ogyIqCpE5KM6XCDIHV40Ug1DCqUWB7VCkDm4jFNc3EXwBCloqQgkiiSKNUOBEKA9WmmljJCryI3OMkOOBI/V31cAxCWVuXy3I/N1GRlO/WrAdirba7J4zjuufKUgd3Mba7HO9rzjvm4yUmX18oG1RY642Y6fdH9k3zbv/VICe/gE=&lt;/diagram&gt;&lt;/mxfile&gt;">
+    <defs/>
+    <g>
+        <path d="M 0 160 L 80 160" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 0 160 L 0 240" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 80 160 L 80 240" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 0 240 L 80 240" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 200 0 L 280 0" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 200 0 L 200 80" fill="none" stroke="rgb(0, 0, 0)" stroke-opacity="0.3" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 280 0 L 280 80" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 200 80 L 280 80" fill="none" stroke="rgb(0, 0, 0)" stroke-opacity="0.3" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 80 160 L 280 0" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 280 80 L 80 240" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 0 160 L 200 0" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 0 240 L 200 80" fill="none" stroke="rgb(0, 0, 0)" stroke-opacity="0.3" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 240 112 L 240 32" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 160 32 L 240 32" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 160 112 L 160 32" fill="none" stroke="rgb(0, 0, 0)" stroke-opacity="0.3" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 160 112 L 240 112" fill="none" stroke="rgb(0, 0, 0)" stroke-opacity="0.3" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 200 144 L 200 64" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 120 64 L 200 64" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 120 144 L 120 64" fill="none" stroke="rgb(0, 0, 0)" stroke-opacity="0.3" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 120 144 L 200 144" fill="none" stroke="rgb(0, 0, 0)" stroke-opacity="0.3" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 160 176 L 160 96" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 80 96 L 160 96" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 80 176 L 80 96" fill="none" stroke="rgb(0, 0, 0)" stroke-opacity="0.3" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 120 208 L 120 128" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 40 128 L 120 128" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 40 208 L 40 128" fill="none" stroke="rgb(0, 0, 0)" stroke-opacity="0.3" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 40 208 L 120 208" fill="none" stroke="rgb(0, 0, 0)" stroke-opacity="0.3" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 10 470 L 90 470" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 10 470 L 10 550" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 90 470 L 90 550" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 10 550 L 90 550" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 210 310 L 290 310" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 210 310 L 210 390" fill="none" stroke="rgb(0, 0, 0)" stroke-opacity="0.3" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 290 310 L 290 390" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 210 390 L 290 390" fill="none" stroke="rgb(0, 0, 0)" stroke-opacity="0.3" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 90 470 L 290 310" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 290 390 L 90 550" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 10 470 L 210 310" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 10 550 L 210 390" fill="none" stroke="rgb(0, 0, 0)" stroke-opacity="0.3" stroke-miterlimit="10" pointer-events="stroke"/>
+    </g>
+</svg>
