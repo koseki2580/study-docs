@@ -48,21 +48,21 @@ def caesar_cipher(input_text: str, direction: str = "encryption"):
   <TabItem value="C++" label="C++">
 
 ```cpp title="caesar-cipher.cpp"
-string caesar_cipher(string input_text, string direction = "encryption")
+string CaesarCipher(string inputText, string direction = "encryption")
 {
-  transform(input_text.begin(), input_text.end(), input_text.begin(), ::toupper);
+  transform(inputText.begin(), inputText.end(), inputText.begin(), ::toupper);
   string base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   int rot = 3;
-  string rot_text = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  rotate(rot_text.begin(), rot_text.begin() + rot, rot_text.end());
+  string rotText = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  rotate(rotText.begin(), rotText.begin() + rot, rotText.end());
   if (direction == "decryption")
-    swap(base, rot_text);
-  string ret_text;
-  for (int i = 0; i < input_text.size(); ++i)
+    swap(base, rotText);
+  string retText;
+  for (int i = 0; i < inputText.size(); ++i)
   {
-    ret_text += rot_text[base.find(input_text[i])];
+    retText += rotText[base.find(inputText[i])];
   }
-  return ret_text;
+  return retText;
 }
 
 ```
@@ -71,7 +71,7 @@ string caesar_cipher(string input_text, string direction = "encryption")
   <TabItem value="C#" label="C#">
 
 ```csharp title="caesar-cipher.cs"
-private static String caesar_cipher(String input_text, String direction = "encryption")
+private static String caesarCipher(String input_text, String direction = "encryption")
 {
     input_text.ToUpper();
     String _base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -149,7 +149,7 @@ function caesarCipher(inputText, direction = "encryption") {
 ```jsx live
 function CaesarCipher(props) {
   // 暗号化 or 復号化する文字列
-  const inputText = "apple";
+  const inputText = "APPLE";
 
   // encryption or decryption
   const direction = "encryption";

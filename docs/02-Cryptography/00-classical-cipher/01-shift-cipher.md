@@ -47,20 +47,20 @@ def shift_cipher(input_text: str, rot: int, direction: str = "encryption"):
   <TabItem value="C++" label="C++">
 
 ```cpp title="shift-cipher.cpp"
-string shift_cipher(string input_text,int rot, string direction = "encryption")
+string ShiftCipher(string inputText,int rot, string direction = "encryption")
 {
-  transform(input_text.begin(), input_text.end(), input_text.begin(), ::toupper);
+  transform(inputText.begin(), inputText.end(), inputText.begin(), ::toupper);
   string base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  string rot_text = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  rotate(rot_text.begin(), rot_text.begin() + rot, rot_text.end());
+  string rotText = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  rotate(rotText.begin(), rotText.begin() + rot, rotText.end());
   if (direction == "decryption")
-    swap(base, rot_text);
-  string ret_text;
-  for (int i = 0; i < input_text.size(); ++i)
+    swap(base, rotText);
+  string retText;
+  for (int i = 0; i < inputText.size(); ++i)
   {
-    ret_text += rot_text[base.find(input_text[i])];
+    retText += rotText[base.find(inputText[i])];
   }
-  return ret_text;
+  return retText;
 }
 
 ```
