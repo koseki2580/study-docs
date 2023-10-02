@@ -28,14 +28,65 @@ import TabItem from '@theme/TabItem';
 <TabItem value="python" label="Python" default>
 
 ```python title="scythia-cipher.py"
+import random
 
+def scythia_cipher_to_encrypt(input_text: str, width: int = 3):
+    input_text = input_text.upper()
+    base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    encrypt_box = [[] for _ in range(len(input_text))]
+    for i in range(len(input_text)):
+        encrypt_box[i] = input_text[i]
+        for _ in range(1, width):
+            encrypt_box[i] += base[random.randint(0, 25)]
+
+    return "".join(encrypt_box)
+
+
+def scythia_cipher_to_decrypt(input_text: str, width: int = 3):
+    decrypt_box = [[] for _ in range(width)]
+    for i in range(len(input_text)):
+        decrypt_box[i % width].append(input_text[i])
+    for i in range(width):
+        decrypt_box[i] = "".join(decrypt_box[i])
+    return decrypt_box
 ```
 
 </TabItem>
   <TabItem value="C++" label="C++">
 
 ```cpp title="scythia-cipher.cpp"
+string ScythiaCipherToEncrypt(string inputText, int width = 3)
+{
+    transform(inputText.begin(), inputText.end(), inputText.begin(), ::toupper);
+    string base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    std::random_device rnd;
+    std::mt19937 mt(rnd());
+    uniform_int_distribution<> rand26(0, 25);
+    vector<string> encryptBox(inputText.size(), "");
+    for (int i = 0; i < inputText.size(); ++i)
+    {
+        encryptBox[i] += inputText[i];
+        for (int j = 1; j < width; ++j)
+        {
+            encryptBox[i] += base[rand26(mt)];
+        }
+    }
+    std::ostringstream os;
+    std::copy(encryptBox.begin(), encryptBox.end(), std::ostream_iterator<std::string>(os));
 
+    return os.str();
+}
+
+vector<string> ScythiaCipherToDecrypt(string inputText, int width = 3)
+{
+    vector<string> decryptBox(width, "");
+    for (int i = 0; i < inputText.size(); ++i)
+    {
+        decryptBox[i % width] += inputText[i];
+    }
+
+    return decryptBox;
+}
 ```
 
   </TabItem>
