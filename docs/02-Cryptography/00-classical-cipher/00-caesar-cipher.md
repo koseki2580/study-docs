@@ -127,6 +127,9 @@ fn  caesar_cipher_decryption(input_text:String) -> String {
 ```js title="caesar-cipher.js"
 function caesarCipher(inputText, direction = "encryption") {
   inputText = inputText.toUpperCase();
+  const base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const rot = 3;
+  const rotText = base.substring(rot) + base.substring(0, rot);
   let retText = "";
   let _base = base;
   let _rotText = rotText;
