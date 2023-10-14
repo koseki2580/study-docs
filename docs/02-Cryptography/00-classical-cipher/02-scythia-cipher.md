@@ -38,7 +38,10 @@ def scythia_cipher_to_encrypt(input_text: str, width: int = 3):
         encrypt_box[i] = input_text[i]
         for _ in range(1, width):
             encrypt_box[i] += base[random.randint(0, 25)]
-
+    rotate_count = random.randint(0, width)
+    for i in range(len(encrypt_box)):
+        encrypt_box[i] = encrypt_box[i][rotate_count:] + \
+            encrypt_box[i][:rotate_count]
     return "".join(encrypt_box)
 
 
@@ -70,6 +73,12 @@ string ScythiaCipherToEncrypt(string inputText, int width = 3)
         {
             encryptBox[i] += base[rand26(mt)];
         }
+    }
+    uniform_int_distribution<> randRotate(0, width);
+    int rotateCount = randRotate(mt);
+    for (int i = 0; i < encryptBox.size(); ++i)
+    {
+        rotate(encryptBox[i].begin(), encryptBox[i].begin() + rotateCount, encryptBox[i].end());
     }
     std::ostringstream os;
     std::copy(encryptBox.begin(), encryptBox.end(), std::ostream_iterator<std::string>(os));
@@ -109,10 +118,14 @@ static private string ScythiaCipherToEncrypt(string inputText, int width = 3)
             encryptBox[i].Append(_base[rand.Next(0, 26)]);
         }
     }
+    int rotateCount = rand.Next(0, width);
     StringBuilder ret_string = new StringBuilder();
     for (int i = 0; i < inputText.Length; ++i)
     {
-        ret_string.Append(encryptBox[i]);
+        String beforeRotate = encryptBox[i].ToString();
+        ret_string.Append(
+            beforeRotate.Substring(rotateCount) + beforeRotate.Substring(0, rotateCount)
+        );
     }
     return ret_string.ToString();
 }
@@ -154,8 +167,10 @@ fn scythia_cipher_to_encrypt(input_text:String, width:u8) -> String{
         }
     }
     let mut ret_string = String::new();
+    let rotate_count = rng.gen_range(0..width) as usize;
     for i in 0..encrypt_box.len(){
-        ret_string += encrypt_box.get(i as usize).unwrap();
+        let before_rotate = encrypt_box.get(i as usize).unwrap();
+        ret_string += &((&before_rotate[rotate_count..]).to_string() + &before_rotate[..rotate_count].to_string());
     }
     ret_string
 }
@@ -192,8 +207,11 @@ function ScythiaCipherToEncrypt(inputText, width = 3) {
     }
   }
   let retString = "";
+  let rotateCount = getRandomInt(0, width);
   for (let i = 0; i < inputText.length; ++i) {
-    retString += encryptBox[i];
+    retString +=
+      encryptBox[i].substring(rotateCount) +
+      encryptBox[i].substring(0, rotateCount);
   }
   return retString;
 }
@@ -238,8 +256,11 @@ function ScythiaCipher(props) {
       }
     }
     let retString = "";
+    let rotateCount = getRandomInt(0, width);
     for (let i = 0; i < inputText.length; ++i) {
-      retString += encryptBox[i];
+      retString +=
+        encryptBox[i].substring(rotateCount) +
+        encryptBox[i].substring(0, rotateCount);
     }
     return retString;
   }
