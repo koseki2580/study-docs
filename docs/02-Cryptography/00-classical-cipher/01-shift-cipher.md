@@ -69,21 +69,21 @@ string ShiftCipher(string inputText,int rot, string direction = "encryption")
   <TabItem value="C#" label="C#">
 
 ```csharp title="shift-cipher.cs"
-private static String shiftCipher(String input_text, int rot, String direction = "encryption")
+private static String ShiftCipher(String inputText, int rot, String direction = "encryption")
 {
-    input_text.ToUpper();
+    inputText.ToUpper();
     String _base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    String rot_text = _base.Substring(rot) + _base.Substring(0, rot);
+    String rotText = _base.Substring(rot) + _base.Substring(0, rot);
     if (direction == "decryption")
     {
-        (_base, rot_text) = (rot_text, _base);
+        (_base, rotText) = (rotText, _base);
     }
-    StringBuilder ret_text = new StringBuilder();
-    for (int i = 0; i < input_text.Length; ++i)
+    StringBuilder retText = new StringBuilder();
+    for (int i = 0; i < inputText.Length; ++i)
     {
-        ret_text.Append(rot_text[_base.IndexOf(input_text[i])]);
+        retText.Append(rotText[_base.IndexOf(inputText[i])]);
     }
-    return ret_text.ToString();
+    return retText.ToString();
 }
 ```
 

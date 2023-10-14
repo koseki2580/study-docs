@@ -71,22 +71,22 @@ string CaesarCipher(string inputText, string direction = "encryption")
   <TabItem value="C#" label="C#">
 
 ```csharp title="caesar-cipher.cs"
-private static String caesarCipher(String input_text, String direction = "encryption")
+private static String CaesarCipher(String inputText, String direction = "encryption")
 {
-    input_text.ToUpper();
+    inputText.ToUpper();
     String _base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     int rot = 3;
-    String rot_text = _base.Substring(rot) + _base.Substring(0, rot);
+    String rotText = _base.Substring(rot) + _base.Substring(0, rot);
     if (direction == "decryption")
     {
-        (_base, rot_text) = (rot_text, _base);
+        (_base, rotText) = (rotText, _base);
     }
-    StringBuilder ret_text = new StringBuilder();
-    for (int i = 0; i < input_text.Length; ++i)
+    StringBuilder retText = new StringBuilder();
+    for (int i = 0; i < inputText.Length; ++i)
     {
-        ret_text.Append(rot_text[_base.IndexOf(input_text[i])]);
+        retText.Append(rotText[_base.IndexOf(inputText[i])]);
     }
-    return ret_text.ToString();
+    return retText.ToString();
 }
 ```
 
