@@ -217,7 +217,7 @@ function ScythiaCipherToEncrypt(inputText, width = 3) {
 }
 function ScythiaCipherToDecrypt(inputText, width = 3) {
   let decryptBox = new Array(width).fill("");
-¥  for (let i = 0; i < inputText.length; ++i) {
+  for (let i = 0; i < inputText.length; ++i) {
     decryptBox[i % width] += inputText[i];
   }
   return decryptBox;
@@ -289,7 +289,7 @@ function ScythiaCipher(props) {
       <span class="mrel" style={{ padding: "5px", margin: "auto 0px" }}>
         →
       </span>
-      <div>
+      <div style={{ "overflow-x": "scroll" }}>
         <h3>暗号化</h3>
         <p>{cipher}</p>
       </div>
