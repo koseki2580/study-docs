@@ -96,7 +96,7 @@ private static String CaesarCipher(String inputText, String direction = "encrypt
 ```rust title="caesar-cipher.rs"
 fn  caesar_cipher_encryption(input_text:String) -> String {
     let input_text_upper = input_text.to_uppercase();
-    let base = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    let base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     let rot = 3;
     let rot_text = (&base[rot..]).to_string() + &base[..rot].to_string();
     let mut ret_text = String::new();
@@ -109,7 +109,7 @@ fn  caesar_cipher_encryption(input_text:String) -> String {
 
 fn  caesar_cipher_decryption(input_text:String) -> String {
     let input_text_upper = input_text.to_uppercase();
-    let base = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    let base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     let rot = 3;
     let rot_text = (&base[rot..]).to_string() + &base[..rot].to_string();
     let mut ret_text = String::new();

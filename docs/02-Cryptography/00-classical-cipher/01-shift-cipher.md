@@ -93,7 +93,7 @@ private static String ShiftCipher(String inputText, int rot, String direction = 
 ```rust title="caesar-cipher.rs"
 fn  shift_cipher_encryption(input_text:String, rot:u8) -> String {
     let input_text_upper = input_text.to_uppercase();
-    let base = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    let base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     let rot_text = (&base[rot..]).to_string() + &base[..rot].to_string();
     let mut ret_text = String::new();
     for i in 0..input_text_upper.len(){
@@ -105,7 +105,7 @@ fn  shift_cipher_encryption(input_text:String, rot:u8) -> String {
 
 fn  shift_cipher_decryption(input_text:String, rot:u8) -> String {
     let input_text_upper = input_text.to_uppercase();
-    let base = String::from("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    let base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     let rot_text = (&base[rot..]).to_string() + &base[..rot].to_string();
     let mut ret_text = String::new();
     for i in 0..input_text_upper.len(){
