@@ -289,8 +289,10 @@ function TranspositionCipher(props) {
   // 暗号化 or 復号化する文字列
   const inputText = "APPLE";
 
-  // 文字列を格納する面の個数
+  // 転置するブロック数
   const size = 3;
+
+  // 暗号化 or 復号化
   const direction = "encryption";
 
   //Fisher-Yatesシャッフルアルゴリズム
