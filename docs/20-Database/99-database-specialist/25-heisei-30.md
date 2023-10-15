@@ -700,12 +700,9 @@ E-R 図からではなく、テーブルから埋める方が理解しやすい�
   「発注に基づいて、仕入先から品目が入荷される。入荷は、入荷#で識別し、入荷年月日、入荷数量、どの発注に該当する入荷であるかを記録する。」
   とあるので、
 
-  > <UnderLine px="2">入荷#</UnderLine>, 入荷年月日, 入荷数量, <UnderLine
-  > px="2"
-  > style="dotted"
-  >
-  > > 発注#
-  > > </UnderLine>
+  > <UnderLine px="2">入荷#</UnderLine>, 入荷年月日, 入荷数量, <UnderLine px="2" style="dotted">
+  > 発注#
+  > </UnderLine>
 
   となる。
 
