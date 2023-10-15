@@ -1,7 +1,7 @@
 ---
 title: 平成29年
 sidebar_label: 平成29年
-draft: false
+draft: true
 toc_max_heading_level: 5
 tags: [データベース, 資格, データベーススペシャリスト, 午後1, 午後2]
 ---

@@ -1,7 +1,7 @@
 ---
 title: 平成30年
 sidebar_label: 平成30年
-draft: false
+draft: true
 toc_max_heading_level: 5
 tags: [データベース, 資格, データベーススペシャリスト, 午後1, 午後2]
 ---
@@ -701,11 +701,11 @@ E-R 図からではなく、テーブルから埋める方が理解しやすい�
   とあるので、
 
   > <UnderLine px="2">入荷#</UnderLine>, 入荷年月日, 入荷数量, <UnderLine
-  >   px="2"
-  >   style="dotted"
-  > >
-  >   発注#
-  > </UnderLine>
+  > px="2"
+  > style="dotted"
+  >
+  > > 発注#
+  > > </UnderLine>
 
   となる。
 
@@ -726,12 +726,12 @@ E-R 図からではなく、テーブルから埋める方が理解しやすい�
   の 4 つに書かれている。これらをまとめると、
 
   > <UnderLine px="2">所要量明細#</UnderLine>, <UnderLine px="2" style="dotted">
-  >   投入品目コード
+  > 投入品目コード
   > </UnderLine>, 必要数量, 引当済数量, <UnderLine px="2" style="dotted">
-  >   発注#
+  > 発注#
   > </UnderLine>
   > , <UnderLine px="2" style="dotted">
-  >   製造#
+  > 製造#
   > </UnderLine>
 
 ##### 追加するサブタイプ
@@ -746,9 +746,9 @@ E-R 図からではなく、テーブルから埋める方が理解しやすい�
   とあるので、 対応する受注明細を記録する必要がある。また、「直納区分を記録する。」とあるので、`直納区分`も必要である。まとめると、
 
   > <UnderLine px="2">発注#</UnderLine>, <UnderLine px="2" style="dotted">
-  >   受注#
+  > 受注#
   > </UnderLine>, <UnderLine px="2" style="dotted">
-  >   受注明細#
+  > 受注明細#
   > </UnderLine>
   > , 直納区分
 
@@ -761,7 +761,7 @@ E-R 図からではなく、テーブルから埋める方が理解しやすい�
   とあるので、
 
   > <UnderLine px="2">発注#</UnderLine>, <UnderLine px="2" style="dotted">
-  >   設計#
+  > 設計#
   > </UnderLine>, 発注数量
 
   となる。
@@ -773,9 +773,9 @@ E-R 図からではなく、テーブルから埋める方が理解しやすい�
   とあるので、 対応する受注明細を記録する必要がある。また、「瑕疵担保期間を記録する。」とあるので、`瑕疵担保期間`も必要である。まとめると、
 
   > <UnderLine px="2">発注#</UnderLine>, <UnderLine px="2" style="dotted">
-  >   受注#
+  > 受注#
   > </UnderLine>, <UnderLine px="2" style="dotted">
-  >   受注明細#
+  > 受注明細#
   > </UnderLine>
   > , 瑕疵担保期間
 
@@ -788,7 +788,7 @@ E-R 図からではなく、テーブルから埋める方が理解しやすい�
   とあるので、
 
   > <UnderLine px="2">発注#</UnderLine>, <UnderLine px="2" style="dotted">
-  >   発注品目コード#
+  > 発注品目コード#
   > </UnderLine>, 発注数量, 発注時在庫数量
 
   となる。
@@ -800,7 +800,7 @@ E-R 図からではなく、テーブルから埋める方が理解しやすい�
   とあるので、
 
   > <UnderLine px="2">発注#</UnderLine>, <UnderLine px="2" style="dotted">
-  >   発注品目コード#
+  > 発注品目コード#
   > </UnderLine>, 発注数量, 希望納入年月日
 
   となる。

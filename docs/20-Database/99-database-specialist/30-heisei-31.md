@@ -1,7 +1,7 @@
 ---
 title: 平成31年
 sidebar_label: 平成31年
-draft: false
+draft: true
 toc_max_heading_level: 5
 tags: [データベース, 資格, データベーススペシャリスト, 午後1, 午後2]
 ---
@@ -464,7 +464,7 @@ WHERE A.ログID = '105'
   これを 1 対多と多対 1 の関係に分ける中間の関係を作成する必要がある。中間テーブルはそれぞれの主キーを合わせた複合キーを主キーとすることで 1 対多と多対 1 の関係に分離ができるので、
 
   > <UnderLine>生地材料品目コード</UnderLine>, <UnderLine>
-  >   使用品目コード
+  > 使用品目コード
   > </UnderLine>, 使用量
 
   となる。
@@ -476,7 +476,7 @@ WHERE A.ログID = '105'
   こちらも e と同じように内製成型材料品目コードと使用品目コード(生地材料と原材料)が多対多関係となるので、
 
   > <UnderLine>内製成型材料品目コード</UnderLine>, <UnderLine>
-  >   使用品目コード
+  > 使用品目コード
   > </UnderLine>, 使用量
 
 - g
@@ -494,7 +494,7 @@ WHERE A.ログID = '105'
   中間テーブルはそれぞれを外部キーとして持つように設計すれば良いので
 
   > <UnderLine>製造番号</UnderLine>, <UnderLine>供給番号</UnderLine>, <UnderLine>
-  >   供給明細番号
+  > 供給明細番号
   > </UnderLine>
   > , 引当数量
 
@@ -523,7 +523,7 @@ WHERE A.ログID = '105'
   在庫確認を行なった時間帯の情報と対応する Mix 部門先についての属性が必要であることが分かるので、
 
   > <UnderLine>補充要求番号</UnderLine>, <UnderLine style="dotted">
-  >   要求先 Mix 部門コード
+  > 要求先 Mix 部門コード
   > </UnderLine>, 在庫確認時間帯
 
   となる。
@@ -535,7 +535,7 @@ WHERE A.ログID = '105'
   注文と調達品目補充要求が 1 対多であることが書かれているので、
 
   > <UnderLine>補充要求番号</UnderLine>, <UnderLine style="dotted">
-  >   注文番号
+  > 注文番号
   > </UnderLine>,
 
   となる。
@@ -1042,10 +1042,10 @@ WHERE A.ログID = '105'
   また、幾つ引き当てたのかという情報を保持する必要があるので(A の焼成指示で B の要求に C 個引き当てた)、引当数量も属性として持たせる必要がある。
 
   > <UnderLine>対象年月日</UnderLine>, <UnderLine>対象時間帯</UnderLine>, <UnderLine>
-  >   焼成部門コード
+  > 焼成部門コード
   > </UnderLine>
   > , <UnderLine>焼成番号</UnderLine>, <UnderLine>要求番号</UnderLine>, <UnderLine>
-  >   要求番号明細
+  > 要求番号明細
   > </UnderLine>
   > , 引当数量
 
@@ -1058,7 +1058,7 @@ WHERE A.ログID = '105'
   どの焼成指示に対しての成型材料製造依頼なのかという情報が必要となるので、
 
   > <UnderLine style="dotted">対象年月日</UnderLine>, <UnderLine style="dotted">
-  >   対象時間帯
+  > 対象時間帯
   > </UnderLine>, <UnderLine style="dotted">焼成部門コード</UnderLine>, <UnderLine style="dotted">焼成番号</UnderLine>
 
   となる。
