@@ -153,7 +153,12 @@ static private string[] ScythiaCipherToDecrypt(string inputText, int width = 3)
   </TabItem>
   <TabItem value="Rust" label="Rust">
 
+:::note
+rand クレートを使用しています。
+:::
+
 ```rust title="scythia-cipher.rs"
+use rand::Rng;
 fn scythia_cipher_to_encrypt(input_text:String, width:u8) -> String{
     let  input_text_upper: Vec<char> = input_text.to_uppercase().chars().collect();
     let base =  "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
