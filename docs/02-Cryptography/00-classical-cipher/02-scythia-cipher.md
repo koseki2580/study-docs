@@ -281,24 +281,24 @@ function ScythiaCipher(props) {
     <div
       style={{
         display: "flex",
-        "flex-direction": "row",
-        "flex-wrap": "nowrap",
-        "align-items": "flex-start",
-        "justify-content": "space-evenly",
+        flexDirection: "row",
+        flexWrap: "nowrap",
+        alignItems: "flex-start",
+        justifyContent: "space-evenly",
       }}
     >
       <div>
         <h3>元の文字列</h3>
         <p>{inputText}</p>
       </div>
-      <span class="mrel" style={{ padding: "5px", margin: "auto 0px" }}>
+      <span className="mrel" style={{ padding: "5px", margin: "auto 0px" }}>
         →
       </span>
-      <div style={{ "overflow-x": "scroll" }}>
+      <div style={{ overflowX: "scroll" }}>
         <h3>暗号化</h3>
         <p>{cipher}</p>
       </div>
-      <span class="mrel" style={{ padding: "5px", margin: "auto 0px" }}>
+      <span className="mrel" style={{ padding: "5px", margin: "auto 0px" }}>
         →
       </span>
       <div>

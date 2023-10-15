@@ -182,7 +182,7 @@ function CaesarCipher(props) {
         {direction === "encryption"
           ? inputText
           : caesarCipher(inputText, direction)}
-        <span class="mrel" style={{ padding: "5px" }}>
+        <span className="mrel" style={{ padding: "5px" }}>
           {direction === "encryption" ? "→" : "←"}
         </span>
         {direction === "encryption"

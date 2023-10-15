@@ -179,7 +179,7 @@ function ShiftCipher(props) {
         {direction === "encryption"
           ? inputText
           : shiftCipher(inputText, direction)}
-        <span class="mrel" style={{ padding: "5px" }}>
+        <span claclassNamess="mrel" style={{ padding: "5px" }}>
           {direction === "encryption" ? "→" : "←"}
         </span>
         {direction === "encryption"
