@@ -1,7 +1,7 @@
 ---
 title: 累積和
 sidebar_label: 累積和
-draft: true
+draft: false
 toc_max_heading_level: 4
 tags: [アルゴリズム]
 ---
