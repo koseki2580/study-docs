@@ -196,7 +196,7 @@ class CumulativeSum<T>
             }
         }
 
-        public T query(int l, int r)
+        public T Query(int l, int r)
         {
             if (l > r)
             {
@@ -265,6 +265,40 @@ impl<T:Copy> CumulativeSum<T>  {
 <TabItem value="python" label="Python" default>
 
 ```python title="cumulative-sum.py"
+class CumulativeSum:
+    def __init__(self, box: list[list]) -> None:
+        self.sum_box = [[0] * (len(box[0]) + 1) for _ in range(len(box)+1)]
+
+        for i in range(len(box)):
+            for j in range(len(box[i])):
+                self.sum_box[i+1][j+1] += box[i][j] + self.sum_box[i+1][j]
+        for i in range(len(box)):
+            for j in range(len(box[i])):
+                self.sum_box[i+1][j+1] += self.sum_box[i][j+1]
+
+    def query(self, sx: int, sy: int, gx: int, gy: int):
+        """l ~ rの和を返す
+
+        Args:
+            l (int): 開始点
+            r (int): 終了点
+        """
+        # 配列番号を元の配列番号に合わせる
+        if sx > gx:
+            sx, gx = gx, sx
+        if sy > gy:
+            sy, gy = gy, sy
+        gx += 1
+        gy += 1
+        assert sx >= 0
+        assert sy >= 0
+        assert gx < len(self.sum_box[0])
+        assert gy < len(self.sum_box)
+        ret = self.sum_box[gy][gx]
+        ret -= self.sum_box[gy][sx]
+        ret -= self.sum_box[sy][gx]
+        ret += self.sum_box[sy][sx]
+        return ret
 
 ```
 
@@ -272,22 +306,197 @@ impl<T:Copy> CumulativeSum<T>  {
   <TabItem value="C++" label="C++">
 
 ```cpp title="cumulative-sum.cpp"
-
+template <typename T>
+struct CumulativeSum
+{
+    vector<vector<T>> sum_box;
+    CumulativeSum(vector<vector<T>> box) : sum_box(box.size() + 1, vector<T>(box[0].size() + 1, 0))
+    {
+        for (int i = 0; i < box.size(); ++i)
+        {
+            for (int j = 0; j < box[i].size(); ++j)
+            {
+                sum_box[i + 1][j + 1] += box[i][j] + sum_box[i + 1][j];
+            }
+        }
+        for (int i = 0; i < box.size(); ++i)
+        {
+            for (int j = 0; j < box[i].size(); ++j)
+            {
+                sum_box[i + 1][j + 1] += sum_box[i][j + 1];
+            }
+        }
+    }
+    T query(int sx, int sy, int gx, int gy)
+    {
+        if (sx > gx)
+            swap(sx, gx);
+        if (sy > gy)
+            swap(sy, gy);
+        ++gx;
+        ++gy;
+        if (sy < 0)
+        {
+            throw runtime_error("sy is out of range");
+        }
+        if (sx < 0)
+        {
+            throw runtime_error("sx is out of range");
+        }
+        if (gx >= sum_box[0].size())
+        {
+            throw runtime_error("gx is out of range");
+        }
+        if (gy >= sum_box.size())
+        {
+            throw runtime_error("gy is out of range");
+        }
+        T ret = sum_box[gy][gx];
+        ret -= sum_box[gy][sx];
+        ret -= sum_box[sy][gx];
+        ret += sum_box[sy][sx];
+        return ret;
+    }
+};
 ```
 
   </TabItem>
   <TabItem value="C#" label="C#">
 
 ```csharp title="cumulative-sum.cs"
+class CumulativeSum<T>
+{
+    T[,] sum_box;
 
+    private Func<T, T, T> Add { get; set; }
+    private Func<T, T, T> Sub { get; set; }
 
+    public CumulativeSum(T[,] box)
+    {
+        sum_box = new T[box.Length + 1, box.GetLength(0) + 1];
+        ParameterExpression op1 = Expression.Parameter(typeof(T));
+        ParameterExpression op2 = Expression.Parameter(typeof(T));
+        Add = Expression.Lambda<Func<T, T, T>>(Expression.Add(op1, op2), op1, op2).Compile();
+        Sub = Expression
+            .Lambda<Func<T, T, T>>(Expression.Subtract(op1, op2), op1, op2)
+            .Compile();
+        for (int i = 0; i > box.GetLength(0); ++i)
+        {
+            for (int j = 0; j > box.GetLength(1); ++j)
+            {
+                sum_box[i, j] = (T)(object)0;
+            }
+        }
+        for (int i = 0; i < box.GetLength(0); ++i)
+        {
+            for (int j = 0; j < box.GetLength(1); ++j)
+            {
+                sum_box[i + 1, j + 1] = Add(
+                    Add(box[i, j], sum_box[i + 1, j]),
+                    sum_box[i + 1, j + 1]
+                );
+            }
+        }
+        for (int i = 0; i < box.GetLength(0); ++i)
+        {
+            for (int j = 0; j < box.GetLength(1); ++j)
+            {
+                sum_box[i + 1, j + 1] = Add(sum_box[i, j + 1], sum_box[i + 1, j + 1]);
+            }
+        }
+    }
+
+    public T Query(int sx, int sy, int gx, int gy)
+    {
+        if (sx > gx)
+        {
+            (sx, gx) = (gx, sx);
+        }
+        if (sy > gy)
+        {
+            (sy, gy) = (gy, sy);
+        }
+        ++gx;
+        ++gy;
+
+        if (sx < 0)
+            throw new Exception("sx is out of ");
+        if (sy < 0)
+            throw new Exception("sy is out of ");
+        if (gx >= this.sum_box.GetLength(1))
+            throw new Exception("gx is out of range");
+        if (gy >= this.sum_box.GetLength(0))
+            throw new Exception("gy is out of range");
+        T ret = this.sum_box[gy, gx];
+        ret = Sub(ret, this.sum_box[gy, sx]);
+        ret = Sub(ret, this.sum_box[sy, gx]);
+        ret = Add(ret, this.sum_box[sy, sx]);
+        return ret;
+    }
+}
 ```
 
   </TabItem>
   <TabItem value="Rust" label="Rust">
 
 ```rust title="cumulative-sum.rs"
+struct CumulativeSum<T>{
+    sum_box:Vec<Vec<T>>
+}
+impl<T:Copy> CumulativeSum<T>  {
+    pub fn new(box_data:Vec<Vec<T>>) -> Self
+    where T: std::ops::Add<Output = T>, T:Default, T:std::ops::AddAssign,
+    usize: std::convert::TryInto<T>,
+    <usize as std::convert::TryInto<T>>::Error: std::fmt::Debug,
+    {
+        let mut sum_box:Vec<Vec<T>> = vec![vec![T::default(); box_data.len() + 1]; box_data[0].len() + 1];
 
+        for i in 0..box_data.len(){
+            for j in  0..box_data[i].len(){
+                let temp = box_data[i][j] + sum_box[i + 1][j];
+                sum_box[i + 1][j + 1] += temp;
+            }
+        }
+        for i in 0..box_data.len(){
+            for j in  0..box_data[i].len(){
+                let temp = sum_box[i][j + 1];
+                sum_box[i + 1][j + 1] += temp;
+            }
+        }
+        CumulativeSum {sum_box:sum_box}
+    }
+
+
+    pub fn query(&self, mut sx: usize, mut sy:usize,mut gx:usize,mut  gy:usize) -> T
+    where T: std::ops::Sub<Output = T>,T:std::ops::AddAssign, T:std::ops::SubAssign,
+    {
+        if sx > gx{
+            std::mem::swap(&mut sx,&mut gx);
+        }
+        if sy > gy {
+            std::mem::swap(&mut sy,&mut gy);
+        };
+        gx += 1;
+        gy += 1;
+        if sx < 0 {
+            panic!("sx is out of range")
+        };
+        if sy < 0 {
+            panic!("sy is out of range")
+        };
+        if gx >= self.sum_box[0].len() {
+            panic!("gx is out of range");
+        }
+        if gy >= self.sum_box.len() {
+            panic!("gy is out of range");
+        }
+        let mut ret = self.sum_box[gy][gx];
+        ret -=  self.sum_box[gy][sx];
+        ret -= self.sum_box[sy][gx];
+        ret += self.sum_box[sy][sx];
+        ret
+    }
+}
 ```
 
   </TabItem>
