@@ -22,6 +22,7 @@ import TabItem from '@theme/TabItem';
 <TabItem value="python" label="Python" default>
 
 ```python title="simple-substitution-cipher.py"
+import random
 def generate_simple_substitution_table():
     base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     table = [i for i in base]
@@ -82,7 +83,7 @@ private static String GenerateSimpleSubstitutionTable()
 {
     String _base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     char[] chars = _base.ToCharArray();
-    return new string(chars.OrderBy(i => Guid.NewGuid()).ToArray());
+    return new String(chars.OrderBy(i => Guid.NewGuid()).ToArray());
 }
 
 private static String SimpleSubstitutionCipher(
