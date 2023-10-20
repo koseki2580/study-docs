@@ -2,6 +2,10 @@
   "name": "study-doxs",
   "version": "0.0.0",
   "private": true,
+  "workspaces": [
+    "argos",
+    "website"
+  ],
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
