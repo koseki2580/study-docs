@@ -460,12 +460,10 @@ WHERE A.ログID = '105'
   「生地材料には、そのレシピとして、1 回の製造に使用する、幾つかの原材料とその使用量を設定する。」とある。
   生地材料レシピは生地材料と紐づいてることが`生地材料には、そのレシピとして`の部分から分かる。
   また、`幾つかの原材料とその使用量を設定する`とあるので、使用品目コードとその使用量についての属性値を持つことが分かる。
-  生地材料は複数の原材料を使用するので{生地材料} $\rightarrow$ {原材料}の関係になる。さらに、原材料は複数の生地材料に用いられるので生地材料と原材料には多対多の関係が成り立つ。
+  生地材料は複数の原材料を使用するので\{生地材料\} $\rightarrow$ \{原材料\}の関係になる。さらに、原材料は複数の生地材料に用いられるので生地材料と原材料には多対多の関係が成り立つ。
   これを 1 対多と多対 1 の関係に分ける中間の関係を作成する必要がある。中間テーブルはそれぞれの主キーを合わせた複合キーを主キーとすることで 1 対多と多対 1 の関係に分離ができるので、
 
-  > <UnderLine>生地材料品目コード</UnderLine>, <UnderLine>
-  > 使用品目コード
-  > </UnderLine>, 使用量
+  > <UnderLine>生地材料品目コード</UnderLine>, <UnderLine>使用品目コード</UnderLine>, 使用量
 
   となる。
 
@@ -475,9 +473,7 @@ WHERE A.ログID = '105'
   「内製成型材料には、そのレシピとして、1 回の製造に使用する、幾つかの品目(生地材料又は原材料)とその使用量を設定する。」とある。
   こちらも e と同じように内製成型材料品目コードと使用品目コード(生地材料と原材料)が多対多関係となるので、
 
-  > <UnderLine>内製成型材料品目コード</UnderLine>, <UnderLine>
-  > 使用品目コード
-  > </UnderLine>, 使用量
+  > <UnderLine>内製成型材料品目コード</UnderLine>, <UnderLine>使用品目コード</UnderLine>, 使用量
 
 - g
 
@@ -487,15 +483,13 @@ WHERE A.ログID = '105'
 
   この 2 つの文から、製品は A という単位で製造されるが、要求される量が A の倍数ではなく B という場合あり、A の中の C 個は引き当てたといったようなケースが存在するということが分かる。
   つまり、焼成実績は複数の供給明細に紐づくこと(A のうち C だけ引き当てた場合)があり、また、
-  供給明細も複数の焼成実績に紐づくこと({A-C}個で足りないので次の A から補給する場合)があるということになり、多対多の関係となってしまっている。
+  供給明細も複数の焼成実績に紐づくこと(\{A-C\}個で足りないので次の A から補給する場合)があるということになり、多対多の関係となってしまっている。
   27 ページ $>$ 1. 概念データモデル及び関係スキーマの設計方針 $>$ (2) に
   「概念データモデルでは多対多のリレーションシップは用いない」とあるので、それぞれを 1 対多, 多対 1 となるような中間テーブルを用意する必要がある。
 
   中間テーブルはそれぞれを外部キーとして持つように設計すれば良いので
 
-  > <UnderLine>製造番号</UnderLine>, <UnderLine>供給番号</UnderLine>, <UnderLine>
-  > 供給明細番号
-  > </UnderLine>
+  > <UnderLine>製造番号</UnderLine>, <UnderLine>供給番号</UnderLine>, <UnderLine> 供給明細番号</UnderLine>
   > , 引当数量
 
   となる。
@@ -506,9 +500,7 @@ WHERE A.ログID = '105'
   「後述する生地材料補充要求について、その生地材料の製造に必要な原材料の払出しを依頼する。」と書かれており、`その生地材料の製造に`とあるので、
   生地材料要求と払出依頼が 1 対 1 の関係であると分かる。また、図 2 の E-R 図に成型材料製造依頼と 1 対 1 の関係を持っているので、
 
-  > <UnderLine style="dotted">
-  >   成型材料製造依頼番号
-  > </UnderLine>, <UnderLine style="dotted">補充要求番号</UnderLine>
+  > <UnderLine style="dotted"> 成型材料製造依頼番号</UnderLine>, <UnderLine style="dotted">補充要求番号</UnderLine>
 
   となる。
 
@@ -522,9 +514,7 @@ WHERE A.ログID = '105'
   「生地材料補充要求は、在庫確認の都度、Mix 部門に送る。Mix 部門では、生地材料補充要求を、1 ロット分の Mix 指示として受け取る。」とあるので、
   在庫確認を行なった時間帯の情報と対応する Mix 部門先についての属性が必要であることが分かるので、
 
-  > <UnderLine>補充要求番号</UnderLine>, <UnderLine style="dotted">
-  > 要求先 Mix 部門コード
-  > </UnderLine>, 在庫確認時間帯
+  > <UnderLine>補充要求番号</UnderLine>, <UnderLine style="dotted">要求先 Mix 部門コード</UnderLine>, 在庫確認時間帯
 
   となる。
 
@@ -534,9 +524,7 @@ WHERE A.ログID = '105'
   「調達品目補充要求は、食材業者ごとにくくって注文を発行する。調達品目補充要求は、注文に対する注文明細に位置付ける。」と書かれている。かつ、図 2 に
   注文と調達品目補充要求が 1 対多であることが書かれているので、
 
-  > <UnderLine>補充要求番号</UnderLine>, <UnderLine style="dotted">
-  > 注文番号
-  > </UnderLine>,
+  > <UnderLine>補充要求番号</UnderLine>, <UnderLine style="dotted">注文番号</UnderLine>,
 
   となる。
 
@@ -1041,12 +1029,8 @@ WHERE A.ログID = '105'
   焼成指示要求引当テーブルはこの中間テーブルとなっており、主キーはそれぞれの主キー合わせた複合キーとなる。
   また、幾つ引き当てたのかという情報を保持する必要があるので(A の焼成指示で B の要求に C 個引き当てた)、引当数量も属性として持たせる必要がある。
 
-  > <UnderLine>対象年月日</UnderLine>, <UnderLine>対象時間帯</UnderLine>, <UnderLine>
-  > 焼成部門コード
-  > </UnderLine>
-  > , <UnderLine>焼成番号</UnderLine>, <UnderLine>要求番号</UnderLine>, <UnderLine>
-  > 要求番号明細
-  > </UnderLine>
+  > <UnderLine>対象年月日</UnderLine>, <UnderLine>対象時間帯</UnderLine>, <UnderLine>焼成部門コード</UnderLine>
+  > , <UnderLine>焼成番号</UnderLine>, <UnderLine>要求番号</UnderLine>, <UnderLine>要求番号明細</UnderLine>
   > , 引当数量
 
   となる。
@@ -1057,9 +1041,7 @@ WHERE A.ログID = '105'
   「内製限定にした焼成指示を先に、成型部門に対して成型材料製造依頼をかける。」とあるので、
   どの焼成指示に対しての成型材料製造依頼なのかという情報が必要となるので、
 
-  > <UnderLine style="dotted">対象年月日</UnderLine>, <UnderLine style="dotted">
-  > 対象時間帯
-  > </UnderLine>, <UnderLine style="dotted">焼成部門コード</UnderLine>, <UnderLine style="dotted">焼成番号</UnderLine>
+  > <UnderLine style="dotted">対象年月日</UnderLine>, <UnderLine style="dotted">対象時間帯</UnderLine>, <UnderLine style="dotted">焼成部門コード</UnderLine>, <UnderLine style="dotted">焼成番号</UnderLine>
 
   となる。
 

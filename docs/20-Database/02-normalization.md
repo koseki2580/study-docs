@@ -47,9 +47,9 @@ import FontColor from "@site/src/components/Custom/FontColor"
 
 ![イメージ図](/img/svg/Database/normalization/normalization-2.drawio.svg "第1正規形 → 第2正規形")
 
-- {受注番号, 製品番号} $\rightarrow$ {値段}
-- {受注番号} $\rightarrow$ {顧客番号, 受注者}
-- {製品番号} $\rightarrow$ {製品名}
+- \{受注番号, 製品番号\} $\rightarrow$ \{値段\}
+- \{受注番号\} $\rightarrow$ \{顧客番号, 受注者\}
+- \{製品番号\} $\rightarrow$ \{製品名\}
 
 の関係が成り立ち、`顧客番号`, `受注者`, `製品名`は部分関係従属である。これらの関係を取り除く。
 
@@ -78,8 +78,8 @@ import FontColor from "@site/src/components/Custom/FontColor"
 
 ![イメージ図](/img/svg/Database/normalization/normalization-4.drawio.svg "第2正規形 → 第3正規形")
 
-- {受注番号} $\rightarrow$ {顧客番号}
-- {顧客番号} $\rightarrow$ {受注者名}
+- \{受注番号\} $\rightarrow$ \{顧客番号\}
+- \{顧客番号\} $\rightarrow$ \{受注者名\}
 
 の推移的関係従属が存在している。この推移的関係従属を取り除く。
 
@@ -109,7 +109,7 @@ X,Y,Z の 3 つの関係が存在し、
 2. X は関係表 R のスーパキーである
 
 `自明な関数従属性`とは X $\rightarrow$ Y である時に Y が X の部分集合である集合である時のことをいう。
-{受注番号, 商品番号} $\rightarrow$ {商品番号}のような場合をさす。
+\{受注番号, 商品番号\} $\rightarrow$ \{商品番号\}のような場合をさす。
 
 `スーパキー`とは関係のタプルを一意に選択できるという条件のみを満たすキーのことをいう。
 
@@ -117,19 +117,19 @@ X,Y,Z の 3 つの関係が存在し、
 
 この関係表では
 
-- {受注番号, 材料名} $\rightarrow$ {商品名}
-- {受注番号, 商品名} $\rightarrow$ {材料名}
-- {商品名} $\rightarrow$ {材料名}
+- \{受注番号, 材料名\} $\rightarrow$ \{商品名\}
+- \{受注番号, 商品名\} $\rightarrow$ \{材料名\}
+- \{商品名\} $\rightarrow$ \{材料名\}
 
 の関数従属が考えられる。そのため、全てが候補キーとなり、第 3 正規形となっている。
 
-{商品名} $\rightarrow$ {材料名}は{受注番号, 商品名} $\rightarrow$ {材料名}の部分関数従属であり、
-{商品名} $\rightarrow$ {材料名}は自明な関数従属性ではなく、商品名はスーパキーでもないので（一意に識別できない）
+\{商品名\} $\rightarrow$ \{材料名\}は\{受注番号, 商品名\} $\rightarrow$ \{材料名\}の部分関数従属であり、
+\{商品名\} $\rightarrow$ \{材料名\}は自明な関数従属性ではなく、商品名はスーパキーでもないので（一意に識別できない）
 分解する必要がある。
 
 ![イメージ図](/img/svg/Database/normalization/normalization-6.drawio.svg "ボイスコッド正規形")
 
-このようにボイスコッド正規を行うと{受注番号, 材料名} $\rightarrow$ {商品名}の関係従属がなくなってしまう。
+このようにボイスコッド正規を行うと\{受注番号, 材料名\} $\rightarrow$ \{商品名\}の関係従属がなくなってしまう。
 このように情報が損失してしまうことを`関係従属性損失`という。
 
 また、関係従属性を保存することを`関係従属保存`という。
@@ -141,12 +141,12 @@ X,Y,Z の 3 つの関係が存在し、
 
 ![イメージ図](/img/svg/Database/normalization/normalization-7.drawio.svg "ベース図")
 
-この関係表では{受注番号 1}と決まれば、{商品 A, 商品 B}または{送り先 A, 送り先 B}と一意に決定する。つまり、{受注番号}が決まれば、独立して{商品名}と{送り先}が決まるため、次の関係が存在する。
-また、{商品名}と{送り先}の間には関係が一切なく、それぞれ独立して決定する。
+この関係表では\{受注番号 1\}と決まれば、\{商品 A, 商品 B\}または\{送り先 A, 送り先 B\}と一意に決定する。つまり、\{受注番号\}が決まれば、独立して\{商品名\}と\{送り先\}が決まるため、次の関係が存在する。
+また、\{商品名\}と\{送り先\}の間には関係が一切なく、それぞれ独立して決定する。
 
-- {受注番号} $\rightarrow$$\rightarrow$ {商品名 | 送り先}
+- \{受注番号\} $\rightarrow$$\rightarrow$ \{商品名 | 送り先\}
 
-この関係を{受注番号} $\rightarrow$$\rightarrow$ {商品名}と{受注番号} $\rightarrow$$\rightarrow$ {送り先}
+この関係を\{受注番号\} $\rightarrow$$\rightarrow$ \{商品名\}と\{受注番号\} $\rightarrow$$\rightarrow$ \{送り先\}
 に分ける正規化を行う。
 
 ![イメージ図](/img/svg/Database/normalization/normalization-8.drawio.svg "第4正規形")
@@ -161,8 +161,8 @@ X,Y,Z の 3 つの関係が存在し、
 
 ![イメージ図](/img/svg/Database/normalization/normalization-10.drawio.svg "ベース図")
 
-この関係表では{受注番号 1}が決まった際に、{材料名 A, 材料名 B}と決まるが、{商品名 A}が決まった際にも{材料名 A, 材料名 B}が決まる。
-{受注番号,　商品名, 材料名}が独立していないため、この関係を分解する。
+この関係表では\{受注番号 1\}が決まった際に、\{材料名 A, 材料名 B\}と決まるが、\{商品名 A\}が決まった際にも\{材料名 A, 材料名 B\}が決まる。
+\{受注番号,　商品名, 材料名\}が独立していないため、この関係を分解する。
 
 ![イメージ図](/img/svg/Database/normalization/normalization-11.drawio.svg "第5正規化")
 

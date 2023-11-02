@@ -382,9 +382,7 @@ import FontColor from "@site/src/components/Custom/FontColor"
   設定してしまうと複数の拠点に複数の営業所が存在することになり、拠点名と営業所の 1 対 1 の関係が成り立たなくなるので、外部キーとして持つことがわかる。
   また、図 3 の E-R 図を見ると物流センターから矢印が出ているので、
 
-  > <UnderLine style="dotted">
-  >   営業所営業部門コード
-  > </UnderLine>, <UnderLine style="dotted">物流センタ拠点コード</UnderLine>
+  > <UnderLine style="dotted"> 営業所営業部門コード</UnderLine>, <UnderLine style="dotted">物流センタ拠点コード</UnderLine>
 
   となる。
 
@@ -423,9 +421,7 @@ import FontColor from "@site/src/components/Custom/FontColor"
   スーパタイプである広域得意先で持つことが分かる。
   まとめると、
 
-  > <UnderLine style="dotted">
-  >   発注得意先コード
-  > </UnderLine>, <UnderLine style="dotted">担当販売部営業部門コード</UnderLine>
+  > <UnderLine style="dotted">発注得意先コード</UnderLine>, <UnderLine style="dotted">担当販売部営業部門コード</UnderLine>
 
   となる。
 

@@ -59,7 +59,7 @@ import FontColor from "@site/src/components/Custom/FontColor"
 
 ④ には仮払金精算について書かれており、「`一つの仮払いに対する精算が複数の日に分かれる`ことがある」から
 
-{仮払金申請} $\rightarrow$ {仮払金精算}
+\{仮払金申請\} $\rightarrow$ \{仮払金精算\}
 
 であることが分かる。
 
@@ -587,12 +587,8 @@ E-R 図からではなく、テーブルから埋める方が理解しやすい�
   とあるので、すり合せ設計に対応するすり合せ部品受注明細を記録する必要がある。そのため、`受注#, 受注明細#`となる。
   また、「専汎区分を記録する」とあるので、`専汎区分`も必要である。まとめると、
 
-  > <UnderLine px="2" style="dotted">
-  >   受注#
-  > </UnderLine>
-  > , <UnderLine px="2" style="dotted">
-  >   受注明細#
-  > </UnderLine>
+  > <UnderLine px="2" style="dotted"> 受注#</UnderLine>
+  > , <UnderLine px="2" style="dotted">受注明細# </UnderLine>
   > , 専汎区分
 
   となる。
@@ -611,12 +607,8 @@ E-R 図からではなく、テーブルから埋める方が理解しやすい�
   」とあるので、設置・試運転指示に対応する設置・試運転受注明細を記録する必要がある。そのため、`受注#, 受注明細#`となる。
   また、「指示年月日を記録する。」とあるので、`指示年月日`も必要である。まとめると、
 
-  > <UnderLine px="2" style="dotted">
-  >   受注#
-  > </UnderLine>
-  > , <UnderLine px="2" style="dotted">
-  >   受注明細#
-  > </UnderLine>
+  > <UnderLine px="2" style="dotted">受注#</UnderLine>
+  > , <UnderLine px="2" style="dotted">受注明細#</UnderLine>
   > , 指示年月日
 
   となる。
@@ -627,12 +619,8 @@ E-R 図からではなく、テーブルから埋める方が理解しやすい�
   ページ 25 $>$ (4) $>$ $\textcircled{\scriptsize 2}$ $>$ (Ⅰ) に「ユニット製造指図は、受注明細の受注数量がそのまま製造指図数量となる。」
   とあるので、対応する受注明細が分かれば良いことが分かり、
 
-  > <UnderLine px="2" style="dotted">
-  >   受注#
-  > </UnderLine>
-  > , <UnderLine px="2" style="dotted">
-  >   受注明細#
-  > </UnderLine>
+  > <UnderLine px="2" style="dotted"> 受注#</UnderLine>
+  > , <UnderLine px="2" style="dotted">受注明細#</UnderLine>
 
   となる。
 
@@ -643,9 +631,7 @@ E-R 図からではなく、テーブルから埋める方が理解しやすい�
   「すり合せ部品製造指図は、受注明細の受注数量がそのまま製造指図数量となる。どのすり合せ部品設計に基づくのかの設計#を記録する。」
   とあるので、
 
-  > <UnderLine px="2" style="dotted">
-  >   設計#
-  > </UnderLine>
+  > <UnderLine px="2" style="dotted">設計#</UnderLine>
 
   となる。
 
@@ -657,12 +643,8 @@ E-R 図からではなく、テーブルから埋める方が理解しやすい�
   とあるので、対応する受注明細が分かれば良いことが分かる。
   また、「納品方法を記録する。」とあるので、`納品方法`も必要である。まとめると、
 
-  > <UnderLine px="2" style="dotted">
-  >   受注#
-  > </UnderLine>
-  > , <UnderLine px="2" style="dotted">
-  >   受注明細#
-  > </UnderLine>
+  > <UnderLine px="2" style="dotted">受注#</UnderLine>
+  > , <UnderLine px="2" style="dotted"> 受注明細#</UnderLine>
   > , 納品方法
 
   となる。
@@ -673,9 +655,7 @@ E-R 図からではなく、テーブルから埋める方が理解しやすい�
   ページ 25 $>$ (4) $>$ $\textcircled{\scriptsize 2}$ $>$ (Ⅳ) に
   「$\dotsm$製造部門が、製造する品目、製造指図数量、優先度を決定し、記録する。」とあるので、
 
-  > <UnderLine px="2" style="dotted">
-  >   製造品目コード
-  > </UnderLine>
+  > <UnderLine px="2" style="dotted"> 製造品目コード </UnderLine>
   > , 製造指図数量, 優先度
 
   となる。
@@ -686,9 +666,7 @@ E-R 図からではなく、テーブルから埋める方が理解しやすい�
   ページ 25 $>$ (4) $>$ $\textcircled{\scriptsize 2}$ $>$ (Ⅴ) に
   「$\dotsm$品目、製造指図数量を記録する。$\dotsm$」とあるので、
 
-  > <UnderLine px="2" style="dotted">
-  >   製造品目コード
-  > </UnderLine>
+  > <UnderLine px="2" style="dotted">製造品目コード </UnderLine>
   > , 製造指図数量
 
   となる。
@@ -700,9 +678,7 @@ E-R 図からではなく、テーブルから埋める方が理解しやすい�
   「発注に基づいて、仕入先から品目が入荷される。入荷は、入荷#で識別し、入荷年月日、入荷数量、どの発注に該当する入荷であるかを記録する。」
   とあるので、
 
-  > <UnderLine px="2">入荷#</UnderLine>, 入荷年月日, 入荷数量, <UnderLine px="2" style="dotted">
-  > 発注#
-  > </UnderLine>
+  > <UnderLine px="2">入荷#</UnderLine>, 入荷年月日, 入荷数量, <UnderLine px="2" style="dotted">発注#</UnderLine>
 
   となる。
 
@@ -722,14 +698,8 @@ E-R 図からではなく、テーブルから埋める方が理解しやすい�
 
   の 4 つに書かれている。これらをまとめると、
 
-  > <UnderLine px="2">所要量明細#</UnderLine>, <UnderLine px="2" style="dotted">
-  > 投入品目コード
-  > </UnderLine>, 必要数量, 引当済数量, <UnderLine px="2" style="dotted">
-  > 発注#
-  > </UnderLine>
-  > , <UnderLine px="2" style="dotted">
-  > 製造#
-  > </UnderLine>
+  > <UnderLine px="2">所要量明細#</UnderLine>, <UnderLine px="2" style="dotted">投入品目コード</UnderLine>, 必要数量, 引当済数量, <UnderLine px="2" style="dotted">発注#</UnderLine>
+  > , <UnderLine px="2" style="dotted">製造# </UnderLine>
 
 ##### 追加するサブタイプ
 
@@ -742,11 +712,7 @@ E-R 図からではなく、テーブルから埋める方が理解しやすい�
   ページ 26 $>$ (Ⅰ) に「受注明細の受注数量がそのまま発注数量となる。仕入先から出荷先に、直接納入するかどうかの直納区分を記録する。」
   とあるので、 対応する受注明細を記録する必要がある。また、「直納区分を記録する。」とあるので、`直納区分`も必要である。まとめると、
 
-  > <UnderLine px="2">発注#</UnderLine>, <UnderLine px="2" style="dotted">
-  > 受注#
-  > </UnderLine>, <UnderLine px="2" style="dotted">
-  > 受注明細#
-  > </UnderLine>
+  > <UnderLine px="2">発注#</UnderLine>, <UnderLine px="2" style="dotted">受注#</UnderLine>, <UnderLine px="2" style="dotted">受注明細#</UnderLine>
   > , 直納区分
 
   となる。
@@ -757,9 +723,7 @@ E-R 図からではなく、テーブルから埋める方が理解しやすい�
   ページ 26 $>$ (Ⅱ) に「すり合せ部品発注は、受注明細の受注数量を基に発注ロットサイズを加味して、発注数量を決定する。どのすり合せ部品設計に基づくのかの設計#を記録する。」
   とあるので、
 
-  > <UnderLine px="2">発注#</UnderLine>, <UnderLine px="2" style="dotted">
-  > 設計#
-  > </UnderLine>, 発注数量
+  > <UnderLine px="2">発注#</UnderLine>, <UnderLine px="2" style="dotted">設計#</UnderLine>, 発注数量
 
   となる。
 
@@ -769,11 +733,7 @@ E-R 図からではなく、テーブルから埋める方が理解しやすい�
   ページ 26 $>$ (Ⅲ)に「ソフトウェア発注は、受注明細の受注数量がそのまま発注数量となる。瑕疵担保期間を記録する。」
   とあるので、 対応する受注明細を記録する必要がある。また、「瑕疵担保期間を記録する。」とあるので、`瑕疵担保期間`も必要である。まとめると、
 
-  > <UnderLine px="2">発注#</UnderLine>, <UnderLine px="2" style="dotted">
-  > 受注#
-  > </UnderLine>, <UnderLine px="2" style="dotted">
-  > 受注明細#
-  > </UnderLine>
+  > <UnderLine px="2">発注#</UnderLine>, <UnderLine px="2" style="dotted">受注#</UnderLine>, <UnderLine px="2" style="dotted">受注明細#</UnderLine>
   > , 瑕疵担保期間
 
   となる。
@@ -784,9 +744,7 @@ E-R 図からではなく、テーブルから埋める方が理解しやすい�
   ページ 26 $>$ (Ⅳ) に「$\dotsm$品目、発注数量、在庫時在庫数量を記録する。」
   とあるので、
 
-  > <UnderLine px="2">発注#</UnderLine>, <UnderLine px="2" style="dotted">
-  > 発注品目コード#
-  > </UnderLine>, 発注数量, 発注時在庫数量
+  > <UnderLine px="2">発注#</UnderLine>, <UnderLine px="2" style="dotted"> 発注品目コード#</UnderLine>, 発注数量, 発注時在庫数量
 
   となる。
 
@@ -796,9 +754,7 @@ E-R 図からではなく、テーブルから埋める方が理解しやすい�
   ページ 26 $>$ (Ⅴ) に「$\dotsm$品目、発注数量、希望納入年月日を記録する。」
   とあるので、
 
-  > <UnderLine px="2">発注#</UnderLine>, <UnderLine px="2" style="dotted">
-  > 発注品目コード#
-  > </UnderLine>, 発注数量, 希望納入年月日
+  > <UnderLine px="2">発注#</UnderLine>, <UnderLine px="2" style="dotted">発注品目コード#</UnderLine>, 発注数量, 希望納入年月日
 
   となる。
 
