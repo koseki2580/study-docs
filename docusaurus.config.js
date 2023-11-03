@@ -1,8 +1,8 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require("prism-react-renderer/themes/github");
-const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+const lightCodeTheme = require("prism-react-renderer").themes.github;
+const darkCodeTheme = require("prism-react-renderer").themes.dracula;
 const fs = require("fs");
 const crypto = require("crypto");
 const math = require("remark-math");
@@ -117,7 +117,7 @@ const config = {
 
       // footer: {},
       prism: {
-        additionalLanguages: ["csharp", "rust"],
+        additionalLanguages: ["csharp", "rust", "python"],
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
