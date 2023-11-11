@@ -48,12 +48,15 @@ contents.push({
   headtitle: "ゲーム",
   contents: [
     {
-      href: "/othello/",
+      href: "othello",
       title: "オセロ",
     },
   ],
 });
-
+navbar_items.push({
+  label: "オセロ",
+  to: "othello",
+});
 WriteFile(
   "./src/components/HomepageFeatures/content.js",
   WriteContents(contents, "content")

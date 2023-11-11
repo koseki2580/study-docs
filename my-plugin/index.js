@@ -16,7 +16,7 @@ module.exports = function (context, options) {
 
       // Add the '/friends' routes, and ensure it receives the friends props
       addRoute({
-        path: "/othello",
+        path: "/study-docs/othello",
         component: "@site/html/othello/index.js",
         exact: true,
       });

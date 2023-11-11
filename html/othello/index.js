@@ -8,7 +8,7 @@ export default function OthelloComponent() {
     >
       <iframe
         title="オセロ1"
-        src="/study-docs/html/othello/index.html"
+        src="html/othello/index.html"
         style={{ width: "100%", height: "90vh" }}
       />
     </Layout>
