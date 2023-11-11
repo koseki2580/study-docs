@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkstudy_doxs=self.webpackChunkstudy_doxs||[]).push([[7702],{42788:s=>{s.exports=JSON.parse('{"name":"my-plugin","id":"default"}')}}]);
