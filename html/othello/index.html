@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/main.css" />
+
+    <title>オセロ</title>
+  </head>
+  <body>
+    <h1>オセロ</h1>
+    <div id="settings-area">
+      <label for="turn">先攻・後攻を選択：</label>
+      <select id="turn" name="turn">
+        <option value="first-turn">先攻</option>
+        <option value="second-turn">後攻</option>
+      </select>
+      <label for="level">強さを選択：</label>
+      <select id="level" name="level">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select>
+      <div id="game-start">
+        <a id="game-start-btn">ゲーム開始</a>
+      </div>
+    </div>
+    <div id="othello-area">
+      <div id="result">
+        <h1 id="victory" class="othello-result">勝利</h1>
+        <h1 id="lose" class="othello-result">敗北</h1>
+        <h1 id="draw" class="othello-result">引き分け</h1>
+        <h1 id="skip" class="othello-result">スキップ</h1>
+      </div>
+      <div id="othello-board"></div>
+    </div>
+    <script>
+      // 要素関係
+      const board = document.getElementById("othello-board");
+      const resultEle = document.getElementById("result");
+      const gameStartBtn = document.getElementById("game-start-btn");
+      const turnEle = document.getElementById("turn");
+      const levelEle = document.getElementById("level");
+
+      // ゲーム関係
+      const mapSize = 8;
+
+      let isFirstPlayer;
+      let strategy;
+
+      // playOthelloを使用するためのJavaScriptのラッパー
+      let playOthello = {};
+
+      // オセロを進行するのに使用するplayOthelloクラス
+      let othello;
+
+      // 開始時の初期化処理
+      gameStartBtn.addEventListener("click", () => {});
+
+      // ユーザのアクション
+      const boardClick = (e) => {
+        const pos = e.target.id.substring("board-".length);
+        const y = (pos / mapSize) & 0xff;
+        const x = pos % mapSize;
+        playOthello.put(othello, y, x);
+        displayOthelloBoard();
+        // 自分の手番が終わったの相手の手番を実行
+        if (playOthello.isDone(othello)) {
+          displayResult();
+        } else {
+          setTimeout(cpuAction, 1000);
+        }
+      };
+
+      // CPUのアクション
+      const cpuAction = () => {
+        const putPoint = playOthello.cpuPut(othello);
+        // 置いてなければスキップとして画面に表示する
+        if (putPoint.y === -1 && putPoint.x === -1) {
+          // スキップ
+          if (playOthello.isDone(othello)) {
+            displayResult();
+          } else {
+            skipAnimation();
+            // 置ける場所を生成
+            createPutOk();
+          }
+          return;
+        }
+        displayOthelloBoard();
+        setTimeout(createPutOk, 1000);
+      };
+
+      // プレイヤーが置けるマスを生成
+      const createPutOk = () => {
+        const putOk = playOthello.getLegalActions(othello);
+        // 置けるところがなければスキップする
+        if (putOk.length === 0) {
+          if (playOthello.isDone(othello)) {
+            displayResult();
+          } else {
+            skipAnimation();
+            // スキップしたので相手の手番
+            setTimeout(cpuAction, 1000);
+          }
+          return;
+        }
+        displayPutOK(putOk);
+      };
+
+      // スキップアニメーション
+      const skipAnimation = () => {
+        resultEle.setAttribute("skip", "");
+        setTimeout(() => {
+          resultEle.removeAttribute("skip");
+        }, 1000);
+      };
+
+      // 試合結果を表示
+      const displayResult = () => {
+        const addResult = (type) => {
+          resultEle.setAttribute(type, "");
+        };
+        const board = playOthello.getBoardInfo(othello);
+        let white = 0;
+        let black = 0;
+        for (let i = 0; i < mapSize; ++i) {
+          for (let j = 0; j < mapSize; ++j) {
+            if (board[i][j] === 0) {
+              white++;
+            } else if (board[i][j] === 1) {
+              black++;
+            }
+          }
+        }
+        if (white === black) {
+          addResult("draw");
+        } else if (white > black && isFirstPlayer) {
+          addResult("victory");
+        } else if (white < black && !isFirstPlayer) {
+          addResult("victory");
+        } else {
+          addResult("lose");
+        }
+        gameStartBtn.removeAttribute("start");
+      };
+
+      // ボードの列を作成
+      const createRow = (count) => {
+        let rowDiv = document.createElement("div");
+        rowDiv.id = `row-${count}`;
+        rowDiv.classList.add("board-row");
+        for (let i = 0; i < mapSize; ++i) {
+          let boardEle = document.createElement("div");
+          boardEle.id = `board-${count * mapSize + i}`;
+          boardEle.classList.add("board");
+          boardEle.addEventListener("click", boardClick);
+          rowDiv.appendChild(boardEle);
+        }
+        return rowDiv;
+      };
+
+      // オセロのコマを作成
+      const createOthelloPiece = (type, init = true) => {
+        const createPieceDiv = (type) => {
+          let pieceUi = document.createElement("div");
+          pieceUi.classList.add(type);
+          return pieceUi;
+        };
+        let pieceDiv = document.createElement("div");
+        pieceDiv.classList.add("piece");
+        if (init) {
+          pieceDiv.setAttribute("init", "");
+        }
+        pieceDiv.setAttribute(type, "");
+        pieceDiv.appendChild(createPieceDiv("white"));
+        pieceDiv.appendChild(createPieceDiv("side"));
+        pieceDiv.appendChild(createPieceDiv("black"));
+        return pieceDiv;
+      };
+      // ボードの更新
+      const displayOthelloBoard = () => {
+        const board = playOthello.getBoardInfo(othello);
+        console.log(board);
+        for (let i = 0; i < mapSize; ++i) {
+          for (let j = 0; j < mapSize; ++j) {
+            let boardElement = document.getElementById(
+              `board-${i * mapSize + j}`
+            );
+            // put-okを取り除く
+            if (boardElement.classList.contains("put-ok")) {
+              boardElement.classList.remove("put-ok");
+            }
+            // 現在のマスが何か
+            let piece = -1;
+            if (boardElement.children.length != 0) {
+              // すでにコマが置かれている
+              if (boardElement.children[0].hasAttribute("white")) {
+                // 白色
+                piece = 0;
+              } else {
+                // 黒色
+                piece = 1;
+              }
+              // ひっくり返っているか
+              if (boardElement.children[0].hasAttribute("reverse")) {
+                piece += 1;
+                piece %= 2;
+              }
+            }
+            // 今のマスと次のマスが同じなら何もしない
+            if (piece === board[i][j]) continue;
+            if (piece === -1) {
+              // 現在のマスには何も置かれていないので
+              // 駒を配置する
+              const pieceEle = createOthelloPiece(
+                board[i][j] === 0 ? "white" : "black"
+              );
+              boardElement.appendChild(pieceEle);
+              continue;
+            }
+            // 違う色の駒に入れ替えるので
+            if (boardElement.children[0].hasAttribute("reverse")) {
+              // すでに反転させている場合は取り除く
+              boardElement.children[0].removeAttribute("reverse");
+            } else {
+              // 反転がないので反転を追加する
+              boardElement.children[0].setAttribute("reverse", "");
+              boardElement.children[0].removeAttribute("init");
+            }
+          }
+        }
+      };
+
+      // 配置できるマスを表示する
+      const displayPutOK = (legalActionsArray) => {
+        console.log(legalActionsArray);
+        for (let i = 0; i < legalActionsArray.length; ++i) {
+          const colId = `board-${
+            legalActionsArray[i].row * mapSize + legalActionsArray[i].col
+          }`;
+          const cell = document.getElementById(colId);
+          cell.classList.add("put-ok");
+        }
+      };
+
+      for (let i = 0; i < mapSize; ++i) {
+        let rowEle = createRow(i);
+        board.appendChild(rowEle);
+      }
+      // ボードの初期化
+      const initializeBoard = () => {
+        const whiteInitPos = [
+          { row: 3, col: 3 },
+          { row: 4, col: 4 },
+        ];
+
+        const blackInitPos = [
+          { row: 3, col: 4 },
+          { row: 4, col: 3 },
+        ];
+        // ボードのコマを取り除く
+        const boardElements = document.getElementsByClassName("board");
+        for (var i = 0; i < boardElements.length; i++) {
+          let currentBoard = boardElements[i];
+          currentBoard.classList.remove("put-ok");
+          while (currentBoard.firstChild) {
+            currentBoard.removeChild(currentBoard.firstChild);
+          }
+        }
+        // 白いコマを初期位置に配置
+        whiteInitPos.forEach((pos) => {
+          const rowId = `row-${pos.row}`;
+          const colId = `board-${pos.row * mapSize + pos.col}`;
+          const cell = document.getElementById(colId);
+          const piece = createOthelloPiece("white");
+          cell.appendChild(piece);
+        });
+
+        // 黒いコマを初期位置に配置
+        blackInitPos.forEach((pos) => {
+          const rowId = `row-${pos.row}`;
+          const colId = `board-${pos.row * mapSize + pos.col}`;
+          const cell = document.getElementById(colId);
+          const piece = createOthelloPiece("black");
+          cell.appendChild(piece);
+        });
+        resultEle.removeAttribute("draw");
+        resultEle.removeAttribute("victory");
+        resultEle.removeAttribute("lose");
+      };
+      // 全体の初期化
+      const initialize = () => {
+        // othelloにオブジェクトがある場合はメモリを解放して
+        // 再度オブジェクトを作成する
+        if (othello) {
+          playOthello.deletePlayOthello(othello);
+          othello = null;
+        }
+
+        initializeBoard();
+
+        // 先攻・後攻
+        isFirstPlayer = turnEle.value === "first-turn";
+        const level = levelEle.value;
+        let strategy;
+        let evaluation;
+        switch (level) {
+          case "1":
+            strategy = "random";
+            evaluation = "mass_count";
+            break;
+          case "2":
+            strategy = "minimax";
+            evaluation = "mass_count";
+            break;
+          case "3":
+            strategy = "minimax";
+            evaluation = "custom";
+            break;
+          default:
+            strategy = "random";
+            evaluation = "mass_count";
+            break;
+        }
+        othello = playOthello.createPlayOthello(
+          isFirstPlayer,
+          strategy,
+          evaluation
+        );
+        if (isFirstPlayer) {
+          displayPutOK(playOthello.getLegalActions(othello));
+        } else {
+          cpuAction();
+        }
+      };
+
+      gameStartBtn.addEventListener("click", () => {
+        setTimeout(initialize, 0);
+        gameStartBtn.setAttribute("start", "");
+      });
+
+      initializeBoard();
+    </script>
+    <script>
+      var Module = {
+        onRuntimeInitialized: function () {
+          // WebAssemblyが初期化された後、C++コードからデータをJavaScriptに渡すことができます
+          Module._main(); // C++のmain関数を呼び出す
+        },
+        printToConsole: function (text) {
+          // C++からの出力をJavaScriptのコンソールに表示
+          console.log(text);
+        },
+      };
+
+      Module.onRuntimeInitialized = function () {
+        playOthello.createPlayOthello = (
+          isFirstPlayer,
+          strategy,
+          evaluation
+        ) => {
+          const strategyPtr = _malloc(strategy.length + 1); // メモリ確保
+          stringToUTF8(strategy, strategyPtr, strategy.length + 1);
+
+          const evaluationPtr = _malloc(evaluation.length + 1);
+          stringToUTF8(evaluation, evaluationPtr, evaluation.length + 1);
+
+          let othello = _createPlayOthello(
+            isFirstPlayer,
+            strategyPtr,
+            evaluationPtr
+          );
+          _free(strategyPtr);
+          _free(evaluationPtr);
+          return othello;
+        };
+        playOthello.put = (playOthelloCpp, y, x) => {
+          Module.ccall(
+            "put",
+            "void",
+            ["number", "number", "number"],
+            [playOthelloCpp, y, x]
+          );
+        };
+        playOthello.cpuPut = (playOthelloCpp) => {
+          const putPointArrayPtr = _malloc(8); // 50 * sizeof(int32)
+
+          Module.ccall(
+            "cpuPut",
+            "void",
+            ["number", "number"],
+            [playOthelloCpp, putPointArrayPtr]
+          );
+          // 配列のポインタを取得
+          const putPointArrayPtrValue = Module.getValue(
+            putPointArrayPtr,
+            "i32"
+          );
+
+          const putPointInt32Array = new Int32Array(
+            Module.HEAP32.buffer,
+            putPointArrayPtrValue,
+            2
+          );
+          _free(putPointArrayPtr);
+          return { y: putPointInt32Array[0], x: putPointInt32Array[1] };
+        };
+        playOthello.deletePlayOthello = (playOthelloCpp) => {
+          _deletePlayOthello(playOthelloCpp);
+        };
+        playOthello.getLegalActions = (playOthelloCpp) => {
+          // メモリ確保
+          const legalActionsArrayPtr = _malloc(4); // 50 * sizeof(int32)
+          const legalActionsSize = _malloc(4); // 2 * sizeof(int32)
+
+          // cppの関数を実行
+          Module.ccall(
+            "getLegalActions",
+            "void",
+            ["number", "number", "number"],
+            [playOthelloCpp, legalActionsArrayPtr, legalActionsSize]
+          );
+
+          // 配列の長さを取得
+          const legalActionsSizeValue = Module.getValue(
+            legalActionsSize,
+            "i32"
+          );
+
+          // 配列のポインタを取得
+          const legalActionsArrayPtrValue = Module.getValue(
+            legalActionsArrayPtr,
+            "i32"
+          );
+          // 配列のデータを取得
+          const legalActionsInt32Array = new Int32Array(
+            Module.HEAP32.buffer,
+            legalActionsArrayPtrValue,
+            legalActionsSizeValue * 2
+          );
+
+          // 扱いやすい形に整形
+          let legalActionsArray = [];
+          for (let i = 0; i < legalActionsSizeValue; ++i) {
+            legalActionsArray.push({
+              row: legalActionsInt32Array[2 * i],
+              col: legalActionsInt32Array[2 * i + 1],
+            });
+          }
+          _free(legalActionsArrayPtr);
+          _free(legalActionsSize);
+          return legalActionsArray;
+        };
+        playOthello.getBoardInfo = (playOthelloCpp) => {
+          const outRows = _malloc(4); // int型のポインタを確保
+          const outCols = _malloc(4); // int型のポインタを確保
+          const outBoard = _malloc(4); // int型のポインタを確保
+
+          Module.ccall(
+            "getBoardInfo",
+            "void",
+            ["number", "number", "number", "number"],
+            [playOthelloCpp, outBoard, outRows, outCols]
+          );
+
+          // JavaScriptから取得した整数値を読み取り
+          const rows = Module.getValue(outRows, "i32");
+          const cols = Module.getValue(outCols, "i32");
+
+          // 初めにポインタのポインタの位置を取得する。
+          const boardDataPtr = Module.getValue(outBoard, "i32");
+
+          // 配列のポインタを取得
+          const boardDataPtrArray = new Int32Array(
+            Module.HEAP32.buffer,
+            boardDataPtr,
+            rows
+          );
+
+          // boardDataPtrからデータを取得してJavaScriptの配列にコピー
+          const boardData = [];
+          for (let i = 0; i < rows; i++) {
+            const row = [];
+            // ポインタから値を取得
+            const boardDataPtrRowArray = new Int32Array(
+              Module.HEAP32.buffer,
+              boardDataPtrArray[i],
+              cols
+            );
+            for (let j = 0; j < cols; ++j) {
+              row.push(boardDataPtrRowArray[j]);
+            }
+
+            boardData.push(row);
+          }
+
+          // 確保したメモリを解放
+          _free(outRows);
+          _free(outCols);
+          _free(outBoard);
+
+          return boardData;
+        };
+
+        playOthello.isDone = (playOthelloCpp) => {
+          const isDone = _malloc(1); // int型のポインタを確保
+
+          Module.ccall(
+            "isDone",
+            "void",
+            ["number", "number"],
+            [playOthelloCpp, isDone]
+          );
+          let result = Module.getValue(isDone, "i8") === 1;
+          _free(isDone);
+          return result;
+        };
+      };
+    </script>
+    <script src="othello.js"></script>
+  </body>
+</html>
