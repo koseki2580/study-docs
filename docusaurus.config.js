@@ -42,6 +42,15 @@ if (isDev === true) {
     type: "doc",
   });
 }
+contents.push({
+  headtitle: "その他",
+  contents: [
+    {
+      href: "html/othello/",
+      title: "オセロ",
+    },
+  ],
+});
 WriteFile(
   "./src/components/HomepageFeatures/content.js",
   WriteContents(contents, "content")
