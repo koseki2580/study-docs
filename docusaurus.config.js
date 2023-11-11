@@ -42,6 +42,8 @@ if (isDev === true) {
     type: "doc",
   });
 }
+
+// オセロを追加
 contents.push({
   headtitle: "その他",
   contents: [
@@ -50,6 +52,11 @@ contents.push({
       title: "オセロ",
     },
   ],
+});
+// ナビバーに追加
+navbar_items.push({
+  label: "オセロ",
+  to: "html/othello/",
 });
 WriteFile(
   "./src/components/HomepageFeatures/content.js",
