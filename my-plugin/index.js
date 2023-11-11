@@ -10,5 +10,16 @@ module.exports = function (context, options) {
         postBodyTags: [],
       };
     },
+    async contentLoaded({ content, actions }) {
+      const { createData, addRoute } = actions;
+      // Create friends.json
+
+      // Add the '/friends' routes, and ensure it receives the friends props
+      addRoute({
+        path: "/othello",
+        component: "@site/html/othello/index.js",
+        exact: true,
+      });
+    },
   };
 };

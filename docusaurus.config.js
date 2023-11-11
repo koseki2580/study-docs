@@ -45,19 +45,15 @@ if (isDev === true) {
 
 // オセロを追加
 contents.push({
-  headtitle: "その他",
+  headtitle: "ゲーム",
   contents: [
     {
-      href: "html/othello/",
+      href: "/othello/",
       title: "オセロ",
     },
   ],
 });
-// ナビバーに追加
-navbar_items.push({
-  label: "オセロ",
-  to: "html/othello/",
-});
+
 WriteFile(
   "./src/components/HomepageFeatures/content.js",
   WriteContents(contents, "content")
