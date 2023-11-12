@@ -1,0 +1,25 @@
+.side {
+  transform: rotateX(270deg);
+  /* 回転軸が異なるので位置を調整して回転を合わせる */
+  top: calc((var(--board-size)) / 2 / 2 / 2 + 1.5px);
+
+  background: linear-gradient(to bottom, black 50%, white 50%);
+}
+
+@keyframes white-reverse-side {
+  0% {
+    transform: rotateX(90deg);
+  }
+  100% {
+    transform: rotateX(270deg);
+  }
+}
+
+@keyframes black-reverse-side {
+  0% {
+    transform: rotateX(270deg);
+  }
+  100% {
+    transform: rotateX(90deg);
+  }
+}
