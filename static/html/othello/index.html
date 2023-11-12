@@ -6,6 +6,17 @@
     <link rel="stylesheet" href="css/main.css" />
 
     <title>オセロ</title>
+    <script>
+      console.log(navigator.userAgent);
+      if (
+        navigator.userAgent.indexOf("Safari") != -1 &&
+        navigator.userAgent.indexOf("Chrome") == -1
+      ) {
+        document.write(
+          '<link rel="stylesheet" type="text/css" href="css/safari-styles.css">'
+        );
+      }
+    </script>
   </head>
   <body>
     <h1>オセロ</h1>
