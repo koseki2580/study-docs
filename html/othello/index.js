@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "@theme/Layout";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import BrowserOnly from "@docusaurus/BrowserOnly";
 
 const IframeComponent = ({ props }) => {
   const path = props.pathname;
@@ -21,16 +22,18 @@ const IframeComponent = ({ props }) => {
 
 export default function OthelloComponent() {
   return (
-    <Layout
-      title="オセロ"
-      description="Description will go into a meta tag in <head />"
-    >
-      <Router>
-        <Route
-          path="/study-docs/othello"
-          render={(path) => <IframeComponent props={path.location} />}
-        />
-      </Router>
-    </Layout>
+    <BrowserOnly>
+      <Layout
+        title="オセロ"
+        description="Description will go into a meta tag in <head />"
+      >
+        <Router>
+          <Route
+            path="/study-docs/othello"
+            render={(path) => <IframeComponent props={path.location} />}
+          />
+        </Router>
+      </Layout>
+    </BrowserOnly>
   );
 }
