@@ -85,6 +85,7 @@ body {
   width: calc((var(--board-size) / 2));
   top: calc((var(--board-size)) / 2 / 2);
   height: 3px;
+  z-index: 0;
   background: linear-gradient(to bottom, white 50%, black 50%);
   transform: rotateX(90deg);
   transform-origin: 50% 0;
@@ -107,10 +108,10 @@ body {
 }
 
 .piece[white] .white {
-  z-index: 2;
+  z-index: 3;
 }
 .piece[black] .black {
-  z-index: 2;
+  z-index: 3;
 }
 .piece[black] .side {
   transform: rotateX(270deg);
