@@ -114,10 +114,15 @@ MiniMax 法同士を対決するとお互いに同じ選択しかしないため
 (変更がある場合は関数・クラス単位で載せているので丸ごと変更していただければと思います。)
 :::
 
+#### evaluation
+
 <Tabs groupId="code">
 <TabItem value="python" label="Python" default>
 
-```python title="mini-max.py"
+```python title="evaluation.py"
+from lib.othello import Othello
+
+
 class EvaluationFunction:
     @staticmethod
     def mass_count(othello: Othello, _id: int):
@@ -194,6 +199,177 @@ class EvaluationFunction:
 
         return evaluation
 
+```
+
+  </TabItem>
+  <TabItem value="C++" label="C++">
+
+```cpp title="evaluation.hpp"
+#ifndef EVALUATIONFUNCTION_H
+#define EVALUATIONFUNCTION_H
+
+#include "othello.hpp"
+
+enum class Evaluation
+{
+    MASS_COUNT,
+    CUSTOM
+};
+
+class EvaluationFunction
+{
+public:
+    // 静的メソッド：マスカウント評価
+    static int massCount(Othello &othello, int _id);
+
+    // 静的メソッド：カスタム評価
+    static int customEvaluation(Othello &othello, int _id);
+};
+
+#endif // EVALUATIONFUNCTION_H
+```
+
+```cpp title="evaluation.cpp"
+#include <bits/stdc++.h>
+#include "evaluation.hpp"
+using namespace std;
+
+// 静的メソッド：マスカウント評価
+int EvaluationFunction::massCount(Othello &othello, int _id)
+{
+    // プレイヤーの ID に基づいてベース値を決定
+    int _base = (_id == 0) ? 1 : -1;
+    // 白と黒のカウントを取得
+    pair<int, int> count = othello.getCount();
+    // 評価を計算して返す
+    return (count.first - count.second) * _base;
+}
+
+// 静的メソッド：カスタム評価
+int EvaluationFunction::customEvaluation(Othello &othello, int _id)
+{
+    // ゲームボードの状態を取得
+    const vector<vector<int>> &board = othello.getBoard();
+
+    // 各要素の重み付け
+    int cornerWeight = 10;
+    int edgeWeight = 5;
+    int mobilityWeight = 2;
+    int parityWeight = 1;
+
+    // 評価値の初期化
+    int evaluation = 0;
+
+    // コーナーの評価
+    int cornerValue = 0;
+    for (int i : {0, othello.mapSize - 1})
+    {
+        for (int j : {0, othello.mapSize - 1})
+        {
+            if (board[i][j] == _id)
+            {
+                cornerValue += 1;
+            }
+            else if (board[i][j] == (_id ^ 1))
+            {
+                cornerValue -= 1;
+            }
+        }
+    }
+    evaluation += cornerWeight * cornerValue;
+
+    // 辺の評価
+    int edgeValue = 0;
+    for (int i = 0; i < othello.mapSize; i++)
+    {
+        for (int j : {0, othello.mapSize - 1})
+        {
+            // 縦の辺
+            if (board[i][j] == _id)
+            {
+                edgeValue += 1;
+            }
+            else if (board[i][j] == (_id ^ 1))
+            {
+                edgeValue -= 1;
+            }
+
+            // 横の辺
+            if (board[j][i] == _id)
+            {
+                edgeValue += 1;
+            }
+            else if (board[j][i] == (_id ^ 1))
+            {
+                edgeValue -= 1;
+            }
+        }
+    }
+    evaluation += edgeWeight * edgeValue;
+
+    // モビリティの評価
+    int mobilityValue = othello.legalActions(_id).size() - othello.legalActions(_id ^ 1).size();
+    evaluation += mobilityWeight * mobilityValue;
+
+    // パリティの評価
+    // プレイヤーの石の数を取得
+    pair<int, int> count = othello.getCount();
+    int _base = (_id == 1) ? -1 : 1;
+    int parityValue = 0;
+    if (count.first > count.second)
+    {
+        parityValue = 1;
+    }
+    else if (count.first < count.second)
+    {
+        parityValue = -1;
+    }
+    evaluation += parityWeight * parityValue * _base;
+
+    // 最終的な評価を返す
+    return evaluation;
+}
+```
+
+  </TabItem>
+  <!-- <TabItem value="C#" label="C#">
+
+```csharp
+
+```
+
+</TabItem> -->
+
+  <!-- <TabItem value="rust" label="Rust">
+
+```rust
+
+```
+
+</TabItem> -->
+  <!-- <TabItem value="javascript" label="JavaScript">
+
+```javascript
+
+```
+
+</TabItem> -->
+</Tabs>
+
+#### mini_max_action
+
+<Tabs groupId="code">
+<TabItem value="python" label="Python" default>
+
+```python title="mini_max_action.py"
+import sys
+from pathlib import Path
+
+sys.path.append(str(Path(__file__).parent.parent.parent))
+from lib.othello import Othello
+from .action import Action
+from lib.evaluation import *
+
 
 class MiniMaxAction(Action):
 
@@ -239,6 +415,132 @@ class MiniMaxAction(Action):
                 count = value
 
         return count, next_put
+```
+
+  </TabItem>
+  <TabItem value="C++" label="C++">
+
+```cpp title="mini_max_action.hpp"
+#ifndef MINIMAX_ACTION_H
+#define MINIMAX_ACTION_H
+#include <bits/stdc++.h>
+
+#include "../othello.hpp"
+#include "../evaluation.hpp"
+#include "action.hpp"
+
+using namespace std;
+class MiniMaxAction : public Action
+{
+public:
+    int depth;
+    function<int(Othello &, int)> evaluation;
+
+    MiniMaxAction(int id, int depth, const Evaluation evaluation);
+
+    optional<pair<int, int>> action(Othello othello) override;
+
+    pair<int, pair<int, int>> miniMax(int _id, Othello othello, int nowDepth);
+};
+
+#endif // MINIMAX_ACTION_H
+```
+
+```cpp title="mini_max_action.cpp"
+#include <bits/stdc++.h>
+
+#include "../othello.hpp"
+#include "../evaluation.hpp"
+#include "action.hpp"
+#include "mini_max_action.hpp"
+using namespace std;
+
+MiniMaxAction::MiniMaxAction(int id, int depth, const Evaluation evaluation) : Action(id), depth(depth)
+{
+    // 評価関数を選択
+    switch (evaluation)
+    {
+    case Evaluation::MASS_COUNT:
+        this->evaluation = [](Othello &othello, int id)
+        {
+            return EvaluationFunction::massCount(othello, id);
+        };
+        break;
+    case Evaluation::CUSTOM:
+        this->evaluation = [](Othello &othello, int id)
+        {
+            return EvaluationFunction::customEvaluation(othello, id);
+        };
+        break;
+
+    default:
+        this->evaluation = [](Othello &othello, int id)
+        {
+            return EvaluationFunction::massCount(othello, id);
+        };
+        break;
+    }
+}
+
+optional<pair<int, int>> MiniMaxAction::action(Othello othello)
+{
+    auto result = miniMax(this->id, othello, 0);
+    if (result.second == make_pair(-1, -1))
+    {
+        return nullopt;
+    }
+    return result.second;
+}
+
+pair<int, pair<int, int>> MiniMaxAction::miniMax(int _id, Othello othello, int nowDepth)
+{
+    if (nowDepth == depth)
+    {
+        // 自分から見た評価を計算する
+        return make_pair(evaluation(othello, this->id), make_pair(-1, -1));
+    }
+
+    vector<pair<int, int>> actions = othello.legalActions(_id);
+
+    int _base = (nowDepth & 1) == 1 ? -1 : 1;
+    pair<int, pair<int, int>> nextPut = make_pair(10'000'000 * _base * -1, make_pair(-1, -1));
+
+    if (actions.empty())
+    {
+        // スキップさせる手は最大の評価にする
+        return nextPut;
+    }
+
+    for (const auto &action : actions)
+    {
+        Othello next_board = othello.copyBoard();
+        next_board.put(_id, action);
+        pair<int, pair<int, int>> value = miniMax(_id ^ 1, next_board, nowDepth + 1);
+
+        if (_base * nextPut.first <= _base * value.first)
+        {
+            nextPut = make_pair(value.first, action);
+        }
+    }
+
+    return nextPut;
+}
+```
+
+  </TabItem>
+</Tabs>
+
+#### 変更
+
+##### player
+
+<Tabs groupId="code">
+<TabItem value="python" label="Python" default>
+
+```python title="player.py"  {14-15}
+from lib.othello import Othello
+from lib.actions import *
+
 
 class Player():
 
@@ -260,335 +562,48 @@ class Player():
         if action is None:
             return
         self.othello.put(self.id, action)
-
-def play_game(player1_strategy, player2_strategy):
-    # 対戦マップ作成
-    othello = Othello()
-
-    # playerを作成
-    player1 = Player(0, othello, player1_strategy, 2, "custom")
-    player2 = Player(1, othello, player2_strategy)
-
-    # print(othello)
-    while (not othello.is_done()):
-        # player1のアクション
-        player1.put()
-        # player2のアクション
-        player2.put()
-    return othello.get_winner()
-
-
-n = 100
-white = 0
-black = 0
-draw = 0
-for i in range(n):
-    win = play_game("minimax", "random")
-    print(f"{i}回目: {win.value}")
-    if win == GameState.WHITE_WIN:
-        white += 1
-    elif win == GameState.BLACK_WIN:
-        black += 1
-    else:
-        draw += 1
-
-print(f"白の勝率: {white/n}")
-print(f"黒の勝率: {black/n}")
-print(f"引き分け: {draw/n}")
-
 ```
 
   </TabItem>
   <TabItem value="C++" label="C++">
 
-```cpp title="mini-max.cpp"
-enum class Strategy
+```cpp title="player.cpp"  {18-19}
+#include <bits/stdc++.h>
+
+#include "othello.hpp"
+#include "evaluation.hpp"
+#include "action/action.hpp"
+#include "action/random_action.hpp"
+#include "action/mini_max_action.hpp"
+#include "player.hpp"
+using namespace std;
+Player::Player(int _id, Othello &_othello, const Strategy strategy, int depth, Evaluation evaluation) : id(_id), othello(_othello)
 {
-    RANDOM,
-    MINIMAX
-};
-enum class Evaluation
-{
-    MASS_COUNT,
-    CUSTOM
-};
-class EvaluationFunction
-{
-public:
-    // 静的メソッド：マスカウント評価
-    static int massCount(Othello &othello, int _id)
+    id = _id;
+    switch (strategy)
     {
-        // プレイヤーの ID に基づいてベース値を決定
-        int _base = (_id == 0) ? 1 : -1;
-        // 白と黒のカウントを取得
-        std::pair<int, int> count = othello.getCount();
-        // 評価を計算して返す
-        return (count.first - count.second) * _base;
+    case Strategy::RANDOM:
+        this->strategy = make_unique<RandomAction>(_id);
+        break;
+    case Strategy::MINIMAX:
+        this->strategy = make_unique<MiniMaxAction>(_id, depth, evaluation);
+        break;
+    default:
+        this->strategy = make_unique<RandomAction>(_id);
+        break;
     }
-
-    // 静的メソッド：カスタム評価
-    static int customEvaluation(Othello &othello, int _id)
-    {
-        // ゲームボードの状態を取得
-        const std::vector<std::vector<int>> &board = othello.getBoard();
-
-        // 各要素の重み付け
-        int cornerWeight = 10;
-        int edgeWeight = 5;
-        int mobilityWeight = 2;
-        int parityWeight = 1;
-
-        // 評価値の初期化
-        int evaluation = 0;
-
-        // コーナーの評価
-        int cornerValue = 0;
-        for (int i : {0, othello.mapSize - 1})
-        {
-            for (int j : {0, othello.mapSize - 1})
-            {
-                if (board[i][j] == _id)
-                {
-                    cornerValue += 1;
-                }
-                else if (board[i][j] == (_id ^ 1))
-                {
-                    cornerValue -= 1;
-                }
-            }
-        }
-        evaluation += cornerWeight * cornerValue;
-
-        // 辺の評価
-        int edgeValue = 0;
-        for (int i = 0; i < othello.mapSize; i++)
-        {
-            for (int j : {0, othello.mapSize - 1})
-            {
-                // 縦の辺
-                if (board[i][j] == _id)
-                {
-                    edgeValue += 1;
-                }
-                else if (board[i][j] == (_id ^ 1))
-                {
-                    edgeValue -= 1;
-                }
-
-                // 横の辺
-                if (board[j][i] == _id)
-                {
-                    edgeValue += 1;
-                }
-                else if (board[j][i] == (_id ^ 1))
-                {
-                    edgeValue -= 1;
-                }
-            }
-        }
-        evaluation += edgeWeight * edgeValue;
-
-        // モビリティの評価
-        int mobilityValue = othello.legalActions(_id).size() - othello.legalActions(_id ^ 1).size();
-        evaluation += mobilityWeight * mobilityValue;
-
-        // パリティの評価
-        // プレイヤーの石の数を取得
-        std::pair<int, int> count = othello.getCount();
-        int _base = (_id == 1) ? -1 : 1;
-        int parityValue = 0;
-        if (count.first > count.second)
-        {
-            parityValue = 1;
-        }
-        else if (count.first < count.second)
-        {
-            parityValue = -1;
-        }
-        evaluation += parityWeight * parityValue * _base;
-
-        // 最終的な評価を返す
-        return evaluation;
-    }
-};
-
-class MiniMaxAction : public Action
-{
-public:
-    int depth;
-    std::function<int(Othello &, int)> evaluation;
-
-    MiniMaxAction(int id, int depth, const Evaluation evaluation) : Action(id), depth(depth)
-    {
-        // 評価関数を選択
-        switch (evaluation)
-        {
-        case Evaluation::MASS_COUNT:
-            this->evaluation = [](Othello &othello, int id)
-            {
-                return EvaluationFunction::massCount(othello, id);
-            };
-            break;
-        case Evaluation::CUSTOM:
-            this->evaluation = [](Othello &othello, int id)
-            {
-                return EvaluationFunction::customEvaluation(othello, id);
-            };
-            break;
-
-        default:
-            this->evaluation = [](Othello &othello, int id)
-            {
-                return EvaluationFunction::massCount(othello, id);
-            };
-            break;
-        }
-    }
-
-    std::optional<std::pair<int, int>> action(Othello othello) override
-    {
-        auto result = miniMax(this->id, othello, 0);
-        if (result.second == std::make_pair(-1, -1))
-        {
-            return std::nullopt;
-        }
-        return result.second;
-    }
-
-    std::pair<int, std::pair<int, int>> miniMax(int _id, Othello othello, int nowDepth)
-    {
-        if (nowDepth == depth)
-        {
-            // 自分から見た評価を計算する
-            return std::make_pair(evaluation(othello, this->id), std::make_pair(-1, -1));
-        }
-
-        std::vector<std::pair<int, int>> actions = othello.legalActions(_id);
-
-        int _base = (nowDepth & 1) == 1 ? -1 : 1;
-        std::pair<int, std::pair<int, int>> nextPut = std::make_pair(10'000'000 * _base * -1, std::make_pair(-1, -1));
-
-        if (actions.empty())
-        {
-            // スキップさせる手は最大の評価にする
-            return nextPut;
-        }
-
-        for (const auto &action : actions)
-        {
-            Othello next_board = othello.copyBoard();
-            next_board.put(_id, action);
-            std::pair<int, std::pair<int, int>> value = miniMax(_id ^ 1, next_board, nowDepth + 1);
-
-            if (_base * nextPut.first <= _base * value.first)
-            {
-                nextPut = std::make_pair(value.first, action);
-            }
-        }
-
-        return nextPut;
-    }
-};
-
-class Player
-{
-
-public:
-    Player(int _id, Othello &_othello, const Strategy strategy, int depth = 2, Evaluation evaluation = Evaluation::MASS_COUNT) : id(_id), othello(_othello)
-    {
-        id = _id;
-        switch (strategy)
-        {
-        case Strategy::RANDOM:
-            this->strategy = std::make_unique<RandomAction>(_id);
-            break;
-        case Strategy::MINIMAX:
-            this->strategy = std::make_unique<MiniMaxAction>(_id, depth, evaluation);
-            break;
-        default:
-            this->strategy = std::make_unique<RandomAction>(_id);
-            break;
-        }
-    }
-
-    void put()
-    {
-        std::optional<std::pair<int, int>> action = strategy->action(othello.copyBoard());
-        if (!action.has_value())
-        {
-            return;
-        }
-        othello.put(id, action.value());
-    }
-
-private:
-    int id;
-    Othello &othello;
-    std::unique_ptr<Action> strategy = nullptr;
-    int (Player::*action)(const std::vector<std::pair<int, int>> &);
-};
-
-std::string playGame(const Strategy player1_strategy, const Strategy player2_strategy)
-{
-    Othello othello;
-
-    Player player1(0, othello, player1_strategy, 2, Evaluation::MASS_COUNT);
-    Player player2(1, othello, player2_strategy);
-
-    while (!othello.isDone())
-    {
-        player1.put();
-        player2.put();
-    }
-    return othello.getWinner();
 }
 
-int main()
+void Player::put()
 {
-    int n = 100;
-    int white = 0;
-    int black = 0;
-    int draw = 0;
-    for (int i = 0; i < n; ++i)
+    optional<pair<int, int>> action = strategy->action(othello.copyBoard());
+    if (!action.has_value())
     {
-        std::string win = playGame(Strategy::MINIMAX, Strategy::RANDOM);
-        printf("%d: %s\n", i, win.c_str());
-
-        if (win == "White Win")
-            white++;
-        else if (win == "Black Win")
-            black++;
-        else
-            draw++;
+        return;
     }
-    printf("白の勝率: %0.5f\n", (double)white / n);
-    printf("黒の勝率: %0.5f\n", (double)black / n);
-    printf("引き分け: %0.5f", (double)draw / n);
-    return 0;
+    othello.put(id, action.value());
 }
 ```
 
   </TabItem>
-  <!-- <TabItem value="C#" label="C#">
-
-```csharp
-
-```
-
-</TabItem> -->
-
-  <!-- <TabItem value="rust" label="Rust">
-
-```rust
-
-```
-
-</TabItem> -->
-  <!-- <TabItem value="javascript" label="JavaScript">
-
-```javascript
-
-```
-
-</TabItem> -->
 </Tabs>
