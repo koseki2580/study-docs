@@ -13,7 +13,7 @@
   --ifm-color-primary-light: #91a1f2;
   --ifm-color-primary-lighter: #a1aef4;
   --ifm-color-primary-lightest: #d0d7f9;
-  --docusaurus-highlighted-code-line-bg: inherit;
+  --docusaurus-highlighted-code-line-bg: #a1aef4;
 
   /* --ifm-heading-color : blue; */
   --ifm-color-word: #421605;
@@ -37,7 +37,7 @@
   --ifm-color-primary-light: #7ae0ee;
   --ifm-color-primary-lighter: #aae6ee;
   --ifm-color-primary-lightest: #c8ebf0;
-  --docusaurus-highlighted-code-line-bg: inherit;
+  --docusaurus-highlighted-code-line-bg: #46757b;
   /* --ifm-menu-color:blue; */
 
   --ifm-color-word: #bebebe;
