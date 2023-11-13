@@ -590,6 +590,10 @@ void Player::put()
 <Tabs groupId="code">
 <TabItem value="python" label="Python" default>
 
+:::note
+`actions`ディレクトリの`__init__.py`には各 action を import するように記述しています。
+:::
+
 ```python title="action.py"
 import sys
 from pathlib import Path
