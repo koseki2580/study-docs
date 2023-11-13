@@ -1,0 +1,877 @@
+<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1444px" height="1045px" viewBox="-0.5 -0.5 1444 1045" content="&lt;mxfile&gt;&lt;diagram id=&quot;kdqW8jqu1U7nLBhCUUdH&quot; name=&quot;ページ1&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;">
+    <defs/>
+    <g>
+        <rect x="1121" y="2" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1161" y="2" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1201" y="2" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1241" y="2" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1281" y="2" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1321" y="2" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1361" y="2" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1401" y="2" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1121" y="42" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1161" y="42" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1201" y="42" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1241" y="42" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1281" y="42" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1321" y="42" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1361" y="42" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1401" y="42" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1121" y="82" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1161" y="82" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1201" y="82" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1241" y="82" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1281" y="82" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1321" y="82" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1361" y="82" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1401" y="82" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1121" y="122" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1161" y="122" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1201" y="122" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1241" y="122" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1281" y="122" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1321" y="122" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1361" y="122" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1401" y="122" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1121" y="162" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1161" y="162" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1201" y="162" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1241" y="162" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1281" y="162" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1321" y="162" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1361" y="162" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1401" y="162" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1121" y="202" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1161" y="202" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1201" y="202" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1241" y="202" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1281" y="202" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1321" y="202" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1361" y="202" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1401" y="202" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1121" y="242" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1161" y="242" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1201" y="242" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1241" y="242" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1281" y="242" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1321" y="242" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1361" y="242" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1401" y="242" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1121" y="282" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1161" y="282" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1201" y="282" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1241" y="282" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1281" y="282" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1321" y="282" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1361" y="282" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1401" y="282" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <ellipse cx="1301" cy="182" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1261" cy="142" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1261" cy="182" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1301" cy="142" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1221" cy="182" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1301" cy="222" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1341" cy="142" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1221" cy="102" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1341" cy="182" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1421" cy="182" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1381" cy="182" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1421" cy="222" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1421" cy="302" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1421" cy="262" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1381" cy="222" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1141" cy="302" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1181" cy="302" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1221" cy="302" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 302px; margin-left: 1212px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                v
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="1221" y="306" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    v
+                </text>
+            </switch>
+        </g>
+        <ellipse cx="1301" cy="302" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1261" cy="262" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1341" cy="302" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1381" cy="302" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1381" cy="262" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1341" cy="222" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1341" cy="262" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1301" cy="262" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1261" cy="302" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1221" cy="262" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1181" cy="262" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1141" cy="262" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1261" cy="222" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1221" cy="222" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1141" cy="222" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1181" cy="222" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1141" cy="182" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1181" cy="182" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1221" cy="142" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1381" cy="142" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1421" cy="142" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1181" cy="142" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1141" cy="142" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1141" cy="102" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1181" cy="102" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1261" cy="102" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1301" cy="102" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1341" cy="102" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1421" cy="102" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1381" cy="102" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1141" cy="22" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1221" cy="62" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1381" cy="62" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1421" cy="22" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1181" cy="62" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1261" cy="22" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1341" cy="62" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1301" cy="22" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <rect x="1161" y="2" width="40" height="40" fill-opacity="0.4" fill="#f8cecc" stroke="none" pointer-events="all"/>
+        <rect x="1121" y="42" width="40" height="40" fill-opacity="0.4" fill="#f8cecc" stroke="none" pointer-events="all"/>
+        <rect x="1321" y="2" width="40" height="40" fill-opacity="0.4" fill="#f8cecc" stroke="none" pointer-events="all"/>
+        <rect x="1361" y="2" width="40" height="40" fill-opacity="0.4" fill="#f8cecc" stroke="none" pointer-events="all"/>
+        <ellipse cx="1421" cy="62" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1301" cy="62" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1261" cy="62" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <rect x="561" y="362" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="601" y="362" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="641" y="362" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="681" y="362" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="721" y="362" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="761" y="362" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="801" y="362" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="841" y="362" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="561" y="402" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="601" y="402" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="641" y="402" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="681" y="402" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="721" y="402" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="761" y="402" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="801" y="402" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="841" y="402" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="561" y="442" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="601" y="442" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="641" y="442" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="681" y="442" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="721" y="442" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="761" y="442" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="801" y="442" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="841" y="442" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="561" y="482" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="601" y="482" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="641" y="482" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="681" y="482" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="721" y="482" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="761" y="482" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="801" y="482" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="841" y="482" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="561" y="522" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="601" y="522" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="641" y="522" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="681" y="522" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="721" y="522" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="761" y="522" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="801" y="522" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="841" y="522" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="561" y="562" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="601" y="562" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="641" y="562" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="681" y="562" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="721" y="562" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="761" y="562" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="801" y="562" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="841" y="562" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="561" y="602" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="601" y="602" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="641" y="602" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="681" y="602" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="721" y="602" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="761" y="602" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="801" y="602" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="841" y="602" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="561" y="642" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="601" y="642" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="641" y="642" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="681" y="642" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="721" y="642" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="761" y="642" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="801" y="642" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="841" y="642" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <ellipse cx="741" cy="542" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="701" cy="502" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="701" cy="542" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="741" cy="502" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="661" cy="542" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="741" cy="582" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="781" cy="502" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="661" cy="462" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="781" cy="542" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="861" cy="542" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="821" cy="542" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="861" cy="582" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="861" cy="662" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="861" cy="622" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="821" cy="582" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="581" cy="662" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="621" cy="662" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="661" cy="662" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 662px; margin-left: 652px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                v
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="661" y="666" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    v
+                </text>
+            </switch>
+        </g>
+        <ellipse cx="741" cy="662" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="701" cy="622" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="781" cy="662" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="821" cy="662" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="821" cy="622" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="781" cy="582" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="781" cy="622" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="741" cy="622" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="701" cy="662" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="661" cy="622" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="621" cy="622" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="581" cy="622" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="701" cy="582" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="661" cy="582" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="581" cy="582" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="621" cy="582" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="581" cy="542" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="621" cy="542" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="661" cy="502" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="821" cy="502" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="861" cy="502" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="621" cy="502" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="581" cy="502" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="581" cy="462" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="621" cy="462" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="701" cy="462" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="741" cy="462" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="781" cy="462" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="861" cy="462" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="821" cy="462" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="581" cy="382" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="661" cy="422" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="821" cy="422" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="861" cy="382" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="621" cy="422" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="701" cy="382" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="781" cy="422" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="741" cy="382" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <rect x="601" y="362" width="40" height="40" fill-opacity="0.4" fill="#dae8fc" stroke="#6c8ebf" stroke-opacity="0.4" stroke-width="4" pointer-events="all"/>
+        <ellipse cx="861" cy="422" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="741" cy="422" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="701" cy="422" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <path d="M 721 362 L 1281 322" fill="none" stroke="rgb(0, 0, 0)" stroke-width="6" stroke-miterlimit="10" pointer-events="stroke"/>
+        <ellipse cx="581" cy="422" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <rect x="641" y="362" width="40" height="40" fill-opacity="0.4" fill="#dae8fc" stroke="#6c8ebf" stroke-opacity="0.4" stroke-width="4" pointer-events="all"/>
+        <rect x="761" y="362" width="40" height="40" fill-opacity="0.4" fill="#dae8fc" stroke="#6c8ebf" stroke-opacity="0.4" stroke-width="4" pointer-events="all"/>
+        <rect x="801" y="362" width="40" height="40" fill-opacity="0.4" fill="#dae8fc" stroke="#6c8ebf" stroke-opacity="0.4" stroke-width="4" pointer-events="all"/>
+        <rect x="361" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="401" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="441" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="481" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="521" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="561" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="601" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="641" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="361" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="401" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="441" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="481" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="521" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="561" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="601" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="641" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="361" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="401" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="441" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="481" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="521" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="561" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="601" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="641" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="361" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="401" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="441" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="481" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="521" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="561" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="601" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="641" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="361" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="401" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="441" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="481" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="521" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="561" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="601" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="641" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="361" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="401" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="441" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="481" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="521" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="561" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="601" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="641" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="361" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="401" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="441" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="481" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="521" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="561" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="601" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="641" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="361" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="401" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="441" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="481" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="521" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="561" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="601" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="641" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <ellipse cx="541" cy="902" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="501" cy="862" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="501" cy="902" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="541" cy="862" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="461" cy="902" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="541" cy="942" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="581" cy="862" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="461" cy="822" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="581" cy="902" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="661" cy="902" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="621" cy="902" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="661" cy="942" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="661" cy="1022" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="661" cy="982" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="621" cy="942" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="381" cy="1022" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="421" cy="1022" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="461" cy="1022" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 1022px; margin-left: 452px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                v
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="461" y="1026" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    v
+                </text>
+            </switch>
+        </g>
+        <ellipse cx="541" cy="1022" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="501" cy="982" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="581" cy="1022" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="621" cy="1022" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="621" cy="982" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="581" cy="942" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="581" cy="982" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="541" cy="982" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="501" cy="1022" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="461" cy="982" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="421" cy="982" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="381" cy="982" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="501" cy="942" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="461" cy="942" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="381" cy="942" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="421" cy="942" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="381" cy="902" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="421" cy="902" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="461" cy="862" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="621" cy="862" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="661" cy="862" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="421" cy="862" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="381" cy="862" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="381" cy="822" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="421" cy="822" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="501" cy="822" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="541" cy="822" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="581" cy="822" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="661" cy="822" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="621" cy="822" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="381" cy="742" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="461" cy="782" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="621" cy="782" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="661" cy="742" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="421" cy="782" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="501" cy="742" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="581" cy="782" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="541" cy="742" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <rect x="401" y="722" width="40" height="40" fill-opacity="0.4" fill="#f8cecc" stroke="#b85450" stroke-opacity="0.4" stroke-width="4" pointer-events="all"/>
+        <ellipse cx="661" cy="782" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="541" cy="782" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="501" cy="782" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="381" cy="782" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <rect x="561" y="722" width="40" height="40" fill-opacity="0.4" fill="#f8cecc" stroke="#b85450" stroke-opacity="0.4" stroke-width="4" pointer-events="all"/>
+        <rect x="601" y="722" width="40" height="40" fill-opacity="0.4" fill="#f8cecc" stroke="#b85450" stroke-opacity="0.4" stroke-width="4" pointer-events="all"/>
+        <rect x="1" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="41" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="81" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="121" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="161" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="201" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="241" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="281" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="41" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="81" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="121" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="161" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="201" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="241" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="281" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="41" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="81" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="121" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="161" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="201" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="241" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="281" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="41" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="81" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="121" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="161" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="201" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="241" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="281" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="41" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="81" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="121" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="161" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="201" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="241" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="281" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="41" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="81" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="121" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="161" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="201" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="241" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="281" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="41" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="81" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="121" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="161" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="201" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="241" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="281" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="41" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="81" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="121" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="161" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="201" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="241" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="281" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <ellipse cx="181" cy="902" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="141" cy="862" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="141" cy="902" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="181" cy="862" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="101" cy="902" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="181" cy="942" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="221" cy="862" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="101" cy="822" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="221" cy="902" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="301" cy="902" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="261" cy="902" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="301" cy="942" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="301" cy="1022" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="301" cy="982" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="261" cy="942" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="21" cy="1022" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="61" cy="1022" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="101" cy="1022" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 1022px; margin-left: 92px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                v
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="101" y="1026" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    v
+                </text>
+            </switch>
+        </g>
+        <ellipse cx="181" cy="1022" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="141" cy="982" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="221" cy="1022" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="261" cy="1022" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="261" cy="982" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="221" cy="942" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="221" cy="982" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="181" cy="982" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="141" cy="1022" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="101" cy="982" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="61" cy="982" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="21" cy="982" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="141" cy="942" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="101" cy="942" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="21" cy="942" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="61" cy="942" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="21" cy="902" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="61" cy="902" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="101" cy="862" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="261" cy="862" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="301" cy="862" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="61" cy="862" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="21" cy="862" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="21" cy="822" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="61" cy="822" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="141" cy="822" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="181" cy="822" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="221" cy="822" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="301" cy="822" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="261" cy="822" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="21" cy="742" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="101" cy="782" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="261" cy="782" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="301" cy="742" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="61" cy="782" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="141" cy="742" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="221" cy="782" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="181" cy="742" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="301" cy="782" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="181" cy="782" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="141" cy="782" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="21" cy="782" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <rect x="81" y="722" width="40" height="40" fill-opacity="0.4" fill="#f8cecc" stroke="#b85450" stroke-opacity="0.4" stroke-width="4" pointer-events="all"/>
+        <rect x="201" y="722" width="40" height="40" fill-opacity="0.4" fill="#f8cecc" stroke="#b85450" stroke-opacity="0.4" stroke-width="4" pointer-events="all"/>
+        <rect x="241" y="722" width="40" height="40" fill-opacity="0.4" fill="#f8cecc" stroke="#b85450" stroke-opacity="0.4" stroke-width="4" pointer-events="all"/>
+        <rect x="1121" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1161" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1201" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1241" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1281" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1321" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1361" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1401" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1121" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1161" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1201" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1241" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1281" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1321" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1361" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1401" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1121" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1161" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1201" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1241" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1281" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1321" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1361" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1401" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1121" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1161" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1201" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1241" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1281" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1321" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1361" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1401" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1121" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1161" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1201" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1241" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1281" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1321" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1361" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1401" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1121" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1161" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1201" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1241" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1281" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1321" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1361" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1401" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1121" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1161" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1201" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1241" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1281" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1321" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1361" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1401" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1121" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1161" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1201" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1241" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1281" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1321" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1361" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1401" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <ellipse cx="1301" cy="902" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1261" cy="862" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1261" cy="902" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1301" cy="862" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1221" cy="902" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1301" cy="942" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1341" cy="862" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1221" cy="822" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1341" cy="902" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1421" cy="902" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1381" cy="902" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1421" cy="942" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1421" cy="1022" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1421" cy="982" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1381" cy="942" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1141" cy="1022" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1181" cy="1022" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1221" cy="1022" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 1022px; margin-left: 1212px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                v
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="1221" y="1026" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    v
+                </text>
+            </switch>
+        </g>
+        <ellipse cx="1301" cy="1022" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1261" cy="982" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1341" cy="1022" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1381" cy="1022" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1381" cy="982" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1341" cy="942" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1341" cy="982" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1301" cy="982" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1261" cy="1022" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1221" cy="982" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1181" cy="982" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1141" cy="982" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1261" cy="942" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1221" cy="942" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1141" cy="942" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1181" cy="942" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1141" cy="902" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1181" cy="902" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1221" cy="862" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1381" cy="862" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1421" cy="862" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1181" cy="862" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1141" cy="862" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1141" cy="822" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1181" cy="822" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1261" cy="822" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1301" cy="822" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1341" cy="822" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1421" cy="822" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1381" cy="822" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1141" cy="742" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1221" cy="782" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1381" cy="782" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1421" cy="742" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1181" cy="782" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1261" cy="742" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1341" cy="782" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1301" cy="742" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1421" cy="782" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1301" cy="782" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1261" cy="782" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1141" cy="782" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <rect x="1321" y="722" width="40" height="40" fill-opacity="0.4" fill="#f8cecc" stroke="#b85450" stroke-opacity="0.4" stroke-width="4" pointer-events="all"/>
+        <rect x="761" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="801" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="841" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="881" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="921" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="961" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1001" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1041" y="722" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="761" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="801" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="841" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="881" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="921" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="961" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1001" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1041" y="762" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="761" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="801" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="841" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="881" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="921" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="961" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1001" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1041" y="802" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="761" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="801" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="841" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="881" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="921" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="961" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1001" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1041" y="842" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="761" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="801" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="841" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="881" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="921" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="961" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1001" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1041" y="882" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="761" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="801" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="841" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="881" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="921" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="961" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1001" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1041" y="922" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="761" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="801" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="841" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="881" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="921" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="961" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1001" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1041" y="962" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="761" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="801" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="841" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="881" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="921" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="961" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1001" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <rect x="1041" y="1002" width="40" height="40" fill="#008a00" stroke="#000000" stroke-width="4" pointer-events="all"/>
+        <ellipse cx="941" cy="902" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="901" cy="862" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="901" cy="902" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="941" cy="862" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="861" cy="902" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="941" cy="942" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="981" cy="862" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="861" cy="822" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="981" cy="902" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1061" cy="902" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1021" cy="902" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1061" cy="942" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1061" cy="1022" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1061" cy="982" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1021" cy="942" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="781" cy="1022" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="821" cy="1022" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="861" cy="1022" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 1022px; margin-left: 852px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
+                                v
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="861" y="1026" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    v
+                </text>
+            </switch>
+        </g>
+        <ellipse cx="941" cy="1022" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="901" cy="982" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="981" cy="1022" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1021" cy="1022" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1021" cy="982" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="981" cy="942" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="981" cy="982" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="941" cy="982" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="901" cy="1022" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="861" cy="982" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="821" cy="982" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="781" cy="982" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="901" cy="942" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="861" cy="942" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="781" cy="942" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="821" cy="942" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="781" cy="902" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="821" cy="902" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="861" cy="862" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1021" cy="862" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1061" cy="862" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="821" cy="862" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="781" cy="862" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="781" cy="822" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="821" cy="822" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="901" cy="822" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="941" cy="822" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="981" cy="822" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1061" cy="822" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1021" cy="822" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="781" cy="742" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="861" cy="782" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="1021" cy="782" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1061" cy="742" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="821" cy="782" rx="10" ry="10" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="901" cy="742" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="981" cy="782" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="941" cy="742" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1061" cy="782" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="941" cy="782" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="901" cy="782" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <ellipse cx="781" cy="782" rx="10" ry="10" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <rect x="1001" y="722" width="40" height="40" fill-opacity="0.4" fill="#f8cecc" stroke="#b85450" stroke-opacity="0.4" stroke-width="4" pointer-events="all"/>
+        <path d="M 161 722 L 721 682" fill="none" stroke="rgb(0, 0, 0)" stroke-width="6" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 521 722 L 721 682" fill="none" stroke="rgb(0, 0, 0)" stroke-width="6" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 721 682 L 1281 722" fill="none" stroke="rgb(0, 0, 0)" stroke-width="6" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 921 722 L 721 682" fill="none" stroke="rgb(0, 0, 0)" stroke-width="6" stroke-miterlimit="10" pointer-events="stroke"/>
+        <ellipse cx="61" cy="742" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="461" cy="742" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="981" cy="742" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+        <ellipse cx="1381" cy="742" rx="10" ry="10" fill="#000000" stroke="none" pointer-events="all"/>
+    </g>
+    <switch>
+        <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"/>
+        <a transform="translate(0,-5)" xlink:href="https://www.diagrams.net/doc/faq/svg-export-text-problems" target="_blank">
+            <text text-anchor="middle" font-size="10px" x="50%" y="100%">
+                Text is not SVG - cannot display
+            </text>
+        </a>
+    </switch>
+</svg>

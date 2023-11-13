@@ -7,7 +7,6 @@
 
     <title>オセロ</title>
     <script>
-      console.log(navigator.userAgent);
       if (
         navigator.userAgent.indexOf("Safari") != -1 &&
         navigator.userAgent.indexOf("Chrome") == -1
@@ -31,6 +30,7 @@
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
+        <option value="4">4</option>
       </select>
       <div id="game-start">
         <a id="game-start-btn">ゲーム開始</a>
@@ -192,7 +192,7 @@
       // ボードの更新
       const displayOthelloBoard = () => {
         const board = playOthello.getBoardInfo(othello);
-        console.log(board);
+        // console.log(board);
         for (let i = 0; i < mapSize; ++i) {
           for (let j = 0; j < mapSize; ++j) {
             let boardElement = document.getElementById(
@@ -245,7 +245,7 @@
 
       // 配置できるマスを表示する
       const displayPutOK = (legalActionsArray) => {
-        console.log(legalActionsArray);
+        // console.log(legalActionsArray);
         for (let i = 0; i < legalActionsArray.length; ++i) {
           const colId = `board-${
             legalActionsArray[i].row * mapSize + legalActionsArray[i].col
@@ -316,6 +316,7 @@
         const level = levelEle.value;
         let strategy;
         let evaluation;
+        let depth = 2;
         switch (level) {
           case "1":
             strategy = "random";
@@ -329,6 +330,16 @@
             strategy = "minimax";
             evaluation = "custom";
             break;
+          case "4":
+            strategy = "alphabeta";
+            depth = 4;
+            evaluation = "mass_count";
+            break;
+          case "5":
+            strategy = "alphabeta";
+            depth = 4;
+            evaluation = "custom";
+            break;
           default:
             strategy = "random";
             evaluation = "mass_count";
@@ -337,6 +348,7 @@
         othello = playOthello.createPlayOthello(
           isFirstPlayer,
           strategy,
+          depth,
           evaluation
         );
         if (isFirstPlayer) {
@@ -369,6 +381,7 @@
         playOthello.createPlayOthello = (
           isFirstPlayer,
           strategy,
+          depth,
           evaluation
         ) => {
           const strategyPtr = _malloc(strategy.length + 1); // メモリ確保
@@ -380,6 +393,7 @@
           let othello = _createPlayOthello(
             isFirstPlayer,
             strategyPtr,
+            depth,
             evaluationPtr
           );
           _free(strategyPtr);
