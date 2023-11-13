@@ -98,7 +98,9 @@ $\textcircled{\scriptsize 0}$, $\textcircled{\scriptsize 10}$番がある深さ 
 $\textcircled{\scriptsize 10}$の評価は最低値を選択するので$\textcircled{\scriptsize 1}$が計算終了した時点で最大でも 4 にしかならないことが分かる。
 そのため$\textcircled{\scriptsize 2}$, $\textcircled{\scriptsize 3}$, $\textcircled{\scriptsize 4}$の計算を行おうと$\textcircled{\scriptsize 10}$の枝は選択されることがない。そのため$\textcircled{\scriptsize 2}$, $\textcircled{\scriptsize 3}$, $\textcircled{\scriptsize 4}$の計算はする必要がないため、カットすることができる。
 
-このようにスコアが一定値以下になったことで計算をカットできることを`αカット`という
+このようにスコアが一定値以下になったことで計算をカットできることを`αカット`という。
+
+これら 2 つのカットを駆使して MiniMax 法の計算をより多く行うアルゴリズムが`Alpha-Beta法`である。
 
 ### コード
 
