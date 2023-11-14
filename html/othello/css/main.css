@@ -76,6 +76,7 @@ body {
   background-color: white;
   border-radius: 50%;
   animation-play-state: paused;
+  transform: translateZ(0px);
 
   /* display: none; 消す */
 }
@@ -312,4 +313,17 @@ body {
 #game-start-btn[start] {
   pointer-events: none;
   filter: brightness(0.5);
+}
+
+/* iPhoneのsafariで表示がバグる(z-indexが効かないのでtranslateZ(3px)で位置を変える) */
+@media only screen and (max-width: 767px) {
+  .piece[white] .white {
+    transform: translateZ(3px);
+  }
+  .piece[black] .black {
+    transform: translateZ(3px);
+  }
+  #othello-area {
+    transform: translateZ(-50px);
+  }
 }
