@@ -9,7 +9,9 @@
     <h1>反射型XSS 例</h1>
     <a href="./../index.html">戻る</a>
     <p>
-      URLを見ていただくと&lt;script&gt;&lt;/script&gt;が埋め込まれており、その処理が実行されている。
+      iframeでドキュメントページに埋め込んでいるため、URLで情報が見えないが、URLに&lt;script&gt;&lt;/script&gt;が埋め込まれており、その処理が実行されている。
+    </p>
+    <p>
       今回はデモなのでalertが発生するだけだが、Cookieを取得するような処理が記述されているとセッション情報等が抜き取られる危険性がある。
     </p>
     <script>
