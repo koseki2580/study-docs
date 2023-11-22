@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Base XSS Example</title>
+  </head>
+  <script>
+    /*
+        タグを無効化するためにエスケープ処理を追加
+      */
+    function escapeHtml(input) {
+      if (typeof input !== "string") {
+        return input;
+      }
+
+      const entityMap = {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+        "/": "&#x2F;",
+        "`": "&#x60;",
+        "=": "&#x3D;",
+      };
+
+      return input.replace(/[&<>"'`=\/]/g, function (s) {
+        return entityMap[s];
+      });
+    }
+  </script>
+  <body>
+    <h1>DOM Base XSS 例</h1>
+    <a href="./../index.html">戻る</a>
+    <p>
+      フラグメントを使用してページの表示内容を変更している。ここに悪意のあるフラグメントを設定したURLを配置し、
+      反射型のようにクリックされることでサーバ側にXSSとわからないようにクライアント側に被害を出すことができる。
+    </p>
+    <nav>
+      <ul>
+        <li><a href="#home">ホーム</a></li>
+        <li><a href="#about">概要</a></li>
+        <li><a href="#contact">コンタクト</a></li>
+        <li>
+          <a
+            href="#<img%20src=x%20onerror=alert('XSS　Attack') id=xss> <style>#xss{display:none}</style>"
+          >
+            悪意のあるフラグメント
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div id="content">
+      <!-- コンテンツはここに表示されます -->
+    </div>
+
+    <script>
+      // 表示するコンテンツの要素
+      const contentElement = document.getElementById("content");
+
+      // フラグメントが変更されたら、対応するコンテンツを表示する
+      window.addEventListener("hashchange", function () {
+        const fragment = window.location.hash.substring(1); // # を取り除く
+        showContentForFragment(fragment);
+      });
+
+      // 初期表示時にもコンテンツを表示
+      const initialFragment = window.location.hash.substring(1);
+
+      showContentForFragment(initialFragment);
+
+      function showContentForFragment(fragment) {
+        switch (fragment) {
+          case "home":
+            contentElement.innerHTML = "<p>Welcome to the Home Page!</p>";
+            break;
+          case "about":
+            contentElement.innerHTML = "<p>Learn more About Us.</p>";
+            break;
+          case "contact":
+            contentElement.innerHTML =
+              "<p>Contact us at example@example.com.</p>";
+            break;
+          default:
+            contentElement.innerHTML = `<p>${escapeHtml(
+              decodeURI(fragment)
+            )} Page not found.</p>`;
+        }
+      }
+    </script>
+  </body>
+</html>

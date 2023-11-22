@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Base XSS Example2</title>
+  </head>
+  <style>
+    label {
+      margin: 10px 10px;
+    }
+    button {
+      margin: 10px 10px;
+    }
+  </style>
+  <body>
+    <h1>DOM Base XSS 例2</h1>
+    <a href="./../index.html">戻る</a>
+    <p>
+      任意の値をaタグのhref属性に設定できるため、「javascript:alert('XSS
+      Attack!')」を設定することでクリックした際にalertを出すことができてしまう。
+    </p>
+    <button onclick="injectJavascript()">悪意のあるスクリプトを設定する</button>
+    <br />
+    <!-- サイトのタイトルとURLを入力するフォーム -->
+    <label for="siteTitle">
+      サイトのタイトル:
+      <input type="text" id="siteTitle" placeholder="例: Google" />
+    </label>
+    <br />
+    <label for="siteURL">
+      サイトのURL:
+      <input
+        type="text"
+        id="siteURL"
+        placeholder="例: https://www.google.com"
+      />
+    </label>
+    <br />
+    <!-- サイトを追加するボタン -->
+    <button onclick="addFavoriteSite()">お気に入りに追加する</button> <br />
+
+    <!-- お気に入りサイトのリスト -->
+    <h2>お気に入りのサイト</h2>
+    <ul id="favoriteSitesList"></ul>
+    <script>
+      const siteTitle = document.getElementById("siteTitle");
+      const siteURL = document.getElementById("siteURL");
+      function injectJavascript() {
+        siteTitle.value = "悪意のあるリンク";
+        siteURL.value = "javascript:alert('XSS Attack!')";
+      }
+      function addFavoriteSite() {
+        // 入力されたサイトのタイトルとURLを取得
+        const title = siteTitle.value;
+        const url = siteURL.value;
+
+        // タイトルとURLが入力されている場合のみ処理を続行
+        if (title && url) {
+          // 新しいリストアイテムを作成してお気に入りリストに追加
+          var listItem = document.createElement("li");
+          listItem.innerHTML = `<a href="${url}" >${title}</a>`;
+          document.getElementById("favoriteSitesList").appendChild(listItem);
+
+          // 入力フィールドをクリア
+          siteTitle.value = "";
+          siteURL.value = "";
+        }
+      }
+    </script>
+  </body>
+</html>

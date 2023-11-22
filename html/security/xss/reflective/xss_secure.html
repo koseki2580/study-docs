@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reflective XSS Example</title>
+  </head>
+  <body>
+    <h1>反射型XSS 例</h1>
+    <a href="./../index.html">戻る</a>
+    <p>
+      URLを見ていただくと&lt;script&gt;&lt;/script&gt;が埋め込まれているが、エスケープ処理が施されているため、実行されない。
+    </p>
+    <script>
+      /*
+        タグを無効化するためにエスケープ処理を追加
+      */
+      function escapeHtml(input) {
+        if (typeof input !== "string") {
+          return input;
+        }
+
+        const entityMap = {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+          "/": "&#x2F;",
+          "`": "&#x60;",
+          "=": "&#x3D;",
+        };
+
+        return input.replace(/[&<>"'`=\/]/g, function (s) {
+          return entityMap[s];
+        });
+      }
+    </script>
+    <script>
+      // JavaScriptでクエリパラメータを取得する関数
+      function getQueryParameter(name) {
+        // URLからクエリ文字列を取得
+        const queryString = window.location.search.substring(1);
+
+        // クエリ文字列をパースしてオブジェクトに変換
+        const params = new URLSearchParams(queryString);
+
+        // 指定された名前のクエリパラメータを取得
+        return params.get(name);
+      }
+
+      // クエリパラメータを取得して表示
+      const parameterName = "example";
+      const parameterValue = getQueryParameter(parameterName);
+
+      if (parameterValue !== null) {
+        // クエリパラメータが存在する場合は表示
+        /* 
+          この部分に脆弱性が存在する。
+        */
+
+        document.write(
+          `<p>${parameterName}: ${escapeHtml(parameterValue)}</p>`
+        );
+      } else {
+        // クエリパラメータが存在しない場合はメッセージを表示
+        document.write(`<p>${parameterName} not found in the URL.</p>`);
+      }
+    </script>
+  </body>
+</html>
