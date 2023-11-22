@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      label {
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+      }
+      .user-select {
+        background-color: rgb(211, 211, 211);
+      }
+    </style>
+    <title>Stored XSS Example</title>
+  </head>
+  <script>
+    // 格納型のためにデータをsessionStorageに保存する。
+    sessionStorage.setItem("normalUser", "テストユーザ");
+    sessionStorage.setItem(
+      "maliciousUser",
+      '悪意のあるユーザ<script>alert("XSS Attack!");<\/script>'
+    );
+  </script>
+  <body>
+    <h1>格納型XSS 例</h1>
+    <a href="./../index.html">戻る</a>
+    <p>
+      この例では特にサニタイズせずにユーザの入力をデータベースに追加している。開発者ツール画面のApplicationのSessiion
+      storageを見ると normalUser,
+      maliciousUserの2種類のユーザのデータを保存している。
+      maliciousUserでは&lt;script&gt;&lt;/script&gt;が埋め込まれており、その処理が実行されている。
+      今回はデモなのでalertが発生するだけだが、Cookieを取得するような処理が記述されているとセッション情報等が抜き取られる危険性がある。
+    </p>
+    <div class="user-select">
+      <h2>閲覧可能ユーザ</h2>
+      <label>
+        <input type="radio" name="user" value="normalUser" checked /> 一般ユーザ
+      </label>
+      <br />
+
+      <label>
+        <input type="radio" name="user" value="maliciousUser" />
+        悪意のあるユーザ
+      </label>
+      <br />
+    </div>
+    <div id="user-info" class="user-info">
+      <h3>A<span>さんの情報</span></h3>
+    </div>
+    <script>
+      const radioButtons = document.querySelectorAll('input[type="radio"]');
+      const userInfo = document.getElementById("user-info");
+      // 各ラジオボタンに対してchangeイベントを追加
+      radioButtons.forEach((radioButton) => {
+        radioButton.addEventListener("change", (e) => {
+          userInfo.innerHTML = "";
+          // ラジオボタンが選択されたときの処理
+          const storedUserName = sessionStorage.getItem(e.target.value);
+          // 文字列をDOM要素に変換
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(
+            `<h3>${storedUserName}<span>さんの情報</span></h3>`,
+            "text/html"
+          );
+          // innerHTMLで追加<script>タグは実行されない ブラウザが実行を制限している
+          // そのため、わざと以下の様な方法で要素を追加している。
+          userInfo.appendChild(
+            doc.getElementsByTagName("h3")[0].cloneNode(true)
+          );
+          // scriptタグのものが実行されないのでわざと以下のように実行させている
+          const scriptText = doc.getElementsByTagName("script")[0];
+          if (scriptText) {
+            eval(scriptText.textContent);
+          }
+        });
+        // デフォルトで選択されているラジオボタンに対してchangeイベントを手動で発生させる
+        if (radioButton.checked) {
+          radioButton.dispatchEvent(new Event("change"));
+        }
+      });
+    </script>
+  </body>
+</html>

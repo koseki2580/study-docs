@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cross Site Scripting Example</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <h1 id="title">XSS 例</h1>
+    <a href="./../index.html">戻る</a>
+
+    <div class="xss-list">
+      <h2>反射型 XSS</h2>
+      <ul>
+        <li>
+          <a
+            class="reflective-xss"
+            data-url="./reflective/xss_vulnerable.html?example=</p><script>alert('XSS Attack!')</script></p>"
+          >
+            脆弱性を含んだページ
+          </a>
+        </li>
+        <li>
+          <a
+            class="reflective-xss"
+            data-url="./reflective/xss_secure.html?example=</p><script>alert('XSS Attack!')</script></p>"
+            >対策したページ</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="xss-list">
+      <h2>格納型 XSS</h2>
+      <ul>
+        <li>
+          <a href="./stored/xss_vulnerable.html">脆弱性を含んだページ</a>
+        </li>
+        <li><a href="./stored/xss_secure.html">対策したページ</a></li>
+      </ul>
+    </div>
+    <div class="xss-list">
+      <h2>DOM Base XSS</h2>
+      <ul>
+        <li>
+          <a href="./dom_base/xss_vulnerable.html">脆弱性を含んだページ</a>
+        </li>
+        <li>
+          <a href="./dom_base/xss_secure.html">対策したページ</a>
+        </li>
+      </ul>
+    </div>
+    <div class="xss-list">
+      <h2>DOM Base XSS 2</h2>
+      <ul>
+        <li>
+          <a href="./dom_base2/xss_vulnerable.html">脆弱性を含んだページ</a>
+        </li>
+        <li>
+          <a href="./dom_base2/xss_secure.html">対策したページ</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+  <script>
+    function executeReflectiveXSS(e) {
+      console.log(e);
+      // 特定のページに遷移させたいURLを指定
+      const targetUrl = e.target.getAttribute("data-url");
+      // ページをリダイレクト
+      window.location.href = targetUrl;
+    }
+    const reflectiveATag = document.getElementsByClassName("reflective-xss");
+    for (let i = 0; i < reflectiveATag.length; ++i) {
+      reflectiveATag[i].addEventListener("click", executeReflectiveXSS);
+    }
+  </script>
+</html>

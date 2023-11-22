@@ -57,6 +57,25 @@ navbar_items.push({
   label: "オセロ",
   to: "othello",
 });
+
+// デモページをコンテンツ表示に追加
+contents.forEach((content) => {
+  if (content.headtitle === "セキュリティ") {
+    content.contents.unshift({
+      href: "security/demo",
+      title: "デモ",
+    });
+  }
+});
+
+navbar_items.forEach((item) => {
+  if (item.label === "セキュリティ") {
+    item.items.unshift({
+      label: "デモ",
+      to: "security/demo",
+    });
+  }
+});
 WriteFile(
   "./src/components/HomepageFeatures/content.js",
   WriteContents(contents, "content")

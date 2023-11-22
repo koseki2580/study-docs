@@ -20,6 +20,11 @@ module.exports = function (context, options) {
         component: "@site/html/othello/index.js",
         exact: true,
       });
+      addRoute({
+        path: "/study-docs/security/demo",
+        component: "@site/html/security/index.js",
+        exact: true,
+      });
     },
   };
 };
