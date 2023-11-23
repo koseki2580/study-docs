@@ -5,3 +5,6 @@
 .list:nth-child(odd) {
   background-color: rgb(230, 230, 230);
 }
+.note {
+  background-color: #ff000080;
+}
