@@ -371,3 +371,13 @@ function escapeHtml(input) {
 ```javascript
 if (title && /^(https?:)/.test(url))
 ```
+
+[IPA XSS について](https://www.ipa.go.jp/security/vuln/websecurity/cross-site-scripting.html)
+のページでは
+
+- エスケープ処理を施す
+- URL 出力時は`http://`, `https://`のみにする
+- `script`タグを動的に生成しない
+- スタイルシートを任意のサイトから取り込めない様にする
+
+の 4 点が根本的解決としている。
