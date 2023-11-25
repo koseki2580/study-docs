@@ -327,3 +327,7 @@ body {
     transform: translateZ(-50px);
   }
 }
+
+.note {
+  background-color: #ff000080;
+}
