@@ -331,3 +331,26 @@ body {
 .note {
   background-color: #ff000080;
 }
+
+#count-area {
+  margin: 10px 10px;
+  position: relative;
+  width: 320px;
+  height: 100px;
+  background-color: #b9b9b9;
+}
+
+#count-area {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mass-display {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-size: 30px;
+}

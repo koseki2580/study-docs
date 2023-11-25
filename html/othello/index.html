@@ -45,6 +45,16 @@
       </div>
     </div>
     <div id="othello-area">
+      <div id="count-area">
+        <div id="mass-color" class="mass-display">
+          <div>白</div>
+          <div>黒</div>
+        </div>
+        <div id="mass-count" class="mass-display">
+          <div id="white-count">2</div>
+          <div id="black-count">2</div>
+        </div>
+      </div>
       <div id="result">
         <h1 id="victory" class="othello-result">勝利</h1>
         <h1 id="lose" class="othello-result">敗北</h1>
@@ -65,6 +75,8 @@
       const gameStartBtn = document.getElementById("game-start-btn");
       const turnEle = document.getElementById("turn");
       const levelEle = document.getElementById("level");
+      const whiteCountEle = document.getElementById("white-count");
+      const blackCountEle = document.getElementById("black-count");
 
       // ゲーム関係
       const mapSize = 8;
@@ -217,12 +229,23 @@
         pieceDiv.appendChild(createPieceDiv("black"));
         return pieceDiv;
       };
+
+      // 現在のコマの数を変更
+      const changeMassCount = (white, black) => {
+        whiteCountEle.innerText = white;
+        blackCountEle.innerText = black;
+      };
       // ボードの更新
       const displayOthelloBoard = async () => {
         const result = await playOthello.getBoardInfo();
         const board = result.board;
+        let white = 0;
+        let black = 0;
         for (let i = 0; i < mapSize; ++i) {
           for (let j = 0; j < mapSize; ++j) {
+            // マスの個数を数える
+            if (board[i][j] === 0) white++;
+            else if (board[i][j] === 1) black++;
             let boardElement = document.getElementById(
               `board-${i * mapSize + j}`
             );
@@ -269,6 +292,7 @@
             }
           }
         }
+        changeMassCount(white, black);
       };
 
       // 配置できるマスを表示する
