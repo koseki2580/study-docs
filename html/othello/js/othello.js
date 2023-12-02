@@ -1360,9 +1360,21 @@ function dbg(text) {
   var ___cxa_uncaught_exceptions = () => uncaughtExceptionCount;
 
 
+  var nowIsMonotonic = true;;
+  var __emscripten_get_now_is_monotonic = () => nowIsMonotonic;
+
   var _abort = () => {
       abort('native code called abort()');
     };
+
+  var _emscripten_date_now = () => Date.now();
+
+  var _emscripten_get_now;
+      // Modern environment where performance.now() is supported:
+      // N.B. a shorter form "_emscripten_get_now = performance.now;" is
+      // unfortunately not allowed even in current browsers (e.g. FF Nightly 75).
+      _emscripten_get_now = () => performance.now();
+  ;
 
   var _emscripten_memcpy_js = (dest, src, num) => HEAPU8.copyWithin(dest, src, src + num);
 
@@ -4832,7 +4844,13 @@ var wasmImports = {
   /** @export */
   __resumeException: ___resumeException,
   /** @export */
+  _emscripten_get_now_is_monotonic: __emscripten_get_now_is_monotonic,
+  /** @export */
   abort: _abort,
+  /** @export */
+  emscripten_date_now: _emscripten_date_now,
+  /** @export */
+  emscripten_get_now: _emscripten_get_now,
   /** @export */
   emscripten_memcpy_js: _emscripten_memcpy_js,
   /** @export */
@@ -4878,6 +4896,8 @@ var wasmImports = {
   /** @export */
   invoke_iiiiiiiiiiiii: invoke_iiiiiiiiiiiii,
   /** @export */
+  invoke_j: invoke_j,
+  /** @export */
   invoke_jiiii: invoke_jiiii,
   /** @export */
   invoke_v: invoke_v,
@@ -4893,6 +4913,8 @@ var wasmImports = {
   invoke_viiiii: invoke_viiiii,
   /** @export */
   invoke_viiiiiii: invoke_viiiiiii,
+  /** @export */
+  invoke_viiiiiiii: invoke_viiiiiiii,
   /** @export */
   invoke_viiiiiiiiii: invoke_viiiiiiiiii,
   /** @export */
@@ -4930,6 +4952,7 @@ var ___get_exception_message = Module['___get_exception_message'] = createExport
 var ___cxa_can_catch = createExportWrapper('__cxa_can_catch');
 var ___cxa_is_pointer_type = createExportWrapper('__cxa_is_pointer_type');
 var dynCall_jiji = Module['dynCall_jiji'] = createExportWrapper('dynCall_jiji');
+var dynCall_j = Module['dynCall_j'] = createExportWrapper('dynCall_j');
 var dynCall_viijii = Module['dynCall_viijii'] = createExportWrapper('dynCall_viijii');
 var dynCall_jiiii = Module['dynCall_jiiii'] = createExportWrapper('dynCall_jiiii');
 var dynCall_iiiiij = Module['dynCall_iiiiij'] = createExportWrapper('dynCall_iiiiij');
@@ -4947,10 +4970,10 @@ function invoke_iii(index,a1,a2) {
   }
 }
 
-function invoke_iiiiii(index,a1,a2,a3,a4,a5) {
+function invoke_iiiiiii(index,a1,a2,a3,a4,a5,a6) {
   var sp = stackSave();
   try {
-    return getWasmTableEntry(index)(a1,a2,a3,a4,a5);
+    return getWasmTableEntry(index)(a1,a2,a3,a4,a5,a6);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -4958,10 +4981,10 @@ function invoke_iiiiii(index,a1,a2,a3,a4,a5) {
   }
 }
 
-function invoke_iiiiiii(index,a1,a2,a3,a4,a5,a6) {
+function invoke_iiiiiiii(index,a1,a2,a3,a4,a5,a6,a7) {
   var sp = stackSave();
   try {
-    return getWasmTableEntry(index)(a1,a2,a3,a4,a5,a6);
+    return getWasmTableEntry(index)(a1,a2,a3,a4,a5,a6,a7);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -4984,6 +5007,17 @@ function invoke_vi(index,a1) {
   var sp = stackSave();
   try {
     getWasmTableEntry(index)(a1);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_iiiiii(index,a1,a2,a3,a4,a5) {
+  var sp = stackSave();
+  try {
+    return getWasmTableEntry(index)(a1,a2,a3,a4,a5);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -5079,10 +5113,10 @@ function invoke_viiiiiii(index,a1,a2,a3,a4,a5,a6,a7) {
   }
 }
 
-function invoke_iiiiiiii(index,a1,a2,a3,a4,a5,a6,a7) {
+function invoke_viiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8) {
   var sp = stackSave();
   try {
-    return getWasmTableEntry(index)(a1,a2,a3,a4,a5,a6,a7);
+    getWasmTableEntry(index)(a1,a2,a3,a4,a5,a6,a7,a8);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
@@ -5171,6 +5205,17 @@ function invoke_viiiiiiiiiiiiiii(index,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a1
   var sp = stackSave();
   try {
     getWasmTableEntry(index)(a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15);
+  } catch(e) {
+    stackRestore(sp);
+    if (!(e instanceof EmscriptenEH)) throw e;
+    _setThrew(1, 0);
+  }
+}
+
+function invoke_j(index) {
+  var sp = stackSave();
+  try {
+    return dynCall_j(index);
   } catch(e) {
     stackRestore(sp);
     if (!(e instanceof EmscriptenEH)) throw e;
