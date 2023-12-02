@@ -39,6 +39,7 @@
         <option value="3">3</option>
         <option value="4">4</option>
         <option value="5">5</option>
+        <option value="6">6</option>
       </select>
       <div id="game-start">
         <a id="game-start-btn">ゲーム開始</a>
@@ -368,6 +369,7 @@
         let strategy;
         let evaluation;
         let depth = 2;
+        let maxTime = 10000;
         switch (level) {
           case "1":
             strategy = "random";
@@ -383,12 +385,17 @@
             break;
           case "4":
             strategy = "alphabeta";
-            depth = 4;
+            depth = 8;
             evaluation = "mass_count";
             break;
           case "5":
             strategy = "alphabeta";
-            depth = 4;
+            depth = 8;
+            evaluation = "custom";
+            break;
+          case "6":
+            strategy = "iterative_deepening_alphabeta";
+            depth = 10;
             evaluation = "custom";
             break;
           default:
@@ -400,6 +407,7 @@
           isFirstPlayer,
           strategy,
           depth,
+          maxTime,
           evaluation
         );
         if (isFirstPlayer) {
@@ -449,12 +457,14 @@
         isFirstPlayer,
         strategy,
         depth,
+        maxTime,
         evaluation
       ) => {
         return syncOnMessage("createPlayOthello", {
           isFirstPlayer: isFirstPlayer,
           strategy: strategy,
           depth: depth,
+          maxTime: maxTime,
           evaluation: evaluation,
         });
       };

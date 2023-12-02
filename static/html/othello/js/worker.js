@@ -18,7 +18,7 @@ onmessage = function (e) {
   const message = e.data;
   switch (message.eventType) {
     case "createPlayOthello":
-      let { isFirstPlayer, strategy, depth, evaluation } = message;
+      let { isFirstPlayer, strategy, depth, maxTime, evaluation } = message;
       const strategyPtr = _malloc(strategy.length + 1); // メモリ確保
       stringToUTF8(strategy, strategyPtr, strategy.length + 1);
 
@@ -28,6 +28,7 @@ onmessage = function (e) {
         isFirstPlayer,
         strategyPtr,
         depth,
+        maxTime,
         evaluationPtr
       );
       _free(strategyPtr);
