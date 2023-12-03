@@ -32,15 +32,17 @@
         <option value="first-turn">先攻</option>
         <option value="second-turn">後攻</option>
       </select>
-      <label for="level">強さを選択：</label>
-      <select id="level" name="level">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
+      <label for="algorithm">強さを選択：</label>
+      <select id="algorithm" name="algorithm">
+        <option value="random">ランダム</option>
+        <option value="minimax">MiniMax法</option>
+        <option value="alpha-beta">Alpha-Beta法</option>
+        <option value="iterative-deepening-alpha-beta">
+          Alpha-Beta法(反復深化)
+        </option>
+        <option value="primitive-monte-carlo">原始モンテカルロ法</option>
       </select>
+      <div id="algorithm-parameters"></div>
       <div id="game-start">
         <a id="game-start-btn">ゲーム開始</a>
       </div>
@@ -75,7 +77,8 @@
       const resultEle = document.getElementById("result");
       const gameStartBtn = document.getElementById("game-start-btn");
       const turnEle = document.getElementById("turn");
-      const levelEle = document.getElementById("level");
+      const algorithmEle = document.getElementById("algorithm");
+      const algorithmParamEle = document.getElementById("algorithm-parameters");
       const whiteCountEle = document.getElementById("white-count");
       const blackCountEle = document.getElementById("black-count");
 
@@ -91,8 +94,11 @@
       // 再度ゲームする際にオブジェクトを初期化するよう
       isPlayed = false;
 
-      // 開始時の初期化処理
-      // gameStartBtn.addEventListener("click", () => {});
+      // 選択できる評価関数のリスト
+      const evaluationList = {
+        mass_count: "マスの数",
+        custom: "様々な要素から判断",
+      };
 
       // ユーザのアクション
       const boardClick = async (e) => {
@@ -352,6 +358,111 @@
         resultEle.removeAttribute("victory");
         resultEle.removeAttribute("lose");
       };
+
+      // 深さを決める要素
+      const createDepthParam = () => {
+        const label = document.createElement("label");
+        label.setAttribute("for", "depth");
+        label.textContent = "計算を行うゲーム木の深さ: ";
+        const inputEle = document.createElement("input");
+        inputEle.type = "number";
+        inputEle.min = "0";
+        inputEle.value = 2;
+        inputEle.id = "depth";
+        inputEle.name = "depth";
+        label.appendChild(inputEle);
+        return label;
+      };
+
+      // 評価関数を決める要素
+      const createEvaluationParam = () => {
+        const label = document.createElement("label");
+        label.setAttribute("for", "evaluation");
+        label.textContent = "評価関数: ";
+        const selectEle = document.createElement("select");
+        selectEle.id = "evaluation";
+        selectEle.name = "evaluation";
+        let isFirst = true;
+        for (const key in evaluationList) {
+          let option = document.createElement("option");
+          option.value = key;
+          option.text = evaluationList[key];
+          if (isFirst) {
+            isFirst = false;
+            option.selected = true;
+          }
+          selectEle.appendChild(option);
+        }
+        label.appendChild(selectEle);
+        return label;
+      };
+
+      // 計算時間の制限を決める。
+      const createMaxTimeParam = () => {
+        const label = document.createElement("label");
+        label.setAttribute("for", "max-time");
+        label.textContent = "計算を行う最大時間[ms]: ";
+        const inputEle = document.createElement("input");
+        inputEle.type = "number";
+        inputEle.min = "0";
+        inputEle.value = 10000;
+        inputEle.id = "max-time";
+        inputEle.name = "max-time";
+        label.appendChild(inputEle);
+        return label;
+      };
+
+      // 試行回数を決める。
+      const createMaxCountParam = () => {
+        const label = document.createElement("label");
+        label.setAttribute("for", "max-count");
+        label.textContent = "試行回数[回]: ";
+        const inputEle = document.createElement("input");
+        inputEle.type = "number";
+        inputEle.value = 100;
+        inputEle.min = "0";
+        inputEle.id = "max-count";
+        inputEle.name = "max-count";
+        label.appendChild(inputEle);
+        return label;
+      };
+
+      // アルゴリズムごとの設定項目を表示させる。
+      algorithmEle.addEventListener("change", (e) => {
+        console.log(e.target.value);
+        // 要素を空にする
+        algorithmParamEle.innerHTML = "";
+        switch (e.target.value) {
+          case "random": {
+            break;
+          }
+          case "minimax": {
+            algorithmParamEle.appendChild(createDepthParam());
+            algorithmParamEle.appendChild(createEvaluationParam());
+            break;
+          }
+          case "alpha-beta": {
+            algorithmParamEle.appendChild(createDepthParam());
+            algorithmParamEle.appendChild(createEvaluationParam());
+            break;
+          }
+          case "iterative-deepening-alpha-beta": {
+            algorithmParamEle.appendChild(createDepthParam());
+            algorithmParamEle.appendChild(createMaxTimeParam());
+            algorithmParamEle.appendChild(createEvaluationParam());
+            break;
+          }
+          case "primitive-monte-carlo": {
+            algorithmParamEle.appendChild(createMaxCountParam());
+            algorithmParamEle.appendChild(createMaxTimeParam());
+            algorithmParamEle.appendChild(createDepthParam());
+            break;
+          }
+          default: {
+            break;
+          }
+        }
+      });
       // 全体の初期化
       const initialize = async () => {
         // othelloにオブジェクトがある場合はメモリを解放して
@@ -365,51 +476,61 @@
 
         // 先攻・後攻
         isFirstPlayer = turnEle.value === "first-turn";
-        const level = levelEle.value;
-        let strategy;
-        let evaluation;
-        let depth = 2;
-        let maxTime = 10000;
-        switch (level) {
-          case "1":
-            strategy = "random";
-            evaluation = "mass_count";
+
+        // othelloオブジェクトの用意
+        await playOthello.createPlayOthello(isFirstPlayer);
+
+        const algorithm = algorithmEle.value;
+
+        switch (algorithm) {
+          case "random": {
+            await playOthello.setRandomAction();
             break;
-          case "2":
-            strategy = "minimax";
-            evaluation = "mass_count";
+          }
+          case "minimax": {
+            const depth = document.getElementById("depth").value;
+            const evaluation = document.getElementById("evaluation").value;
+            await playOthello.setMiniMaxAction(depth, evaluation);
             break;
-          case "3":
-            strategy = "minimax";
-            evaluation = "custom";
+          }
+          case "alpha-beta": {
+            const depth = document.getElementById("depth").value;
+            const evaluation = document.getElementById("evaluation").value;
+            await playOthello.setAlphaBetaAction(depth, "custom");
             break;
-          case "4":
-            strategy = "alphabeta";
-            depth = 8;
-            evaluation = "mass_count";
+          }
+          case "iterative-deepening-alpha-beta": {
+            const depth = document.getElementById("depth").value;
+            const evaluation = document.getElementById("evaluation").value;
+            const maxTime = document.getElementById("max-time").value;
+            await playOthello.setIterativeDeepeningAlphaBetaAction(
+              depth,
+              maxTime,
+              evaluation
+            );
             break;
-          case "5":
-            strategy = "alphabeta";
-            depth = 8;
-            evaluation = "custom";
+          }
+          case "primitive-monte-carlo": {
+            const maxCount = document.getElementById("max-count").value;
+            const maxTime = document.getElementById("max-time").value;
+            const depth = document.getElementById("depth").value;
+
+            await playOthello.setPrimitiveMonteCarloAction(
+              maxCount,
+              maxTime,
+              depth
+            );
             break;
-          case "6":
-            strategy = "iterative_deepening_alphabeta";
-            depth = 10;
-            evaluation = "custom";
+          }
+          default: {
+            await playOthello.setRandomAction();
             break;
-          default:
-            strategy = "random";
-            evaluation = "mass_count";
-            break;
+          }
         }
-        await playOthello.createPlayOthello(
-          isFirstPlayer,
-          strategy,
-          depth,
-          maxTime,
-          evaluation
-        );
+
+        // CPUの行動戦術を決定
+        await playOthello.decision();
+
         if (isFirstPlayer) {
           let result = await playOthello.getLegalActions();
           displayPutOK(result.legalActionsArray);
@@ -453,20 +574,46 @@
       }
     </script>
     <script>
-      playOthello.createPlayOthello = (
-        isFirstPlayer,
-        strategy,
+      playOthello.createPlayOthello = (isFirstPlayer) => {
+        return syncOnMessage("createPlayOthello", {
+          isFirstPlayer: isFirstPlayer,
+        });
+      };
+      playOthello.setRandomAction = () => {
+        return syncOnMessage("setRandomAction", {});
+      };
+      playOthello.setMiniMaxAction = (depth, evaluation) => {
+        return syncOnMessage("setMiniMaxAction", {
+          depth: depth,
+          evaluation: evaluation,
+        });
+      };
+      playOthello.setAlphaBetaAction = (depth, evaluation) => {
+        return syncOnMessage("setAlphaBetaAction", {
+          depth: depth,
+          evaluation: evaluation,
+        });
+      };
+      playOthello.setIterativeDeepeningAlphaBetaAction = (
         depth,
         maxTime,
         evaluation
       ) => {
-        return syncOnMessage("createPlayOthello", {
-          isFirstPlayer: isFirstPlayer,
-          strategy: strategy,
+        return syncOnMessage("setIterativeDeepeningAlphaBetaAction", {
           depth: depth,
           maxTime: maxTime,
           evaluation: evaluation,
         });
+      };
+      playOthello.setPrimitiveMonteCarloAction = (maxCount, maxTime, depth) => {
+        return syncOnMessage("setPrimitiveMonteCarloAction", {
+          depth: depth,
+          maxTime: maxTime,
+          maxCount: maxCount,
+        });
+      };
+      playOthello.decision = () => {
+        return syncOnMessage("decision", {});
       };
       playOthello.put = (y, x) => {
         return syncOnMessage("put", {

@@ -16,30 +16,85 @@ importScripts("othello.js");
 
 onmessage = function (e) {
   const message = e.data;
+  console.log(message);
   switch (message.eventType) {
-    case "createPlayOthello":
-      let { isFirstPlayer, strategy, depth, maxTime, evaluation } = message;
-      const strategyPtr = _malloc(strategy.length + 1); // メモリ確保
-      stringToUTF8(strategy, strategyPtr, strategy.length + 1);
-
-      const evaluationPtr = _malloc(evaluation.length + 1);
-      stringToUTF8(evaluation, evaluationPtr, evaluation.length + 1);
-      othello = _createPlayOthello(
-        isFirstPlayer,
-        strategyPtr,
-        depth,
-        maxTime,
-        evaluationPtr
-      );
-      _free(strategyPtr);
-      _free(evaluationPtr);
+    case "createPlayOthello": {
+      let { isFirstPlayer } = message;
+      othello = _createPlayOthello(isFirstPlayer);
 
       postMessage({
         eventType: "createPlayOthello",
         result: "Othello Object Create Success",
       });
       break;
-    case "put":
+    }
+    case "setRandomAction": {
+      _setRandomAction(othello);
+      postMessage({
+        eventType: "setRandomAction",
+        result: "Set Random Action",
+      });
+      break;
+    }
+    case "setMiniMaxAction": {
+      let { depth, evaluation } = message;
+      const evaluationPtr = _malloc(evaluation.length + 1);
+      stringToUTF8(evaluation, evaluationPtr, evaluation.length + 1);
+      _setMiniMaxAction(othello, depth, evaluationPtr);
+      _free(evaluationPtr);
+      postMessage({
+        eventType: "setMiniMaxAction",
+        result: "Set MiniMax Action",
+      });
+      break;
+    }
+    case "setAlphaBetaAction": {
+      let { depth, evaluation } = message;
+      const evaluationPtr = _malloc(evaluation.length + 1);
+      stringToUTF8(evaluation, evaluationPtr, evaluation.length + 1);
+      _setAlphaBetaAction(othello, depth, evaluationPtr);
+      _free(evaluationPtr);
+      postMessage({
+        eventType: "setAlphaBetaAction",
+        result: "Set AlphaBeta Action",
+      });
+      break;
+    }
+    case "setIterativeDeepeningAlphaBetaAction": {
+      let { depth, maxTime, evaluation } = message;
+      const evaluationPtr = _malloc(evaluation.length + 1);
+      stringToUTF8(evaluation, evaluationPtr, evaluation.length + 1);
+      _setIterativeDeepeningAlphaBetaAction(
+        othello,
+        depth,
+        maxTime,
+        evaluationPtr
+      );
+      _free(evaluationPtr);
+      postMessage({
+        eventType: "setIterativeDeepeningAlphaBetaAction",
+        result: "Set IterativeDeepeningAlphaBeta Action",
+      });
+      break;
+    }
+    case "setPrimitiveMonteCarloAction": {
+      let { depth, maxTime, maxCount } = message;
+      _setPrimitiveMonteCarloAction(othello, maxCount, maxTime, depth);
+      postMessage({
+        eventType: "setPrimitiveMonteCarloAction",
+        result: "Set PrimitiveMonteCarloAction Action",
+      });
+      break;
+    }
+    case "decision": {
+      _decision(othello);
+      postMessage({
+        eventType: "decision",
+        result: "Decision Action",
+      });
+      break;
+    }
+    case "put": {
       let { y, x } = message;
       Module.ccall(
         "put",
@@ -53,8 +108,8 @@ onmessage = function (e) {
         result: "Success",
       });
       break;
-
-    case "cpuPut":
+    }
+    case "cpuPut": {
       const putPointArrayPtr = _malloc(8); // 4 * 2
 
       Module.ccall(
@@ -79,7 +134,8 @@ onmessage = function (e) {
         x: putPointInt32Array[1],
       });
       break;
-    case "deletePlayOthello":
+    }
+    case "deletePlayOthello": {
       _deletePlayOthello(othello);
 
       postMessage({
@@ -87,7 +143,8 @@ onmessage = function (e) {
         result: "Success",
       });
       break;
-    case "getLegalActions":
+    }
+    case "getLegalActions": {
       // メモリ確保
       const legalActionsArrayPtr = _malloc(4);
       const legalActionsSize = _malloc(4);
@@ -131,7 +188,8 @@ onmessage = function (e) {
         legalActionsArray: legalActionsArray,
       });
       break;
-    case "getBoardInfo":
+    }
+    case "getBoardInfo": {
       const outRows = _malloc(4); // int型のポインタを確保
       const outCols = _malloc(4); // int型のポインタを確保
       const outBoard = _malloc(4); // int型のポインタを確保
@@ -185,7 +243,8 @@ onmessage = function (e) {
         board: boardData,
       });
       break;
-    case "isDone":
+    }
+    case "isDone": {
       const isDone = _malloc(1); // int型のポインタを確保
 
       Module.ccall("isDone", "void", ["number", "number"], [othello, isDone]);
@@ -197,5 +256,6 @@ onmessage = function (e) {
         isDone: result,
       });
       break;
+    }
   }
 };

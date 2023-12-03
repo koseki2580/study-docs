@@ -6,6 +6,12 @@ body {
   height: 100%;
   width: 100%;
 }
+#algorithm-parameters {
+  display: flex;
+
+  flex-direction: column;
+  margin: 10px 0px;
+}
 #othello-area {
   position: absolute;
   height: 100%;
