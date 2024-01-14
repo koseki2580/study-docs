@@ -82,7 +82,23 @@ onmessage = function (e) {
       _setPrimitiveMonteCarloAction(othello, maxCount, maxTime, depth);
       postMessage({
         eventType: "setPrimitiveMonteCarloAction",
-        result: "Set PrimitiveMonteCarloAction Action",
+        result: "Set PrimitiveMonteCarlo Action",
+      });
+      break;
+    }
+    case "setMonteCarloTreeSearchAction": {
+      let { threshold, maxTime, explorationWeight, maxCount, depth } = message;
+      _setMonteCarloTreeSearchAction(
+        othello,
+        threshold,
+        maxTime,
+        explorationWeight,
+        maxCount,
+        depth
+      );
+      postMessage({
+        eventType: "setMonteCarloTreeSearchAction",
+        result: "Set MonteCarloTreeSearch Action",
       });
       break;
     }
