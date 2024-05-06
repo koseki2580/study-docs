@@ -115,7 +115,7 @@ hier-part   = "//" <authority> <path-abempty>, <path-absolute>, <path-rootless>,
   <port>: *<DIGIT>
 ```
 
-:::cation
+::: cation
 [rfc3986](https://datatracker.ietf.org/doc/html/rfc3986)ではuserInfoフィールドでの「ユーザー：パスワード」のフォーマットの使用は非推奨になっている。
 内部環境やテスト環境のように簡易的に確認したい場合は使用するケースが存在する。
 
