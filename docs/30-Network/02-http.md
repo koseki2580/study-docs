@@ -100,7 +100,7 @@ quoted-string  = ( <"> *(qdtext | quoted-pair ) <"> )
 qdtext         = <any TEXT except <">>
 quoted-pair    = "\" CHAR
 TEXT           = <any OCTET except CTLs, but including LWS>
-
+(headerは全てmessage-headerと同じようにkey:valueの形式で記述されているが量が多いので割愛)
 message-body = entity-body | <entity-body encoded as per Transfer-Encoding>
 entity-body := Content-Encoding( Content-Type( data ) )
 ```
@@ -125,6 +125,22 @@ entity-body := Content-Encoding( Content-Type( data ) )
   ネットワークのトラブルシューティングやパフォーマンスの最適化、セキュリティの確認など、リクエストとレスポンスの動作を理解し、トラフィックを監視するためのツールとして使用される。
 - CONNECT
   プロキシサーバーが通常のHTTPリクエストとレスポンスを介さずに、クライアントとエンドサーバー間の直接的な通信を確立するために使用される。
+
+###### Header
+
+代表的なものとして以下のようなヘッダーが存在する。
+
+- Content-Type: リクエストまたはレスポンスの本文のメディアタイプを示す。
+- Content-Length: リクエストまたはレスポンスの本文の長さをバイト単位で示す。
+- Cache-Control: キャッシュの動作を制御する。
+- User-Agent: リクエストを送信するクライアントのアプリケーションやブラウザを識別する。
+- Authorization: リクエストに認証情報を含めるために使用される。
+- Location: リダイレクトレスポンスで使用される。
+- Accept: クライアントが受け入れ可能なメディアタイプを指定する。
+- Accept-Language: クライアントが受け入れ可能な言語を指定する。
+- Accept-Encoding: クライアントが受け入れ可能なエンコーディング方式を指定する。
+- Connection: クライアントとサーバーの間の接続の状態を制御する。
+- Host: リクエストが送信される対象のホスト名とオプションのポート番号を示す。
 
 ##### レスポンス
 
